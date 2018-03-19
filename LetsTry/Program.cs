@@ -1,5 +1,7 @@
 ﻿using SixLabors.Fonts;
 using SixLabors.ImageSharp;
+using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using TyKonKet.BarcodeGenerator;
@@ -10,15 +12,20 @@ namespace LetsTry
     {
         static void Main(string[] args)
         {
-            var bc = new Barcode()
+            var sw = new Stopwatch();
+            sw.Start();
+            var bc = new Barcode(o =>
             {
-                Encode = Encode.EAN8,
-                Height = 31,
-                Scale = 5,
-                BgColor = Rgba32.Transparent,
-                FontStyle = FontStyle.Regular
-            };
+                o.Encode = Encodes.EAN8;
+                o.Height = 31;
+                o.Scale = 5;
+                o.BgColor = Rgba32.Transparent;
+                o.FontStyle = FontStyle.Regular;
+            });
             bc.GenerateBarcode("98458486", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "test.png"));
+            sw.Stop();
+            Console.WriteLine($"Barcode generated in {sw.ElapsedMilliseconds}ms");
+            Console.ReadKey();
         }
     }
 }
