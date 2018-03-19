@@ -1,11 +1,7 @@
 ﻿using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.Primitives;
-using SixLabors.Shapes;
 using System;
-using System.Numerics;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace TyKonKet.BarcodeGenerator.Generators
 {
@@ -26,56 +22,43 @@ namespace TyKonKet.BarcodeGenerator.Generators
             var bars = _ean8Encode(barcode);
 
             // Calculate drawing data
-            var scale = this.Options.Scale < 1 ? 2 : this.Options.Scale;
-            var margins = new { Top = 2 * scale, Right = 2 * scale, Bottom = 2 * scale, Left = 2 * scale };
-            var totalY = (float)(scale * this.Options.Height);
-            var totalX = scale * bars.Length + margins.Right + margins.Left;
-            var posX = margins.Left;
-            var height = (float)Math.Floor(totalY - (scale * 10));
-            var height2 = (float)Math.Floor(totalY - margins.Bottom);
+            var scale = Math.Max(this.Options.Scale, 1);
+            var margins = 2 * scale;
+            var width = scale * bars.Length + margins * 2;
+            var height = scale * this.Options.Height;
+            var longBarsH = height - margins;
+            var shortBarsH = (int)(longBarsH * 0.76);
 
             // Generate barcode
-            using (var im = new Image<Rgba32>(totalX, (int)totalY))
+            using (var im = new Image<Rgba32>(width, height))
             {
-                // Set bg color
+                // Draw bg color
                 im.Mutate(i => i.Fill(this.Options.BgColor));
 
                 // Draw bars
-                var tempPosX = posX;
+                var posX = margins;
                 for (var i = 0; i < bars.Length; i++)
                 {
-                    var h = height;
-                    var val = bars[i].ToString().ToUpper();
-                    if ((new Regex("[a-z]", RegexOptions.IgnoreCase)).IsMatch(val))
+                    var value = bars[i];
+                    if (value == 'b' || value == '1')
                     {
-                        val = (Encoding.ASCII.GetBytes(val)[0] - 65).ToString();
-                        h = height2;
+                        var barRectangle = new RectangleF(posX, margins, scale, (value == '1' ? shortBarsH : longBarsH) - margins);
+                        im.Mutate(img => img.Fill(this.Options.Color, barRectangle));
                     }
-
-                    if (val == "1")
-                    {
-                        var rect = new RectangleF(tempPosX, margins.Top, scale, h - margins.Top + 1);
-                        im.Mutate(img => img.Fill(this.Options.Color, rect));
-                    }
-                    tempPosX += scale;
+                    posX += scale;
                 }
 
                 if (this.Options.ShowText)
                 {
                     // Draw texts
-                    var font = SystemFonts.CreateFont(this.Options.Font, scale * 7.8f, this.Options.FontStyle);
-                    var txt = barcode.Substring(0, 4);
-                    var textsize = TextMeasurer.Measure(txt, new RendererOptions(font));
-                    var matrix = Matrix3x2.Identity;
-                    matrix.Translation = new Vector2(margins.Left + scale * barcode.Length, height2 - scale * 3);
-                    var path = new PathBuilder(matrix).AddLine(0, 0, textsize.Width, 0).Build();
-                    im.Mutate(i => i.DrawText(txt, font, this.Options.Color, path));
-                    txt = barcode.Substring(4, 4);
-                    matrix = Matrix3x2.Identity;
-                    matrix.Translation = new Vector2(margins.Left + scale * bars.Length / 1.65f, height2 - scale * 3);
-                    path = new PathBuilder(matrix).AddLine(0, 0, textsize.Width, 0).Build();
-                    im.Mutate(i => i.DrawText(txt, font, this.Options.Color, path));
+                    var font = SystemFonts.CreateFont(this.Options.Font, scale * 7, this.Options.FontStyle);
+                    var leftText = barcode.Substring(0, 4);
+                    var rightText = barcode.Substring(4, 4);
+                    var leftPoint = new PointF(margins + 10 * scale, shortBarsH - margins / 2);
+                    var rightPoint = new PointF(margins + 42 * scale, shortBarsH - margins / 2);
 
+                    im.Mutate(i => i.DrawText(leftText, font, this.Options.Color, leftPoint));
+                    im.Mutate(i => i.DrawText(rightText, font, this.Options.Color, rightPoint));
                 }
 
                 // Export barcode
@@ -92,11 +75,11 @@ namespace TyKonKet.BarcodeGenerator.Generators
                 var num = barcode[i].ToInt();
                 if (i < 4)
                 {
-                    mfcStr += this._leftOdd[num];
+                    mfcStr += this._encodingA[num];
                 }
                 else if (i >= 4)
                 {
-                    prodStr += this._rightAll[num];
+                    prodStr += this._encodingC[num];
                 }
             }
             return $"{this._guards[0]}{mfcStr}{this._guards[1]}{prodStr}{this._guards[2]}";

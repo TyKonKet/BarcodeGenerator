@@ -1,5 +1,6 @@
 ﻿using SixLabors.Fonts;
 using SixLabors.ImageSharp;
+using System;
 
 namespace TyKonKet.BarcodeGenerator
 {
@@ -16,7 +17,8 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// 
         /// </summary>
-        public int Scale { get; set; } = 5;
+        private int _Scale = 5;
+        public int Scale { get => _Scale; set => _Scale = Math.Abs(value); }
 
         /// <summary>
         /// 
