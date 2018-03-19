@@ -36,6 +36,7 @@ namespace TyKonKet.BarcodeGenerator
         public Rgba32 BgColor { get; set; } = Rgba32.White;
         public Rgba32 Color { get; set; } = Rgba32.Black;
         public string Font { get; set; } = "Arial";
+        public FontStyle FontStyle { get; set; } = FontStyle.Regular;
 
         private delegate void generateBarcode(string barcode, string file);
         private generateBarcode[] _generators;
@@ -106,7 +107,7 @@ namespace TyKonKet.BarcodeGenerator
                     }
                     tempPosX += scale;
                 }
-                var font = SystemFonts.CreateFont(this.Font, scale * 7.8f, FontStyle.Bold);
+                var font = SystemFonts.CreateFont(this.Font, scale * 7.8f, this.FontStyle);
 
                 var txt = barcode.Substring(0, 4);
                 var textsize = TextMeasurer.Measure(txt, new RendererOptions(font));
