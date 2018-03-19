@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace TyKonKet.BarcodeGenerator.Generators
 {
-    internal class EAN8Generator : IGenerator
+    internal class EAN8Generator : EANUPCGenerator, IGenerator
     {
         public BarcodeOptions Options { get; set; }
 
@@ -20,7 +20,7 @@ namespace TyKonKet.BarcodeGenerator.Generators
             {
                 throw new Exception("Barcode number must be less then 8 characters.");
             }
-            barcode = this._checkDigit(barcode, 7);
+            barcode = this._checkDigit(barcode, 8);
 
             // Bars encode
             var bars = _ean8Encode(barcode);
@@ -79,37 +79,8 @@ namespace TyKonKet.BarcodeGenerator.Generators
             }
         }
 
-        private string _checkDigit(string barcode, int number)
-        {
-            var csumTotal = 0;
-            var checksumDigit = "";
-
-            if (barcode.Length < number)
-            {
-                barcode = barcode.PadLeft(number, '0');
-            }
-
-            for (var i = 0; i < barcode.Length; i++)
-            {
-                var n = barcode[i].ToInt();
-                csumTotal += (i % 2 == 0) ? 3 * n : n;
-            }
-
-            if (csumTotal % 10 != 0)
-            {
-                checksumDigit = (10 - (csumTotal % 10)).ToString();
-            }
-
-            return $"{barcode}{checksumDigit}";
-        }
-
         private string _ean8Encode(string barcode)
         {
-            var leftOdd = new string[] { "0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011" };
-            //var leftEven = new string[] { "0100111", "0110011", "0011011", "0100001", "0011101", "0111001", "0000101", "0010001", "0001001", "0010111" };
-            var rightAll = new string[] { "1110010", "1100110", "1101100", "1000010", "1011100", "1001110", "1010000", "1000100", "1001000", "1110100" };
-            //var encTable = new string[] { "000000", "001011", "001101", "001110", "010011", "011001", "011100", "010101", "010110", "011010" };
-            var guards = new string[] { "bab", "ababa", "bab" };
             var mfcStr = "";
             var prodStr = "";
             for (var i = 0; i < barcode.Length; i++)
@@ -117,14 +88,14 @@ namespace TyKonKet.BarcodeGenerator.Generators
                 var num = barcode[i].ToInt();
                 if (i < 4)
                 {
-                    mfcStr += leftOdd[num];
+                    mfcStr += this._leftOdd[num];
                 }
                 else if (i >= 4)
                 {
-                    prodStr += rightAll[num];
+                    prodStr += this._rightAll[num];
                 }
             }
-            return $"{guards[0]}{mfcStr}{guards[1]}{prodStr}{guards[2]}";
+            return $"{this._guards[0]}{mfcStr}{this._guards[1]}{prodStr}{this._guards[2]}";
         }
     }
 }
