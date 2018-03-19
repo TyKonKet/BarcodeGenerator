@@ -21,6 +21,7 @@ namespace LetsTry
                 o.Scale = 5;
                 o.BgColor = Rgba32.Transparent;
                 o.FontStyle = FontStyle.Regular;
+                o.ShowText = false;
             });
             bc.GenerateBarcode("98458486", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "test.png"));
             sw.Stop();

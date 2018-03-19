@@ -60,19 +60,23 @@ namespace TyKonKet.BarcodeGenerator.Generators
                     tempPosX += scale;
                 }
 
-                // Draw texts
-                var font = SystemFonts.CreateFont(this.Options.Font, scale * 7.8f, this.Options.FontStyle);
-                var txt = barcode.Substring(0, 4);
-                var textsize = TextMeasurer.Measure(txt, new RendererOptions(font));
-                var matrix = Matrix3x2.Identity;
-                matrix.Translation = new Vector2(margins.Left + scale * barcode.Length, height2 - scale * 3);
-                var path = new PathBuilder(matrix).AddLine(0, 0, textsize.Width, 0).Build();
-                im.Mutate(i => i.DrawText(txt, font, this.Options.Color, path));
-                txt = barcode.Substring(4, 4);
-                matrix = Matrix3x2.Identity;
-                matrix.Translation = new Vector2(margins.Left + scale * bars.Length / 1.65f, height2 - scale * 3);
-                path = new PathBuilder(matrix).AddLine(0, 0, textsize.Width, 0).Build();
-                im.Mutate(i => i.DrawText(txt, font, this.Options.Color, path));
+                if (this.Options.ShowText)
+                {
+                    // Draw texts
+                    var font = SystemFonts.CreateFont(this.Options.Font, scale * 7.8f, this.Options.FontStyle);
+                    var txt = barcode.Substring(0, 4);
+                    var textsize = TextMeasurer.Measure(txt, new RendererOptions(font));
+                    var matrix = Matrix3x2.Identity;
+                    matrix.Translation = new Vector2(margins.Left + scale * barcode.Length, height2 - scale * 3);
+                    var path = new PathBuilder(matrix).AddLine(0, 0, textsize.Width, 0).Build();
+                    im.Mutate(i => i.DrawText(txt, font, this.Options.Color, path));
+                    txt = barcode.Substring(4, 4);
+                    matrix = Matrix3x2.Identity;
+                    matrix.Translation = new Vector2(margins.Left + scale * bars.Length / 1.65f, height2 - scale * 3);
+                    path = new PathBuilder(matrix).AddLine(0, 0, textsize.Width, 0).Build();
+                    im.Mutate(i => i.DrawText(txt, font, this.Options.Color, path));
+
+                }
 
                 // Export barcode
                 im.Save(file);

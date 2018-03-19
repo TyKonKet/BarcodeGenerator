@@ -42,5 +42,10 @@ namespace TyKonKet.BarcodeGenerator
         /// 
         /// </summary>
         public FontStyle FontStyle { get; set; } = FontStyle.Regular;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool ShowText { get; set; } = true;
     }
 }
