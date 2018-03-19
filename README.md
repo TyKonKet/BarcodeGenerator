@@ -1,4 +1,4 @@
-# TyKonKet.BarcodeGenerator
+# BarcodeGenerator
 Barcode generator on .NET Standard 1.3
   
 # NuGet:
