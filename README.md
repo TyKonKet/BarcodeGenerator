@@ -6,7 +6,9 @@ Barcode generator on .NET Standard 1.3
   
 # Usage:
 Include the [BarcodeGenerator NuGet package](https://www.nuget.org/packages/TyKonKet.BarcodeGenerator/) in your app:  
-```PM> Install-Package TyKonKet.BarcodeGenerator```
+````
+PM> Install-Package TyKonKet.BarcodeGenerator
+````
 ## Program.cs
 Now you can generates all the barcodes you want as you wish:  
 ```csharp
