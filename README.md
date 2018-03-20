@@ -12,6 +12,8 @@ PM> Install-Package TyKonKet.BarcodeGenerator
 ## Program.cs
 Now you can generates all the barcodes you want as you wish:  
 ```csharp
+using TyKonKet.BarcodeGenerator;
+
 internal static class Program
 {
     private static void Main()
@@ -27,7 +29,7 @@ internal static class Program
             o.FontStyle = FontStyle.Regular;
             o.ShowText = false;
         });
-        bc.GenerateBarcode("barcode", "path/filename.extension");
+        bc.Encode("barcode", "path/filename.extension");
     }
 }
 ```
@@ -35,7 +37,7 @@ internal static class Program
 # Encoders
 - [x] EAN-13
 - [ ] UPC-A
-- [ ] ISBN
+- [x] ISBN
 - [x] EAN-8
 - [ ] UPC-E
 - [ ] S205

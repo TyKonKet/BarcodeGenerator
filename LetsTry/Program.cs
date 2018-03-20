@@ -16,7 +16,7 @@ namespace LetsTry
             sw.Start();
             var bc = new Barcode(o =>
             {
-                o.Encode = Encodes.Ean8;
+                o.Encode = Encodes.Isbn13;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BgColor = Rgba32.Transparent;
@@ -25,9 +25,9 @@ namespace LetsTry
                 o.FontStyle = FontStyle.Regular;
                 //o.ShowText = false;
             });
-            bc.GenerateBarcode("978020137962", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "test.png"));
+            bc.Encode("9781234567897", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "test.png"));
             sw.Stop();
-            Console.WriteLine($"Barcode generated in {sw.ElapsedMilliseconds}ms ({sw.ElapsedMilliseconds}ms)");
+            Console.WriteLine($"Barcode generated in {sw.ElapsedMilliseconds}ms");
             Console.ReadKey();
         }
     }

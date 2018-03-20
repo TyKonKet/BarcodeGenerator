@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
-using TyKonKet.BarcodeGenerator.Encoders;
 
 namespace TyKonKet.BarcodeGenerator
 {
@@ -14,8 +12,8 @@ namespace TyKonKet.BarcodeGenerator
         Ean13 = 1,
         [Encode("UPC-A")]
         Upca = 2,
-        [Encode("ISBN")]
-        Isbn = 3,
+        [Encode("ISBN-13")]
+        Isbn13 = 3,
         [Encode("EAN-8")]
         Ean8 = 4,
         [Encode("UPC-E")]
@@ -51,7 +49,7 @@ namespace TyKonKet.BarcodeGenerator
         }
     }
 
-    internal static class EncodesExtensions
+    public static class EncodesExtensions
     {
         /// <summary>
         /// Returns name of the encoding
@@ -72,17 +70,5 @@ namespace TyKonKet.BarcodeGenerator
             }
             return e.ToString();
         }
-
-        /// <summary>
-        /// Returns whether or not the generator is implemented
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        //public static bool IsImplemented(this Encodes e)
-        //{
-        //    var info = e.GetType().GetRuntimeField(e.ToString());
-        //    var attributes = info.GetCustomAttributes(typeof(EncodeAttribute), false);
-        //    return attributes != null && attributes.OfType<EncodeAttribute>().Select(item => item.Generator != null).FirstOrDefault();
-        //}
     }
 }

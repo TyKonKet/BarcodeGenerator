@@ -1,5 +1,4 @@
 ﻿using System;
-using TyKonKet.BarcodeGenerator.Encoders;
 
 namespace TyKonKet.BarcodeGenerator
 {
@@ -24,7 +23,7 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         /// <param name="barcode"></param>
         /// <param name="file"></param>
-        public void GenerateBarcode(string barcode, string file)
+        public void Encode(string barcode, string file)
         {
             var encoder = EncodersFactory.Create(Options);
             encoder.Encode(barcode, file);
