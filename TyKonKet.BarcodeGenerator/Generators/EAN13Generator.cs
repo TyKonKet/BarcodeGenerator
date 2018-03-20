@@ -28,10 +28,10 @@ namespace TyKonKet.BarcodeGenerator.Generators
             var shortBarsH = (int)(longBarsH * 0.76);
 
             // Generate barcode
-            using (var im = new Image<Rgba32>(width, height))
+            using (var image = new Image<Rgba32>(width, height))
             {
                 // Draw bg color
-                im.Mutate(i => i.Fill(Options.BgColor));
+                image.Mutate(i => i.Fill(Options.BgColor));
 
                 // Draw bars
                 var posX = margins + leftExtreSpace;
@@ -40,7 +40,7 @@ namespace TyKonKet.BarcodeGenerator.Generators
                     if (value == 'b' || value == '1')
                     {
                         var barRectangle = new RectangleF(posX, margins, scale, (value == '1' ? shortBarsH : longBarsH) - margins);
-                        im.Mutate(img => img.Fill(Options.Color, barRectangle));
+                        image.Mutate(img => img.Fill(Options.Color, barRectangle));
                     }
                     posX += scale;
                 }
@@ -56,13 +56,15 @@ namespace TyKonKet.BarcodeGenerator.Generators
                     var leftPoint = new PointF(margins + leftExtreSpace + 13 * scale, shortBarsH - margins / 2);
                     var rightPoint = new PointF(margins + leftExtreSpace + 59 * scale, shortBarsH - margins / 2);
 
-                    im.Mutate(i => i.DrawText(leftExtraText, font, Options.Color, leftExtraPoint));
-                    im.Mutate(i => i.DrawText(leftText, font, Options.Color, leftPoint));
-                    im.Mutate(i => i.DrawText(rightText, font, Options.Color, rightPoint));
+                    image.Mutate(i => i
+                        .DrawText(leftExtraText, font, Options.Color, leftExtraPoint)
+                        .DrawText(leftText, font, Options.Color, leftPoint)
+                        .DrawText(rightText, font, Options.Color, rightPoint)
+                    );
                 }
 
                 // Export barcode
-                im.Save(file);
+                image.Save(file);
             }
         }
 

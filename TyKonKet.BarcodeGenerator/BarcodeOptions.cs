@@ -12,6 +12,11 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// 
         /// </summary>
+        public Encodes Encode { get; set; } = Encodes.Ean8;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public int Height { get; set; } = 30;
 
         /// <summary>
@@ -19,11 +24,6 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         private int _scale = 5;
         public int Scale { get => _scale; set => _scale = Math.Abs(value); }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Encodes Encode { get; set; } = Encodes.Ean8;
 
         /// <summary>
         /// 
@@ -38,7 +38,7 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// 
         /// </summary>
-        public string Font { get; set; } = "Arial"; //TODO: Implement some kind of caching 'cause seems it takes long time to load
+        public string Font { get; set; } = "Arial";
 
         /// <summary>
         /// 
