@@ -26,12 +26,16 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 barcode = barcode.PadLeft(length, '0');
             }
             barcode = barcode.Substring(0, length);
-            var csumTotal = 0;
-            for (var i = barcode.Length; i > 0; i--)
+            var check = 0;
+            var odd = true;
+            for (var i = barcode.Length - 1; i >= 0; i--)
             {
-                csumTotal += i % 2 * 2 + 1 * barcode[i - 1].ToInt();
+                var n = barcode[i].ToInt();
+                var m = odd ? 3 : 1;
+                check += n * m;
+                odd = !odd;
             }
-            return $"{barcode}{10 - csumTotal % 10}";
+            return $"{barcode}{10 - check % 10}";
         }
     }
 }
