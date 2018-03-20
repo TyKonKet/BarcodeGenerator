@@ -16,14 +16,14 @@ namespace LetsTry
             sw.Start();
             var bc = new Barcode(o =>
             {
-                o.Encode = Encodes.Ean13;
+                o.Encode = Encodes.Ean8;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BgColor = Rgba32.Transparent;
                 o.Color = Rgba32.Black;
                 o.Font = "Arial";
                 o.FontStyle = FontStyle.Regular;
-                o.ShowText = false;
+                //o.ShowText = false;
             });
             bc.GenerateBarcode("978020137962", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "test.png"));
             sw.Stop();

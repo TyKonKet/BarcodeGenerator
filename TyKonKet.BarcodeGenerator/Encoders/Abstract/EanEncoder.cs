@@ -1,8 +1,8 @@
 ﻿using TyKonKet.BarcodeGenerator.System;
 
-namespace TyKonKet.BarcodeGenerator.Generators
+namespace TyKonKet.BarcodeGenerator.Encoders
 {
-    internal abstract class EanGenerator
+    internal abstract class EanEncoder : Encoder
     {
         protected string[] EncodingA { get; } = { "0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011" };
 
@@ -13,6 +13,10 @@ namespace TyKonKet.BarcodeGenerator.Generators
         protected string[] EncodingTable { get; } = { "000000", "001011", "001101", "001110", "010011", "011001", "011100", "010101", "010110", "011010" };
 
         protected string[] Guards { get; } = { "bab", "ababa", "bab" };
+
+        protected EanEncoder(BarcodeOptions options) : base(options)
+        {
+        }
 
         protected static string _checkDigit(string barcode, int length)
         {

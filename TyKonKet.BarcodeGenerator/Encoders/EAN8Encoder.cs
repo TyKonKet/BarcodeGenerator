@@ -4,25 +4,26 @@ using SixLabors.ImageSharp;
 using SixLabors.Primitives;
 using TyKonKet.BarcodeGenerator.System;
 
-namespace TyKonKet.BarcodeGenerator.Generators
+namespace TyKonKet.BarcodeGenerator.Encoders
 {
-    internal class Ean13Generator : EanGenerator, IGenerator
+    internal class Ean8Encoder : EanEncoder
     {
-        public BarcodeOptions Options { get; set; }
+        public Ean8Encoder(BarcodeOptions options) : base(options)
+        {
+        }
 
-        public void GenerateBarcode(string barcode, string file)
+        public override void Encode(string barcode, string file)
         {
             // Barcode checks
-            barcode = _checkDigit(barcode, 13);
+            barcode = _checkDigit(barcode, 8);
 
             // Bars encode
-            var bars = _eanEncode(barcode);
+            var bars = _ean8Encode(barcode);
 
             // Calculate drawing data
             var scale = Math.Max(Options.Scale, 1);
             var margins = 2 * scale;
-            var leftExtreSpace = Options.ShowText ? 6 * scale : 0;
-            var width = scale * bars.Length + margins * 2 + leftExtreSpace;
+            var width = scale * bars.Length + margins * 2;
             var height = scale * Options.Height;
             var longBarsH = height - margins;
             var shortBarsH = (int)(longBarsH * 0.76);
@@ -34,7 +35,7 @@ namespace TyKonKet.BarcodeGenerator.Generators
                 image.Mutate(i => i.Fill(Options.BgColor));
 
                 // Draw bars
-                var posX = margins + leftExtreSpace;
+                var posX = margins;
                 foreach (var value in bars)
                 {
                     if (value == 'b' || value == '1')
@@ -49,15 +50,12 @@ namespace TyKonKet.BarcodeGenerator.Generators
                 {
                     // Draw texts
                     var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
-                    var leftExtraText = barcode.Substring(0, 1);
-                    var leftText = barcode.Substring(1, 6);
-                    var rightText = barcode.Substring(7, 6);
-                    var leftExtraPoint = new PointF(margins, shortBarsH - margins / 2);
-                    var leftPoint = new PointF(margins + leftExtreSpace + 13 * scale, shortBarsH - margins / 2);
-                    var rightPoint = new PointF(margins + leftExtreSpace + 59 * scale, shortBarsH - margins / 2);
+                    var leftText = barcode.Substring(0, 4);
+                    var rightText = barcode.Substring(4, 4);
+                    var leftPoint = new PointF(margins + 10 * scale, shortBarsH - margins / 2);
+                    var rightPoint = new PointF(margins + 42 * scale, shortBarsH - margins / 2);
 
                     image.Mutate(i => i
-                        .DrawText(leftExtraText, font, Options.Color, leftExtraPoint)
                         .DrawText(leftText, font, Options.Color, leftPoint)
                         .DrawText(rightText, font, Options.Color, rightPoint)
                     );
@@ -68,27 +66,18 @@ namespace TyKonKet.BarcodeGenerator.Generators
             }
         }
 
-        private string _eanEncode(string barcode)
+        private string _ean8Encode(string barcode)
         {
             var left = "";
             var right = "";
-            for (var i = 1; i < barcode.Length; i++)
+            for (var i = 0; i < barcode.Length; i++)
             {
                 var num = barcode[i].ToInt();
-                if (i < 7)
+                if (i < 4)
                 {
-                    var encodingA = EncodingTable[barcode[0].ToInt()].Substring(i - 1, 1) == "0";
-                    if (encodingA)
-                    {
-                        left += EncodingA[num];
-                    }
-                    else
-                    {
-                        left += EncodingB[num];
-                    }
-                    
+                    left += EncodingA[num];
                 }
-                else if (i >= 7)
+                else if (i >= 4)
                 {
                     right += EncodingC[num];
                 }
