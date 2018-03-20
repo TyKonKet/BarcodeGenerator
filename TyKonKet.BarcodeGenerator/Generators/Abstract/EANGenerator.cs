@@ -2,7 +2,7 @@
 
 namespace TyKonKet.BarcodeGenerator.Generators
 {
-    internal abstract class EANUPCGenerator
+    internal abstract class EANGenerator
     {
         protected string[] _encodingA = new string[] { "0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011" };
         protected string[] _encodingB = new string[] { "0100111", "0110011", "0011011", "0100001", "0011101", "0111001", "0000101", "0010001", "0001001", "0010111" };

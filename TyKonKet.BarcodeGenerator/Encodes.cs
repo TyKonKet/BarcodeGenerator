@@ -9,7 +9,7 @@ namespace TyKonKet.BarcodeGenerator
     /// </summary>
     public enum Encodes
     {
-        [Encode("EAN-13")]
+        [Encode("EAN-13", typeof(EAN13Generator))]
         EAN13 = 1,
         [Encode("UPC-A")]
         UPCA = 2,

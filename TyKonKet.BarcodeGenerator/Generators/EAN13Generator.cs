@@ -5,21 +5,21 @@ using System;
 
 namespace TyKonKet.BarcodeGenerator.Generators
 {
-    internal class EAN8Generator : EANGenerator, IGenerator
+    internal class EAN13Generator : EANGenerator, IGenerator
     {
         public BarcodeOptions Options { get; set; }
 
         public void GenerateBarcode(string barcode, string file)
         {
             // Barcode checks
-            if (barcode.Length > 8)
+            if (barcode.Length > 13)
             {
-                throw new Exception("Barcode number must be less then 8 characters.");
+                throw new Exception("Barcode number must be less then 14 characters.");
             }
-            barcode = this._checkDigit(barcode, 8);
+            barcode = this._checkDigit(barcode, 13);
 
             // Bars encode
-            var bars = _ean8Encode(barcode);
+            var bars = _eanEncode(barcode);
 
             // Calculate drawing data
             var scale = Math.Max(this.Options.Scale, 1);
@@ -48,36 +48,45 @@ namespace TyKonKet.BarcodeGenerator.Generators
                     posX += scale;
                 }
 
-                if (this.Options.ShowText)
-                {
-                    // Draw texts
-                    var font = SystemFonts.CreateFont(this.Options.Font, scale * 7, this.Options.FontStyle);
-                    var leftText = barcode.Substring(0, 4);
-                    var rightText = barcode.Substring(4, 4);
-                    var leftPoint = new PointF(margins + 10 * scale, shortBarsH - margins / 2);
-                    var rightPoint = new PointF(margins + 42 * scale, shortBarsH - margins / 2);
+                //if (this.Options.ShowText)
+                //{
+                //    // Draw texts
+                //    var font = SystemFonts.CreateFont(this.Options.Font, scale * 7, this.Options.FontStyle);
+                //    var leftText = barcode.Substring(1, 6);
+                //    var rightText = barcode.Substring(7, 6);
+                //    var leftPoint = new PointF(margins + 10 * scale, shortBarsH - margins / 2);
+                //    var rightPoint = new PointF(margins + 42 * scale, shortBarsH - margins / 2);
 
-                    im.Mutate(i => i.DrawText(leftText, font, this.Options.Color, leftPoint));
-                    im.Mutate(i => i.DrawText(rightText, font, this.Options.Color, rightPoint));
-                }
+                //    im.Mutate(i => i.DrawText(leftText, font, this.Options.Color, leftPoint));
+                //    im.Mutate(i => i.DrawText(rightText, font, this.Options.Color, rightPoint));
+                //}
 
                 // Export barcode
                 im.Save(file);
             }
         }
 
-        private string _ean8Encode(string barcode)
+        private string _eanEncode(string barcode)
         {
             var left = "";
             var right = "";
-            for (var i = 0; i < barcode.Length; i++)
+            for (var i = 1; i < barcode.Length; i++)
             {
                 var num = barcode[i].ToInt();
-                if (i < 4)
+                if (i < 7)
                 {
-                    left += this._encodingA[num];
+                    var encodingA = this._encodingTable[barcode[0].ToInt()].Substring(i - 1, 1) == "0";
+                    if (encodingA)
+                    {
+                        left += this._encodingA[num];
+                    }
+                    else
+                    {
+                        left += this._encodingB[num];
+                    }
+                    
                 }
-                else if (i >= 4)
+                else if (i >= 7)
                 {
                     right += this._encodingC[num];
                 }

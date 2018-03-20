@@ -38,7 +38,7 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// 
         /// </summary>
-        public string Font { get; set; } = "Arial";
+        public string Font { get; set; } = "Arial"; //TODO: Implement some kind of caching 'cause seems it takes long time to load
 
         /// <summary>
         /// 
