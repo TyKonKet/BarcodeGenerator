@@ -1,6 +1,6 @@
 ﻿namespace TyKonKet.BarcodeGenerator.Generators
 {
-    interface IGenerator
+    internal interface IGenerator
     {
         BarcodeOptions Options { get; set; }
 

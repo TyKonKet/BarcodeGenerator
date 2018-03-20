@@ -15,7 +15,7 @@ namespace TyKonKet.BarcodeGenerator
         /// <param name="options"></param>
         public Barcode(Action<BarcodeOptions> options = null)
         {
-            options?.Invoke(this.Options);
+            options?.Invoke(Options);
         }
 
         /// <summary>
@@ -25,8 +25,8 @@ namespace TyKonKet.BarcodeGenerator
         /// <param name="file"></param>
         public void GenerateBarcode(string barcode, string file)
         {
-            var generator = this.Options.Encode.GetGenerator();
-            generator.Options = this.Options;
+            var generator = Options.Encode.GetGenerator();
+            generator.Options = Options;
             generator.GenerateBarcode(barcode, file);
         }
     }

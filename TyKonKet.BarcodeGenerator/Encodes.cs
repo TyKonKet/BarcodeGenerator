@@ -1,6 +1,7 @@
 ﻿using System;
-using TyKonKet.BarcodeGenerator.Generators;
+using System.Linq;
 using System.Reflection;
+using TyKonKet.BarcodeGenerator.Generators;
 
 namespace TyKonKet.BarcodeGenerator
 {
@@ -9,16 +10,16 @@ namespace TyKonKet.BarcodeGenerator
     /// </summary>
     public enum Encodes
     {
-        [Encode("EAN-13", typeof(EAN13Generator))]
-        EAN13 = 1,
+        [Encode("EAN-13", typeof(Ean13Generator))]
+        Ean13 = 1,
         [Encode("UPC-A")]
-        UPCA = 2,
+        Upca = 2,
         [Encode("ISBN")]
-        ISBN = 3,
-        [Encode("EAN-8", typeof(EAN8Generator))]
-        EAN8 = 4,
+        Isbn = 3,
+        [Encode("EAN-8", typeof(Ean8Generator))]
+        Ean8 = 4,
         [Encode("UPC-E")]
-        UPCE = 5,
+        Upce = 5,
         [Encode("S205")]
         S205 = 6,
         [Encode("I2O5")]
@@ -26,38 +27,28 @@ namespace TyKonKet.BarcodeGenerator
         [Encode("I25")]
         I25 = 7,
         [Encode("INTERLEAVED")]
-        INTERLEAVED = I25,
+        Interleaved = I25,
         [Encode("POSTNET")]
-        POSTNET = 8,
+        Postnet = 8,
         [Encode("CODABAR")]
-        CODABAR = 9,
+        Codabar = 9,
         [Encode("CODE128")]
-        CODE128 = 10,
+        Code128 = 10,
         [Encode("CODE39")]
-        CODE39 = 11,
+        Code39 = 11,
         [Encode("CODE93")]
-        CODE93 = 12
+        Code93 = 12
     }
 
     [AttributeUsage(AttributeTargets.Field)]
     internal class EncodeAttribute : Attribute
     {
-        public string Name { get; set; }
-        public Type Generator { get; set; }
-
-        public EncodeAttribute()
-        {
-
-        }
+        public string Name { get; }
+        public Type Generator { get; }
 
         public EncodeAttribute(string name)
         {
             Name = name;
-        }
-
-        public EncodeAttribute(Type generator)
-        {
-            Generator = generator;
         }
 
         public EncodeAttribute(string name, Type generator)
@@ -80,7 +71,7 @@ namespace TyKonKet.BarcodeGenerator
             var attributes = info.GetCustomAttributes(typeof(EncodeAttribute), false);
             if (attributes != null)
             {
-                foreach (Attribute item in attributes)
+                foreach (var item in attributes)
                 {
                     if (item is EncodeAttribute)
                         return (item as EncodeAttribute).Name;
@@ -98,45 +89,26 @@ namespace TyKonKet.BarcodeGenerator
         {
             var info = e.GetType().GetRuntimeField(e.ToString());
             var attributes = info.GetCustomAttributes(typeof(EncodeAttribute), false);
-            if (attributes != null)
-            {
-                foreach (Attribute item in attributes)
-                {
-                    if (item is EncodeAttribute)
-                        return (item as EncodeAttribute).Generator != null;
-                }
-            }
-            return false;
+            return attributes != null && attributes.OfType<EncodeAttribute>().Select(item => item.Generator != null).FirstOrDefault();
         }
 
         internal static IGenerator GetGenerator(this Encodes e)
         {
             var info = e.GetType().GetRuntimeField(e.ToString());
             var attributes = info.GetCustomAttributes(typeof(EncodeAttribute), false);
-            if (attributes != null)
+            if (attributes == null) throw new Exception($"The field {e.ToString()} has no {nameof(EncodeAttribute)}.");
+            foreach (var item in attributes)
             {
-                foreach (Attribute item in attributes)
+                if (!(item is EncodeAttribute)) continue;
+                var attribute = item as EncodeAttribute;
+                if (attribute.Generator == null)
+                    throw new NotImplementedException($"The {e.ToName()} generator isn't implemented yet.");
+                if (typeof(IGenerator).GetTypeInfo().IsAssignableFrom(attribute.Generator.GetTypeInfo()))
                 {
-                    if (item is EncodeAttribute)
-                    {
-                        var attribute = item as EncodeAttribute;
-                        if (attribute.Generator != null)
-                        {
-                            if (typeof(IGenerator).GetTypeInfo().IsAssignableFrom(attribute.Generator.GetTypeInfo()))
-                            {
-                                return Activator.CreateInstance(attribute.Generator) as IGenerator;
-                            }
-                            else
-                            {
-                                throw new TypeLoadException($"The { e.ToName() } generator isn't of type {nameof(IGenerator)}");
-                            }
-                        }
-                        else
-                        {
-                            throw new NotImplementedException($"The {e.ToName()} generator isn't implemented yet.");
-                        }
-                    }
+                    return Activator.CreateInstance(attribute.Generator) as IGenerator;
                 }
+
+                throw new TypeLoadException($"The { e.ToName() } generator isn't of type {nameof(IGenerator)}");
             }
             throw new Exception($"The field {e.ToString()} has no {nameof(EncodeAttribute)}.");
         }

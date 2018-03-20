@@ -1,11 +1,11 @@
-﻿using SixLabors.Fonts;
+﻿using System;
 using SixLabors.ImageSharp;
 using SixLabors.Primitives;
-using System;
+using TyKonKet.BarcodeGenerator.System;
 
 namespace TyKonKet.BarcodeGenerator.Generators
 {
-    internal class EAN13Generator : EANGenerator, IGenerator
+    internal class Ean13Generator : EanGenerator, IGenerator
     {
         public BarcodeOptions Options { get; set; }
 
@@ -16,16 +16,16 @@ namespace TyKonKet.BarcodeGenerator.Generators
             {
                 throw new Exception("Barcode number must be less then 14 characters.");
             }
-            barcode = this._checkDigit(barcode, 13);
+            barcode = _checkDigit(barcode, 13);
 
             // Bars encode
             var bars = _eanEncode(barcode);
 
             // Calculate drawing data
-            var scale = Math.Max(this.Options.Scale, 1);
+            var scale = Math.Max(Options.Scale, 1);
             var margins = 2 * scale;
             var width = scale * bars.Length + margins * 2;
-            var height = scale * this.Options.Height;
+            var height = scale * Options.Height;
             var longBarsH = height - margins;
             var shortBarsH = (int)(longBarsH * 0.76);
 
@@ -33,17 +33,16 @@ namespace TyKonKet.BarcodeGenerator.Generators
             using (var im = new Image<Rgba32>(width, height))
             {
                 // Draw bg color
-                im.Mutate(i => i.Fill(this.Options.BgColor));
+                im.Mutate(i => i.Fill(Options.BgColor));
 
                 // Draw bars
                 var posX = margins;
-                for (var i = 0; i < bars.Length; i++)
+                foreach (var value in bars)
                 {
-                    var value = bars[i];
                     if (value == 'b' || value == '1')
                     {
                         var barRectangle = new RectangleF(posX, margins, scale, (value == '1' ? shortBarsH : longBarsH) - margins);
-                        im.Mutate(img => img.Fill(this.Options.Color, barRectangle));
+                        im.Mutate(img => img.Fill(Options.Color, barRectangle));
                     }
                     posX += scale;
                 }
@@ -75,23 +74,23 @@ namespace TyKonKet.BarcodeGenerator.Generators
                 var num = barcode[i].ToInt();
                 if (i < 7)
                 {
-                    var encodingA = this._encodingTable[barcode[0].ToInt()].Substring(i - 1, 1) == "0";
+                    var encodingA = EncodingTable[barcode[0].ToInt()].Substring(i - 1, 1) == "0";
                     if (encodingA)
                     {
-                        left += this._encodingA[num];
+                        left += EncodingA[num];
                     }
                     else
                     {
-                        left += this._encodingB[num];
+                        left += EncodingB[num];
                     }
                     
                 }
                 else if (i >= 7)
                 {
-                    right += this._encodingC[num];
+                    right += EncodingC[num];
                 }
             }
-            return $"{this._guards[0]}{left}{this._guards[1]}{right}{this._guards[2]}";
+            return $"{Guards[0]}{left}{Guards[1]}{right}{Guards[2]}";
         }
     }
 }

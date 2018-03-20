@@ -1,22 +1,22 @@
-﻿using SixLabors.Fonts;
-using SixLabors.ImageSharp;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using SixLabors.Fonts;
+using SixLabors.ImageSharp;
 using TyKonKet.BarcodeGenerator;
 
 namespace LetsTry
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             var sw = new Stopwatch();
             sw.Start();
             var bc = new Barcode(o =>
             {
-                o.Encode = Encodes.EAN13;
+                o.Encode = Encodes.Ean13;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BgColor = Rgba32.Transparent;

@@ -1,4 +1,4 @@
-﻿namespace System
+﻿namespace TyKonKet.BarcodeGenerator.System
 {
     public static class Extensions
     {
