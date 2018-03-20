@@ -13,10 +13,6 @@ namespace TyKonKet.BarcodeGenerator.Generators
         public void GenerateBarcode(string barcode, string file)
         {
             // Barcode checks
-            if (barcode.Length > 13)
-            {
-                throw new Exception("Barcode number must be less then 14 characters.");
-            }
             barcode = _checkDigit(barcode, 13);
 
             // Bars encode
