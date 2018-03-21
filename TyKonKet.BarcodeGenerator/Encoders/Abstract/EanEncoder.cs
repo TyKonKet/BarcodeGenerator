@@ -18,14 +18,16 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
         }
 
-        protected static string _checkDigit(string barcode, int length)
+        protected static string _validate(string barcode, int length)
         {
-            length -= 1;
-            if (barcode.Length < length)
-            {
-                barcode = barcode.PadLeft(length, '0');
-            }
+            length = length - 1;
+            barcode = barcode.PadLeft(length, '0');
             barcode = barcode.Substring(0, length);
+            return $"{barcode}{_checkDigit(barcode)}";
+        }
+
+        private static string _checkDigit(string barcode)
+        {
             var check = 0;
             var odd = true;
             for (var i = barcode.Length - 1; i >= 0; i--)
@@ -35,7 +37,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 check += n * m;
                 odd = !odd;
             }
-            return $"{barcode}{10 - check % 10}";
+            return $"{10 - check % 10}";
         }
     }
 }

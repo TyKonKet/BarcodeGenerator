@@ -8,10 +8,13 @@
 
         public override void Encode(string barcode, string file)
         {
-            // Preparse barcode
-            barcode = barcode.PadLeft(12, '0');
-            barcode = barcode.Substring(0, 12);
-            barcode = $"978{barcode.Substring(3, 9)}";
+            // Prevalidate barcode
+            if (barcode.Length > 3 && barcode.Substring(0, 3) == "978")
+            {
+                barcode = barcode.Remove(0, 3);
+            }
+            barcode = barcode.PadLeft(9, '0');
+            barcode = $"978{barcode.Substring(0, 9)}";
             base.Encode(barcode, file);
         }
     }

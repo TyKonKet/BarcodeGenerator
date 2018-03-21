@@ -15,7 +15,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         public override void Encode(string barcode, string file)
         {
             // Barcode checks
-            barcode = _checkDigit(barcode, 13);
+            barcode = _validate(barcode, 13);
 
             // Bars encode
             var bars = _eanEncode(barcode);
@@ -88,7 +88,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     {
                         left += EncodingB[num];
                     }
-                    
                 }
                 else if (i >= 7)
                 {
