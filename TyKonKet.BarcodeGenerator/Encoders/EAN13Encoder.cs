@@ -8,6 +8,26 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 {
     internal class Ean13Encoder : EanEncoder
     {
+        //"bab010111101001110110011001110100110010100011ababa100111011011001110010100010011001101001110bab"
+        private byte[] _barsHeight = new byte[]
+        {
+            1, 1, 1,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            1, 1, 1, 1, 1,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            1, 1, 1
+        };
+
         public Ean13Encoder(BarcodeOptions options) : base(options)
         {
         }
@@ -18,7 +38,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             barcode = _validate(barcode, 13);
 
             // Bars encode
-            var bars = _eanEncode(barcode);
+            var bars = _eanEncodeBars(barcode);
 
             // Calculate drawing data
             var scale = Math.Max(Options.Scale, 1);
@@ -26,26 +46,29 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             var leftExtreSpace = Options.ShowText ? 6 * scale : 0;
             var width = scale * bars.Length + margins * 2 + leftExtreSpace;
             var height = scale * Options.Height;
-            var longBarsH = height - margins;
-            var shortBarsH = (int)(longBarsH * 0.76);
+            var barsH = new[] { (int)((height - margins) * 0.76), height - margins };
 
-            // Generate barcode
+            // Generate barcode image
             using (var image = new Image<Rgba32>(width, height))
             {
-                // Draw bg color
-                image.Mutate(i => i.Fill(Options.BgColor));
-
-                // Draw bars
-                var posX = margins + leftExtreSpace;
-                foreach (var value in bars)
+                image.Mutate(img =>
                 {
-                    if (value == 'b' || value == '1')
+                    // Draw bg color
+                    img.Fill(Options.BgColor);
+
+                    var posX = margins + leftExtreSpace;
+                    for (var i = 0; i < bars.Length; i++)
                     {
-                        var barRectangle = new RectangleF(posX, margins, scale, (value == '1' ? shortBarsH : longBarsH) - margins);
-                        image.Mutate(img => img.Fill(Options.Color, barRectangle));
+                        // Draw bars
+                        if (bars[i] == '1')
+                        {
+                            var barRectangle = new RectangleF(posX, margins, scale, barsH[_barsHeight[i]] - margins);
+                            img.Fill(Options.Color, barRectangle);
+                        }
+
+                        posX += scale;
                     }
-                    posX += scale;
-                }
+                });
 
                 if (Options.ShowText)
                 {
@@ -54,9 +77,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     var leftExtraText = barcode.Substring(0, 1);
                     var leftText = barcode.Substring(1, 6);
                     var rightText = barcode.Substring(7, 6);
-                    var leftExtraPoint = new PointF(margins, shortBarsH - margins / 2);
-                    var leftPoint = new PointF(margins + leftExtreSpace + 13 * scale, shortBarsH - margins / 2);
-                    var rightPoint = new PointF(margins + leftExtreSpace + 59 * scale, shortBarsH - margins / 2);
+                    var leftExtraPoint = new PointF(margins, barsH[0] - margins / 2);
+                    var leftPoint = new PointF(margins + leftExtreSpace + 13 * scale, barsH[0] - margins / 2);
+                    var rightPoint = new PointF(margins + leftExtreSpace + 59 * scale, barsH[0] - margins / 2);
 
                     image.Mutate(i => i
                         .DrawText(leftExtraText, font, Options.Color, leftExtraPoint)
@@ -70,7 +93,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             }
         }
 
-        private string _eanEncode(string barcode)
+        //TODO: unit test
+        internal static string _eanEncodeBars(string barcode)
         {
             var left = "";
             var right = "";

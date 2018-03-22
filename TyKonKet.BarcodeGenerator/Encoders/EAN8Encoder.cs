@@ -8,6 +8,21 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 {
     internal class Ean8Encoder : EanEncoder
     {
+        //bab0011001001001101111010100011ababa1001110101000010001001110010bab
+        private readonly byte[] _barsHeight = {
+            1, 1, 1,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            1, 1, 1, 1, 1,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0,
+            1, 1, 1
+        };
+
         public Ean8Encoder(BarcodeOptions options) : base(options)
         {
         }
@@ -18,33 +33,36 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             barcode = _validate(barcode, 8);
 
             // Bars encode
-            var bars = _ean8Encode(barcode);
+            var bars = _eanEncodeBars(barcode);
 
             // Calculate drawing data
             var scale = Math.Max(Options.Scale, 1);
             var margins = 2 * scale;
             var width = scale * bars.Length + margins * 2;
             var height = scale * Options.Height;
-            var longBarsH = height - margins;
-            var shortBarsH = (int)(longBarsH * 0.76);
+            var barsH = new[] {(int) ((height - margins) * 0.76), height - margins};
 
-            // Generate barcode
+            // Generate barcode image
             using (var image = new Image<Rgba32>(width, height))
-            {
-                // Draw bg color
-                image.Mutate(i => i.Fill(Options.BgColor));
-
-                // Draw bars
-                var posX = margins;
-                foreach (var value in bars)
+            {                
+                image.Mutate(img =>
                 {
-                    if (value == 'b' || value == '1')
+                    // Draw bg color
+                    img.Fill(Options.BgColor);
+
+                    var posX = margins;
+                    for (var i = 0; i < bars.Length; i++)
                     {
-                        var barRectangle = new RectangleF(posX, margins, scale, (value == '1' ? shortBarsH : longBarsH) - margins);
-                        image.Mutate(img => img.Fill(Options.Color, barRectangle));
+                        // Draw bars
+                        if (bars[i] == '1')
+                        {
+                            var barRectangle = new RectangleF(posX, margins, scale, barsH[_barsHeight[i]] - margins);
+                            img.Fill(Options.Color, barRectangle);
+                        }
+
+                        posX += scale;
                     }
-                    posX += scale;
-                }
+                });
 
                 if (Options.ShowText)
                 {
@@ -52,8 +70,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
                     var leftText = barcode.Substring(0, 4);
                     var rightText = barcode.Substring(4, 4);
-                    var leftPoint = new PointF(margins + 10 * scale, shortBarsH - margins / 2);
-                    var rightPoint = new PointF(margins + 42 * scale, shortBarsH - margins / 2);
+                    var leftPoint = new PointF(margins + 10 * scale, barsH[0] - margins / 2);
+                    var rightPoint = new PointF(margins + 42 * scale, barsH[0] - margins / 2);
 
                     image.Mutate(i => i
                         .DrawText(leftText, font, Options.Color, leftPoint)
@@ -66,7 +84,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             }
         }
 
-        private string _ean8Encode(string barcode)
+        //TODO: unit test
+        internal static string _eanEncodeBars(string barcode)
         {
             var left = "";
             var right = "";

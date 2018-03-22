@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("TyKonKet.BarcodeGenerator.Tests")]
+[assembly: InternalsVisibleTo("LetsTry")]
 
 namespace TyKonKet.BarcodeGenerator
 {
