@@ -4,10 +4,10 @@ using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests
 {
-    public class EanEncodersTest
+    public class EncodersTest
     {
         [Fact]
-        public void CheckDigit()
+        public void EanCheckDigit()
         {
             Assert.All(new Dictionary<string, string>
             {
@@ -47,7 +47,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         }
 
         [Fact]
-        public void Validate8()
+        public void Ean8Validate()
         {
             Assert.All(new Dictionary<string, string>
             {
@@ -59,7 +59,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         }
 
         [Fact]
-        public void Validate13()
+        public void Ean13Validate()
         {
             Assert.All(new Dictionary<string, string>
             {
@@ -71,7 +71,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         }
 
         [Fact]
-        public void ValidateIsbn13()
+        public void Iasb13Validate()
         {
             Assert.All(new Dictionary<string, string>
             {
@@ -82,6 +82,18 @@ namespace TyKonKet.BarcodeGenerator.Tests
                 {"34567897532", "978345678975" },
                 {"567894567897532", "978567894567" }
             }, io => { Assert.Equal(io.Value, Isbn13Encoder._isbnValidate(io.Key)); });
+        }
+
+        [Fact]
+        public void UpcaValidate()
+        {
+            Assert.All(new Dictionary<string, string>
+            {
+                {"978123456786", "978123456786" },
+                {"97812345678", "978123456786" },
+                {"12345678", "000123456784" },
+                {"97812345678975", "978123456786" }
+            }, io => { Assert.Equal(io.Value, EanEncoder._validate(io.Key, 12)); });
         }
     }
 }

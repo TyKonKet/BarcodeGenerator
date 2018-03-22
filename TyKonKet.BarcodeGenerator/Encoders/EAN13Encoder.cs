@@ -8,8 +8,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 {
     internal class Ean13Encoder : EanEncoder
     {
-        //"bab010111101001110110011001110100110010100011ababa100111011011001110010100010011001101001110bab"
-        private byte[] _barsHeight = new byte[]
+        private readonly byte[] _barsHeight = new byte[]
         {
             1, 1, 1,
             0, 0, 0, 0, 0, 0, 0,
@@ -38,7 +37,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             barcode = _validate(barcode, 13);
 
             // Bars encode
-            var bars = _eanEncodeBars(barcode);
+            var bars = _encodeBars(barcode);
 
             // Calculate drawing data
             var scale = Math.Max(Options.Scale, 1);
@@ -93,8 +92,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             }
         }
 
-        //TODO: unit test
-        internal static string _eanEncodeBars(string barcode)
+        internal static string _encodeBars(string barcode)
         {
             var left = "";
             var right = "";

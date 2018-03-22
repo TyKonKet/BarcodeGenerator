@@ -7,7 +7,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
     public class BarsEncodingTest
     {
         [Fact]
-        public void BarsEncoding8()
+        public void Ean8EncodeBars()
         {
             Assert.All(new Dictionary<string, string>
             {
@@ -16,11 +16,11 @@ namespace TyKonKet.BarcodeGenerator.Tests
                 {"81274635", "1010110111001100100100110111011010101011100101000010000101001110101"},
                 {"83928345", "1010110111011110100010110010011010101001000100001010111001001110101"},
                 {"12345670", "1010011001001001101111010100011010101001110101000010001001110010101"}
-            }, io => { Assert.Equal(io.Value, Ean8Encoder._eanEncodeBars(io.Key)); });
+            }, io => { Assert.Equal(io.Value, Ean8Encoder._encodeBars(io.Key)); });
         }
 
         [Fact]
-        public void BarsEncoding13()
+        public void Ean13EncodeBars()
         {
             Assert.All(new Dictionary<string, string>
             {
@@ -29,7 +29,20 @@ namespace TyKonKet.BarcodeGenerator.Tests
                 {"8829647458294", "10101101110011011000101100001010011101011101101010101110010011101001000110110011101001011100101"},
                 {"1234567891231", "10100100110111101001110101100010000101001000101010100100011101001100110110110010000101100110101"},
                 {"7352837294767", "10101111010111001001001100010010111101001000101010110110011101001011100100010010100001000100101"}
-            }, io => { Assert.Equal(io.Value, Ean13Encoder._eanEncodeBars(io.Key)); });
+            }, io => { Assert.Equal(io.Value, Ean13Encoder._encodeBars(io.Key)); });
+        }
+
+        [Fact]
+        public void UpcaEncodeBars()
+        {
+            Assert.All(new Dictionary<string, string>
+            {
+                {"725272730706", "10101110110010011011000100100110111011001001101010100010010000101110010100010011100101010000101"},
+                {"827364192833", "10101101110010011011101101111010101111010001101010110011011101001101100100100010000101000010101"},
+                {"192748273645", "10100110010001011001001101110110100011011011101010110110010001001000010101000010111001001110101"},
+                {"112233445562", "10100110010011001001001100100110111101011110101010101110010111001001110100111010100001101100101"},
+                {"998877665548", "10100010110001011011011101101110111011011101101010101000010100001001110100111010111001001000101"}
+            }, io => { Assert.Equal(io.Value, UpcaEncoder._encodeBars(io.Key)); });
         }
     }
 }

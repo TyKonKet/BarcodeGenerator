@@ -17,7 +17,7 @@ namespace LetsTry
             sw.Start();
             var bc = new Barcode(o =>
             {
-                o.Encode = Encodes.Ean8;
+                o.Encode = Encodes.Upca;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BgColor = Rgba32.Transparent;
@@ -26,25 +26,24 @@ namespace LetsTry
                 o.FontStyle = FontStyle.Regular;
                 //o.ShowText = false;
             });
-            bc.Encode("1234567", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "test.png"));
-            bc.Options.Encode = Encodes.Ean13;
-            bc.Encode("6601414520715", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "test1.png"));
+            bc.Encode("72527273070", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "test.png"));
             sw.Stop();
             Console.WriteLine($"Barcode generated in {sw.ElapsedMilliseconds}ms");
+
             //var ou = "";
             //foreach (var io in new Dictionary<string, string>
             //{
-            //    {"9780201379624", ""},
-            //    {"2837491746340", ""},
-            //    {"8829647458294", ""},
-            //    {"1234567891231", ""},
-            //    {"7352837294767", ""}
+            //    {"725272730706", "10101110110010011011000100100110111011001001101010100010010000101110010100010011100101010000101"},
+            //    {"827364192833", "10101101110010011011101101111010101111010001101010110011011101001101100100100010000101000010101"},
+            //    {"192748273645", "10100110010001011001001101110110100011011011101010110110010001001000010101000010111001001110101"},
+            //    {"112233445562", "10100110010011001001001100100110111101011110101010101110010111001001110100111010100001101100101"},
+            //    {"998877665548", "10100010110001011011011101101110111011011101101010101000010100001001110100111010111001001000101"}
             //})
             //{
-            //    ou += TyKonKet.BarcodeGenerator.Encoders.Ean13Encoder._eanEncodeBars(io.Key) + "\r\n";
+            //    ou += TyKonKet.BarcodeGenerator.Encoders.UpcaEncoder._encodeBars(io.Key) + "\r\n";
             //}
-
             //File.WriteAllText("a.txt", ou);
+
             Console.ReadKey();
         }
     }

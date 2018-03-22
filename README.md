@@ -36,7 +36,7 @@ internal static class Program
 
 # Encoders
 - [x] EAN-13
-- [ ] UPC-A
+- [x] UPC-A
 - [x] ISBN
 - [x] EAN-8
 - [ ] UPC-E
