@@ -16,26 +16,18 @@ namespace TyKonKet.BarcodeGenerator
         Isbn13 = 3,
         [Encode("EAN-8")]
         Ean8 = 4,
-        [Encode("UPC-E")]
+        [Encode("UPC-E")] //delayed
         Upce = 5,
-        [Encode("S205")]
-        S205 = 6,
-        [Encode("I2O5")]
-        I2O5 = S205,
-        [Encode("I25")]
-        I25 = 7,
-        [Encode("INTERLEAVED")]
-        Interleaved = I25,
-        [Encode("POSTNET")]
-        Postnet = 8,
-        [Encode("CODABAR")]
-        Codabar = 9,
+        [Encode("I25")] //delayed
+        I25 = 6,
+        [Encode("I25INTERLEAVED")] //delayed
+        I25Interleaved = 7,
         [Encode("CODE128")]
-        Code128 = 10,
+        Code128 = 8,
         [Encode("CODE39")]
-        Code39 = 11,
+        Code39 = 9,
         [Encode("CODE93")]
-        Code93 = 12
+        Code93 = 10
     }
 
     [AttributeUsage(AttributeTargets.Field)]

@@ -40,12 +40,8 @@ internal static class Program
 - [x] ISBN
 - [x] EAN-8
 - [ ] UPC-E
-- [ ] S205
-- [ ] I2O5
 - [ ] I25
-- [ ] INTERLEAVED
-- [ ] POSTNET
-- [ ] CODABAR
+- [ ] I25INTERLEAVED
 - [ ] CODE128
 - [ ] CODE39
 - [ ] CODE93

@@ -35,6 +35,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
             // Barcode checks
             barcode = _validate(barcode, 12);
+            _checkCharset(barcode);
 
             // Bars encode
             var bars = _encodeBars(barcode);

@@ -1,4 +1,6 @@
-﻿using TyKonKet.BarcodeGenerator.System;
+﻿using System.Text.RegularExpressions;
+using TyKonKet.BarcodeGenerator.System;
+using System;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
@@ -24,8 +26,19 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
         protected static string[] Guards { get; } = {"101", "01010", "101"};
 
+        private static readonly Regex AcceptedCharset = new Regex("^[0-9]+$");
+
         protected EanEncoder(BarcodeOptions options) : base(options)
         {
+        }
+
+        internal static bool _checkCharset(string barcode)
+        {
+            if (!AcceptedCharset.IsMatch(barcode))
+            {
+                throw new FormatException($"Invalid barcode charset ({barcode}), only {AcceptedCharset} are accepted");
+            }
+            return true;
         }
 
         internal static string _validate(string barcode, int length)
