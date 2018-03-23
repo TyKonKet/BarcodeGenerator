@@ -44,7 +44,7 @@ namespace LetsTry
             //}
             //File.WriteAllText("a.txt", ou);
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }
