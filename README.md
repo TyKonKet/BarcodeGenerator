@@ -29,7 +29,8 @@ internal static class Program
             o.FontStyle = FontStyle.Regular;
             o.ShowText = false;
         });
-        bc.Encode("barcode", "path/filename.extension");
+        // you can use {barcode} keyword
+        bc.Encode("973543265432", "barcodes_path/bc_{barcode}.png");
     }
 }
 ```

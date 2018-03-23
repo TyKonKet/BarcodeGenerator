@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Text.RegularExpressions;
+using SixLabors.ImageSharp;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
@@ -17,7 +19,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             Options = options;
         }
 
-        public abstract void Encode(string barcode, string file);
+        public abstract string Encode(string barcode, string file);
 
         internal virtual bool _checkCharset(string barcode)
         {
@@ -26,6 +28,17 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 throw new FormatException($"Invalid barcode charset ({barcode}), only {AcceptedCharset} are accepted");
             }
             return true;
+        }
+
+        protected virtual void Export(Image<Rgba32> image, string barcode, string file)
+        {
+            file = file.Replace("{barcode}", barcode);
+            var path = Path.GetDirectoryName(file);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            image.Save(file);
         }
     }
 }

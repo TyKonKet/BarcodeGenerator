@@ -6,30 +6,34 @@ using System.Runtime.CompilerServices;
 namespace TyKonKet.BarcodeGenerator
 {
     /// <summary>
-    /// 
+    /// Provides support for barcode encoding.
     /// </summary>
     public class Barcode
     {
+        /// <summary>
+        /// Barcode options.
+        /// </summary>
         public BarcodeOptions Options { get; set; } = new BarcodeOptions();
 
         /// <summary>
-        /// 
+        /// Initialize a new instance of <see cref="Barcode"/> with custom options.
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Barcode options.</param>
         public Barcode(Action<BarcodeOptions> options = null)
         {
             options?.Invoke(Options);
         }
 
         /// <summary>
-        /// 
+        /// Encode the barcode based on <see cref="Options"/> and save it as image.
         /// </summary>
-        /// <param name="barcode"></param>
-        /// <param name="file"></param>
-        public void Encode(string barcode, string file)
+        /// <param name="barcode">Alphanumeric barcode to encode.</param>
+        /// <param name="file">Output image path, supports <c>{barcode}</c> keyword.</param>
+        /// <returns>Validated barcode.</returns>
+        public string Encode(string barcode, string file)
         {
             var encoder = EncodersFactory.Create(Options);
-            encoder.Encode(barcode, file);
+            return encoder.Encode(barcode, file);
         }
     }
 }

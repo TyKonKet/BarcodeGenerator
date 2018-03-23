@@ -23,7 +23,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         protected static string[] EncodingTable { get; } =
             {"000000", "001011", "001101", "001110", "010011", "011001", "011100", "010101", "010110", "011010"};
 
-        protected static string[] Guards { get; } = {"101", "01010", "101"};
+        protected static string[] Guards { get; } = { "101", "01010", "101" };
 
         protected override Regex AcceptedCharset => new Regex("^[0-9]+$");
 

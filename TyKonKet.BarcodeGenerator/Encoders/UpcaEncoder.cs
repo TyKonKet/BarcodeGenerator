@@ -2,15 +2,13 @@
 using SixLabors.ImageSharp;
 using SixLabors.Primitives;
 using System;
-using System.Text.RegularExpressions;
 using TyKonKet.BarcodeGenerator.System;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
     internal class UpcaEncoder : EanEncoder
     {
-        private readonly byte[] _barsHeight = new byte[]
-        {
+        private readonly byte[] _barsHeight = {
             1, 1, 1,
             1, 1, 1, 1, 1, 1, 1,
             0, 0, 0, 0, 0, 0, 0,
@@ -36,7 +34,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
         }
 
-        public override void Encode(string barcode, string file)
+        public override string Encode(string barcode, string file)
         {
             // Barcode checks
             barcode = _validate(barcode, 12);
@@ -60,7 +58,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 image.Mutate(img =>
                 {
                     // Draw bg color
-                    img.Fill(Options.BgColor);
+                    img.Fill(Options.BackgroundColor);
 
                     var posX = margins + leftExtreSpace;
                     for (var i = 0; i < bars.Length; i++)
@@ -98,8 +96,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 }
 
                 // Export barcode
-                image.Save(file);
+                Export(image, barcode, file);
             }
+            return barcode;
         }
 
         internal static string _encodeBars(string barcode)

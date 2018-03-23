@@ -6,7 +6,6 @@ using System.Reflection;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using TyKonKet.BarcodeGenerator;
-using TyKonKet.BarcodeGenerator.Encoders;
 
 namespace LetsTry
 {
@@ -21,13 +20,13 @@ namespace LetsTry
                 o.Encode = Encodes.Upca;
                 o.Height = 30;
                 o.Scale = 5;
-                o.BgColor = Rgba32.Transparent;
+                o.BackgroundColor = Rgba32.Transparent;
                 o.Color = Rgba32.Black;
                 o.Font = "Arial";
                 o.FontStyle = FontStyle.Regular;
                 //o.ShowText = false;
             });
-            bc.Encode("72527273070", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "test.png"));
+            bc.Encode("72527273070", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "prova/{barcode}.png"));
             sw.Stop();
             Console.WriteLine($"Barcode generated in {sw.ElapsedMilliseconds}ms");
 

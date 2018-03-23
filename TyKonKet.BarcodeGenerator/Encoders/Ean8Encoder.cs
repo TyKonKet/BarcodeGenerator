@@ -30,7 +30,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
         }
 
-        public override void Encode(string barcode, string file)
+        public override string Encode(string barcode, string file)
         {
             // Barcode checks
             barcode = _validate(barcode, 8);
@@ -44,15 +44,15 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             var margins = 2 * scale;
             var width = scale * bars.Length + margins * 2;
             var height = scale * Options.Height;
-            var barsH = new[] {(int) ((height - margins) * 0.76), height - margins};
+            var barsH = new[] { (int)((height - margins) * 0.76), height - margins };
 
             // Generate barcode image
             using (var image = new Image<Rgba32>(width, height))
-            {                
+            {
                 image.Mutate(img =>
                 {
                     // Draw bg color
-                    img.Fill(Options.BgColor);
+                    img.Fill(Options.BackgroundColor);
 
                     var posX = margins;
                     for (var i = 0; i < bars.Length; i++)
@@ -84,8 +84,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 }
 
                 // Export barcode
-                image.Save(file);
+                Export(image, barcode, file);
             }
+            return barcode;
         }
 
         internal static string _encodeBars(string barcode)

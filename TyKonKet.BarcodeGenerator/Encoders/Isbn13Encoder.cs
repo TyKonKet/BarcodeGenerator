@@ -10,10 +10,10 @@
         {
         }
 
-        public override void Encode(string barcode, string file)
+        public override string Encode(string barcode, string file)
         {
             barcode = _isbnValidate(barcode);
-            base.Encode(barcode, file);
+            return base.Encode(barcode, file);
         }
 
         internal static string _isbnValidate(string barcode)
