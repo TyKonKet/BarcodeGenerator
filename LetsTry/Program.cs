@@ -6,6 +6,7 @@ using System.Reflection;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using TyKonKet.BarcodeGenerator;
+using TyKonKet.BarcodeGenerator.Encoders;
 
 namespace LetsTry
 {

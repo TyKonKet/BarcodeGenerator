@@ -2,6 +2,7 @@
 using SixLabors.ImageSharp;
 using SixLabors.Primitives;
 using System;
+using System.Text.RegularExpressions;
 using TyKonKet.BarcodeGenerator.System;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
@@ -26,6 +27,10 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             1, 1, 1, 1, 1, 1, 1,
             1, 1, 1
         };
+
+        public UpcaEncoder() : base()
+        {
+        }
 
         public UpcaEncoder(BarcodeOptions options) : base(options)
         {

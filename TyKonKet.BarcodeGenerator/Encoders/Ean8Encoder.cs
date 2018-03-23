@@ -22,6 +22,10 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             1, 1, 1
         };
 
+        public Ean8Encoder() : base()
+        {
+        }
+
         public Ean8Encoder(BarcodeOptions options) : base(options)
         {
         }

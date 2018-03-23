@@ -2,6 +2,10 @@
 {
     internal class Isbn13Encoder : Ean13Encoder
     {
+        public Isbn13Encoder() : base()
+        {
+        }
+
         public Isbn13Encoder(BarcodeOptions options) : base(options)
         {
         }
