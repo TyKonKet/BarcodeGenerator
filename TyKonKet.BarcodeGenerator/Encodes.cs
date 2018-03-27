@@ -16,18 +16,12 @@ namespace TyKonKet.BarcodeGenerator
         Isbn13 = 3,
         [Encode("EAN-8")]
         Ean8 = 4,
-        [Encode("UPC-E")] //delayed
-        Upce = 5,
-        [Encode("I25")] //delayed
-        I25 = 6,
-        [Encode("I25INTERLEAVED")] //delayed
-        I25Interleaved = 7,
-        [Encode("CODE128")]
-        Code128 = 8,
-        [Encode("CODE39")]
-        Code39 = 9,
-        [Encode("CODE93")]
-        Code93 = 10
+        [Encode("CODE-128")]
+        Code128 = 5,
+        [Encode("CODE-39")]
+        Code39 = 6,
+        [Encode("CODE-93")]
+        Code93 = 7
     }
 
     [AttributeUsage(AttributeTargets.Field)]
@@ -44,10 +38,8 @@ namespace TyKonKet.BarcodeGenerator
     public static class EncodesExtensions
     {
         /// <summary>
-        /// Returns name of the encoding
+        /// Get the name of the encoding.
         /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
         public static string ToName(this Encodes e)
         {
             var info = e.GetType().GetRuntimeField(e.ToString());

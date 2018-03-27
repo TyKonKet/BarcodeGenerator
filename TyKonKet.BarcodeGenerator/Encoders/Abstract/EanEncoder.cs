@@ -48,13 +48,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
             // calculate check digit following EAN rules
             var check = 0;
-            var odd = true;
-            for (var i = barcode.Length - 1; i >= 0; i--)
+            for (var i = 1; i <= barcode.Length; i++)
             {
-                var n = barcode[i].ToInt();
-                var m = odd ? 3 : 1;
-                check += n * m;
-                odd = !odd;
+                check += (i % 2 * 2 + 1) * barcode[barcode.Length - i].ToInt();
             }
             return $"{((check %= 10) != 0 ? 10 - check : check)}";
         }
