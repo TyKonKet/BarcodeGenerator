@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System;
+using BenchmarkDotNet.Attributes;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using System.IO;
@@ -21,7 +22,10 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
                 o.Font = "Arial";
                 o.FontStyle = FontStyle.Regular;
             });
-            bc.Encode("90311017", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "{barcode}.png"));
+            bc.Encode("90311017",
+                Path.Combine(
+                    Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) ??
+                    throw new InvalidOperationException(), "{barcode}.png"));
         }
     }
 }

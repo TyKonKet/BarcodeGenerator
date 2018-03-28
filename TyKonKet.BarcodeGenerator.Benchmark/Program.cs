@@ -1,9 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Attributes.Jobs;
-using BenchmarkDotNet.Running;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
-using System.IO;
+﻿using BenchmarkDotNet.Running;
 using System.Reflection;
 
 namespace TyKonKet.BarcodeGenerator.Benchmark

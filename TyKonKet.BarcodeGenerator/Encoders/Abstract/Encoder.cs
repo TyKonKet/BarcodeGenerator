@@ -21,7 +21,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
         public abstract string Encode(string barcode, string file);
 
-        internal virtual bool _checkCharset(string barcode)
+        internal bool _checkCharset(string barcode)
         {
             if (!AcceptedCharset.IsMatch(barcode))
             {
@@ -30,15 +30,20 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             return true;
         }
 
-        protected virtual void Export(Image<Rgba32> image, string barcode, string file)
+        protected void Export(Image<Rgba32> image, string barcode, string file)
         {
-            file = file.Replace("{barcode}", barcode);
+            file = file.Replace("{barcode}", _getSafeFilename(barcode));
             var path = Path.GetDirectoryName(file);
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
             image.Save(file);
+        }
+
+        private static string _getSafeFilename(string filename)
+        {
+            return string.Join("", filename.Split(Path.GetInvalidFileNameChars()));
         }
     }
 }
