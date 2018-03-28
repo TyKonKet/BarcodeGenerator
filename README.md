@@ -23,7 +23,7 @@ internal static class Program
             o.Encode = Encodes.Ean13;
             o.Height = 30;
             o.Scale = 5;
-            o.BgColor = Rgba32.Transparent;
+            o.BackgroundColor = Rgba32.Transparent;
             o.Color = Rgba32.Black;
             o.Font = "Arial";
             o.FontStyle = FontStyle.Regular;
