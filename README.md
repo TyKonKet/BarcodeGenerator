@@ -40,6 +40,6 @@ internal static class Program
 - [x] UPC-A
 - [x] ISBN
 - [x] EAN-8
-- [ ] CODE128
 - [ ] CODE39
-- [ ] CODE93
+- [x] CODE93
+- [ ] CODE128
