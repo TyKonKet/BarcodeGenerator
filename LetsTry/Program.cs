@@ -1,6 +1,7 @@
 ﻿using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -25,10 +26,11 @@ namespace LetsTry
                 o.FontStyle = FontStyle.Regular;
                 //o.ShowText = false;
             });
-            bc.Encode("ABC-1234-ABC", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "out/{barcode}.png"));
+            bc.Encode("ABC", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "out/{barcode}.png"));
             sw.Stop();
             Console.WriteLine($"Barcode generated in {sw.ElapsedMilliseconds}ms");
-            //Console.ReadKey();
+
+            Console.ReadKey();
         }
     }
 }

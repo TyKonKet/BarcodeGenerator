@@ -1,64 +1,68 @@
-﻿using System;
+﻿using SixLabors.Fonts;
 using SixLabors.ImageSharp;
+using SixLabors.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using SixLabors.Fonts;
-using SixLabors.Primitives;
-using TyKonKet.BarcodeGenerator.System;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
     internal class Code93Encoder : Encoder
     {
-        protected internal static Dictionary<string, string> EncodingTable => new Dictionary<string, string>
+        internal static readonly Dictionary<char, (int, string)> EncodingTable = new Dictionary<char, (int, string)>
         {
-            {"0", "100010100"},
-            {"1", "101001000"},
-            {"2", "101000100"},
-            {"3", "101000010"},
-            {"4", "100101000"},
-            {"5", "100100100"},
-            {"6", "100100010"},
-            {"7", "101010000"},
-            {"8", "100010010"},
-            {"9", "100001010"},
-            {"A", "110101000"},
-            {"B", "110100100"},
-            {"C", "110100010"},
-            {"D", "110010100"},
-            {"E", "110010010"},
-            {"F", "110001010"},
-            {"G", "101101000"},
-            {"H", "101100100"},
-            {"I", "101100010"},
-            {"J", "100110100"},
-            {"K", "100011010"},
-            {"L", "101011000"},
-            {"M", "101001100"},
-            {"N", "101000110"},
-            {"O", "100101100"},
-            {"P", "100010110"},
-            {"Q", "110110100"},
-            {"R", "110110010"},
-            {"S", "110101100"},
-            {"T", "110100110"},
-            {"U", "110010110"},
-            {"V", "110011010"},
-            {"W", "101101100"},
-            {"X", "101100110"},
-            {"Y", "100110110"},
-            {"Z", "100111010"},
-            {"-", "100101110"},
-            {".", "111010100"},
-            {" ", "111010010"},
-            {"$", "100100110"},
-            {"/", "111010110"},
-            {"+", "100110010"},
-            {"%", "111011010"},
-            {"*", "101011110"}
+            {'0', (0, "100010100")},
+            {'1', (1, "101001000")},
+            {'2', (2, "101000100")},
+            {'3', (3, "101000010")},
+            {'4', (4, "100101000")},
+            {'5', (5, "100100100")},
+            {'6', (6, "100100010")},
+            {'7', (7, "101010000")},
+            {'8', (8, "100010010")},
+            {'9', (9, "100001010")},
+            {'A', (10, "110101000")},
+            {'B', (11, "110100100")},
+            {'C', (12, "110100010")},
+            {'D', (13, "110010100")},
+            {'E', (14, "110010010")},
+            {'F', (15, "110001010")},
+            {'G', (16, "101101000")},
+            {'H', (17, "101100100")},
+            {'I', (18, "101100010")},
+            {'J', (19, "100110100")},
+            {'K', (20, "100011010")},
+            {'L', (21, "101011000")},
+            {'M', (22, "101001100")},
+            {'N', (23, "101000110")},
+            {'O', (24, "100101100")},
+            {'P', (25, "100010110")},
+            {'Q', (26, "110110100")},
+            {'R', (27, "110110010")},
+            {'S', (28, "110101100")},
+            {'T', (29, "110100110")},
+            {'U', (30, "110010110")},
+            {'V', (31, "110011010")},
+            {'W', (32, "101101100")},
+            {'X', (33, "101100110")},
+            {'Y', (34, "100110110")},
+            {'Z', (35, "100111010")},
+            {'-', (36, "100101110")},
+            {'.', (37, "111010100")},
+            {' ', (38, "111010010")},
+            {'$', (39, "111001010")},
+            {'/', (40, "101101110")},
+            {'+', (41, "101110110")},
+            {'%', (42, "110101110")},
+            {'<', (43, "100100110")},
+            {'=', (44, "111011010")},
+            {'>', (45, "111010110")},
+            {'?', (46, "100110010")},
+            {'*', (47, "101011110")}
         };
+
+        private static readonly char[] EncodingTableKeys = EncodingTable.Keys.ToArray();
 
         protected override Regex AcceptedCharset => new Regex(@"^[A-Z0-9 .$+%\-\/]+$");
 
@@ -75,9 +79,10 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             // Barcode checks
             barcode = _validate(barcode);
             _checkCharset(barcode);
+            var checkDigits = _checkDigits(barcode);
 
             // Bars encode
-            var bars = _encodeBars($"{barcode}{_checkDigits(barcode)}");
+            var bars = _encodeBars($"{barcode}{checkDigits}");
 
             // Calculate drawing data
             var scale = Math.Max(Options.Scale, 1);
@@ -136,64 +141,25 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         internal static string _checkDigits(string barcode)
         {
             // calculate check digit following CODE93 rules
-            var keys = EncodingTable.Keys.ToArray();
-            var checkDigit = "";
-            for (var two = 0; two < 2; two++)
+            string CheckDigit(string b, int maxWeight)
             {
                 var sum = 0;
-                for (var i = barcode.Length; i > 0; i--)
+                var weight = 1;
+                for (var i = b.Length - 1; i >= 0; i--)
                 {
-                    var num = barcode[barcode.Length - i];
-                    switch (num)
+                    sum += weight * EncodingTable[b[i]].Item1;
+                    weight++;
+                    if (weight > maxWeight)
                     {
-                        case '-':
-                            num = (char) 36;
-                            break;
-                        case '.':
-                            num = (char) 37;
-                            break;
-                        case ' ':
-                            num = (char) 38;
-                            break;
-                        case '$':
-                            num = (char) 39;
-                            break;
-                        case '/':
-                            num = (char) 40;
-                            break;
-                        case '+':
-                            num = (char) 41;
-                            break;
-                        case '%':
-                            num = (char) 42;
-                            break;
-                        case '*':
-                            num = (char) 43;
-                            break;
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3':
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7':
-                        case '8':
-                        case '9':
-                            num = (char) num.ToInt();
-                            break;
-                        default:
-                            num = (char) (Encoding.ASCII.GetBytes(num.ToString())[0] - 55);
-                            break;
+                        weight = 1;
                     }
-
-                    sum += i * num;
                 }
 
-                var c = keys[sum % 47];
-                checkDigit += c;
-                barcode += c;
+                return EncodingTableKeys[sum % 47].ToString();
             }
+
+            var checkDigit = CheckDigit(barcode, 20);
+            checkDigit += CheckDigit($"{barcode}{checkDigit}", 15);
 
             return $"{checkDigit}";
         }
@@ -201,7 +167,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         internal static string _encodeBars(string barcode)
         {
             barcode = $"*{barcode}*";
-            var bars = barcode.Aggregate("", (current, b) => current + EncodingTable[b.ToString()]);
+            var bars = barcode.Aggregate("", (current, b) => current + EncodingTable[b].Item2);
             return $"{bars}1";
         }
     }
