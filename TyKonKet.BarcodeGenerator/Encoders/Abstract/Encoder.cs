@@ -1,7 +1,8 @@
-﻿using System;
+﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using SixLabors.ImageSharp;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {

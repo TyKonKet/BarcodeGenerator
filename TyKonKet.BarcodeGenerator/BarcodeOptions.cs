@@ -1,6 +1,6 @@
-﻿using System;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
+﻿using SixLabors.Fonts;
+using SixLabors.ImageSharp.PixelFormats;
+using System;
 
 namespace TyKonKet.BarcodeGenerator
 {

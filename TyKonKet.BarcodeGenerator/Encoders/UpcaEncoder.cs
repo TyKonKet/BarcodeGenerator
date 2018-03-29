@@ -1,5 +1,9 @@
 ﻿using SixLabors.Fonts;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Processing.Drawing;
+using SixLabors.ImageSharp.Processing.Text;
 using SixLabors.Primitives;
 using System;
 using TyKonKet.BarcodeGenerator.System;
