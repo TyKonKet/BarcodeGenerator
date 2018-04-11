@@ -74,10 +74,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Common
             string CheckDigit(string b)
             {
                 var sum = 0;
-                for (var i = b.Length; i > 0; i--)
-                {
-                    sum += i * Array.IndexOf(EncodingTableKeys, b[b.Length - i]);
-                }
+                for (var i = b.Length; i > 0; i--) sum += i * Array.IndexOf(EncodingTableKeys, b[b.Length - i]);
 
                 return EncodingTableKeys[sum % 47].ToString();
             }
@@ -100,10 +97,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Common
                 {
                     sum += weight * EncodingTable[b[i]].Item1;
                     weight++;
-                    if (weight > maxWeight)
-                    {
-                        weight = 1;
-                    }
+                    if (weight > maxWeight) weight = 1;
                 }
 
                 return EncodingTableKeys[sum % 47].ToString();

@@ -1,14 +1,14 @@
-﻿using SixLabors.Fonts;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Drawing;
 using SixLabors.ImageSharp.Processing.Text;
 using SixLabors.Primitives;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
@@ -70,14 +70,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
         protected override Regex AcceptedCharset => new Regex(@"^[A-Z0-9 .$+%\-\/]+$");
 
-        public Code93Encoder() : base()
-        {
-        }
-
-        public Code93Encoder(BarcodeOptions options) : base(options)
-        {
-        }
-
         public override string Encode(string barcode, string file)
         {
             // Barcode checks
@@ -122,6 +114,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     // Draw text
                     var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
                     var textsize = TextMeasurer.Measure(barcode, new RendererOptions(font));
+                    // ReSharper disable once PossibleLossOfFraction
                     var point = new PointF(width / 2 - textsize.Width / 2, barsH - margins / 2);
 
                     image.Mutate(i => i
@@ -136,7 +129,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             return barcode;
         }
 
-        internal static string _validate(string barcode)
+        private static string _validate(string barcode)
         {
             // validate barcode following CODE93 rules
             return $"{barcode.ToUpper()}";
@@ -153,10 +146,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 {
                     sum += weight * EncodingTable[b[i]].Item1;
                     weight++;
-                    if (weight > maxWeight)
-                    {
-                        weight = 1;
-                    }
+                    if (weight > maxWeight) weight = 1;
                 }
 
                 return EncodingTableKeys[sum % 47].ToString();

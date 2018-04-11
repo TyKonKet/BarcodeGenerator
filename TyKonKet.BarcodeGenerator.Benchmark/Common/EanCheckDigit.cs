@@ -1,7 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Attributes.Columns;
 using BenchmarkDotNet.Attributes.Jobs;
-using TyKonKet.BarcodeGenerator.System;
 
 namespace TyKonKet.BarcodeGenerator.Benchmark.Common
 {
@@ -33,10 +32,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Common
             var barcode = "978156216789";
             var check = 0;
 
-            for (var i = 1; i <= barcode.Length; i++)
-            {
-                check += (i % 2 * 2 + 1) * barcode[barcode.Length - i].ToInt();
-            }
+            for (var i = 1; i <= barcode.Length; i++) check += (i % 2 * 2 + 1) * barcode[barcode.Length - i].ToInt();
 
             return $"{((check %= 10) != 0 ? 10 - check : check)}";
         }
@@ -47,10 +43,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Common
             var barcode = "978156216789";
             var check = 0;
 
-            for (var i = 1; i <= barcode.Length; i++)
-            {
-                check += (i % 2 * 2 + 1) * barcode[barcode.Length - i].ToInt();
-            }
+            for (var i = 1; i <= barcode.Length; i++) check += (i % 2 * 2 + 1) * barcode[barcode.Length - i].ToInt();
 
             return $"{((check %= 10) != 0 ? 10 - check : check)}";
         }

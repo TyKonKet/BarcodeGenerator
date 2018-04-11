@@ -1,16 +1,13 @@
-﻿using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using System;
+﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
     internal abstract class Encoder
     {
-        protected BarcodeOptions Options { get; }
-        protected abstract Regex AcceptedCharset { get; }
-
         protected Encoder()
         {
         }
@@ -20,14 +17,15 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             Options = options;
         }
 
+        protected BarcodeOptions Options { get; }
+        protected abstract Regex AcceptedCharset { get; }
+
         public abstract string Encode(string barcode, string file);
 
         internal bool _checkCharset(string barcode)
         {
             if (!AcceptedCharset.IsMatch(barcode))
-            {
                 throw new FormatException($"Invalid barcode charset ({barcode}), only {AcceptedCharset} are accepted");
-            }
             return true;
         }
 
@@ -35,10 +33,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
             file = file.Replace("{barcode}", _getSafeFilename(barcode));
             var path = Path.GetDirectoryName(file);
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             image.Save(file);
         }
 

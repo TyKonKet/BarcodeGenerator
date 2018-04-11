@@ -1,9 +1,9 @@
-﻿using SixLabors.Fonts;
-using SixLabors.ImageSharp.PixelFormats;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using SixLabors.Fonts;
+using SixLabors.ImageSharp.PixelFormats;
 using TyKonKet.BarcodeGenerator;
 
 namespace LetsTry
@@ -25,7 +25,8 @@ namespace LetsTry
                 o.FontStyle = FontStyle.Regular;
                 //o.ShowText = false;
             });
-            bc.Encode("ABC", Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "out/{barcode}.png"));
+            bc.Encode("ABC",
+                Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "out/{barcode}.png"));
             sw.Stop();
             Console.WriteLine($"Barcode generated in {sw.ElapsedMilliseconds}ms");
 

@@ -1,18 +1,18 @@
-﻿using SixLabors.Fonts;
+﻿using System;
+using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Drawing;
 using SixLabors.ImageSharp.Processing.Text;
 using SixLabors.Primitives;
-using System;
-using TyKonKet.BarcodeGenerator.System;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
     internal class UpcaEncoder : EanEncoder
     {
-        private readonly byte[] _barsHeight = {
+        private readonly byte[] _barsHeight =
+        {
             1, 1, 1,
             1, 1, 1, 1, 1, 1, 1,
             0, 0, 0, 0, 0, 0, 0,
@@ -30,14 +30,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             1, 1, 1
         };
 
-        public UpcaEncoder() : base()
-        {
-        }
-
-        public UpcaEncoder(BarcodeOptions options) : base(options)
-        {
-        }
-
         public override string Encode(string barcode, string file)
         {
             // Barcode checks
@@ -54,7 +46,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             var rightExtreSpace = Options.ShowText ? 6 * scale : 0;
             var width = scale * bars.Length + margins * 2 + leftExtreSpace + rightExtreSpace;
             var height = scale * Options.Height;
-            var barsH = new[] { (int)((height - margins) * 0.76), height - margins };
+            var barsH = new[] {(int) ((height - margins) * 0.76), height - margins};
 
             // Generate barcode image
             using (var image = new Image<Rgba32>(width, height))
@@ -102,6 +94,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 // Export barcode
                 Export(image, barcode, file);
             }
+
             return barcode;
         }
 
@@ -113,15 +106,10 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             {
                 var num = barcode[i].ToInt();
                 if (i < 6)
-                {
-
                     left += EncodingA[num];
-                }
-                else if (i >= 6)
-                {
-                    right += EncodingC[num];
-                }
+                else if (i >= 6) right += EncodingC[num];
             }
+
             return $"{Guards[0]}{left}{Guards[1]}{right}{Guards[2]}";
         }
     }

@@ -1,9 +1,9 @@
-﻿using BenchmarkDotNet.Attributes;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp.PixelFormats;
-using System;
+﻿using System;
 using System.IO;
 using System.Reflection;
+using BenchmarkDotNet.Attributes;
+using SixLabors.Fonts;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
 {

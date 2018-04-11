@@ -1,4 +1,5 @@
-﻿namespace TyKonKet.BarcodeGenerator.System
+﻿// ReSharper disable once CheckNamespace
+namespace TyKonKet.BarcodeGenerator
 {
     public static class Extensions
     {

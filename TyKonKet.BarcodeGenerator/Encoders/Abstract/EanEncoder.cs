@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using TyKonKet.BarcodeGenerator.System;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
@@ -23,9 +22,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         protected static readonly string[] EncodingTable =
             {"000000", "001011", "001101", "001110", "010011", "011001", "011100", "010101", "010110", "011010"};
 
-        protected static readonly string[] Guards = { "101", "01010", "101" };
-
-        protected override Regex AcceptedCharset => new Regex("^[0-9]+$");
+        protected static readonly string[] Guards = {"101", "01010", "101"};
 
         protected EanEncoder(BarcodeOptions options) : base(options)
         {
@@ -34,6 +31,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         protected EanEncoder()
         {
         }
+
+        protected override Regex AcceptedCharset => new Regex("^[0-9]+$");
 
         internal static string _validate(string barcode, int length)
         {
@@ -48,10 +47,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
             // calculate check digit following EAN rules
             var check = 0;
-            for (var i = 1; i <= barcode.Length; i++)
-            {
-                check += (i % 2 * 2 + 1) * barcode[barcode.Length - i].ToInt();
-            }
+            for (var i = 1; i <= barcode.Length; i++) check += (i % 2 * 2 + 1) * barcode[barcode.Length - i].ToInt();
             return $"{((check %= 10) != 0 ? 10 - check : check)}";
         }
     }

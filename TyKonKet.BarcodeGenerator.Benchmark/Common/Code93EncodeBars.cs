@@ -26,10 +26,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Common
             var barcode = "ABC-1234-ABC92736182345ANDJEOW918273EHEHCIA-.-SSS /$+%$+/ $ VARNAME PHPVAR VARNAME CSHARP";
             barcode = $"*{barcode}*";
             var bars = "";
-            foreach (var b in barcode)
-            {
-                bars += Code93Encoder.EncodingTable[b];
-            }
+            foreach (var b in barcode) bars += Code93Encoder.EncodingTable[b];
             return $"{bars}1";
         }
     }
