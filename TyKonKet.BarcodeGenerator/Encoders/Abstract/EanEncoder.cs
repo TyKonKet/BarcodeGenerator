@@ -20,9 +20,11 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         };
 
         protected static readonly string[] EncodingTable =
-            {"000000", "001011", "001101", "001110", "010011", "011001", "011100", "010101", "010110", "011010"};
+            {
+            "000000", "001011", "001101", "001110", "010011", "011001", "011100", "010101", "010110", "011010"
+        };
 
-        protected static readonly string[] Guards = {"101", "01010", "101"};
+        protected static readonly string[] Guards = { "101", "01010", "101" };
 
         protected EanEncoder(BarcodeOptions options) : base(options)
         {
@@ -32,22 +34,35 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
         }
 
+#if NET6_0_OR_GREATER
+        protected override Regex AcceptedCharset => new("^[0-9]+$");
+#else
         protected override Regex AcceptedCharset => new Regex("^[0-9]+$");
+#endif
 
-        internal static string _validate(string barcode, int length)
+        internal static string Validate(string barcode, int length)
         {
             // validate barcode following EAN rules
-            length = length - 1;
+            length--;
             barcode = barcode.PadLeft(length, '0');
+#if NET6_0_OR_GREATER
+            barcode = barcode[..length];
+#else
             barcode = barcode.Substring(0, length);
-            return $"{barcode}{_checkDigit(barcode)}";
+#endif
+
+            return $"{barcode}{CheckDigit(barcode)}";
         }
 
-        internal static string _checkDigit(string barcode)
+        internal static string CheckDigit(string barcode)
         {
             // calculate check digit following EAN rules
             var check = 0;
+#if NET6_0_OR_GREATER
+            for (var i = 1; i <= barcode.Length; i++) check += (i % 2 * 2 + 1) * barcode[^i].ToInt();
+#else
             for (var i = 1; i <= barcode.Length; i++) check += (i % 2 * 2 + 1) * barcode[barcode.Length - i].ToInt();
+#endif 
             return $"{((check %= 10) != 0 ? 10 - check : check)}";
         }
     }

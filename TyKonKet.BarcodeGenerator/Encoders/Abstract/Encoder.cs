@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+using SkiaSharp;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
-    internal abstract class Encoder
+    internal abstract class Encoder : IDisposable
     {
         protected Encoder()
         {
@@ -18,28 +17,69 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         }
 
         protected BarcodeOptions Options { get; }
+
+        internal SKImage Image { get; set; }
+
+        protected string Barcode { get; set; }
+
         protected abstract Regex AcceptedCharset { get; }
 
-        public abstract string Encode(string barcode, string file);
+        /// <summary>
+        /// Validates and generates the barcode image.
+        /// </summary>
+        /// <param name="barcode">Barcode chars / digits.</param>
+        /// <returns>Returns the vaidated barcode chars / digits.</returns>
+        public abstract string Encode(string barcode);
 
-        internal bool _checkCharset(string barcode)
+        internal bool CheckCharset(string barcode)
         {
             if (!AcceptedCharset.IsMatch(barcode))
                 throw new FormatException($"Invalid barcode charset ({barcode}), only {AcceptedCharset} are accepted");
             return true;
         }
 
-        protected void Export(Image<Rgba32> image, string barcode, string file)
+        /// <summary>
+        /// Exports the barcode image.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="format">Image export format.</param>
+        /// <param name="quality">Image export qualty.</param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public virtual void Export(string fileName, SKEncodedImageFormat format, int quality)
         {
-            file = file.Replace("{barcode}", _getSafeFilename(barcode));
-            var path = Path.GetDirectoryName(file);
+            if (Image == null)
+            {
+                throw new InvalidOperationException("The barcode must be encoded before exported");
+            }
+
+            fileName = fileName.Replace("{barcode}", GetSafeFilename(Barcode));
+            var path = Path.GetDirectoryName(fileName);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-            image.Save(file);
+#if NET6_0_OR_GREATER
+            using var encodedImage = Image.Encode(format, quality);
+            using var fileStream = new FileStream(fileName, FileMode.OpenOrCreate);
+            encodedImage.SaveTo(fileStream);
+#else
+            using (var encodedImage = Image.Encode(format, quality))
+            {
+                using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
+                {
+                    encodedImage.SaveTo(fileStream);
+
+                }
+            }
+#endif
+
         }
 
-        private static string _getSafeFilename(string filename)
+        private static string GetSafeFilename(string filename)
         {
             return string.Join("", filename.Split(Path.GetInvalidFileNameChars()));
+        }
+
+        public void Dispose()
+        {
+            Image?.Dispose();
         }
     }
 }

@@ -1,29 +1,33 @@
 ﻿using System;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp.PixelFormats;
+using SkiaSharp;
 
 namespace TyKonKet.BarcodeGenerator
 {
     /// <summary>
-    ///     Barcode options.
+    /// Barcode options.
     /// </summary>
     public class BarcodeOptions
     {
-        /// <summary>
-        ///     Output image height.
-        /// </summary>
         private int _scale = 5;
 
         /// <summary>
-        ///     Enconding type.
+        /// Barcode margins.
+        /// </summary>
+        public int Margins { get; set; } = 5;
+
+        /// <summary>
+        /// Enconding type.
         /// </summary>
         public Encodes Encode { get; set; } = Encodes.Ean8;
 
         /// <summary>
-        ///     Output image height.
+        /// Output image height.
         /// </summary>
         public int Height { get; set; } = 30;
 
+        /// <summary>
+        /// Output image width scale.
+        /// </summary>
         public int Scale
         {
             get => _scale;
@@ -31,28 +35,28 @@ namespace TyKonKet.BarcodeGenerator
         }
 
         /// <summary>
-        ///     Output image background color.
+        /// Output image background color.
         /// </summary>
-        public Rgba32 BackgroundColor { get; set; } = Rgba32.White;
+        public SKColor BackgroundColor { get; set; } = SKColors.White;
 
         /// <summary>
-        ///     Output image color.
+        /// Output image color.
         /// </summary>
-        public Rgba32 Color { get; set; } = Rgba32.Black;
+        public SKColor Color { get; set; } = SKColors.Black;
 
         /// <summary>
-        ///     Output text font (eg. Arial, Calibri, Helvetica).
+        /// Output text font (eg. Arial, Calibri, Helvetica).
         /// </summary>
         public string Font { get; set; } = "Arial";
 
         /// <summary>
-        ///     Output text font style.
+        /// Output text font style.
         /// </summary>
-        public FontStyle FontStyle { get; set; } = FontStyle.Regular;
+        public SKFontStyle FontStyle { get; set; } = SKFontStyle.Normal;
 
         /// <summary>
-        ///     Show or hide image text.
+        /// Draw or not the image text.
         /// </summary>
-        public bool ShowText { get; set; } = true;
+        public bool DrawText { get; set; } = true;
     }
 }

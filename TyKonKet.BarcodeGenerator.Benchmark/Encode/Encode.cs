@@ -1,14 +1,20 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Attributes.Jobs;
+using BenchmarkDotNet.Jobs;
 
 namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
 {
     [MemoryDiagnoser]
-    [CoreJob]
-    [ClrJob]
+    [SimpleJob(runtimeMoniker: RuntimeMoniker.Net462)]
+    [SimpleJob(runtimeMoniker: RuntimeMoniker.Net48, baseline: true)]
+    //[SimpleJob(runtimeMoniker: RuntimeMoniker.NetCoreApp31)]
+    //[SimpleJob(runtimeMoniker: RuntimeMoniker.Net50)]
+    [SimpleJob(runtimeMoniker: RuntimeMoniker.Net60)]
     public abstract class Encode
     {
-        [Benchmark]
+        public abstract Barcode DoInstance();
+
         public abstract void DoEncoding();
+
+        public abstract void DoExport();
     }
 }

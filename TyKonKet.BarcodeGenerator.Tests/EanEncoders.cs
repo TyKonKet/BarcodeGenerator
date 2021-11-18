@@ -41,7 +41,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("4628384", "9")]
         public void EanCheckDigit(string input, string expected)
         {
-            Assert.Equal(expected, EanEncoder._checkDigit(input));
+            Assert.Equal(expected, EanEncoder.CheckDigit(input));
         }
 
         [Theory]
@@ -51,7 +51,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("90361012456", "90361012")]
         public void Ean8Validate(string input, string expected)
         {
-            Assert.Equal(expected, EanEncoder._validate(input, 8));
+            Assert.Equal(expected, EanEncoder.Validate(input, 8));
         }
 
         [Theory]
@@ -61,7 +61,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("9781234567897532", "9781234567897")]
         public void Ean13Validate(string input, string expected)
         {
-            Assert.Equal(expected, EanEncoder._validate(input, 13));
+            Assert.Equal(expected, EanEncoder.Validate(input, 13));
         }
 
         [Theory]
@@ -73,7 +73,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("567894567897532", "978567894567")]
         public void Iasb13Validate(string input, string expected)
         {
-            Assert.Equal(expected, Isbn13Encoder._isbnValidate(input));
+            Assert.Equal(expected, Isbn13Encoder.IsbnValidate(input));
         }
 
         [Theory]
@@ -83,7 +83,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("97812345678975", "978123456786")]
         public void UpcaValidate(string input, string expected)
         {
-            Assert.Equal(expected, EanEncoder._validate(input, 12));
+            Assert.Equal(expected, EanEncoder.Validate(input, 12));
         }
 
         [Theory]
@@ -93,10 +93,10 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("64.61524")]
         public void EanCharsetCheckExceptions(string barcode)
         {
-            Assert.Throws<FormatException>(() => { new Ean8Encoder()._checkCharset(barcode); });
-            Assert.Throws<FormatException>(() => { new Ean13Encoder()._checkCharset(barcode); });
-            Assert.Throws<FormatException>(() => { new Isbn13Encoder()._checkCharset(barcode); });
-            Assert.Throws<FormatException>(() => { new UpcaEncoder()._checkCharset(barcode); });
+            Assert.Throws<FormatException>(() => { new Ean8Encoder().CheckCharset(barcode); });
+            Assert.Throws<FormatException>(() => { new Ean13Encoder().CheckCharset(barcode); });
+            Assert.Throws<FormatException>(() => { new Isbn13Encoder().CheckCharset(barcode); });
+            Assert.Throws<FormatException>(() => { new UpcaEncoder().CheckCharset(barcode); });
         }
 
         [Theory]
@@ -106,10 +106,10 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("978123456786")]
         public void EanCharsetCheck(string barcode)
         {
-            Assert.True(new Ean8Encoder()._checkCharset(barcode));
-            Assert.True(new Ean13Encoder()._checkCharset(barcode));
-            Assert.True(new Isbn13Encoder()._checkCharset(barcode));
-            Assert.True(new UpcaEncoder()._checkCharset(barcode));
+            Assert.True(new Ean8Encoder().CheckCharset(barcode));
+            Assert.True(new Ean13Encoder().CheckCharset(barcode));
+            Assert.True(new Isbn13Encoder().CheckCharset(barcode));
+            Assert.True(new UpcaEncoder().CheckCharset(barcode));
         }
 
         [Theory]
@@ -120,7 +120,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("12345670", "1010011001001001101111010100011010101001110101000010001001110010101")]
         public void Ean8EncodeBars(string input, string expected)
         {
-            Assert.Equal(expected, Ean8Encoder._encodeBars(input));
+            Assert.Equal(expected, Ean8Encoder.EncodeBars(input));
         }
 
         [Theory]
@@ -136,7 +136,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
             "10101111010111001001001100010010111101001000101010110110011101001011100100010010100001000100101")]
         public void Ean13EncodeBars(string input, string expected)
         {
-            Assert.Equal(expected, Ean13Encoder._encodeBars(input));
+            Assert.Equal(expected, Ean13Encoder.EncodeBars(input));
         }
 
         [Theory]
@@ -152,7 +152,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
             "10100010110001011011011101101110111011011101101010101000010100001001110100111010111001001000101")]
         public void UpcaEncodeBars(string input, string expected)
         {
-            Assert.Equal(expected, UpcaEncoder._encodeBars(input));
+            Assert.Equal(expected, UpcaEncoder.EncodeBars(input));
         }
     }
 }

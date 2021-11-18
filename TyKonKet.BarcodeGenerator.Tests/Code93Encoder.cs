@@ -29,7 +29,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("0123456789ABCDEFGHIJKLMNOP", "/=")]
         public void Code93CheckDigits(string input, string expected)
         {
-            Assert.Equal(expected, Code93Encoder._checkDigits(input));
+            Assert.Equal(expected, Code93Encoder.CheckDigits(input));
         }
 
 
@@ -40,7 +40,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("@ANDJEOW918273")]
         public void Code93CharsetCheckExceptions(string barcode)
         {
-            Assert.Throws<FormatException>(() => { new Code93Encoder()._checkCharset(barcode); });
+            Assert.Throws<FormatException>(() => { new Code93Encoder().CheckCharset(barcode); });
         }
 
         [Theory]
@@ -53,7 +53,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("VAR VARNAME CSHARP")]
         public void Code93CharsetCheck(string barcode)
         {
-            Assert.True(new Code93Encoder()._checkCharset(barcode));
+            Assert.True(new Code93Encoder().CheckCharset(barcode));
         }
 
         [Theory]
@@ -73,7 +73,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
             "1010111101100110101101010001101100101110100101100110101101010001101100101010001101101010001010011001100100101110100101101000101101011001011001001101010001101100101000101101010111101")]
         public void Code93EncodeBars(string input, string expected)
         {
-            Assert.Equal(expected, Code93Encoder._encodeBars(input));
+            Assert.Equal(expected, Code93Encoder.EncodeBars(input));
         }
     }
 }

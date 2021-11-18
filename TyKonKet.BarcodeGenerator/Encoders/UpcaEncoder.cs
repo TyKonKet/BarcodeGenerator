@@ -1,11 +1,5 @@
-﻿using System;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Processing.Drawing;
-using SixLabors.ImageSharp.Processing.Text;
-using SixLabors.Primitives;
+﻿using SkiaSharp;
+using System;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
@@ -30,75 +24,87 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             1, 1, 1
         };
 
-        public override string Encode(string barcode, string file)
+        public UpcaEncoder() : base()
+        {
+        }
+
+        public UpcaEncoder(BarcodeOptions options) : base(options)
+        {
+        }
+
+        public override string Encode(string barcode)
         {
             // Barcode checks
-            barcode = _validate(barcode, 12);
-            _checkCharset(barcode);
+            Barcode = Validate(barcode, 12);
+            CheckCharset(Barcode);
 
             // Bars encode
-            var bars = _encodeBars(barcode);
+            var bars = EncodeBars(Barcode);
 
             // Calculate drawing data
-            var scale = Math.Max(Options.Scale, 1);
-            var margins = 2 * scale;
-            var leftExtreSpace = Options.ShowText ? 6 * scale : 0;
-            var rightExtreSpace = Options.ShowText ? 6 * scale : 0;
-            var width = scale * bars.Length + margins * 2 + leftExtreSpace + rightExtreSpace;
-            var height = scale * Options.Height;
-            var barsH = new[] {(int) ((height - margins) * 0.76), height - margins};
+            var scale = Math.Max(Options.Scale, 0);
+            var margin = 2 * scale;
+            var leftExtreSpace = Options.DrawText ? 6 * scale : 0;
+            var rightExtreSpace = Options.DrawText ? 6 * scale : 0;
+            var width = scale * bars.Length + margin * 2 + leftExtreSpace + rightExtreSpace; ;
+            var height = scale * Options.Height + margin * 2;
+            var barsHeights = new[] { (int)((height - margin * 2) * 0.76), height - margin * 2 };
 
             // Generate barcode image
-            using (var image = new Image<Rgba32>(width, height))
+            using (var surface = SKSurface.Create(new SKImageInfo(width, height)))
             {
-                image.Mutate(img =>
+                using (var canvas = surface.Canvas)
                 {
                     // Draw bg color
-                    img.Fill(Options.BackgroundColor);
+                    canvas.Clear(Options.BackgroundColor);
 
-                    var posX = margins + leftExtreSpace;
+                    var brush = new SKPaint
+                    {
+                        Color = Options.Color,
+                        IsStroke = false,
+                    };
+
+                    var posX = margin + leftExtreSpace;
                     for (var i = 0; i < bars.Length; i++)
                     {
                         // Draw bars
                         if (bars[i] == '1')
                         {
-                            var barRectangle = new RectangleF(posX, margins, scale, barsH[_barsHeight[i]] - margins);
-                            img.Fill(Options.Color, barRectangle);
+                            canvas.DrawRect(posX, margin, scale, barsHeights[_barsHeight[i]], brush);
                         }
 
                         posX += scale;
                     }
-                });
 
-                if (Options.ShowText)
-                {
-                    // Draw texts
-                    var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
-                    var leftExtraText = barcode.Substring(0, 1);
-                    var leftText = barcode.Substring(1, 5);
-                    var rightText = barcode.Substring(6, 5);
-                    var rightExtraText = barcode.Substring(11, 1);
-                    var leftExtraPoint = new PointF(margins, barsH[0] - margins / 2);
-                    var leftPoint = new PointF(margins + leftExtreSpace + 18 * scale, barsH[0] - margins / 2);
-                    var rightPoint = new PointF(margins + leftExtreSpace + 57 * scale, barsH[0] - margins / 2);
-                    var rightExtraPoint = new PointF(width - rightExtreSpace, barsH[0] - margins / 2);
+                    if (Options.DrawText)
+                    {
+                        //// Draw texts
+                        //var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
+                        //var leftExtraText = barcode.Substring(0, 1);
+                        //var leftText = barcode.Substring(1, 5);
+                        //var rightText = barcode.Substring(6, 5);
+                        //var rightExtraText = barcode.Substring(11, 1);
+                        //var leftExtraPoint = new PointF(margins, barsH[0] - margins / 2);
+                        //var leftPoint = new PointF(margins + leftExtreSpace + 18 * scale, barsH[0] - margins / 2);
+                        //var rightPoint = new PointF(margins + leftExtreSpace + 57 * scale, barsH[0] - margins / 2);
+                        //var rightExtraPoint = new PointF(width - rightExtreSpace, barsH[0] - margins / 2);
 
-                    image.Mutate(i => i
-                        .DrawText(leftExtraText, font, Options.Color, leftExtraPoint)
-                        .DrawText(leftText, font, Options.Color, leftPoint)
-                        .DrawText(rightText, font, Options.Color, rightPoint)
-                        .DrawText(rightExtraText, font, Options.Color, rightExtraPoint)
-                    );
+                        //image.Mutate(i => i
+                        //    .DrawText(leftExtraText, font, Options.Color, leftExtraPoint)
+                        //    .DrawText(leftText, font, Options.Color, leftPoint)
+                        //    .DrawText(rightText, font, Options.Color, rightPoint)
+                        //    .DrawText(rightExtraText, font, Options.Color, rightExtraPoint)
+                        //);
+                    }
                 }
-
-                // Export barcode
-                Export(image, barcode, file);
+                // Save barcode image
+                Image = surface.Snapshot();
             }
 
-            return barcode;
+            return Barcode;
         }
 
-        internal static string _encodeBars(string barcode)
+        internal static string EncodeBars(string barcode)
         {
             var left = "";
             var right = "";
