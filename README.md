@@ -16,7 +16,7 @@ PM> Install-Package TyKonKet.BarcodeGenerator
 
 ## Program.cs
 
-Now you can generates all the barcodes you want as you wish:  
+Now you can generate all the barcodes you want as you wish:  
 
 ```csharp
 using TyKonKet.BarcodeGenerator;
