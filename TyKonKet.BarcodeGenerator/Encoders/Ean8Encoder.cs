@@ -72,17 +72,17 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
                     if (Options.DrawText)
                     {
-                        //    // Draw texts
-                        //    var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
-                        //    var leftText = Barcode.Substring(0, 4);
-                        //    var rightText = Barcode.Substring(4, 4);
-                        //    var leftPoint = new PointF(margins + 10 * scale, barsH[0] - margins / 2);
-                        //    var rightPoint = new PointF(margins + 42 * scale, barsH[0] - margins / 2);
-
-                        //    image.Mutate(i => i
-                        //        .DrawText(leftText, font, Options.Color, leftPoint)
-                        //        .DrawText(rightText, font, Options.Color, rightPoint)
-                        //    );
+                        // Draw texts
+                        var font = new SKFont(SKTypeface.FromFamilyName(Options.Font, Options.FontStyle), 9 * scale);
+#if NET6_0_OR_GREATER
+                        var leftText = Barcode[..4];
+                        var rightText = Barcode[4..4];
+#else
+                        var leftText = Barcode.Substring(0, 4);
+                        var rightText = Barcode.Substring(4, 4);
+#endif
+                        canvas.DrawText(leftText, margin + 8 * scale - 4, barsHeights[1] + margin, font, brush);
+                        canvas.DrawText(rightText, margin + 40 * scale, barsHeights[1] + margin, font, brush);
                     }
                 }
                 // Save barcode image

@@ -16,7 +16,7 @@ namespace LetsTry
 
             var bc = new Barcode(o =>
             {
-                o.Encode = Encodes.Code93;
+                o.Encode = Encodes.Ean8;
                 o.Height = 30;
                 o.Scale = 10;
                 o.Margins = 2;
@@ -24,9 +24,9 @@ namespace LetsTry
                 o.Color = SKColors.Black;
                 o.Font = "Arial";
                 o.FontStyle = SKFontStyle.Normal;
-                o.DrawText = false;
+                o.DrawText = true;
             });
-            bc.Encode("BARCODE");
+            bc.Encode("1234568");
             Console.WriteLine($"Barcode generated in {sw.ElapsedMilliseconds}ms");
             sw.Restart();
             bc.Export(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "out/{barcode}.png"));
