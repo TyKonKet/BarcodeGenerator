@@ -49,49 +49,51 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             var barsHeights = new[] { (int)((height - margin * 2) * 0.76), height - margin * 2 };
 
             // Generate barcode image
-            using (var surface = SKSurface.Create(new SKImageInfo(width, height)))
+            var surface = SKSurface.Create(new SKImageInfo(width, height));
+
+            using (var canvas = surface.Canvas)
             {
-                using (var canvas = surface.Canvas)
+                // Draw bg color
+                canvas.Clear(Options.BackgroundColor);
+
+                var brush = new SKPaint
                 {
-                    // Draw bg color
-                    canvas.Clear(Options.BackgroundColor);
+                    Color = Options.Color,
+                    IsStroke = false,
+                };
 
-                    var brush = new SKPaint
+                var posX = margin;
+                for (var i = 0; i < bars.Length; i++)
+                {
+                    // Draw bars
+                    if (bars[i] == '1')
                     {
-                        Color = Options.Color,
-                        IsStroke = false,
-                    };
-
-                    var posX = margin;
-                    for (var i = 0; i < bars.Length; i++)
-                    {
-                        // Draw bars
-                        if (bars[i] == '1')
-                        {
-                            canvas.DrawRect(posX, margin, scale, barsHeights[_barsHeight[i]], brush);
-                        }
-
-                        posX += scale;
+                        canvas.DrawRect(posX, margin, scale, barsHeights[_barsHeight[i]], brush);
                     }
 
-                    if (Options.DrawText)
-                    {
-                        // Draw texts
-                        //var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
-                        //var leftExtraText = barcode.Substring(0, 1);
-                        //var leftText = barcode.Substring(1, 6);
-                        //var rightText = barcode.Substring(7, 6);
-                        //var leftExtraPoint = new PointF(margins, barsHight[0] - margins / 2);
-                        //var leftPoint = new PointF(margins + leftExtraSpace + 13 * scale, barsHight[0] - margins / 2);
-                        //var rightPoint = new PointF(margins + leftExtraSpace + 59 * scale, barsHight[0] - margins / 2);
-
-                        //image.Mutate(i => i
-                        //    .DrawText(leftExtraText, font, Options.Color, leftExtraPoint)
-                        //    .DrawText(leftText, font, Options.Color, leftPoint)
-                        //    .DrawText(rightText, font, Options.Color, rightPoint)
-                        //);
-                    }
+                    posX += scale;
                 }
+
+                if (Options.DrawText)
+                {
+                    // Draw texts
+                    //var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
+                    //var leftExtraText = barcode.Substring(0, 1);
+                    //var leftText = barcode.Substring(1, 6);
+                    //var rightText = barcode.Substring(7, 6);
+                    //var leftExtraPoint = new PointF(margins, barsHight[0] - margins / 2);
+                    //var leftPoint = new PointF(margins + leftExtraSpace + 13 * scale, barsHight[0] - margins / 2);
+                    //var rightPoint = new PointF(margins + leftExtraSpace + 59 * scale, barsHight[0] - margins / 2);
+
+                    //image.Mutate(i => i
+                    //    .DrawText(leftExtraText, font, Options.Color, leftExtraPoint)
+                    //    .DrawText(leftText, font, Options.Color, leftPoint)
+                    //    .DrawText(rightText, font, Options.Color, rightPoint)
+                    //);
+                }
+
+                Surface = surface;
+
                 // Save barcode image
                 Image = surface.Snapshot();
             }

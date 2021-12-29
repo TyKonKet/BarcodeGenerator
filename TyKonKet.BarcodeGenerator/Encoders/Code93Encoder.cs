@@ -152,42 +152,44 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
 
             // Generate barcode image
-            using (var surface = SKSurface.Create(new SKImageInfo(width, height)))
+            var surface = SKSurface.Create(new SKImageInfo(width, height));
+
+            using (var canvas = surface.Canvas)
             {
-                using (var canvas = surface.Canvas)
+                // Draw bg color
+                canvas.Clear(Options.BackgroundColor);
+
+                var brush = new SKPaint
                 {
-                    // Draw bg color
-                    canvas.Clear(Options.BackgroundColor);
+                    Color = Options.Color,
+                    IsStroke = false,
+                };
 
-                    var brush = new SKPaint
+                var posX = margin;
+                foreach (var bar in bars)
+                {
+                    // Draw bars
+                    if (bar == '1')
                     {
-                        Color = Options.Color,
-                        IsStroke = false,
-                    };
-
-                    var posX = margin;
-                    foreach (var bar in bars)
-                    {
-                        // Draw bars
-                        if (bar == '1')
-                        {
-                            canvas.DrawRect(posX, margin, scale, barsHeight, brush);
-                        }
-
-                        posX += scale;
+                        canvas.DrawRect(posX, margin, scale, barsHeight, brush);
                     }
 
-                    if (Options.DrawText)
-                    {
-                        //// Draw text
-                        //var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
-                        //var textsize = TextMeasurer.Measure(Barcode, new RendererOptions(font));
-                        //// ReSharper disable once PossibleLossOfFraction
-                        //var point = new PointF(width / 2 - textsize.Width / 2, barsHeight - margins / 2);
-
-                        //image.Mutate(i => i.DrawText(Barcode, font, Options.Color, point));
-                    }
+                    posX += scale;
                 }
+
+                if (Options.DrawText)
+                {
+                    //// Draw text
+                    //var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
+                    //var textsize = TextMeasurer.Measure(Barcode, new RendererOptions(font));
+                    //// ReSharper disable once PossibleLossOfFraction
+                    //var point = new PointF(width / 2 - textsize.Width / 2, barsHeight - margins / 2);
+
+                    //image.Mutate(i => i.DrawText(Barcode, font, Options.Color, point));
+                }
+
+                Surface = surface;
+
                 // Save barcode image
                 Image = surface.Snapshot();
             }

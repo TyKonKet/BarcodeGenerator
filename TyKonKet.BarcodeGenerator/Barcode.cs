@@ -12,6 +12,11 @@ namespace TyKonKet.BarcodeGenerator
         private Encoder BarcodeEncoder;
 
         /// <summary>
+        /// Barcode surface.
+        /// </summary>
+        public SKSurface BarcodeSurface { get => BarcodeEncoder.Surface; }
+
+        /// <summary>
         /// Encoded image.
         /// </summary>
         public SKImage BarcodeImage { get => BarcodeEncoder.Image; }

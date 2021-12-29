@@ -18,7 +18,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
         protected BarcodeOptions Options { get; }
 
-        internal SKImage Image { get; set; }
+        internal SKSurface Surface { get;  set; }
+
+        internal SKImage Image { get;  set; }
 
         protected string Barcode { get; set; }
 
@@ -79,6 +81,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
         public void Dispose()
         {
+            Surface?.Dispose();
             Image?.Dispose();
         }
     }

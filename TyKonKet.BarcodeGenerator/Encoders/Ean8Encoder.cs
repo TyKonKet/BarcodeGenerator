@@ -45,46 +45,47 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             var barsHeights = new[] { (int)((height - margin * 2) * 0.76), height - margin * 2 };
 
             // Generate barcode image
-            using (var surface = SKSurface.Create(new SKImageInfo(width, height)))
+            var surface = SKSurface.Create(new SKImageInfo(width, height));
+            using (var canvas = surface.Canvas)
             {
-                using (var canvas = surface.Canvas)
+                // Draw bg color
+                canvas.Clear(Options.BackgroundColor);
+
+                var brush = new SKPaint
                 {
-                    // Draw bg color
-                    canvas.Clear(Options.BackgroundColor);
+                    Color = Options.Color,
+                    IsStroke = false,
+                };
 
-                    var brush = new SKPaint
+                var posX = margin;
+                for (var i = 0; i < bars.Length; i++)
+                {
+                    // Draw bars
+                    if (bars[i] == '1')
                     {
-                        Color = Options.Color,
-                        IsStroke = false,
-                    };
-
-                    var posX = margin;
-                    for (var i = 0; i < bars.Length; i++)
-                    {
-                        // Draw bars
-                        if (bars[i] == '1')
-                        {
-                            canvas.DrawRect(posX, margin, scale, barsHeights[_barsHeight[i]], brush);
-                        }
-
-                        posX += scale;
+                        canvas.DrawRect(posX, margin, scale, barsHeights[_barsHeight[i]], brush);
                     }
 
-                    if (Options.DrawText)
-                    {
-                        // Draw texts
-                        var font = new SKFont(SKTypeface.FromFamilyName(Options.Font, Options.FontStyle), 9 * scale);
+                    posX += scale;
+                }
+
+                if (Options.DrawText)
+                {
+                    // Draw texts
+                    var font = new SKFont(SKTypeface.FromFamilyName(Options.Font, Options.FontStyle), 9 * scale);
 #if NET6_0_OR_GREATER
                         var leftText = Barcode[..4];
                         var rightText = Barcode[4..4];
 #else
-                        var leftText = Barcode.Substring(0, 4);
-                        var rightText = Barcode.Substring(4, 4);
+                    var leftText = Barcode.Substring(0, 4);
+                    var rightText = Barcode.Substring(4, 4);
 #endif
-                        canvas.DrawText(leftText, margin + 8 * scale - 4, barsHeights[1] + margin, font, brush);
-                        canvas.DrawText(rightText, margin + 40 * scale, barsHeights[1] + margin, font, brush);
-                    }
+                    canvas.DrawText(leftText, margin + 8 * scale - 4, barsHeights[1] + margin, font, brush);
+                    canvas.DrawText(rightText, margin + 40 * scale, barsHeights[1] + margin, font, brush);
                 }
+
+                Surface = surface;
+
                 // Save barcode image
                 Image = surface.Snapshot();
             }
