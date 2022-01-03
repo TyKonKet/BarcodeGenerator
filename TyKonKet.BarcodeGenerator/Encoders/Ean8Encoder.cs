@@ -74,8 +74,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     // Draw texts
                     var font = new SKFont(SKTypeface.FromFamilyName(Options.Font, Options.FontStyle), 9 * scale);
 #if NET6_0_OR_GREATER
-                        var leftText = Barcode[..4];
-                        var rightText = Barcode[4..4];
+                    var leftText = Barcode[..4];
+                    var rightText = Barcode[4..8];
 #else
                     var leftText = Barcode.Substring(0, 4);
                     var rightText = Barcode.Substring(4, 4);
@@ -101,8 +101,13 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             {
                 var num = barcode[i].ToInt();
                 if (i < 4)
+                {
                     left += EncodingA[num];
-                else if (i >= 4) right += EncodingC[num];
+                }
+                else if (i >= 4)
+                {
+                    right += EncodingC[num];
+                }
             }
 
             return $"{Guards[0]}{left}{Guards[1]}{right}{Guards[2]}";

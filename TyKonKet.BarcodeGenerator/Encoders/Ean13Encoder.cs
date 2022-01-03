@@ -47,6 +47,12 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             var width = scale * bars.Length + margin * 2;
             var height = scale * Options.Height + margin * 2;
             var barsHeights = new[] { (int)((height - margin * 2) * 0.76), height - margin * 2 };
+            var leftExtraMargin = margin * 3;
+
+            if (Options.DrawText)
+            {
+                width += leftExtraMargin;
+            }
 
             // Generate barcode image
             var surface = SKSurface.Create(new SKImageInfo(width, height));
@@ -63,6 +69,10 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 };
 
                 var posX = margin;
+                if (Options.DrawText)
+                {
+                    posX += leftExtraMargin;
+                }
                 for (var i = 0; i < bars.Length; i++)
                 {
                     // Draw bars
@@ -76,6 +86,22 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
                 if (Options.DrawText)
                 {
+                    // Draw texts
+                    var font = new SKFont(SKTypeface.FromFamilyName(Options.Font, Options.FontStyle), 9 * scale);
+#if NET6_0_OR_GREATER
+                    var leftExtraText = barcode[..1];
+                    var leftText = Barcode[1..7];
+                    var rightText = Barcode[7..13];
+#else
+                    var leftExtraText = barcode.Substring(0, 1);
+                    var leftText = Barcode.Substring(1, 6);
+                    var rightText = Barcode.Substring(7, 6);
+#endif
+                    canvas.DrawText(leftExtraText, margin, barsHeights[1] + margin, font, brush);
+                    canvas.DrawText(leftText, margin + 16 * scale - 4, barsHeights[1] + margin, font, brush);
+                    canvas.DrawText(rightText, margin + 62 * scale, barsHeights[1] + margin, font, brush);
+
+
                     // Draw texts
                     //var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
                     //var leftExtraText = barcode.Substring(0, 1);
@@ -112,9 +138,13 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 {
                     var encodingA = EncodingTable[barcode[0].ToInt()].Substring(i - 1, 1) == "0";
                     if (encodingA)
+                    {
                         left += EncodingA[num];
+                    }
                     else
+                    {
                         left += EncodingB[num];
+                    }
                 }
                 else if (i >= 7)
                 {

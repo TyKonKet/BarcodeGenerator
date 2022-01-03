@@ -20,7 +20,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         };
 
         protected static readonly string[] EncodingTable =
-            {
+        {
             "000000", "001011", "001101", "001110", "010011", "011001", "011100", "010101", "010110", "011010"
         };
 
