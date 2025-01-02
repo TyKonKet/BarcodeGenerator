@@ -44,9 +44,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             // Calculate drawing data
             var scale = Math.Max(Options.Scale, 0);
             var margin = 2 * scale;
-            var leftExtreSpace = Options.DrawText ? 6 * scale : 0;
-            var rightExtreSpace = Options.DrawText ? 6 * scale : 0;
-            var width = scale * bars.Length + margin * 2 + leftExtreSpace + rightExtreSpace; ;
+            var leftExtraSpace = Options.DrawText ? 6 * scale : 0;
+            var rightExtraSpace = Options.DrawText ? 6 * scale : 0;
+            var width = scale * bars.Length + margin * 2 + leftExtraSpace + rightExtraSpace;
             var height = scale * Options.Height + margin * 2;
             var barsHeights = new[] { (int)((height - margin * 2) * 0.76), height - margin * 2 };
 
@@ -63,7 +63,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     IsStroke = false,
                 };
 
-                var posX = margin + leftExtreSpace;
+                var posX = margin + leftExtraSpace;
                 for (var i = 0; i < bars.Length; i++)
                 {
                     // Draw bars
@@ -77,6 +77,29 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
                 if (Options.DrawText)
                 {
+                    // Draw texts
+                    var font = new SKFont(SKTypeface.FromFamilyName(Options.Font, Options.FontStyle), 9 * scale);
+#if NET6_0_OR_GREATER
+                    var leftExtraText = barcode[..1];
+                    var leftText = Barcode[1..6];
+                    var rightText = Barcode[6..11];
+                    var rightExtraText = Barcode[11..];
+#else
+                    var leftExtraText = barcode.Substring(0, 1);
+                    var leftText = Barcode.Substring(1, 5);
+                    var rightText = Barcode.Substring(6, 5);
+                    var rightExtraText = Barcode.Substring(11, 1);
+#endif
+                    var leftTextOffset = 24;
+                    var leftTextModifier = -4;
+                    var rightTextOffset = 60;
+                    var rightTextModifier = -4;
+                    var rightExtraTextOffset = 102;
+                    canvas.DrawText(leftExtraText, margin, barsHeights[1] + margin, font, brush);
+                    canvas.DrawText(leftText, margin + leftTextOffset * scale + leftTextModifier, barsHeights[1] + margin, font, brush);
+                    canvas.DrawText(rightText, margin + rightTextOffset * scale + rightTextModifier, barsHeights[1] + margin, font, brush);
+                    canvas.DrawText(rightExtraText, margin + rightExtraTextOffset * scale, barsHeights[1] + margin, font, brush);
+
                     //// Draw texts
                     //var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
                     //var leftExtraText = barcode.Substring(0, 1);
