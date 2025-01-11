@@ -5,7 +5,7 @@ using BenchmarkDotNet.Exporters.Json;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Loggers;
 
-namespace TyKonKet.BarcodeGenerator.Benchmark
+namespace TyKonKet.BarcodeGenerator.Benchmarks
 {
     public class BenchmarkConfig : ManualConfig
     {

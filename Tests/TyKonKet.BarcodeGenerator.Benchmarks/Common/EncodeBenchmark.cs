@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace TyKonKet.BarcodeGenerator.Benchmark.Common
+namespace TyKonKet.BarcodeGenerator.Benchmarks.Common
 {
     [Config(typeof(BenchmarkConfig))]
     public abstract class EncodeBenchmark

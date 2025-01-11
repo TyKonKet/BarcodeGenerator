@@ -3,9 +3,9 @@ using SkiaSharp;
 using System;
 using System.IO;
 using System.Reflection;
-using TyKonKet.BarcodeGenerator.Benchmark.Common;
+using TyKonKet.BarcodeGenerator.Benchmarks.Common;
 
-namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
+namespace TyKonKet.BarcodeGenerator.Benchmarks.Encoders
 {
     public class EncodeIsbn13 : EncodeBenchmark
     {

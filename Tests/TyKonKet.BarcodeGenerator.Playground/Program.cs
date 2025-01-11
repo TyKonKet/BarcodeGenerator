@@ -3,9 +3,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using TyKonKet.BarcodeGenerator;
 
-namespace LetsTry
+namespace TyKonKet.BarcodeGenerator.Playground
 {
     internal static class Program
     {

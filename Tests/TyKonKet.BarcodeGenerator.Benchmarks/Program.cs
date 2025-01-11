@@ -2,7 +2,7 @@
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 
-namespace TyKonKet.BarcodeGenerator.Benchmark
+namespace TyKonKet.BarcodeGenerator.Benchmarks
 {
     public class Program
     {
