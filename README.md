@@ -1,22 +1,21 @@
 # Barcode Generator
-
 Barcode generator based on [SkiaSharp](https://github.com/mono/SkiaSharp) library.
   
-## NuGet
-
 [![NuGet](https://img.shields.io/nuget/v/TyKonKet.BarcodeGenerator.svg)](https://www.nuget.org/packages/TyKonKet.BarcodeGenerator/)
   
 ## Usage
-
-Include the [BarcodeGenerator NuGet package](https://www.nuget.org/packages/TyKonKet.BarcodeGenerator/) in your app:  
+BarcodeGenerator is available as a convenient [NuGet package](https://www.nuget.org/packages/TyKonKet.BarcodeGenerator/), to use install the package like this:
 
 ```` powershell
 PM> Install-Package TyKonKet.BarcodeGenerator
 ````
+````
+nuget install TyKonKet.BarcodeGenerator
+````
 
-## Program.cs
+## Getting started
 
-Now you can generate all the barcodes you want as you wish:  
+You can generate all the barcodes using the `Barcode` class. The `Barcode` class has a constructor that accepts an `Action<BarcodeOptions>` delegate to set the barcode options. The `BarcodeOptions` class has the following properties:  
 
 ```csharp
 using TyKonKet.BarcodeGenerator;
@@ -45,6 +44,10 @@ internal static class Program
 }
 ```
 
+## Breaking changes
+- Starting with version 2.0.0, the library is no more compatible with .NET Standard 1.3 since it uses SkiaSharp 3.116.1 which requires .NET Standard 2.0
+
+
 ## Supported encoders
 
 - [x] EAN-13
@@ -54,6 +57,3 @@ internal static class Program
 - [ ] CODE39
 - [x] CODE93
 - [ ] CODE128
-
-## Warnings
-- Starting with version 1.0.4, the library is no more compatible with .NET Standard 1.3 since it uses SkiaSharp 3 which requires .NET Standard 2.0

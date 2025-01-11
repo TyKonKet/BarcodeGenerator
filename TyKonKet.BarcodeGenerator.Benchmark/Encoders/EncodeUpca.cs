@@ -17,26 +17,26 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
         {
             forEncode = new Barcode(o =>
             {
-                o.Encode = Encodes.Upca;
+                o.Encode = BarcodeEncodings.Upca;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BackgroundColor = SKColors.Transparent;
                 o.Color = SKColors.Black;
                 o.Font = "Arial";
                 o.FontStyle = SKFontStyle.Normal;
-                o.DrawText = false;
+                o.RenderText = false;
             });
 
             forExport = new Barcode(o =>
             {
-                o.Encode = Encodes.Upca;
+                o.Encode = BarcodeEncodings.Upca;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BackgroundColor = SKColors.Transparent;
                 o.Color = SKColors.Black;
                 o.Font = "Arial";
                 o.FontStyle = SKFontStyle.Normal;
-                o.DrawText = false;
+                o.RenderText = false;
             });
 
             forExport.Encode("725272730706");
@@ -54,14 +54,14 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
         {
             return new Barcode(o =>
             {
-                o.Encode = Encodes.Upca;
+                o.Encode = BarcodeEncodings.Upca;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BackgroundColor = SKColors.Transparent;
                 o.Color = SKColors.Black;
                 o.Font = "Arial";
                 o.FontStyle = SKFontStyle.Normal;
-                o.DrawText = false;
+                o.RenderText = false;
             });
         }
 

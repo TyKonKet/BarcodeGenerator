@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2005
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35617.110 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TyKonKet.BarcodeGenerator", "TyKonKet.BarcodeGenerator\TyKonKet.BarcodeGenerator.csproj", "{DB17A807-EFD1-470C-9068-1EDD248817A6}"
 EndProject
@@ -10,6 +10,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TyKonKet.BarcodeGenerator.Tests", "TyKonKet.BarcodeGenerator.Tests\TyKonKet.BarcodeGenerator.Tests.csproj", "{4F8DBDDB-3F33-4C94-A1F2-10FA0172E123}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TyKonKet.BarcodeGenerator.Benchmark", "TyKonKet.BarcodeGenerator.Benchmark\TyKonKet.BarcodeGenerator.Benchmark.csproj", "{187F25E4-E1E7-4896-8B7A-D5D0BF6F7EDF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

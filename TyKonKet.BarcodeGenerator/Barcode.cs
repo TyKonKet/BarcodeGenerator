@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 using System;
-using TyKonKet.BarcodeGenerator.Encoders;
+using TyKonKet.BarcodeGenerator.Encoders.Abstract;
+using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator
 {
@@ -14,12 +15,12 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// Barcode surface.
         /// </summary>
-        public SKSurface BarcodeSurface { get => BarcodeEncoder.Surface; }
+        public SKSurface BarcodeSurface { get => this.BarcodeEncoder.Surface; }
 
         /// <summary>
         /// Encoded image.
         /// </summary>
-        public SKImage BarcodeImage { get => BarcodeEncoder.Image; }
+        public SKImage BarcodeImage { get => this.BarcodeEncoder.Image; }
 
         /// <summary>
         /// Initialize a new instance of <see cref="Barcode" /> with custom options.
@@ -27,7 +28,7 @@ namespace TyKonKet.BarcodeGenerator
         /// <param name="options">Barcode options.</param>
         public Barcode(Action<BarcodeOptions> options = null)
         {
-            options?.Invoke(Options);
+            options?.Invoke(this.Options);
         }
 
         /// <summary>
@@ -42,8 +43,8 @@ namespace TyKonKet.BarcodeGenerator
         /// <returns>Validated barcode.</returns>
         public string Encode(string barcode)
         {
-            BarcodeEncoder = EncodersFactory.Create(Options);
-            return BarcodeEncoder.Encode(barcode);
+            this.BarcodeEncoder = EncodersFactory.Create(this.Options);
+            return this.BarcodeEncoder.Encode(barcode);
         }
 
         /// <summary>
@@ -51,23 +52,23 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         /// <param name="fileName">Output image path, supports <c>{barcode}</c> keyword.</param>
         /// <param name="format">Image export format.</param>
-        /// <param name="quality">Image export qualty.</param>
-        /// <exception cref="InvalidOperationException"></exception>
+        /// <param name="quality">Image export quality.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
         public void Export(string fileName, SKEncodedImageFormat format = SKEncodedImageFormat.Png, int quality = 100)
         {
-            if (BarcodeEncoder == null)
+            if (this.BarcodeEncoder == null)
             {
                 throw new InvalidOperationException("The barcode must be encoded before exported");
             }
-            BarcodeEncoder.Export(fileName, format, quality);
+            this.BarcodeEncoder.Export(fileName, format, quality);
         }
 
         /// <summary>
-        /// 
+        /// Releases all resources used by the <see cref="Barcode"/> class.
         /// </summary>
         public void Dispose()
         {
-            BarcodeEncoder?.Dispose();
+            this.BarcodeEncoder?.Dispose();
             GC.SuppressFinalize(this);
         }
     }

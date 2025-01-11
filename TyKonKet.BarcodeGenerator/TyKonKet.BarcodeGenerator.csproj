@@ -1,54 +1,108 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFrameworks>netstandard2.0;net6.0;net462;net8.0</TargetFrameworks>
-	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<Description>Barcode generator based on SkiaSharp</Description>
-	<PackageProjectUrl>https://github.com/TyKonKet/BarcodeGenerator</PackageProjectUrl>
-	<PackageLicenseUrl>https://github.com/TyKonKet/BarcodeGenerator/blob/master/LICENSE</PackageLicenseUrl>
-	<RepositoryUrl>https://github.com/TyKonKet/BarcodeGenerator</RepositoryUrl>
-	<RepositoryType>git</RepositoryType>
-	<PackageTags>barcode</PackageTags>
-	<AssemblyVersion>1.0.3.0</AssemblyVersion>
-	<FileVersion>1.0.3.0</FileVersion>
-	<Version>1.0.3.0</Version>
-	<PackageVersion>1.0.3.0</PackageVersion>
-	<Authors>TyKonKet</Authors>
-	<Company />
-	<Title>Barcode generator</Title>
-	<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
-	<ApplicationIcon>icon.ico</ApplicationIcon>
-	<DebugType>embedded</DebugType>
-	<GenerateDocumentationFile>True</GenerateDocumentationFile>
-	<PackageIcon>icon.png</PackageIcon>
-	<NeutralLanguage>en</NeutralLanguage>
-	<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-	<EnableNETAnalyzers>True</EnableNETAnalyzers>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net6.0;net462;net8.0</TargetFrameworks>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Description>Barcode generator based on SkiaSharp</Description>
+		<PackageProjectUrl>https://github.com/TyKonKet/BarcodeGenerator</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/TyKonKet/BarcodeGenerator/blob/master/LICENSE</PackageLicenseUrl>
+		<RepositoryUrl>https://github.com/TyKonKet/BarcodeGenerator</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>barcode</PackageTags>
+		<AssemblyVersion>1.0.3.0</AssemblyVersion>
+		<FileVersion>1.0.3.0</FileVersion>
+		<Version>1.0.3.0</Version>
+		<PackageVersion>1.0.3.0</PackageVersion>
+		<Authors>TyKonKet</Authors>
+		<Company />
+		<Title>Barcode generator</Title>
+		<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+		<ApplicationIcon>icon.ico</ApplicationIcon>
+		<DebugType>embedded</DebugType>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<PackageIcon>icon.png</PackageIcon>
+		<NeutralLanguage>en</NeutralLanguage>
+		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+		<EnableNETAnalyzers>True</EnableNETAnalyzers>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-	<None Remove="icon.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="icon.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-	<Content Include="icon.ico" />
-	<Content Include="icon.png">
-	  <Pack>True</Pack>
-	  <PackagePath>\</PackagePath>
-	</Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="icon.ico" />
+		<Content Include="icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-	<None Include="..\README.md">
-	  <Pack>True</Pack>
-	  <PackagePath>\</PackagePath>
-	</None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-	<PackageReference Include="SkiaSharp" Version="3.116.1" />
-	<PackageReference Include="System.ValueTuple" Version="4.5.0" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="SkiaSharp" Version="3.116.1" />
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="10.5.0.109200">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Asyncify" Version="0.9.7">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="ErrorProne.NET.CoreAnalyzers" Version="0.1.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="ErrorProne.NET.Structs" Version="0.1.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="IDisposableAnalyzers" Version="4.0.8">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Meziantou.Analyzer" Version="2.0.186">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="ReflectionAnalyzers" Version="0.3.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Roslynator.Analyzers" Version="4.12.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.12.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="SharpSource" Version="1.27.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Wintellect.Analyzers" Version="1.0.6">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 </Project>

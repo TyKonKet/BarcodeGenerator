@@ -1,5 +1,7 @@
 ﻿using SkiaSharp;
 using System;
+using TyKonKet.BarcodeGenerator.Encoders.Abstract;
+using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
@@ -35,21 +37,21 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         public override string Encode(string barcode)
         {
             // Barcode checks
-            Barcode = Validate(barcode, 13);
-            CheckCharset(Barcode);
+            this.Barcode = Validate(barcode, 13);
+            this.CheckCharset(this.Barcode);
 
             // Bars encode
-            var bars = EncodeBars(Barcode);
+            var bars = EncodeBars(this.Barcode);
 
             // Calculate drawing data
-            var scale = Math.Max(Options.Scale, 0);
+            var scale = Math.Max(this.Options.Scale, 0);
             var margin = 2 * scale;
             var width = scale * bars.Length + margin * 2;
-            var height = scale * Options.Height + margin * 2;
+            var height = scale * this.Options.Height + margin * 2;
             var barsHeights = new[] { (int)((height - margin * 2) * 0.76), height - margin * 2 };
             var leftExtraMargin = margin * 3;
 
-            if (Options.DrawText)
+            if (this.Options.RenderText)
             {
                 width += leftExtraMargin;
             }
@@ -60,16 +62,16 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             using (var canvas = surface.Canvas)
             {
                 // Draw bg color
-                canvas.Clear(Options.BackgroundColor);
+                canvas.Clear(this.Options.BackgroundColor);
 
                 var brush = new SKPaint
                 {
-                    Color = Options.Color,
+                    Color = this.Options.Color,
                     IsStroke = false,
                 };
 
                 var posX = margin;
-                if (Options.DrawText)
+                if (this.Options.RenderText)
                 {
                     posX += leftExtraMargin;
                 }
@@ -78,24 +80,24 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     // Draw bars
                     if (bars[i] == '1')
                     {
-                        canvas.DrawRect(posX, margin, scale, barsHeights[_barsHeight[i]], brush);
+                        canvas.DrawRect(posX, margin, scale, barsHeights[this._barsHeight[i]], brush);
                     }
 
                     posX += scale;
                 }
 
-                if (Options.DrawText)
+                if (this.Options.RenderText)
                 {
                     // Draw texts
-                    var font = new SKFont(SKTypeface.FromFamilyName(Options.Font, Options.FontStyle), 9 * scale);
+                    var font = new SKFont(SKTypeface.FromFamilyName(this.Options.Font, this.Options.FontStyle), 9 * scale);
 #if NET6_0_OR_GREATER
                     var leftExtraText = barcode[..1];
                     var leftText = Barcode[1..7];
                     var rightText = Barcode[7..13];
 #else
                     var leftExtraText = barcode.Substring(0, 1);
-                    var leftText = Barcode.Substring(1, 6);
-                    var rightText = Barcode.Substring(7, 6);
+                    var leftText = this.Barcode.Substring(1, 6);
+                    var rightText = this.Barcode.Substring(7, 6);
 #endif
                     canvas.DrawText(leftExtraText, margin, barsHeights[1] + margin, font, brush);
                     canvas.DrawText(leftText, margin + 16 * scale - 4, barsHeights[1] + margin, font, brush);
@@ -118,13 +120,13 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     //);
                 }
 
-                Surface = surface;
+                this.Surface = surface;
 
                 // Save barcode image
-                Image = surface.Snapshot();
+                this.Image = surface.Snapshot();
             }
 
-            return Barcode;
+            return this.Barcode;
         }
 
         internal static string EncodeBars(string barcode)

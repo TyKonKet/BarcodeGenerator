@@ -1,5 +1,6 @@
 using System;
 using TyKonKet.BarcodeGenerator.Encoders;
+using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests

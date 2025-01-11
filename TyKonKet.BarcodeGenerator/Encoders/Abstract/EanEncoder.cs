@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
+using TyKonKet.BarcodeGenerator.Utils;
 
-namespace TyKonKet.BarcodeGenerator.Encoders
+namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
 {
     internal abstract class EanEncoder : Encoder
     {

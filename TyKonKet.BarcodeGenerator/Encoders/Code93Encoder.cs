@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using SkiaSharp;
+using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
@@ -136,18 +137,18 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         public override string Encode(string barcode)
         {
             // Barcode checks
-            Barcode = Validate(barcode);
-            CheckCharset(Barcode);
-            var checkDigits = CheckDigits(Barcode);
+            this.Barcode = Validate(barcode);
+            this.CheckCharset(this.Barcode);
+            var checkDigits = CheckDigits(this.Barcode);
 
             // Bars encode
-            var bars = EncodeBars($"{Barcode}{checkDigits}");
+            var bars = EncodeBars($"{this.Barcode}{checkDigits}");
 
             // Calculate drawing data
-            var scale = Math.Max(Options.Scale, 0);
-            var margin = Options.Margins * scale;
+            var scale = Math.Max(this.Options.Scale, 0);
+            var margin = this.Options.Margins * scale;
             var width = scale * bars.Length + margin * 2;
-            var height = scale * Options.Height + margin * 2;
+            var height = scale * this.Options.Height + margin * 2;
             var barsHeight = height - margin * 2;
 
 
@@ -157,11 +158,11 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             using (var canvas = surface.Canvas)
             {
                 // Draw bg color
-                canvas.Clear(Options.BackgroundColor);
+                canvas.Clear(this.Options.BackgroundColor);
 
                 var brush = new SKPaint
                 {
-                    Color = Options.Color,
+                    Color = this.Options.Color,
                     IsStroke = false,
                 };
 
@@ -177,7 +178,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     posX += scale;
                 }
 
-                if (Options.DrawText)
+                if (this.Options.RenderText)
                 {
                     //// Draw text
                     //var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
@@ -188,13 +189,13 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     //image.Mutate(i => i.DrawText(Barcode, font, Options.Color, point));
                 }
 
-                Surface = surface;
+                this.Surface = surface;
 
                 // Save barcode image
-                Image = surface.Snapshot();
+                this.Image = surface.Snapshot();
             }
 
-            return Barcode;
+            return this.Barcode;
         }
 
         private static string Validate(string barcode)
