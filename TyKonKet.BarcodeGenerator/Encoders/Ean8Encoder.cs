@@ -19,7 +19,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0,
-            1, 1, 1
+            1, 1, 1,
         };
 
         public Ean8Encoder() : base()
@@ -33,8 +33,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         public override string Encode(string barcode)
         {
             // Barcode checks
-            this.Barcode = Validate(barcode, 8);
-            this.CheckCharset(this.Barcode);
+            this.Barcode = FormatBarcode(barcode, 8);
+            this.ValidateCharset(this.Barcode);
 
             // Bars encode
             var bars = EncodeBars(this.Barcode);

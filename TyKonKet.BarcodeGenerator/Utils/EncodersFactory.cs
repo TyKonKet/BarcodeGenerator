@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Reflection;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 
@@ -9,6 +10,10 @@ namespace TyKonKet.BarcodeGenerator.Utils
     /// </summary>
     internal static class EncodersFactory
     {
+        private static readonly Assembly Assembly = Assembly.GetExecutingAssembly();
+        private static readonly Type EncoderType = typeof(Encoder);
+        private static readonly ConcurrentDictionary<string, Type> TypeCache = new ConcurrentDictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
+
         /// <summary>
         /// Creates an instance of an <see cref="Encoder"/> based on the provided <see cref="BarcodeOptions"/>.
         /// </summary>
@@ -19,12 +24,11 @@ namespace TyKonKet.BarcodeGenerator.Utils
         {
             var className = $"{options.Encode}Encoder";
 
-            var type = Type.GetType($"{typeof(Encoder).Namespace}.{className}", throwOnError: false) ?? throw new InvalidOperationException($"{className} isn't a known {nameof(Encoder)} type");
-
-            if (!typeof(Encoder).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
+            var type = TypeCache.GetOrAdd(className, key =>
             {
-                throw new InvalidOperationException($"{type.Name} doesn't inherit from {nameof(Encoder)}");
-            }
+                return Array.Find(Assembly.GetTypes(), t => string.Equals(t.Name, key, StringComparison.OrdinalIgnoreCase) && EncoderType.IsAssignableFrom(t))
+                    ?? throw new InvalidOperationException($"{key} isn't a known {nameof(Encoder)} type");
+            });
 
             return (Encoder)Activator.CreateInstance(type, options);
         }

@@ -40,7 +40,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("@ANDJEOW918273")]
         public void Code93CharsetCheckExceptions(string barcode)
         {
-            Assert.Throws<FormatException>(() => { new Code93Encoder().CheckCharset(barcode); });
+            Assert.Throws<FormatException>(() => { new Code93Encoder().ValidateCharset(barcode); });
         }
 
         [Theory]
@@ -53,7 +53,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("VAR VARNAME CSHARP")]
         public void Code93CharsetCheck(string barcode)
         {
-            Assert.True(new Code93Encoder().CheckCharset(barcode));
+            Assert.True(new Code93Encoder().ValidateCharset(barcode));
         }
 
         [Theory]

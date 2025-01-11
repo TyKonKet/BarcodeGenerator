@@ -1,145 +1,180 @@
 ﻿using SkiaSharp;
 using System;
+using System.Text;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
 {
-    internal class UpcaEncoder : EanEncoder
+    /// <summary>
+    /// Encoder for UPC-A barcodes.
+    /// </summary>
+    internal sealed class UpcaEncoder : EanEncoder
     {
-        private readonly byte[] _barsHeight =
+        /// <summary>
+        /// Heights of the bars in the barcode.
+        /// </summary>
+        private readonly byte[] barsHeight =
         {
-            1, 1, 1,
-            1, 1, 1, 1, 1, 1, 1,
-            0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0,
-            1, 1, 1, 1, 1,
-            0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0,
-            1, 1, 1, 1, 1, 1, 1,
-            1, 1, 1
+                1, 1, 1,
+                1, 1, 1, 1, 1, 1, 1,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                1, 1, 1, 1, 1,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0,
+                1, 1, 1, 1, 1, 1, 1,
+                1, 1, 1,
         };
 
-        public UpcaEncoder() : base()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpcaEncoder"/> class.
+        /// </summary>
+        public UpcaEncoder()
         {
         }
 
-        public UpcaEncoder(BarcodeOptions options) : base(options)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpcaEncoder"/> class with the specified options.
+        /// </summary>
+        /// <param name="options">The barcode options.</param>
+        public UpcaEncoder(BarcodeOptions options)
+            : base(options)
         {
         }
 
+        /// <summary>
+        /// Encodes the specified barcode string.
+        /// </summary>
+        /// <param name="barcode">The barcode string to encode.</param>
+        /// <returns>The encoded barcode string.</returns>
         public override string Encode(string barcode)
         {
             // Barcode checks
-            this.Barcode = Validate(barcode, 12);
-            this.CheckCharset(this.Barcode);
+            this.Barcode = FormatBarcode(barcode, 12);
+            this.ValidateCharset(this.Barcode);
 
             // Bars encode
-            var bars = EncodeBars(this.Barcode);
+            var encodedBars = EncodeBars(this.Barcode);
 
             // Calculate drawing data
-            var scale = Math.Max(this.Options.Scale, 0);
-            var margin = 2 * scale;
-            var leftExtraSpace = this.Options.RenderText ? 6 * scale : 0;
-            var rightExtraSpace = this.Options.RenderText ? 6 * scale : 0;
-            var width = scale * bars.Length + margin * 2 + leftExtraSpace + rightExtraSpace;
-            var height = scale * this.Options.Height + margin * 2;
-            var barsHeights = new[] { (int)((height - margin * 2) * 0.76), height - margin * 2 };
+            var scalingFactor = Math.Max(this.Options.Scale, 0);
+
+            var padding = 2 * scalingFactor;
+
+            var leftTextPadding = this.Options.RenderText ? 6 * scalingFactor : 0;
+            var rightTextPadding = this.Options.RenderText ? 6 * scalingFactor : 0;
+
+            var imageWidth = (scalingFactor * encodedBars.Length) + (padding * 2) + leftTextPadding + rightTextPadding;
+            var imageHeight = (scalingFactor * this.Options.Height) + (padding * 2);
+
+            var longBarHeight = imageHeight - (padding * 2);
+            var shortBarHeight = (int)(longBarHeight * 0.76);
+            var barHeightValues = new[] { shortBarHeight, longBarHeight };
 
             // Generate barcode image
-            var surface = SKSurface.Create(new SKImageInfo(width, height));
-            using (var canvas = surface.Canvas)
+            var drawingSurface = SKSurface.Create(new SKImageInfo(imageWidth, imageHeight));
+            using (var renderCanvas = drawingSurface.Canvas)
             {
                 // Draw bg color
-                canvas.Clear(this.Options.BackgroundColor);
+                renderCanvas.Clear(this.Options.BackgroundColor);
 
-                var brush = new SKPaint
+                using (var paintBrush = new SKPaint
                 {
                     Color = this.Options.Color,
                     IsStroke = false,
-                };
-
-                var posX = margin + leftExtraSpace;
-                for (var i = 0; i < bars.Length; i++)
+                })
                 {
-                    // Draw bars
-                    if (bars[i] == '1')
+                    var xPosition = padding + leftTextPadding;
+                    for (var i = 0; i < encodedBars.Length; i++)
                     {
-                        canvas.DrawRect(posX, margin, scale, barsHeights[this._barsHeight[i]], brush);
+                        // Draw bars
+                        if (encodedBars[i] == '1')
+                        {
+                            renderCanvas.DrawRect(xPosition, padding, scalingFactor, barHeightValues[this.barsHeight[i]], paintBrush);
+                        }
+
+                        xPosition += scalingFactor;
                     }
 
-                    posX += scale;
+                    if (this.Options.RenderText)
+                    {
+                        this.RenderBarcodeText(scalingFactor, padding, barHeightValues, renderCanvas, paintBrush);
+                    }
+
+                    this.Surface?.Dispose();
+                    this.Surface = drawingSurface;
+
+                    // Save barcode image
+                    this.Image?.Dispose();
+                    this.Image = drawingSurface.Snapshot();
                 }
-
-                if (this.Options.RenderText)
-                {
-                    // Draw texts
-                    var font = new SKFont(SKTypeface.FromFamilyName(this.Options.Font, this.Options.FontStyle), 9 * scale);
-#if NET6_0_OR_GREATER
-                    var leftExtraText = barcode[..1];
-                    var leftText = Barcode[1..6];
-                    var rightText = Barcode[6..11];
-                    var rightExtraText = Barcode[11..];
-#else
-                    var leftExtraText = barcode.Substring(0, 1);
-                    var leftText = this.Barcode.Substring(1, 5);
-                    var rightText = this.Barcode.Substring(6, 5);
-                    var rightExtraText = this.Barcode.Substring(11, 1);
-#endif
-                    var leftTextOffset = 24;
-                    var leftTextModifier = -4;
-                    var rightTextOffset = 60;
-                    var rightTextModifier = -4;
-                    var rightExtraTextOffset = 102;
-                    canvas.DrawText(leftExtraText, margin, barsHeights[1] + margin, font, brush);
-                    canvas.DrawText(leftText, margin + leftTextOffset * scale + leftTextModifier, barsHeights[1] + margin, font, brush);
-                    canvas.DrawText(rightText, margin + rightTextOffset * scale + rightTextModifier, barsHeights[1] + margin, font, brush);
-                    canvas.DrawText(rightExtraText, margin + rightExtraTextOffset * scale, barsHeights[1] + margin, font, brush);
-
-                    //// Draw texts
-                    //var font = SystemFonts.CreateFont(Options.Font, scale * 7, Options.FontStyle);
-                    //var leftExtraText = barcode.Substring(0, 1);
-                    //var leftText = barcode.Substring(1, 5);
-                    //var rightText = barcode.Substring(6, 5);
-                    //var rightExtraText = barcode.Substring(11, 1);
-                    //var leftExtraPoint = new PointF(margins, barsH[0] - margins / 2);
-                    //var leftPoint = new PointF(margins + leftExtreSpace + 18 * scale, barsH[0] - margins / 2);
-                    //var rightPoint = new PointF(margins + leftExtreSpace + 57 * scale, barsH[0] - margins / 2);
-                    //var rightExtraPoint = new PointF(width - rightExtreSpace, barsH[0] - margins / 2);
-
-                    //image.Mutate(i => i
-                    //    .DrawText(leftExtraText, font, Options.Color, leftExtraPoint)
-                    //    .DrawText(leftText, font, Options.Color, leftPoint)
-                    //    .DrawText(rightText, font, Options.Color, rightPoint)
-                    //    .DrawText(rightExtraText, font, Options.Color, rightExtraPoint)
-                    //);
-                }
-
-                this.Surface = surface;
-
-                // Save barcode image
-                this.Image = surface.Snapshot();
             }
 
             return this.Barcode;
         }
 
+        /// <summary>
+        /// Renders the barcode text on the canvas.
+        /// </summary>
+        /// <param name="scalingFactor">The scaling factor for the text.</param>
+        /// <param name="padding">The padding around the text.</param>
+        /// <param name="barHeightValues">The heights of the bars.</param>
+        /// <param name="renderCanvas">The canvas to render the text on.</param>
+        /// <param name="paintBrush">The paint brush to use for rendering the text.</param>
+        private void RenderBarcodeText(int scalingFactor, int padding, int[] barHeightValues, SKCanvas renderCanvas, SKPaint paintBrush)
+        {
+            // Draw texts
+            using (var textFont = new SKFont(SKTypeface.FromFamilyName(this.Options.Font, this.Options.FontStyle), 9 * scalingFactor))
+            {
+                var leftFirstDigit = this.Barcode.Substring(0, 1);
+                var leftMainText = this.Barcode.Substring(1, 5);
+                var rightMainText = this.Barcode.Substring(6, 5);
+                var rightCheckDigit = this.Barcode.Substring(11, 1);
+
+                renderCanvas.DrawText(leftFirstDigit, padding, barHeightValues[1] + padding, textFont, paintBrush);
+
+                const int leftTextPosition = 22;
+                const int leftTextOffset = -4;
+                renderCanvas.DrawText(leftMainText, padding + (leftTextPosition * scalingFactor) + leftTextOffset, barHeightValues[1] + padding, textFont, paintBrush);
+
+                const int rightTextPosition = 61;
+                const int rightTextOffset = -4;
+                renderCanvas.DrawText(rightMainText, padding + (rightTextPosition * scalingFactor) + rightTextOffset, barHeightValues[1] + padding, textFont, paintBrush);
+
+                const int rightCheckDigitPosition = 102;
+                renderCanvas.DrawText(rightCheckDigit, padding + (rightCheckDigitPosition * scalingFactor), barHeightValues[1] + padding, textFont, paintBrush);
+            }
+        }
+
+        /// <summary>
+        /// Encodes the bars for the specified barcode string.
+        /// </summary>
+        /// <param name="barcode">The barcode string to encode.</param>
+        /// <returns>The encoded bars as a string.</returns>
         internal static string EncodeBars(string barcode)
         {
-            var left = "";
-            var right = "";
+            var left = new StringBuilder(42);
+            var right = new StringBuilder(42);
+
             for (var i = 0; i < barcode.Length; i++)
             {
                 var num = barcode[i].ToInt();
+
                 if (i < 6)
-                    left += EncodingA[num];
-                else if (i >= 6) right += EncodingC[num];
+                {
+                    left.Append(EncodingA[num]);
+                }
+                else
+                {
+                    right.Append(EncodingC[num]);
+                }
             }
 
             return $"{Guards[0]}{left}{Guards[1]}{right}{Guards[2]}";

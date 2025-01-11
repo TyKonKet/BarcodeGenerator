@@ -15,7 +15,7 @@ namespace TyKonKet.BarcodeGenerator.Playground
 
             var bc = new Barcode(o =>
             {
-                o.Encode = BarcodeEncodings.Ean13;
+                o.Encode = BarcodeEncodings.Upca;
                 o.Height = 30;
                 o.Scale = 10;
                 o.Margins = 2;
@@ -26,11 +26,11 @@ namespace TyKonKet.BarcodeGenerator.Playground
                 o.RenderText = true;
             });
 
-            bc.Encode("923456809876");
+            bc.Encode("72527273070");
             Console.WriteLine($"Barcode generated in {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
-            bc.Export(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "out/{barcode}.png"));
+            bc.Export(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "out/{barcode}_{quality}.{format}"));
             sw.Stop();
             Console.WriteLine($"Barcode exported in {sw.ElapsedMilliseconds}ms");
 

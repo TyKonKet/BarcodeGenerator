@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using SkiaSharp;
+using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
 {
@@ -10,6 +13,10 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
     /// </summary>
     internal abstract class Encoder : IDisposable
     {
+        private static readonly HashSet<char> InvalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+
+        private bool disposed = false;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Encoder"/> class.
         /// </summary>
@@ -23,7 +30,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <param name="options">The barcode options.</param>
         protected Encoder(BarcodeOptions options)
         {
-            Options = options;
+            this.Options = options;
         }
 
         /// <summary>
@@ -64,10 +71,13 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <param name="barcode">The barcode string to check.</param>
         /// <returns>Returns true if the barcode matches the accepted character set.</returns>
         /// <exception cref="FormatException">Thrown when the barcode does not match the accepted character set.</exception>
-        internal bool CheckCharset(string barcode)
+        internal bool ValidateCharset(string barcode)
         {
-            if (!AcceptedCharset.IsMatch(barcode))
-                throw new FormatException($"Invalid barcode charset ({barcode}), only {AcceptedCharset} are accepted");
+            if (!this.AcceptedCharset.IsMatch(barcode))
+            {
+                throw new FormatException($"Invalid barcode charset ({barcode}), only {this.AcceptedCharset} are accepted");
+            }
+
             return true;
         }
 
@@ -80,27 +90,42 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
         public virtual void Export(string fileName, SKEncodedImageFormat format, int quality)
         {
-            if (Image == null)
+            if (this.Image == null)
             {
                 throw new InvalidOperationException("The barcode must be encoded before exported");
             }
 
-            fileName = fileName.Replace("{barcode}", GetSafeFilename(Barcode));
+            fileName = GetFinalFileName(fileName, this.Barcode, format, quality);
+
             var path = Path.GetDirectoryName(fileName);
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-#if NET6_0_OR_GREATER
-                using var encodedImage = Image.Encode(format, quality);
-                using var fileStream = new FileStream(fileName, FileMode.OpenOrCreate);
-                encodedImage.SaveTo(fileStream);
-#else
-            using (var encodedImage = Image.Encode(format, quality))
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            using (var encodedImage = this.Image.Encode(format, quality))
             {
                 using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
                 {
                     encodedImage.SaveTo(fileStream);
                 }
             }
-#endif
+        }
+
+        /// <summary>
+        /// Generates the final file name by replacing placeholders with actual values.
+        /// </summary>
+        /// <param name="fileName">The original file name with placeholders.</param>
+        /// <param name="barcode">The barcode string.</param>
+        /// <param name="format">The image format.</param>
+        /// <param name="quality">The image quality.</param>
+        /// <returns>Returns the final file name with placeholders replaced.</returns>
+        internal static string GetFinalFileName(string fileName, string barcode, SKEncodedImageFormat format, int quality)
+        {
+            fileName = fileName.Replace("{barcode}", GetSafeFilename(barcode));
+            fileName = fileName.Replace("{format}", format.ToFileExtension());
+            fileName = fileName.Replace("{quality}", $"{quality}");
+            return fileName;
         }
 
         /// <summary>
@@ -108,9 +133,18 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// </summary>
         /// <param name="filename">The original filename.</param>
         /// <returns>Returns a safe filename.</returns>
-        private static string GetSafeFilename(string filename)
+        internal static string GetSafeFilename(string filename)
         {
-            return string.Join("", filename.Split(Path.GetInvalidFileNameChars()));
+            var result = new StringBuilder(filename.Length);
+            foreach (char c in filename)
+            {
+                if (!InvalidChars.Contains(c))
+                {
+                    result.Append(c);
+                }
+            }
+
+            return result.ToString();
         }
 
         /// <summary>
@@ -118,8 +152,26 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// </summary>
         public void Dispose()
         {
-            Surface?.Dispose();
-            Image?.Dispose();
+            this.Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Disposes the resources used by the encoder.
+        /// </summary>
+        /// <param name="disposing">Indicates whether the method call comes from a Dispose method (its value is true) or from a finalizer (its value is false).</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    // Dispose managed resources here.
+                }
+
+                // Dispose unmanaged resources here.
+                this.disposed = true;
+            }
         }
     }
 }

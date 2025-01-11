@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using System;
+using System.Diagnostics;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 using TyKonKet.BarcodeGenerator.Utils;
 
@@ -8,19 +9,25 @@ namespace TyKonKet.BarcodeGenerator
     /// <summary>
     /// Provides support for barcode encoding.
     /// </summary>
-    public class Barcode : IDisposable
+    [DebuggerDisplay("BarcodeSurface = {BarcodeSurface}, BarcodeImage = {BarcodeImage}")]
+    public sealed class Barcode : IDisposable
     {
-        private Encoder BarcodeEncoder;
+        private Encoder barcodeEncoder;
+
+        /// <summary>
+        /// Barcode options.
+        /// </summary>
+        private BarcodeOptions Options { get; } = new BarcodeOptions();
 
         /// <summary>
         /// Barcode surface.
         /// </summary>
-        public SKSurface BarcodeSurface { get => this.BarcodeEncoder.Surface; }
+        public SKSurface BarcodeSurface { get => this.barcodeEncoder.Surface; }
 
         /// <summary>
         /// Encoded image.
         /// </summary>
-        public SKImage BarcodeImage { get => this.BarcodeEncoder.Image; }
+        public SKImage BarcodeImage { get => this.barcodeEncoder.Image; }
 
         /// <summary>
         /// Initialize a new instance of <see cref="Barcode" /> with custom options.
@@ -32,19 +39,15 @@ namespace TyKonKet.BarcodeGenerator
         }
 
         /// <summary>
-        /// Barcode options.
-        /// </summary>
-        private BarcodeOptions Options { get; } = new BarcodeOptions();
-
-        /// <summary>
         /// Encodes the barcode based on <see cref="Options" /> and renders the image.
         /// </summary>
         /// <param name="barcode">Alphanumeric barcode to encode.</param>
         /// <returns>Validated barcode.</returns>
         public string Encode(string barcode)
         {
-            this.BarcodeEncoder = EncodersFactory.Create(this.Options);
-            return this.BarcodeEncoder.Encode(barcode);
+            this.barcodeEncoder?.Dispose();
+            this.barcodeEncoder = EncodersFactory.Create(this.Options);
+            return this.barcodeEncoder.Encode(barcode);
         }
 
         /// <summary>
@@ -56,11 +59,12 @@ namespace TyKonKet.BarcodeGenerator
         /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
         public void Export(string fileName, SKEncodedImageFormat format = SKEncodedImageFormat.Png, int quality = 100)
         {
-            if (this.BarcodeEncoder == null)
+            if (this.barcodeEncoder == null)
             {
                 throw new InvalidOperationException("The barcode must be encoded before exported");
             }
-            this.BarcodeEncoder.Export(fileName, format, quality);
+
+            this.barcodeEncoder.Export(fileName, format, quality);
         }
 
         /// <summary>
@@ -68,8 +72,7 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         public void Dispose()
         {
-            this.BarcodeEncoder?.Dispose();
-            GC.SuppressFinalize(this);
+            this.barcodeEncoder?.Dispose();
         }
     }
 }
