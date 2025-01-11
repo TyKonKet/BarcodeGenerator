@@ -1,6 +1,6 @@
 # Barcode Generator
 
-Barcode generator on .NET Standard 1.3
+Barcode generator based on [SkiaSharp](https://github.com/mono/SkiaSharp) library.
   
 ## NuGet
 
@@ -45,7 +45,7 @@ internal static class Program
 }
 ```
 
-## Encoders
+## Supported encoders
 
 - [x] EAN-13
 - [x] UPC-A
@@ -54,3 +54,6 @@ internal static class Program
 - [ ] CODE39
 - [x] CODE93
 - [ ] CODE128
+
+## Warnings
+- Starting with version 1.0.4, the library is no more compatible with .NET Standard 1.3 since it uses SkiaSharp 3 which requires .NET Standard 2.0
