@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 
 namespace TyKonKet.BarcodeGenerator.Benchmark
@@ -7,7 +8,8 @@ namespace TyKonKet.BarcodeGenerator.Benchmark
     {
         public static void Main(string[] args)
         {
-            new BenchmarkSwitcher(typeof(Program).GetTypeInfo().Assembly).Run(args);
+            var config = DefaultConfig.Instance;
+            new BenchmarkSwitcher(typeof(Program).GetTypeInfo().Assembly).Run(args, config);
         }
     }
 }

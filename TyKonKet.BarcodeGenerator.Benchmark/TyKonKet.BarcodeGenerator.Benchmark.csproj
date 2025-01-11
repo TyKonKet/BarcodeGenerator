@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp3.1;net462;net6.0;net5.0;net4.8</TargetFrameworks>
+    <TargetFrameworks>net9.0;net8.0;net5.0;net4.8</TargetFrameworks>
       <PlatformTarget>AnyCPU</PlatformTarget>
       <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
       <Nullable>disable</Nullable>
@@ -14,8 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
-    <PackageReference Include="BenchmarkDotNet.Annotations" Version="0.13.1" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+    <PackageReference Include="BenchmarkDotNet.Annotations" Version="0.14.0" />
   </ItemGroup>
 
   <ItemGroup>

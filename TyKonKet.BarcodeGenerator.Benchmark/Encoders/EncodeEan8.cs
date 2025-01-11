@@ -3,10 +3,11 @@ using SkiaSharp;
 using System;
 using System.IO;
 using System.Reflection;
+using TyKonKet.BarcodeGenerator.Benchmark.Common;
 
 namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
 {
-    public class EncodeIsbn13 : Encode
+    public class EncodeEan8 : EncodeBenchmark
     {
         private Barcode forEncode;
         private Barcode forExport;
@@ -16,7 +17,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
         {
             forEncode = new Barcode(o =>
             {
-                o.Encode = Encodes.Isbn13;
+                o.Encode = Encodes.Ean8;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BackgroundColor = SKColors.Transparent;
@@ -28,7 +29,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
 
             forExport = new Barcode(o =>
             {
-                o.Encode = Encodes.Isbn13;
+                o.Encode = Encodes.Ean8;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BackgroundColor = SKColors.Transparent;
@@ -38,7 +39,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
                 o.DrawText = false;
             });
 
-            forExport.Encode("9781234567897");
+            forExport.Encode("90311017");
         }
 
         [GlobalCleanup]
@@ -53,7 +54,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
         {
             return new Barcode(o =>
             {
-                o.Encode = Encodes.Isbn13;
+                o.Encode = Encodes.Ean8;
                 o.Height = 30;
                 o.Scale = 5;
                 o.BackgroundColor = SKColors.Transparent;
@@ -67,7 +68,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmark.Encode
         [Benchmark]
         public override void DoEncoding()
         {
-            forEncode.Encode("9781234567897");
+            forEncode.Encode("90311017");
         }
 
         [Benchmark]
