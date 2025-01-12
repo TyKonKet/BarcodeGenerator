@@ -48,7 +48,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <summary>
         /// Gets or sets the barcode string.
         /// </summary>
-        protected string Barcode { get; set; }
+        internal string Barcode { get; set; }
 
         /// <summary>
         /// Gets the accepted character set for the barcode.

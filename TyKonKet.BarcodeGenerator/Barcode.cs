@@ -10,7 +10,7 @@ namespace TyKonKet.BarcodeGenerator
     /// <summary>
     /// Provides support for barcode encoding.
     /// </summary>
-    [DebuggerDisplay("{Options}")]
+    [DebuggerDisplay("Barcode = {barcodeEncoder.Barcode}, {Options}")]
     public sealed class Barcode : IDisposable
     {
         private readonly Encoder barcodeEncoder;

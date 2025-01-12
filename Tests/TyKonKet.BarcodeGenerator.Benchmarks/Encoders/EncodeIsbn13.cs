@@ -9,13 +9,13 @@ namespace TyKonKet.BarcodeGenerator.Benchmarks.Encoders
 {
     public class EncodeIsbn13 : EncodeBenchmark
     {
-        private Barcode forEncode;
-        private Barcode forExport;
+        private Barcode toEncode;
+        private Barcode toExport;
 
         [GlobalSetup]
         public void GlobalSetup()
         {
-            forEncode = new Barcode(o =>
+            toEncode = new Barcode(o =>
             {
                 o.Encode = BarcodeEncodings.Isbn13;
                 o.Height = 30;
@@ -27,7 +27,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmarks.Encoders
                 o.RenderText = false;
             });
 
-            forExport = new Barcode(o =>
+            toExport = new Barcode(o =>
             {
                 o.Encode = BarcodeEncodings.Isbn13;
                 o.Height = 30;
@@ -39,14 +39,14 @@ namespace TyKonKet.BarcodeGenerator.Benchmarks.Encoders
                 o.RenderText = false;
             });
 
-            forExport.Encode("9781234567897");
+            toExport.Encode("9781234567897");
         }
 
         [GlobalCleanup]
         public void GlobalCleanup()
         {
-            forEncode.Dispose();
-            forExport.Dispose();
+            toEncode.Dispose();
+            toExport.Dispose();
         }
 
         [Benchmark]
@@ -68,13 +68,13 @@ namespace TyKonKet.BarcodeGenerator.Benchmarks.Encoders
         [Benchmark]
         public override void DoEncoding()
         {
-            forEncode.Encode("9781234567897");
+            toEncode.Encode("9781234567897");
         }
 
         [Benchmark]
         public override void DoExport()
         {
-            forExport.Export(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) ?? throw new InvalidOperationException(), "{barcode}.png"));
+            toExport.Export(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) ?? throw new InvalidOperationException(), "{barcode}.png"));
         }
     }
 }
