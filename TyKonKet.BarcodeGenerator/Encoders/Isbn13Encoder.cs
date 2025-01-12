@@ -1,34 +1,52 @@
 ﻿namespace TyKonKet.BarcodeGenerator.Encoders
 {
-    internal class Isbn13Encoder : Ean13Encoder
+    /// <summary>
+    /// Encoder for ISBN-13 barcodes.
+    /// </summary>
+    internal sealed class Isbn13Encoder : Ean13Encoder
     {
-
-        public Isbn13Encoder() : base()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Isbn13Encoder"/> class.
+        /// </summary>
+        public Isbn13Encoder()
         {
         }
 
-        public Isbn13Encoder(BarcodeOptions options) : base(options)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Isbn13Encoder"/> class with the specified options.
+        /// </summary>
+        /// <param name="options">The barcode options.</param>
+        public Isbn13Encoder(BarcodeOptions options)
+            : base(options)
         {
         }
 
+        /// <summary>
+        /// Encodes the specified barcode.
+        /// </summary>
+        /// <param name="barcode">The barcode to encode.</param>
+        /// <returns>The encoded barcode.</returns>
         public override string Encode(string barcode)
         {
-            barcode = IsbnValidate(barcode);
+            barcode = FormatBarcode(barcode);
             return base.Encode(barcode);
         }
 
-        internal static string IsbnValidate(string barcode)
+        /// <summary>
+        /// Formats the barcode according to ISBN-13 rules.
+        /// </summary>
+        /// <param name="barcode">The barcode to format.</param>
+        /// <returns>The formatted barcode.</returns>
+        internal static new string FormatBarcode(string barcode)
         {
-            // validate barcode following ISBN-13 rules
-#if NET6_0_OR_GREATER
-            if (barcode.Length > 3 && barcode[..3] == "978") barcode = barcode.Remove(0, 3);
-            barcode = barcode.PadLeft(9, '0');
-            barcode = $"978{barcode[..9]}";
-#else
-            if (barcode.Length > 3 && barcode.Substring(0, 3) == "978") barcode = barcode.Remove(0, 3);
+            // format barcode following ISBN-13 rules
+            if (barcode.Length > 3 && string.Equals(barcode.Substring(0, 3), "978", System.StringComparison.Ordinal))
+            {
+                barcode = barcode.Remove(0, 3);
+            }
+
             barcode = barcode.PadLeft(9, '0');
             barcode = $"978{barcode.Substring(0, 9)}";
-#endif
 
             return barcode;
         }

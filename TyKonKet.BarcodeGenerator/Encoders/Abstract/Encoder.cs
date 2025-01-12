@@ -167,6 +167,11 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <returns>Returns a safe filename.</returns>
         internal static string GetSafeFilename(string filename)
         {
+            if (string.IsNullOrEmpty(filename))
+            {
+                return filename;
+            }
+
             var result = new StringBuilder(filename.Length);
             foreach (char c in filename)
             {

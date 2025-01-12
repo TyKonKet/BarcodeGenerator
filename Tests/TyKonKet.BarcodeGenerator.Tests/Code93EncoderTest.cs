@@ -27,18 +27,17 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("GITHUB", "1T")]
         [InlineData("VISUALSTUDIO2017", "8+")]
         [InlineData("0123456789ABCDEFGHIJKLMNOP", "/=")]
-        public void Code93CheckDigits(string input, string expected)
+        public void CheckDigits_ShouldReturnExpectedCheckDigits(string input, string expected)
         {
             Assert.Equal(expected, Code93Encoder.CheckDigits(input));
         }
-
 
         [Theory]
         [InlineData("ABC-1234-aBC")]
         [InlineData("EHEHCIA-._SSS")]
         [InlineData("$VARNAME PHP?")]
         [InlineData("@ANDJEOW918273")]
-        public void Code93CharsetCheckExceptions(string barcode)
+        public void ValidateCharset_ShouldThrowFormatException_ForInvalidCharset(string barcode)
         {
             Assert.Throws<FormatException>(() => { new Code93Encoder().ValidateCharset(barcode); });
         }
@@ -51,7 +50,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData(" /$+%$+/ ")]
         [InlineData("$ VARNAME PHP")]
         [InlineData("VAR VARNAME CSHARP")]
-        public void Code93CharsetCheck(string barcode)
+        public void ValidateCharset_ShouldReturnTrue_ForValidCharset(string barcode)
         {
             Assert.True(new Code93Encoder().ValidateCharset(barcode));
         }
@@ -71,9 +70,41 @@ namespace TyKonKet.BarcodeGenerator.Tests
             "1010111101110010101110100101100110101101010001101100101010001101101010001010011001100100101110100101000101101011001001000101101010111101")]
         [InlineData("VAR VARNAME CSHARP",
             "1010111101100110101101010001101100101110100101100110101101010001101100101010001101101010001010011001100100101110100101101000101101011001011001001101010001101100101000101101010111101")]
-        public void Code93EncodeBars(string input, string expected)
+        public void EncodeBars_ShouldReturnExpectedEncodedBars(string input, string expected)
         {
             Assert.Equal(expected, Code93Encoder.EncodeBars(input));
+        }
+
+        [Theory]
+        [InlineData("ABC-1234-ABC", "1010111101101010001101001001101000101001011101010010001010001001010000101001010001001011101101010001101001001101000101010111101")]
+        [InlineData("92736182345", "1010111101000010101010001001010100001010000101001000101010010001000100101010001001010000101001010001001001001010111101")]
+        public void EncodeBars_ShouldReturnExpectedEncodedBars_Additional(string input, string expected)
+        {
+            Assert.Equal(expected, Code93Encoder.EncodeBars(input));
+        }
+
+        [Theory]
+        [InlineData("ABC-1234-ABC", "DX")]
+        [InlineData("92736182345", "%/")]
+        public void CheckDigits_ShouldReturnExpectedCheckDigits_Additional(string input, string expected)
+        {
+            Assert.Equal(expected, Code93Encoder.CheckDigits(input));
+        }
+
+        [Theory]
+        [InlineData("ABC-1234-ABC")]
+        [InlineData("92736182345")]
+        public void ValidateCharset_ShouldReturnTrue_ForValidCharset_Additional(string barcode)
+        {
+            Assert.True(new Code93Encoder().ValidateCharset(barcode));
+        }
+
+        [Theory]
+        [InlineData("ABC-1234-aBC")]
+        [InlineData("EHEHCIA-._SSS")]
+        public void ValidateCharset_ShouldThrowFormatException_ForInvalidCharset_Additional(string barcode)
+        {
+            Assert.Throws<FormatException>(() => { new Code93Encoder().ValidateCharset(barcode); });
         }
     }
 }

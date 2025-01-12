@@ -26,18 +26,24 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             1, 1, 1,
         };
 
-        public Ean13Encoder() : base()
+        public Ean13Encoder()
         {
         }
 
-        public Ean13Encoder(BarcodeOptions options) : base(options)
+        public Ean13Encoder(BarcodeOptions options)
+            : base(options)
         {
+        }
+
+        internal static string FormatBarcode(string barcode)
+        {
+            return FormatBarcode(barcode, 13);
         }
 
         public override string Encode(string barcode)
         {
             // Barcode checks
-            this.Barcode = FormatBarcode(barcode, 13);
+            this.Barcode = FormatBarcode(barcode);
             this.ValidateCharset(this.Barcode);
 
             // Bars encode

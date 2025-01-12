@@ -153,7 +153,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         public override string Encode(string barcode)
         {
             // Barcode checks
-            this.Barcode = FormatBarcode(barcode, 12);
+            this.Barcode = FormatBarcode(barcode);
             this.ValidateCharset(this.Barcode);
 
             // Bars encoding
@@ -224,6 +224,16 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
             const int rightCheckDigitPosition = 102;
             this.renderCanvas.DrawText(rightCheckDigit, this.padding + (rightCheckDigitPosition * this.scalingFactor), this.barHeightValues[1] + this.padding, this.textFont, this.paintBrush);
+        }
+
+        /// <summary>
+        /// Formats the barcode to the specified length.
+        /// </summary>
+        /// <param name="barcode">The barcode string to format.</param>
+        /// <returns>The formatted barcode string.</returns>
+        internal static string FormatBarcode(string barcode)
+        {
+            return FormatBarcode(barcode, 12);
         }
 
         /// <summary>
