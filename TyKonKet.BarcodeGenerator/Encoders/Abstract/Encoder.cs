@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SkiaSharp;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using SkiaSharp;
 using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
@@ -22,6 +23,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// </summary>
         protected Encoder()
         {
+            this.Options = new BarcodeOptions();
         }
 
         /// <summary>
@@ -39,11 +41,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         protected BarcodeOptions Options { get; }
 
         /// <summary>
-        /// Gets or sets the SKSurface for drawing the barcode.
-        /// </summary>
-        internal SKSurface Surface { get; set; }
-
-        /// <summary>
         /// Gets or sets the SKImage representing the barcode.
         /// </summary>
         internal SKImage Image { get; set; }
@@ -56,7 +53,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <summary>
         /// Gets the accepted character set for the barcode.
         /// </summary>
-        protected abstract Regex AcceptedCharset { get; }
+        protected abstract Regex AllowedCharsetPattern { get; }
 
         /// <summary>
         /// Validates and generates the barcode image.
@@ -64,22 +61,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <param name="barcode">Barcode chars / digits.</param>
         /// <returns>Returns the validated barcode chars / digits.</returns>
         public abstract string Encode(string barcode);
-
-        /// <summary>
-        /// Checks if the barcode matches the accepted character set.
-        /// </summary>
-        /// <param name="barcode">The barcode string to check.</param>
-        /// <returns>Returns true if the barcode matches the accepted character set.</returns>
-        /// <exception cref="FormatException">Thrown when the barcode does not match the accepted character set.</exception>
-        internal bool ValidateCharset(string barcode)
-        {
-            if (!this.AcceptedCharset.IsMatch(barcode))
-            {
-                throw new FormatException($"Invalid barcode charset ({barcode}), only {this.AcceptedCharset} are accepted");
-            }
-
-            return true;
-        }
 
         /// <summary>
         /// Exports the barcode image to a file.
@@ -103,13 +84,64 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
                 Directory.CreateDirectory(path);
             }
 
+            using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
+            {
+                this.Export(fileStream, format, quality);
+            }
+        }
+
+        /// <summary>
+        /// Exports the barcode image to a stream.
+        /// </summary>
+        /// <param name="stream">The stream to export the image to.</param>
+        /// <param name="format">Image export format.</param>
+        /// <param name="quality">Image export quality.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
+        public virtual void Export(Stream stream, SKEncodedImageFormat format, int quality)
+        {
+            if (this.Image == null)
+            {
+                throw new InvalidOperationException("The barcode must be encoded before exported");
+            }
+
             using (var encodedImage = this.Image.Encode(format, quality))
             {
-                using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
-                {
-                    encodedImage.SaveTo(fileStream);
-                }
+                encodedImage.SaveTo(stream);
             }
+        }
+
+        /// <summary>
+        /// Loads the barcode options.
+        /// </summary>
+        protected internal virtual void LoadOptions()
+        {
+        }
+
+        /// <summary>
+        /// Sets the image for the barcode.
+        /// </summary>
+        /// <param name="image">The SKImage representing the barcode.</param>
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected", Justification = "EnsureDisposing")]
+        protected void SetImage(SKImage image)
+        {
+            this.Image?.Dispose();
+            this.Image = image;
+        }
+
+        /// <summary>
+        /// Checks if the barcode matches the accepted character set.
+        /// </summary>
+        /// <param name="barcode">The barcode string to check.</param>
+        /// <returns>Returns true if the barcode matches the accepted character set.</returns>
+        /// <exception cref="FormatException">Thrown when the barcode does not match the accepted character set.</exception>
+        internal bool ValidateCharset(string barcode)
+        {
+            if (!this.AllowedCharsetPattern.IsMatch(barcode))
+            {
+                throw new FormatException($"Invalid barcode charset ({barcode}), only {this.AllowedCharsetPattern} are accepted");
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -160,16 +192,16 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// Disposes the resources used by the encoder.
         /// </summary>
         /// <param name="disposing">Indicates whether the method call comes from a Dispose method (its value is true) or from a finalizer (its value is false).</param>
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected", Justification = "EnsureDisposing")]
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
                 if (disposing)
                 {
-                    // Dispose managed resources here.
+                    this.Image?.Dispose();
                 }
 
-                // Dispose unmanaged resources here.
                 this.disposed = true;
             }
         }

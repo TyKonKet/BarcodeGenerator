@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
 using SkiaSharp;
+using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator
 {
     /// <summary>
     /// Barcode options.
     /// </summary>
-    [DebuggerDisplay("Encode = {Encode}, Height = {Height}, Scale = {Scale}, RenderText = {RenderText}")]
+    [DebuggerDisplay("Encode = {EncodeDisplayName}, Height = {Height}, Scale = {Scale}, RenderText = {RenderText}")]
     public sealed class BarcodeOptions
     {
         private int scale = 5;
+
+        internal string EncodeDisplayName => this.Encode.GetDisplayName();
 
         /// <summary>
         /// Gets or sets the barcode margins.

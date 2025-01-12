@@ -120,7 +120,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     //);
                 }
 
-                this.Surface = surface;
+                //this.Surface = surface;
 
                 // Save barcode image
                 this.Image = surface.Snapshot();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 using TyKonKet.BarcodeGenerator.Utils;
 
@@ -52,25 +53,18 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         protected static readonly string[] Guards = { "101", "01010", "101" };
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EanEncoder"/> class with the specified options.
+        /// Gets the accepted character set for the barcode.
         /// </summary>
-        /// <param name="options">The barcode options.</param>
-        protected EanEncoder(BarcodeOptions options)
-            : base(options)
-        {
-        }
+        protected override Regex AllowedCharsetPattern => RegexCache.EanAllowedCharsetRegex;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EanEncoder"/> class.
-        /// </summary>
         protected EanEncoder()
         {
         }
 
-        /// <summary>
-        /// Gets the accepted character set for the barcode.
-        /// </summary>
-        protected override Regex AcceptedCharset => new Regex("^[0-9]+$", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+        protected EanEncoder(BarcodeOptions options)
+            : base(options)
+        {
+        }
 
         /// <summary>
         /// Validates the barcode and appends the check digit following EAN rules.

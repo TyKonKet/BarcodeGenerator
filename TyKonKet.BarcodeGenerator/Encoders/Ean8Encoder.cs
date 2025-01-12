@@ -86,7 +86,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     canvas.DrawText(rightText, margin + 40 * scale, barsHeights[1] + margin, font, brush);
                 }
 
-                this.Surface = surface;
+                //this.Surface = surface;
 
                 // Save barcode image
                 this.Image = surface.Snapshot();

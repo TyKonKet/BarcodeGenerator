@@ -63,7 +63,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
         private static readonly char[] EncodingTableKeys = EncodingTable.Keys.ToArray();
 
-        protected override Regex AcceptedCharset => new Regex(@"^[A-Z0-9 .$+%\-\/]+$");
+        protected override Regex AllowedCharsetPattern => new Regex(@"^[A-Z0-9 .$+%\-\/]+$");
 
         public Code93Encoder()
         {
@@ -129,7 +129,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     //image.Mutate(i => i.DrawText(Barcode, font, Options.Color, point));
                 }
 
-                this.Surface = surface;
+                //this.Surface = surface;
 
                 // Save barcode image
                 this.Image = surface.Snapshot();
