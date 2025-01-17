@@ -19,7 +19,7 @@ namespace TyKonKet.BarcodeGenerator
         /// Gets or sets the barcode margins.
         /// </summary>
         /// <value>The margins of the barcode.</value>
-        public int Margins { get; set; } = 5;
+        public int Margins { get; set; } = 2;
 
         /// <summary>
         /// Gets or sets the encoding type.

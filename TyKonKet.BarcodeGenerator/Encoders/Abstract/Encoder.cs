@@ -134,8 +134,14 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <param name="barcode">The barcode string to check.</param>
         /// <returns>Returns true if the barcode matches the accepted character set.</returns>
         /// <exception cref="FormatException">Thrown when the barcode does not match the accepted character set.</exception>
-        internal bool ValidateCharset(string barcode)
+        /// <exception cref="ArgumentNullException">Thrown when the barcode is null.</exception>
+        internal bool EnsureValidCharset(string barcode)
         {
+            if (barcode == null)
+            {
+                throw new ArgumentNullException(nameof(barcode));
+            }
+
             if (!this.AllowedCharsetPattern.IsMatch(barcode))
             {
                 throw new FormatException($"Invalid barcode charset ({barcode}), only {this.AllowedCharsetPattern} are accepted");

@@ -5,7 +5,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Description>Barcode generator based on SkiaSharp</Description>
 		<PackageProjectUrl>https://github.com/TyKonKet/BarcodeGenerator</PackageProjectUrl>
-		<PackageLicenseUrl>https://github.com/TyKonKet/BarcodeGenerator/blob/master/LICENSE</PackageLicenseUrl>
+		<PackageLicense>https://github.com/TyKonKet/BarcodeGenerator/blob/master/LICENSE</PackageLicense>
 		<RepositoryUrl>https://github.com/TyKonKet/BarcodeGenerator</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>barcode</PackageTags>

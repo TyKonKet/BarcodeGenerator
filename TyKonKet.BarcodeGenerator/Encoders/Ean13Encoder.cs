@@ -44,7 +44,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
             // Barcode checks
             this.Barcode = FormatBarcode(barcode);
-            this.ValidateCharset(this.Barcode);
+            this.EnsureValidCharset(this.Barcode);
 
             // Bars encode
             var bars = EncodeBars(this.Barcode);
