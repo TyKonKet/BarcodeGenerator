@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
@@ -217,8 +218,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <returns>The encoded bars string.</returns>
         internal static string EncodeBars(string barcode)
         {
-            var left = new System.Text.StringBuilder(28); // 4 digits * 7 bits
-            var right = new System.Text.StringBuilder(28); // 4 digits * 7 bits
+            var left = new StringBuilder(28); // 4 digits * 7 bits
+            var right = new StringBuilder(28); // 4 digits * 7 bits
             for (var i = 0; i < barcode.Length; i++)
             {
                 var num = barcode[i] - '0'; // Convert char to int
