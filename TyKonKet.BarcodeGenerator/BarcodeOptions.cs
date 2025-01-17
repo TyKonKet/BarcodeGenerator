@@ -40,7 +40,7 @@ namespace TyKonKet.BarcodeGenerator
         public int Scale
         {
             get => this.scale;
-            set => this.scale = Math.Abs(value);
+            set => this.scale = Math.Max(Math.Abs(value), 1);
         }
 
         /// <summary>

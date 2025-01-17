@@ -40,11 +40,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         private bool disposed = false;
 
         /// <summary>
-        /// Scaling factor for the barcode.
-        /// </summary>
-        private int scalingFactor = 0;
-
-        /// <summary>
         /// Padding around the barcode.
         /// </summary>
         private int imagePadding = 0;
@@ -117,14 +112,12 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
             base.LoadOptions();
 
-            this.scalingFactor = Math.Max(this.Options.Scale, 0);
+            this.imagePadding = this.Options.Margins * this.Options.Scale;
 
-            this.imagePadding = this.Options.Margins * this.scalingFactor;
+            this.leftTextPadding = this.Options.RenderText ? 6 * this.Options.Scale : 0;
+            this.rightTextPadding = this.Options.RenderText ? 6 * this.Options.Scale : 0;
 
-            this.leftTextPadding = this.Options.RenderText ? 6 * this.scalingFactor : 0;
-            this.rightTextPadding = this.Options.RenderText ? 6 * this.scalingFactor : 0;
-
-            this.imageHeight = (this.scalingFactor * this.Options.Height) + (this.imagePadding * 2);
+            this.imageHeight = (this.Options.Scale * this.Options.Height) + (this.imagePadding * 2);
 
             var longBarHeight = this.imageHeight - (this.imagePadding * 2);
             var shortBarHeight = (int)(longBarHeight * 0.76);
@@ -140,7 +133,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             if (this.Options.RenderText)
             {
                 this.textFont?.Dispose();
-                this.textFont = new SKFont(SKTypeface.FromFamilyName(this.Options.Font, this.Options.FontStyle), 9 * this.scalingFactor);
+                this.textFont = new SKFont(SKTypeface.FromFamilyName(this.Options.Font, this.Options.FontStyle), 9 * this.Options.Scale);
             }
         }
 
@@ -161,7 +154,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             // Bars encoding
             var encodedBars = EncodeBars(this.Barcode);
 
-            var imageWidth = (this.scalingFactor * encodedBars.Length) + (this.imagePadding * 2) + this.leftTextPadding + this.rightTextPadding;
+            var imageWidth = (this.Options.Scale * encodedBars.Length) + (this.imagePadding * 2) + this.leftTextPadding + this.rightTextPadding;
 
             // Setups the canvas for rendering if it's not already set or if the image size has changed
             if (this.imageInfo == default || this.imageHeight != this.imageInfo.Height || imageWidth != this.imageInfo.Width)
@@ -185,10 +178,10 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 // If the bar is a colored one, draw it
                 if (encodedBars[i] == '1')
                 {
-                    this.renderCanvas.DrawRect(xPosition, this.imagePadding, this.scalingFactor, this.barHeightValues[this.barsHeight[i]], this.paintBrush);
+                    this.renderCanvas.DrawRect(xPosition, this.imagePadding, this.Options.Scale, this.barHeightValues[this.barsHeight[i]], this.paintBrush);
                 }
 
-                xPosition += this.scalingFactor;
+                xPosition += this.Options.Scale;
             }
 
             // Render barcode text if enabled
@@ -218,14 +211,14 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
             const int leftTextPosition = 22;
             const int leftTextOffset = -4;
-            this.renderCanvas.DrawText(leftMainText, this.imagePadding + (leftTextPosition * this.scalingFactor) + leftTextOffset, this.barHeightValues[1] + this.imagePadding, this.textFont, this.paintBrush);
+            this.renderCanvas.DrawText(leftMainText, this.imagePadding + (leftTextPosition * this.Options.Scale) + leftTextOffset, this.barHeightValues[1] + this.imagePadding, this.textFont, this.paintBrush);
 
             const int rightTextPosition = 61;
             const int rightTextOffset = -4;
-            this.renderCanvas.DrawText(rightMainText, this.imagePadding + (rightTextPosition * this.scalingFactor) + rightTextOffset, this.barHeightValues[1] + this.imagePadding, this.textFont, this.paintBrush);
+            this.renderCanvas.DrawText(rightMainText, this.imagePadding + (rightTextPosition * this.Options.Scale) + rightTextOffset, this.barHeightValues[1] + this.imagePadding, this.textFont, this.paintBrush);
 
             const int rightCheckDigitPosition = 102;
-            this.renderCanvas.DrawText(rightCheckDigit, this.imagePadding + (rightCheckDigitPosition * this.scalingFactor), this.barHeightValues[1] + this.imagePadding, this.textFont, this.paintBrush);
+            this.renderCanvas.DrawText(rightCheckDigit, this.imagePadding + (rightCheckDigitPosition * this.Options.Scale), this.barHeightValues[1] + this.imagePadding, this.textFont, this.paintBrush);
         }
 
         /// <summary>
@@ -250,7 +243,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
             for (var i = 0; i < barcode.Length; i++)
             {
-                var num = barcode[i].ToInt();
+                var num = barcode[i] - '0';
 
                 if (i < 6)
                 {
