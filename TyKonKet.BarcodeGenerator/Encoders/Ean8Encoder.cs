@@ -12,17 +12,17 @@ namespace TyKonKet.BarcodeGenerator.Encoders
     {
         private readonly byte[] barsHeight =
         {
-                1, 1, 1,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                1, 1, 1, 1, 1,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                1, 1, 1,
+                    1, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    1, 1, 1, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    1, 1, 1,
         };
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         }
 
         /// <summary>
-        /// Loads the barcode options.
+        /// Loads the barcode options and initializes the necessary properties for rendering.
         /// </summary>
         protected internal override void LoadOptions()
         {
@@ -129,7 +129,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         }
 
         /// <summary>
-        /// Encodes the specified barcode string.
+        /// Encodes the specified barcode string into an EAN-8 barcode image.
         /// </summary>
         /// <param name="barcode">The barcode string to encode.</param>
         /// <returns>The encoded barcode string.</returns>
@@ -188,7 +188,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         }
 
         /// <summary>
-        /// Renders the barcode text.
+        /// Renders the text below the barcode.
         /// </summary>
         private void RenderBarcodeText()
         {
@@ -202,7 +202,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         }
 
         /// <summary>
-        /// Formats the barcode string to the required length.
+        /// Formats the barcode string to the required length and appends the check digit.
         /// </summary>
         /// <param name="barcode">The barcode string to format.</param>
         /// <returns>The formatted barcode string.</returns>
@@ -212,7 +212,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         }
 
         /// <summary>
-        /// Encodes the bars for the barcode.
+        /// Encodes the bars for the barcode using the EAN-8 encoding scheme.
         /// </summary>
         /// <param name="barcode">The barcode string to encode.</param>
         /// <returns>The encoded bars string.</returns>

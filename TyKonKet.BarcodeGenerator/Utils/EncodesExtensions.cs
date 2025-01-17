@@ -4,15 +4,15 @@ using TyKonKet.BarcodeGenerator.Attributes;
 namespace TyKonKet.BarcodeGenerator.Utils
 {
     /// <summary>
-    /// Extension methods for the Encodes enum
+    /// Provides extension methods for the <see cref="BarcodeEncodings"/> enum.
     /// </summary>
     public static class EncodesExtensions
     {
         /// <summary>
-        /// Get the name of the encoding.
+        /// Retrieves the display name of the specified barcode encoding.
         /// </summary>
-        /// <param name="e">The encoding type</param>
-        /// <returns>The name of the encoding</returns>
+        /// <param name="e">The barcode encoding type.</param>
+        /// <returns>The display name of the barcode encoding, or the enum name if no display name is found.</returns>
         public static string GetDisplayName(this BarcodeEncodings e)
         {
             var info = typeof(BarcodeEncodings).GetRuntimeField(e.ToString());

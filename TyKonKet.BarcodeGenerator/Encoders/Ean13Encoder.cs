@@ -13,22 +13,22 @@ namespace TyKonKet.BarcodeGenerator.Encoders
     {
         private readonly byte[] barsHeight =
         {
-                1, 1, 1,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                1, 1, 1, 1, 1,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0,
-                1, 1, 1,
-            };
+                    1, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    1, 1, 1, 1, 1,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0,
+                    1, 1, 1,
+        };
 
         /// <summary>
         /// Indicates whether the object has been disposed.
@@ -112,7 +112,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         }
 
         /// <summary>
-        /// Loads the barcode options.
+        /// Loads the barcode options and initializes the necessary properties for rendering.
         /// </summary>
         protected internal override void LoadOptions()
         {
@@ -147,7 +147,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         }
 
         /// <summary>
-        /// Encodes the specified barcode string.
+        /// Encodes the specified barcode string into a visual representation.
         /// </summary>
         /// <param name="barcode">The barcode string to encode.</param>
         /// <returns>The encoded barcode string.</returns>

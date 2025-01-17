@@ -13,6 +13,12 @@ namespace TyKonKet.BarcodeGenerator.Utils
         /// </summary>
         /// <param name="format">The image format.</param>
         /// <returns>The file extension for the image format.</returns>
+        /// <example>
+        /// <code>
+        /// SKEncodedImageFormat format = SKEncodedImageFormat.Png;
+        /// string extension = format.ToFileExtension(); // returns "png"
+        /// </code>
+        /// </example>
         public static string ToFileExtension(this SKEncodedImageFormat format)
         {
             switch (format)

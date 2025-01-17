@@ -25,7 +25,7 @@
         /// Encodes the specified barcode.
         /// </summary>
         /// <param name="barcode">The barcode to encode.</param>
-        /// <returns>The encoded barcode.</returns>
+        /// <returns>The encoded barcode string.</returns>
         public override string Encode(string barcode)
         {
             barcode = FormatBarcode(barcode);
@@ -36,10 +36,10 @@
         /// Formats the barcode according to ISBN-13 rules.
         /// </summary>
         /// <param name="barcode">The barcode to format.</param>
-        /// <returns>The formatted barcode.</returns>
+        /// <returns>The formatted barcode string.</returns>
         internal static new string FormatBarcode(string barcode)
         {
-            // format barcode following ISBN-13 rules
+            // Format barcode following ISBN-13 rules
             if (barcode.Length > 3 && string.Equals(barcode.Substring(0, 3), "978", System.StringComparison.Ordinal))
             {
                 barcode = barcode.Remove(0, 3);
