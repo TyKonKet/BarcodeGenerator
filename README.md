@@ -46,6 +46,7 @@ internal static class Program
 
 ## Breaking changes
 - Starting with version 2.0.0, the library is no more compatible with .NET Standard 1.3 since it uses SkiaSharp 3.116.1 which requires .NET Standard 2.0
+- Starting with version 2.0.0, the API has been changed to be more user-friendly and to allow more customization, follow the examples in the README.md file to see how to use the new API
 
 
 ## Supported encoders
@@ -57,3 +58,10 @@ internal static class Program
 - [ ] CODE39
 - [x] CODE93
 - [ ] CODE128
+
+
+## Roadmap
+- [ ] Update the README.md documentation
+- [ ] Add support for CODE39 and CODE128 encoders
+- [ ] Add support for more barcode types
+- [ ] Add an API to validate the barcode
