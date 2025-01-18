@@ -48,11 +48,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         private int leftTextPadding = 0;
 
         /// <summary>
-        /// Height of the barcode image.
-        /// </summary>
-        private int imageHeight = 0;
-
-        /// <summary>
         /// Heights of the bars in the barcode.
         /// </summary>
         private int[] barHeightValues;
@@ -60,7 +55,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <summary>
         /// Vertical space for the text.
         /// </summary>
-        private int verticalTextSpace;
+        private int verticalTextSpace = 0;
 
         /// <summary>
         /// Paint brush for drawing the barcode.
@@ -78,11 +73,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// </summary>
         private SKPaint debugPaint;
 #endif
-
-        /// <summary>
-        /// Information about the image.
-        /// </summary>
-        private SKImageInfo imageInfo;
 
         /// <summary>
         /// Surface for drawing the barcode.
@@ -141,11 +131,20 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
             this.leftTextPadding = this.Options.RenderText ? 7 * this.Options.Scaling : 0;
 
-            this.imageHeight = (this.Options.Scaling * this.Options.Height) + (this.imagePadding * 2);
+            var imageHeight = (this.Options.Scaling * this.Options.Height) + (this.imagePadding * 2);
+            var imageWidth = (this.Options.Scaling * this.barsHeight.Length) + (this.imagePadding * 2) + this.leftTextPadding;
 
-            var longBarHeight = this.imageHeight - (this.imagePadding * 2);
+            var longBarHeight = imageHeight - (this.imagePadding * 2);
             var shortBarHeight = (int)(longBarHeight * 0.76);
             this.barHeightValues = new[] { shortBarHeight, longBarHeight };
+
+            var imageInfo = new SKImageInfo(imageWidth, imageHeight);
+
+            this.drawingSurface?.Dispose();
+            this.drawingSurface = SKSurface.Create(imageInfo);
+
+            this.renderCanvas?.Dispose();
+            this.renderCanvas = this.drawingSurface.Canvas;
 
             this.paintBrush?.Dispose();
             this.paintBrush = new SKPaint()
@@ -177,9 +176,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     IsAntialias = true,
                 };
 
-                this.firstDigitTextPosition = new SKPoint(this.imagePadding, this.imageHeight - this.imagePadding);
-                this.leftTextPosition = new SKPoint(this.imagePadding + this.leftTextPadding + (int)((49 * this.Options.Scaling) / 2.0), this.imageHeight - this.imagePadding);
-                this.rightTextPosition = new SKPoint(this.imagePadding + this.leftTextPadding + (int)((49 * this.Options.Scaling) / 2.0) + (46 * this.Options.Scaling), this.imageHeight - this.imagePadding);
+                this.firstDigitTextPosition = new SKPoint(this.imagePadding, imageHeight - this.imagePadding);
+                this.leftTextPosition = new SKPoint(this.imagePadding + this.leftTextPadding + (int)((49 * this.Options.Scaling) / 2.0), imageHeight - this.imagePadding);
+                this.rightTextPosition = new SKPoint(this.imagePadding + this.leftTextPadding + (int)((49 * this.Options.Scaling) / 2.0) + (46 * this.Options.Scaling), imageHeight - this.imagePadding);
             }
         }
 
@@ -199,20 +198,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
             // Bars encoding
             var encodedBars = EncodeBars(this.Barcode);
-
-            var imageWidth = (this.Options.Scaling * encodedBars.Length) + (this.imagePadding * 2) + this.leftTextPadding;
-
-            // Setups the canvas for rendering if it's not already set or if the image size has changed
-            if (this.imageInfo == default || this.imageHeight != this.imageInfo.Height || imageWidth != this.imageInfo.Width)
-            {
-                this.imageInfo = new SKImageInfo(imageWidth, this.imageHeight);
-
-                this.drawingSurface?.Dispose();
-                this.drawingSurface = SKSurface.Create(this.imageInfo);
-
-                this.renderCanvas?.Dispose();
-                this.renderCanvas = this.drawingSurface.Canvas;
-            }
 
             // Clear canvas
             this.renderCanvas.Clear(this.Options.BackgroundColor);
