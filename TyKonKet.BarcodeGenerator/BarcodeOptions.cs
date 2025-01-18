@@ -97,7 +97,10 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// Sets the typeface used for rendering text in the barcode.
         /// </summary>
-        /// <param name="fontFamily">The font family to use.</param>
+        /// <param name="fontFamily">
+        /// The font family to use. This can be either a string representing the font family name
+        /// or a <see cref="FontFamilies"/> enum value.
+        /// </param>
         /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
         public void UseTypeface(FontFamily fontFamily)
         {
@@ -112,7 +115,10 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// Sets the typeface used for rendering text in the barcode.
         /// </summary>
-        /// <param name="fontFamily">The font family to use.</param>
+        /// <param name="fontFamily">
+        /// The font family to use. This can be either a string representing the font family name
+        /// or a <see cref="FontFamilies"/> enum value.
+        /// </param>
         /// <param name="fontStyle">The font style to use.</param>
         /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
         public void UseTypeface(FontFamily fontFamily, SKFontStyle fontStyle)
@@ -128,7 +134,10 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// Sets the typeface used for rendering text in the barcode.
         /// </summary>
-        /// <param name="fontFamily">The font family to use.</param>
+        /// <param name="fontFamily">
+        /// The font family to use. This can be either a string representing the font family name
+        /// or a <see cref="FontFamilies"/> enum value.
+        /// </param>
         /// <param name="weight">The font weight to use.</param>
         /// <param name="width">The font width to use.</param>
         /// <param name="fontStyleSlant">The font style slant to use.</param>
@@ -146,7 +155,10 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// Sets the typeface used for rendering text in the barcode.
         /// </summary>
-        /// <param name="fontFamily">The font family to use.</param>
+        /// <param name="fontFamily">
+        /// The font family to use. This can be either a string representing the font family name
+        /// or a <see cref="FontFamilies"/> enum value.
+        /// </param>
         /// <param name="weight">The font weight to use.</param>
         /// <param name="width">The font width to use.</param>
         /// <param name="fontStyleSlant">The font style slant to use.</param>

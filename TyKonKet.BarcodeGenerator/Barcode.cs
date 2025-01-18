@@ -51,7 +51,13 @@ namespace TyKonKet.BarcodeGenerator
         /// <summary>
         /// Exports the barcode image to a file.
         /// </summary>
-        /// <param name="fileName">The name of the file to export the image to.</param>
+        /// <param name="fileName">
+        /// The name of the file to export the image to.
+        /// Available keywords:
+        /// - {barcode}: The barcode string.
+        /// - {format}: The image format (e.g., png, jpg).
+        /// - {quality}: The image quality (1-100).
+        /// </param>
         /// <param name="format">The image export format.</param>
         /// <param name="quality">The image export quality (1-100).</param>
         /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
