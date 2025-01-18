@@ -6,6 +6,7 @@
 		<Description>Barcode generator based on SkiaSharp</Description>
 		<PackageProjectUrl>https://github.com/TyKonKet/BarcodeGenerator</PackageProjectUrl>
 		<PackageLicense>https://github.com/TyKonKet/BarcodeGenerator/blob/master/LICENSE</PackageLicense>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/TyKonKet/BarcodeGenerator</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>barcode</PackageTags>
