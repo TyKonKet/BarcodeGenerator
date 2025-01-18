@@ -22,7 +22,7 @@ namespace TyKonKet.BarcodeGenerator.Utils
         /// <exception cref="InvalidOperationException">Thrown when the encoder type is not known or does not inherit from <see cref="Encoder"/>.</exception>
         internal static Encoder Create(BarcodeOptions options)
         {
-            var className = $"{options.Encode}Encoder";
+            var className = $"{options.Type}Encoder";
 
             var type = TypeCache.GetOrAdd(className, key =>
             {

@@ -1,76 +1,236 @@
-﻿using System;
+﻿using SkiaSharp;
+using System;
 using System.Diagnostics;
-using SkiaSharp;
+using System.IO;
+using TyKonKet.BarcodeGenerator.Fonts;
 using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator
 {
     /// <summary>
-    /// Barcode options.
+    /// Represents the options for generating barcodes.
     /// </summary>
-    [DebuggerDisplay("Encode = {EncodeDisplayName}, Height = {Height}, Scale = {Scale}, RenderText = {RenderText}")]
+    [DebuggerDisplay("Encode = {EncodingName}, Height = {Height}, Scaling = {Scaling}, RenderText = {RenderText}")]
     public sealed class BarcodeOptions
     {
-        private int scale = 5;
+        /// <summary>
+        /// The default typeface used for rendering text in barcodes.
+        /// </summary>
+        public static readonly SKTypeface DefaultTypeface = SKTypeface.Default;
 
-        internal string EncodeDisplayName => this.Encode.GetDisplayName();
+        private bool locked = false;
+
+        private int scalingFactor = 5;
+
+        private SKTypeface typeface;
 
         /// <summary>
-        /// Gets or sets the barcode margins.
+        /// Gets the name of the encoding used for the barcode.
         /// </summary>
-        /// <value>The margins of the barcode.</value>
-        public int Margins { get; set; } = 2;
+        internal string EncodingName => this.Type.GetDisplayName();
 
         /// <summary>
-        /// Gets or sets the encoding type.
+        /// Gets the typeface used for rendering text in the barcode.
         /// </summary>
-        /// <value>The encoding type of the barcode.</value>
-        public BarcodeEncodings Encode { get; set; } = BarcodeEncodings.Ean8;
-
-        /// <summary>
-        /// Gets or sets the output image height.
-        /// </summary>
-        /// <value>The height of the output image.</value>
-        public int Height { get; set; } = 30;
-
-        /// <summary>
-        /// Gets or sets the output image width scale.
-        /// </summary>
-        /// <value>The scale of the output image width.</value>
-        public int Scale
+        public SKTypeface Typeface
         {
-            get => this.scale;
-            set => this.scale = Math.Max(Math.Abs(value), 1);
+            get
+            {
+                return this.typeface ?? DefaultTypeface;
+            }
         }
 
         /// <summary>
-        /// Gets or sets the output image background color.
+        /// Gets or sets the margins around the barcode.
         /// </summary>
-        /// <value>The background color of the output image.</value>
+        public int Margins { get; set; } = 2;
+
+        /// <summary>
+        /// Gets or sets the type of barcode to generate.
+        /// </summary>
+        public BarcodeTypes Type { get; set; } = BarcodeTypes.Ean8;
+
+        /// <summary>
+        /// Gets or sets the height of the barcode.
+        /// </summary>
+        public int Height { get; set; } = 30;
+
+        /// <summary>
+        /// Gets or sets the scaling factor for the barcode.
+        /// </summary>
+        public int Scaling
+        {
+            get => this.scalingFactor;
+            set => this.scalingFactor = Math.Max(Math.Abs(value), 1);
+        }
+
+        /// <summary>
+        /// Gets or sets the background color of the barcode.
+        /// </summary>
         public SKColor BackgroundColor { get; set; } = SKColors.White;
 
         /// <summary>
-        /// Gets or sets the output image color.
+        /// Gets or sets the foreground color of the barcode.
         /// </summary>
-        /// <value>The color of the output image.</value>
-        public SKColor Color { get; set; } = SKColors.Black;
+        public SKColor ForegroundColor { get; set; } = SKColors.Black;
 
         /// <summary>
-        /// Gets or sets the output text font.
+        /// Gets or sets a value indicating whether to render text below the barcode.
         /// </summary>
-        /// <value>The font of the output text (e.g., Arial, Calibri, Helvetica).</value>
-        public string Font { get; set; } = "Arial";
-
-        /// <summary>
-        /// Gets or sets the output text font style.
-        /// </summary>
-        /// <value>The font style of the output text.</value>
-        public SKFontStyle FontStyle { get; set; } = SKFontStyle.Normal;
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to render the barcode text.
-        /// </summary>
-        /// <value><see langword="true"/> if the barcode text should be rendered; otherwise, <see langword="false"/>.</value>
         public bool RenderText { get; set; } = true;
+
+        /// <summary>
+        /// Sets the typeface used for rendering text in the barcode.
+        /// </summary>
+        /// <param name="typeface">The typeface to use.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        public void UseTypeface(SKTypeface typeface)
+        {
+            if (this.locked)
+            {
+                throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            this.typeface = typeface;
+        }
+
+        /// <summary>
+        /// Sets the typeface used for rendering text in the barcode.
+        /// </summary>
+        /// <param name="fontFamily">The font family to use.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        public void UseTypeface(FontFamily fontFamily)
+        {
+            if (this.locked)
+            {
+                throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            this.typeface = SKTypeface.FromFamilyName(fontFamily.ToString());
+        }
+
+        /// <summary>
+        /// Sets the typeface used for rendering text in the barcode.
+        /// </summary>
+        /// <param name="fontFamily">The font family to use.</param>
+        /// <param name="fontStyle">The font style to use.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        public void UseTypeface(FontFamily fontFamily, SKFontStyle fontStyle)
+        {
+            if (this.locked)
+            {
+                throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            this.typeface = SKTypeface.FromFamilyName(fontFamily.ToString(), fontStyle);
+        }
+
+        /// <summary>
+        /// Sets the typeface used for rendering text in the barcode.
+        /// </summary>
+        /// <param name="fontFamily">The font family to use.</param>
+        /// <param name="weight">The font weight to use.</param>
+        /// <param name="width">The font width to use.</param>
+        /// <param name="fontStyleSlant">The font style slant to use.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        public void UseTypeface(FontFamily fontFamily, int weight, int width, SKFontStyleSlant fontStyleSlant)
+        {
+            if (this.locked)
+            {
+                throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            this.typeface = SKTypeface.FromFamilyName(fontFamily.ToString(), weight, width, fontStyleSlant);
+        }
+
+        /// <summary>
+        /// Sets the typeface used for rendering text in the barcode.
+        /// </summary>
+        /// <param name="fontFamily">The font family to use.</param>
+        /// <param name="weight">The font weight to use.</param>
+        /// <param name="width">The font width to use.</param>
+        /// <param name="fontStyleSlant">The font style slant to use.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        public void UseTypeface(FontFamily fontFamily, SKFontStyleWeight weight, SKFontStyleWidth width, SKFontStyleSlant fontStyleSlant)
+        {
+            if (this.locked)
+            {
+                throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            this.typeface = SKTypeface.FromFamilyName(fontFamily.ToString(), weight, width, fontStyleSlant);
+        }
+
+        /// <summary>
+        /// Sets the typeface used for rendering text in the barcode from a file.
+        /// </summary>
+        /// <param name="path">The path to the font file.</param>
+        /// <param name="index">The index of the font in the file.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        public void UseTypefaceFromFile(string path, int index = 0)
+        {
+            if (this.locked)
+            {
+                throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            this.typeface = SKTypeface.FromFile(path, index);
+        }
+
+        /// <summary>
+        /// Sets the typeface used for rendering text in the barcode from data.
+        /// </summary>
+        /// <param name="data">The font data.</param>
+        /// <param name="index">The index of the font in the data.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        public void UseTypefaceFromData(SKData data, int index = 0)
+        {
+            if (this.locked)
+            {
+                throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            this.typeface = SKTypeface.FromData(data, index);
+        }
+
+        /// <summary>
+        /// Sets the typeface used for rendering text in the barcode from a stream.
+        /// </summary>
+        /// <param name="stream">The font stream.</param>
+        /// <param name="index">The index of the font in the stream.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        public void UseTypefaceFromStream(SKStreamAsset stream, int index = 0)
+        {
+            if (this.locked)
+            {
+                throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            this.typeface = SKTypeface.FromStream(stream, index);
+        }
+
+        /// <summary>
+        /// Sets the typeface used for rendering text in the barcode from a stream.
+        /// </summary>
+        /// <param name="stream">The font stream.</param>
+        /// <param name="index">The index of the font in the stream.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        public void UseTypefaceFromStream(Stream stream, int index = 0)
+        {
+            if (this.locked)
+            {
+                throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            this.typeface = SKTypeface.FromStream(stream, index);
+        }
+
+        /// <summary>
+        /// Locks the options, preventing further modifications.
+        /// </summary>
+        internal void Lock()
+        {
+            this.locked = true;
+        }
     }
 }

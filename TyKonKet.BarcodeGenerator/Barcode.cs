@@ -33,6 +33,7 @@ namespace TyKonKet.BarcodeGenerator
         public Barcode(Action<BarcodeOptions> options = null)
         {
             options?.Invoke(this.Options);
+            this.Options.Lock();
             this.barcodeEncoder = EncodersFactory.Create(this.Options);
             this.barcodeEncoder.LoadOptions();
         }

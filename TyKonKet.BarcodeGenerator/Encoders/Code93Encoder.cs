@@ -146,25 +146,25 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
             base.LoadOptions();
 
-            this.imagePadding = this.Options.Margins * this.Options.Scale;
+            this.imagePadding = this.Options.Margins * this.Options.Scaling;
 
-            this.imageHeight = (this.Options.Scale * this.Options.Height) + (this.imagePadding * 2);
+            this.imageHeight = (this.Options.Scaling * this.Options.Height) + (this.imagePadding * 2);
 
             this.barsHeight = this.imageHeight - (this.imagePadding * 2);
 
             this.paintBrush?.Dispose();
             this.paintBrush = new SKPaint()
             {
-                Color = this.Options.Color,
+                Color = this.Options.ForegroundColor,
                 IsStroke = false,
             };
 
             if (this.Options.RenderText)
             {
-                var fontSize = 9 * this.Options.Scale;
+                var fontSize = 9 * this.Options.Scaling;
 
                 this.textFont?.Dispose();
-                this.textFont = new SKFont(SKTypeface.FromFamilyName(this.Options.Font, this.Options.FontStyle), fontSize);
+                this.textFont = new SKFont(this.Options.Typeface, fontSize);
 
                 // Increase the image height to accommodate the text
                 this.imageHeight += fontSize;
@@ -188,7 +188,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             // Bars encoding
             var encodedBars = EncodeBars(this.Barcode);
 
-            var imageWidth = (this.Options.Scale * encodedBars.Length) + (this.imagePadding * 2);
+            var imageWidth = (this.Options.Scaling * encodedBars.Length) + (this.imagePadding * 2);
 
             // Setups the canvas for rendering if it's not already set or if the image size has changed
             if (this.imageInfo == default || this.imageHeight != this.imageInfo.Height || imageWidth != this.imageInfo.Width)
@@ -212,10 +212,10 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 // If the bar is a colored one, draw it
                 if (bar == '1')
                 {
-                    this.renderCanvas.DrawRect(xPosition, this.imagePadding, this.Options.Scale, this.barsHeight, this.paintBrush);
+                    this.renderCanvas.DrawRect(xPosition, this.imagePadding, this.Options.Scaling, this.barsHeight, this.paintBrush);
                 }
 
-                xPosition += this.Options.Scale;
+                xPosition += this.Options.Scaling;
             }
 
             // Render barcode text if enabled
@@ -239,7 +239,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             // Get the barcode text (without the check digits)
             var barcodeText = this.Barcode.Substring(0, this.Barcode.Length - 2);
 
-            var textPosition = new SKPoint((int)(imageWidth / 2.0), this.barsHeight + this.imagePadding + (9 * this.Options.Scale));
+            var textPosition = new SKPoint((int)(imageWidth / 2.0), this.barsHeight + this.imagePadding + (9 * this.Options.Scaling));
 
             // Draw the barcode text
             this.renderCanvas.DrawText(barcodeText, textPosition, SKTextAlign.Center, this.textFont, this.paintBrush);

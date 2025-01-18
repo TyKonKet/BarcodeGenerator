@@ -7,7 +7,7 @@ namespace TyKonKet.BarcodeGenerator
     /// Represents the available barcode encoding types.
     /// </summary>
     [SuppressMessage("ApiDesign", "SS039:An enum should specify a default value", Justification = "NotThisTime")]
-    public enum BarcodeEncodings
+    public enum BarcodeTypes
     {
         /// <summary>
         /// European Article Number (EAN) 13. Used for marking products often sold at retail point of sale.
