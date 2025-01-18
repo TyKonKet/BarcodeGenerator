@@ -1,5 +1,7 @@
 ﻿using SkiaSharp;
+using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 using TyKonKet.BarcodeGenerator.Utils;
@@ -56,9 +58,26 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         private int[] barHeightValues;
 
         /// <summary>
+        /// Vertical space for the text.
+        /// </summary>
+        private int verticalTextSpace;
+
+        /// <summary>
         /// Paint brush for drawing the barcode.
         /// </summary>
         private SKPaint paintBrush;
+
+        /// <summary>
+        /// Text brush for drawing the text.
+        /// </summary>
+        private SKPaint textBrush;
+
+#if DEBUG
+        /// <summary>
+        /// Paint brush for debugging purposes.
+        /// </summary>
+        private SKPaint debugPaint;
+#endif
 
         /// <summary>
         /// Information about the image.
@@ -120,7 +139,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
             this.imagePadding = 2 * this.Options.Scaling;
 
-            this.leftTextPadding = this.Options.RenderText ? 6 * this.Options.Scaling : 0;
+            this.leftTextPadding = this.Options.RenderText ? 7 * this.Options.Scaling : 0;
 
             this.imageHeight = (this.Options.Scaling * this.Options.Height) + (this.imagePadding * 2);
 
@@ -135,14 +154,32 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 IsStroke = false,
             };
 
+#if DEBUG
+            this.debugPaint?.Dispose();
+            this.debugPaint = new SKPaint()
+            {
+                Color = SKColors.Red,
+                IsStroke = true,
+            };
+#endif
+
             if (this.Options.RenderText)
             {
+                this.verticalTextSpace = this.barHeightValues.Max() - this.barHeightValues.Min();
+
                 this.textFont?.Dispose();
                 this.textFont = new SKFont(this.Options.Typeface, 9 * this.Options.Scaling);
 
-                this.firstDigitTextPosition = new SKPoint(this.imagePadding + this.leftTextPadding - this.Options.Scaling, this.barHeightValues[0] + this.imagePadding + (8 * this.Options.Scaling));
-                this.leftTextPosition = new SKPoint(this.imagePadding + this.leftTextPadding + (int)((49 * this.Options.Scaling) / 2.0), this.barHeightValues[0] + this.imagePadding + (8 * this.Options.Scaling));
-                this.rightTextPosition = new SKPoint(this.imagePadding + this.leftTextPadding + (int)((49 * this.Options.Scaling) / 2.0) + (46 * this.Options.Scaling), this.barHeightValues[0] + this.imagePadding + (8 * this.Options.Scaling));
+                this.textBrush?.Dispose();
+                this.textBrush = new SKPaint()
+                {
+                    Color = this.Options.ForegroundColor,
+                    IsAntialias = true,
+                };
+
+                this.firstDigitTextPosition = new SKPoint(this.imagePadding, this.imageHeight - this.imagePadding);
+                this.leftTextPosition = new SKPoint(this.imagePadding + this.leftTextPadding + (int)((49 * this.Options.Scaling) / 2.0), this.imageHeight - this.imagePadding);
+                this.rightTextPosition = new SKPoint(this.imagePadding + this.leftTextPadding + (int)((49 * this.Options.Scaling) / 2.0) + (46 * this.Options.Scaling), this.imageHeight - this.imagePadding);
             }
         }
 
@@ -212,14 +249,57 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
             // Draw the barcode text
             var firstDigitText = this.Barcode.Substring(0, 1);
-            var leftMainText = this.Barcode.Substring(1, 6);
-            var rightMainText = this.Barcode.Substring(7, 6);
+            var leftText = this.Barcode.Substring(1, 6);
+            var rightText = this.Barcode.Substring(7, 6);
 
-            this.renderCanvas.DrawText(firstDigitText, this.firstDigitTextPosition, SKTextAlign.Right, this.textFont, this.paintBrush);
+            // Offset for the text
+            var textOffset = new SKPoint(0, 0);
 
-            this.renderCanvas.DrawText(leftMainText, this.leftTextPosition, SKTextAlign.Center, this.textFont, this.paintBrush);
+            // Measure the texts
+            this.textFont.MeasureText(firstDigitText, out SKRect firstDigitTextBounds, this.textBrush);
+            this.textFont.MeasureText(leftText, out SKRect leftTextBounds, this.textBrush);
+            this.textFont.MeasureText(leftText, out SKRect rightTextBounds, this.textBrush);
 
-            this.renderCanvas.DrawText(rightMainText, this.rightTextPosition, SKTextAlign.Center, this.textFont, this.paintBrush);
+            // Get the highest text
+            var highestText = Math.Max(Math.Max(leftTextBounds.Height, rightTextBounds.Height), firstDigitTextBounds.Height);
+
+            // Offset the text to the middle of the available space
+            textOffset.Y -= (this.verticalTextSpace - highestText) / 2;
+
+            this.renderCanvas.DrawText(firstDigitText, this.firstDigitTextPosition + textOffset, SKTextAlign.Left, this.textFont, this.textBrush);
+            this.renderCanvas.DrawText(leftText, this.leftTextPosition + textOffset, SKTextAlign.Center, this.textFont, this.textBrush);
+            this.renderCanvas.DrawText(rightText, this.rightTextPosition + textOffset, SKTextAlign.Center, this.textFont, this.textBrush);
+
+#if DEBUG
+            // Offset the bounds of the first digit text
+            firstDigitTextBounds.Offset(this.firstDigitTextPosition + textOffset);
+
+            // Draw the bounds of the left text
+            this.renderCanvas.DrawRect(firstDigitTextBounds, this.debugPaint);
+
+            // Draw the center point of the left text
+            this.renderCanvas.DrawPoint(this.firstDigitTextPosition + textOffset, SKColors.Blue);
+
+            // Offset the bounds to the center of the left text
+            leftTextBounds.Offset(leftTextBounds.Width / -2, 0);
+            leftTextBounds.Offset(this.leftTextPosition + textOffset);
+
+            // Draw the bounds of the left text
+            this.renderCanvas.DrawRect(leftTextBounds, this.debugPaint);
+
+            // Draw the center point of the left text
+            this.renderCanvas.DrawPoint(this.leftTextPosition + textOffset, SKColors.Blue);
+
+            // Offset the bounds to the center of the right text
+            rightTextBounds.Offset(rightTextBounds.Width / -2, 0);
+            rightTextBounds.Offset(this.rightTextPosition + textOffset);
+
+            // Draw the bounds of the right text
+            this.renderCanvas.DrawRect(rightTextBounds, this.debugPaint);
+
+            // Draw the center point of the right text
+            this.renderCanvas.DrawPoint(this.rightTextPosition + textOffset, SKColors.Blue);
+#endif
         }
 
         /// <summary>
@@ -277,9 +357,13 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 if (disposing)
                 {
                     this.paintBrush?.Dispose();
+                    this.textBrush?.Dispose();
                     this.drawingSurface?.Dispose();
                     this.renderCanvas?.Dispose();
                     this.textFont?.Dispose();
+#if DEBUG
+                    this.debugPaint?.Dispose();
+#endif
                 }
 
                 this.disposed = true;
