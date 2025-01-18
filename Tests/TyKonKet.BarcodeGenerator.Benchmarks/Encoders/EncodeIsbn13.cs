@@ -17,25 +17,21 @@ namespace TyKonKet.BarcodeGenerator.Benchmarks.Encoders
         {
             toEncode = new Barcode(o =>
             {
-                o.Encode = BarcodeEncodings.Isbn13;
+                o.Type = BarcodeTypes.Isbn13;
                 o.Height = 30;
-                o.Scale = 5;
+                o.Scaling = 5;
                 o.BackgroundColor = SKColors.Transparent;
-                o.Color = SKColors.Black;
-                o.Font = "Arial";
-                o.FontStyle = SKFontStyle.Normal;
+                o.ForegroundColor = SKColors.Black;
                 o.RenderText = false;
             });
 
             toExport = new Barcode(o =>
             {
-                o.Encode = BarcodeEncodings.Isbn13;
+                o.Type = BarcodeTypes.Isbn13;
                 o.Height = 30;
-                o.Scale = 5;
+                o.Scaling = 5;
                 o.BackgroundColor = SKColors.Transparent;
-                o.Color = SKColors.Black;
-                o.Font = "Arial";
-                o.FontStyle = SKFontStyle.Normal;
+                o.ForegroundColor = SKColors.Black;
                 o.RenderText = false;
             });
 
@@ -54,13 +50,11 @@ namespace TyKonKet.BarcodeGenerator.Benchmarks.Encoders
         {
             return new Barcode(o =>
             {
-                o.Encode = BarcodeEncodings.Isbn13;
+                o.Type = BarcodeTypes.Isbn13;
                 o.Height = 30;
-                o.Scale = 5;
+                o.Scaling = 5;
                 o.BackgroundColor = SKColors.Transparent;
-                o.Color = SKColors.Black;
-                o.Font = "Arial";
-                o.FontStyle = SKFontStyle.Normal;
+                o.ForegroundColor = SKColors.Black;
                 o.RenderText = false;
             });
         }
