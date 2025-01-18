@@ -38,16 +38,6 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         private int imagePadding = 0;
 
         /// <summary>
-        /// Height of the barcode image.
-        /// </summary>
-        private int imageHeight = 0;
-
-        /// <summary>
-        /// Width of the barcode image.
-        /// </summary>
-        private int imageWidth = 0;
-
-        /// <summary>
         /// Heights of the bars in the barcode.
         /// </summary>
         private int[] barHeightValues;
@@ -55,7 +45,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <summary>
         /// Vertical space for the text.
         /// </summary>
-        private int verticalTextSpace;
+        private int verticalTextSpace = 0;
 
         /// <summary>
         /// Paint brush for drawing the barcode.
@@ -124,14 +114,14 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
             this.imagePadding = 2 * this.Options.Scaling;
 
-            this.imageHeight = (this.Options.Scaling * this.Options.Height) + (this.imagePadding * 2);
-            this.imageWidth = (this.Options.Scaling * this.barsHeight.Length) + (this.imagePadding * 2);
+            var imageHeight = (this.Options.Scaling * this.Options.Height) + (this.imagePadding * 2);
+            var imageWidth = (this.Options.Scaling * this.barsHeight.Length) + (this.imagePadding * 2);
 
-            var longBarHeight = this.imageHeight - (this.imagePadding * 2);
+            var longBarHeight = imageHeight - (this.imagePadding * 2);
             var shortBarHeight = (int)(longBarHeight * 0.76);
             this.barHeightValues = new[] { shortBarHeight, longBarHeight };
 
-            var imageInfo = new SKImageInfo(this.imageWidth, this.imageHeight);
+            var imageInfo = new SKImageInfo(imageWidth, imageHeight);
 
             this.drawingSurface?.Dispose();
             this.drawingSurface = SKSurface.Create(imageInfo);
@@ -169,8 +159,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     IsAntialias = true,
                 };
 
-                this.leftTextPosition = new SKPoint(this.imagePadding + (3 * this.Options.Scaling) + (int)((29 * this.Options.Scaling) / 2.0), this.imageHeight - this.imagePadding);
-                this.rightTextPosition = new SKPoint(this.imagePadding + (6 * this.Options.Scaling) + (29 * this.Options.Scaling) + (int)((29 * this.Options.Scaling) / 2.0), this.imageHeight - this.imagePadding);
+                this.leftTextPosition = new SKPoint(this.imagePadding + (3 * this.Options.Scaling) + (int)((29 * this.Options.Scaling) / 2.0), imageHeight - this.imagePadding);
+                this.rightTextPosition = new SKPoint(this.imagePadding + (6 * this.Options.Scaling) + (29 * this.Options.Scaling) + (int)((29 * this.Options.Scaling) / 2.0), imageHeight - this.imagePadding);
             }
         }
 
