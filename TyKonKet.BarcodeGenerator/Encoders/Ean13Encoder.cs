@@ -127,7 +127,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         {
             base.LoadOptions();
 
-            this.imagePadding = 2 * this.Options.Scaling;
+            this.imagePadding = this.Options.Margins * this.Options.Scaling;
 
             this.leftTextPadding = this.Options.RenderText ? 7 * this.Options.Scaling : 0;
 
