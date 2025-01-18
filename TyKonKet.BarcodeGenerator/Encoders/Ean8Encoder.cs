@@ -246,25 +246,29 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             // Offset the text to the middle of the available space
             textOffset.Y -= (this.verticalTextSpace - highestText) / 2;
 
-            // Draw the left text
+            // Draw the left and right text
             this.renderCanvas.DrawText(leftText, this.leftTextPosition + textOffset, SKTextAlign.Center, this.textFont, this.textBrush);
-
-#if DEBUG
-            // Offset the bounds to the center of the text
-            leftTextBounds.Offset(leftTextBounds.Width / -2, 0);
-            leftTextBounds.Offset(this.leftTextPosition + textOffset);
-            this.renderCanvas.DrawRect(leftTextBounds, this.debugPaint);
-            this.renderCanvas.DrawPoint(this.leftTextPosition + textOffset, SKColors.Blue);
-#endif
-
-            // Draw the right text
             this.renderCanvas.DrawText(rightText, this.rightTextPosition + textOffset, SKTextAlign.Center, this.textFont, this.textBrush);
 
 #if DEBUG
-            // Offset the bounds to the center of the text
+            // Offset the bounds to the center of the left text
+            leftTextBounds.Offset(leftTextBounds.Width / -2, 0);
+            leftTextBounds.Offset(this.leftTextPosition + textOffset);
+
+            // Draw the bounds of the left text
+            this.renderCanvas.DrawRect(leftTextBounds, this.debugPaint);
+
+            // Draw the center point of the left text
+            this.renderCanvas.DrawPoint(this.leftTextPosition + textOffset, SKColors.Blue);
+
+            // Offset the bounds to the center of the right text
             rightTextBounds.Offset(rightTextBounds.Width / -2, 0);
             rightTextBounds.Offset(this.rightTextPosition + textOffset);
+
+            // Draw the bounds of the right text
             this.renderCanvas.DrawRect(rightTextBounds, this.debugPaint);
+
+            // Draw the center point of the right text
             this.renderCanvas.DrawPoint(this.rightTextPosition + textOffset, SKColors.Blue);
 #endif
         }
