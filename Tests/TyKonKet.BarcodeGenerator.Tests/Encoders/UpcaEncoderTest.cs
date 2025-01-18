@@ -2,7 +2,7 @@
 using TyKonKet.BarcodeGenerator.Encoders;
 using Xunit;
 
-namespace TyKonKet.BarcodeGenerator.Tests
+namespace TyKonKet.BarcodeGenerator.Tests.Encoders
 {
     public class UpcaEncoderTest
     {
@@ -23,7 +23,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("64.61524")]
         public void ValidateCharset_ShouldThrowFormatException_ForInvalidCharset(string barcode)
         {
-            Assert.Throws<FormatException>(() => { new UpcaEncoder().ValidateCharset(barcode); });
+            Assert.Throws<FormatException>(() => { new UpcaEncoder().EnsureValidCharset(barcode); });
         }
 
         [Theory]
@@ -33,7 +33,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("978123456786")]
         public void ValidateCharset_ShouldReturnTrue_ForValidCharset(string barcode)
         {
-            Assert.True(new UpcaEncoder().ValidateCharset(barcode));
+            Assert.True(new UpcaEncoder().EnsureValidCharset(barcode));
         }
 
         [Theory]

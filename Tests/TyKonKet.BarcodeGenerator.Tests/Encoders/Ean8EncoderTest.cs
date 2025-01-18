@@ -2,7 +2,7 @@
 using TyKonKet.BarcodeGenerator.Encoders;
 using Xunit;
 
-namespace TyKonKet.BarcodeGenerator.Tests
+namespace TyKonKet.BarcodeGenerator.Tests.Encoders
 {
     public class Ean8EncoderTest
     {
@@ -35,7 +35,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("64.61524")]
         public void ValidateCharset_ShouldThrowFormatExceptionForInvalidCharset(string barcode)
         {
-            Assert.Throws<FormatException>(() => { new Ean8Encoder().ValidateCharset(barcode); });
+            Assert.Throws<FormatException>(() => { new Ean8Encoder().EnsureValidCharset(barcode); });
         }
 
         [Theory]
@@ -45,7 +45,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("978123456786")]
         public void ValidateCharset_ShouldReturnTrueForValidCharset(string barcode)
         {
-            Assert.True(new Ean8Encoder().ValidateCharset(barcode));
+            Assert.True(new Ean8Encoder().EnsureValidCharset(barcode));
         }
     }
 }

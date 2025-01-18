@@ -2,7 +2,7 @@
 using TyKonKet.BarcodeGenerator.Encoders;
 using Xunit;
 
-namespace TyKonKet.BarcodeGenerator.Tests
+namespace TyKonKet.BarcodeGenerator.Tests.Encoders
 {
     public class Isbn13EncoderTest
     {
@@ -25,7 +25,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("64.61524")]
         public void ValidateCharset_ShouldThrowFormatException_ForInvalidCharset(string barcode)
         {
-            Assert.Throws<FormatException>(() => { new Isbn13Encoder().ValidateCharset(barcode); });
+            Assert.Throws<FormatException>(() => { new Isbn13Encoder().EnsureValidCharset(barcode); });
         }
 
         [Theory]
@@ -35,7 +35,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("978123456786")]
         public void ValidateCharset_ShouldReturnTrue_ForValidCharset(string barcode)
         {
-            Assert.True(new Isbn13Encoder().ValidateCharset(barcode));
+            Assert.True(new Isbn13Encoder().EnsureValidCharset(barcode));
         }
     }
 }

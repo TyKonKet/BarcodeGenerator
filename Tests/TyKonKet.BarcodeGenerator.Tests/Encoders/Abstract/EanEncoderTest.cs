@@ -1,7 +1,7 @@
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 using Xunit;
 
-namespace TyKonKet.BarcodeGenerator.Tests
+namespace TyKonKet.BarcodeGenerator.Tests.Encoders.Abstract
 {
     public class EanEncodersTest
     {
