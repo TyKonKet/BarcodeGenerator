@@ -99,9 +99,26 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         private int barsHeight = 0;
 
         /// <summary>
+        /// Font size for rendering the text.
+        /// </summary>
+        private int fontSize = 0;
+
+        /// <summary>
         /// Paint brush for drawing the barcode.
         /// </summary>
         private SKPaint paintBrush;
+
+        /// <summary>
+        /// Text brush for drawing the text.
+        /// </summary>
+        private SKPaint textBrush;
+
+#if DEBUG
+        /// <summary>
+        /// Paint brush for debugging purposes.
+        /// </summary>
+        private SKPaint debugPaint;
+#endif
 
         /// <summary>
         /// Information about the image.
@@ -159,15 +176,31 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 IsStroke = false,
             };
 
+#if DEBUG
+            this.debugPaint?.Dispose();
+            this.debugPaint = new SKPaint()
+            {
+                Color = SKColors.Red,
+                IsStroke = true,
+            };
+#endif
+
             if (this.Options.RenderText)
             {
-                var fontSize = 9 * this.Options.Scaling;
+                this.fontSize = 9 * this.Options.Scaling;
 
                 this.textFont?.Dispose();
-                this.textFont = new SKFont(this.Options.Typeface, fontSize);
+                this.textFont = new SKFont(this.Options.Typeface, 9 * this.Options.Scaling);
+
+                this.textBrush?.Dispose();
+                this.textBrush = new SKPaint()
+                {
+                    Color = this.Options.ForegroundColor,
+                    IsAntialias = true,
+                };
 
                 // Increase the image height to accommodate the text
-                this.imageHeight += fontSize;
+                this.imageHeight += this.fontSize;
             }
         }
 
@@ -239,10 +272,32 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             // Get the barcode text (without the check digits)
             var barcodeText = this.Barcode.Substring(0, this.Barcode.Length - 2);
 
-            var textPosition = new SKPoint((int)(imageWidth / 2.0), this.barsHeight + this.imagePadding + (9 * this.Options.Scaling));
+            // Offset for the text
+            var textOffset = new SKPoint(0, 0);
+
+            // Measure the text
+            this.textFont.MeasureText(barcodeText, out SKRect textBounds, this.textBrush);
+
+            // Get the text position
+            var textPosition = new SKPoint((int)(imageWidth / 2.0), this.imageHeight - this.imagePadding);
+
+            // Offset the text to the middle of the available space
+            textOffset.Y -= (this.fontSize - textBounds.Height) / 2;
 
             // Draw the barcode text
-            this.renderCanvas.DrawText(barcodeText, textPosition, SKTextAlign.Center, this.textFont, this.paintBrush);
+            this.renderCanvas.DrawText(barcodeText, textPosition + textOffset, SKTextAlign.Center, this.textFont, this.paintBrush);
+
+#if DEBUG
+            // Offset the bounds to the center of the left text
+            textBounds.Offset(textBounds.Width / -2, 0);
+            textBounds.Offset(textPosition + textOffset);
+
+            // Draw the bounds of the left text
+            this.renderCanvas.DrawRect(textBounds, this.debugPaint);
+
+            // Draw the center point of the left text
+            this.renderCanvas.DrawPoint(textPosition + textOffset, SKColors.Blue);
+#endif
         }
 
         /// <summary>
@@ -325,9 +380,13 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 if (disposing)
                 {
                     this.paintBrush?.Dispose();
+                    this.textBrush?.Dispose();
                     this.drawingSurface?.Dispose();
                     this.renderCanvas?.Dispose();
                     this.textFont?.Dispose();
+#if DEBUG
+                    this.debugPaint?.Dispose();
+#endif
                 }
 
                 this.disposed = true;
