@@ -51,26 +51,43 @@ You can generate all the barcodes using the `Barcode` class. The `Barcode` class
 Here is an example of how to generate a barcode using the `Barcode` class:
 
 ```csharp
+using SkiaSharp;
 using TyKonKet.BarcodeGenerator;
 
-internal static class Program
+internal static class Example
 {
-    private static void Main()
+    private static void CreateBarcodeImage()
     {
-        var bc = new Barcode(o =>
+        // Set up the barcode generator with specific options
+        using var barcodeGenerator = new Barcode(options =>
         {
-            o.Encode = Encodes.Code93;
-            o.Height = 30; o.Scale = 10;
-            o.Margins = 2;
-            o.BackgroundColor = SKColors.Transparent;
-            o.Color = SKColors.Black; o.Font = "Arial";
-            o.FontStyle = SKFontStyle.Normal;
-            o.DrawText = false;
+            // Set the type of barcode to Code93
+            options.Type = BarcodeTypes.Code93;
+            // Set the height of the barcode
+            options.Height = 30;
+            // Set the scaling factor for the barcode
+            options.Scaling = 10;
+            // Set the margins around the barcode
+            options.Margins = 2;
+            // Set the background color of the barcode to transparent
+            options.BackgroundColor = SKColors.Transparent;
+            // Set the foreground color of the barcode to black
+            options.ForegroundColor = SKColors.Black;
+            // Enable rendering of text below the barcode
+            options.RenderText = true;
+            // Use the specified font family and style for the text
+            options.UseTypeface("Arial", SKFontStyle.Normal);
         });
-        bc.Encode("THE-BARCODE");
-        // you can use {barcode} keyword in the file path
-        bc.Export("barcodes_path/bc_{barcode}.png");
-        bc.Dispose();
+
+        // Encode the barcode with the specified string
+        barcodeGenerator.Encode("THE-BARCODE");
+
+        // Export the barcode image to a file
+        // The file path can include the following keywords:
+        // - {barcode}: The barcode string.
+        // - {format}: The image format (e.g., png, jpg).
+        // - {quality}: The image quality (1-100).
+        barcodeGenerator.Export("path/{barcode}_{quality}.{format}", SKEncodedImageFormat.Png, 100);
     }
 }
 ```
