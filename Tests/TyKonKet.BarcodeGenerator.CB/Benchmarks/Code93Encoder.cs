@@ -18,7 +18,7 @@ namespace TyKonKet.BarcodeGenerator.CB.Benchmarks
 
         private static readonly string outputFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "out", "barcode.jpg");
 
-        private static readonly BarcodeTypes barcodeType = BarcodeTypes.Code39;
+        private static readonly BarcodeTypes barcodeType = BarcodeTypes.Code93;
 
         private const int HEIGHT = 20;
 
