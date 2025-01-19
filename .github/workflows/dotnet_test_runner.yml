@@ -1,0 +1,43 @@
+name: .NET Test Runner
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "master" ]
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Tests/TyKonKet.BarcodeGenerator.Tests
+
+    permissions:
+      contents: read
+    
+    env:
+      TERM: xterm
+      DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION: true
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.x
+      
+      - name: Run tests
+        run: >
+            dotnet test
+            --configuration Release
+            --logger "GitHubActions;summary.includePassedTests=true;summary.includeSkippedTests=true"
+            -- 
+            RunConfiguration.CollectSourceInformation=true
