@@ -1,15 +1,10 @@
 ﻿using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TyKonKet.BarcodeGenerator.Fonts;
 using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests.Fonts
 {
-    public class UpcaEncoderTest
+    public class FontFamilyTest
     {
         [Theory]
         [InlineData(FontFamilies.Arial)]
