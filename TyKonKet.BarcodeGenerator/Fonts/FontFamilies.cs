@@ -87,5 +87,10 @@ namespace TyKonKet.BarcodeGenerator.Fonts
         /// Verdana font family.
         /// </summary>
         Verdana = 15,
+
+        /// <summary>
+        /// DejaVu Sans font family.
+        /// </summary>
+        DejaVuSerif = 16,
     }
 }

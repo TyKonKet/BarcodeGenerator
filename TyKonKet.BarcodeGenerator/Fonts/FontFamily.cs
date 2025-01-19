@@ -63,6 +63,8 @@ namespace TyKonKet.BarcodeGenerator.Fonts
                     return "Trebuchet MS";
                 case FontFamilies.Verdana:
                     return "Verdana";
+                case FontFamilies.DejaVuSerif:
+                    return "DejaVu Serif";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(fontFamily), fontFamily, message: null);
             }

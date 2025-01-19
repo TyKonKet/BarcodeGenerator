@@ -1,4 +1,6 @@
 ﻿using SkiaSharp;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TyKonKet.BarcodeGenerator.Fonts;
 using Xunit;
 
@@ -6,23 +8,39 @@ namespace TyKonKet.BarcodeGenerator.Tests.Fonts
 {
     public class FontFamilyTest
     {
+        public static IEnumerable<object[]> ValidateFontFamily_ShouldReturnExpectedFamilyName_Data()
+        {
+            var allData = new List<object[]>();
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                allData.Add([FontFamilies.Arial]);
+                allData.Add([FontFamilies.Calibri]);
+                allData.Add([FontFamilies.Cambria]);
+                allData.Add([FontFamilies.ComicSans]);
+                allData.Add([FontFamilies.Consolas]);
+                allData.Add([FontFamilies.CourierNew]);
+                allData.Add([FontFamilies.FranklinGothic]);
+                allData.Add([FontFamilies.Georgia]);
+                allData.Add([FontFamilies.Impact]);
+                allData.Add([FontFamilies.LucidaConsole]);
+                allData.Add([FontFamilies.PalatinoLinotype]);
+                allData.Add([FontFamilies.SegoeUI]);
+                allData.Add([FontFamilies.Tahoma]);
+                allData.Add([FontFamilies.TimesNewRoman]);
+                allData.Add([FontFamilies.TrebuchetMS]);
+                allData.Add([FontFamilies.Verdana]);
+            }
+            else
+            {
+                allData.Add([FontFamilies.DejaVuSerif]);
+            }
+
+            return allData;
+        }
+
         [Theory]
-        [InlineData(FontFamilies.Arial)]
-        [InlineData(FontFamilies.Calibri)]
-        [InlineData(FontFamilies.Cambria)]
-        [InlineData(FontFamilies.ComicSans)]
-        [InlineData(FontFamilies.Consolas)]
-        [InlineData(FontFamilies.CourierNew)]
-        [InlineData(FontFamilies.FranklinGothic)]
-        [InlineData(FontFamilies.Georgia)]
-        [InlineData(FontFamilies.Impact)]
-        [InlineData(FontFamilies.LucidaConsole)]
-        [InlineData(FontFamilies.PalatinoLinotype)]
-        [InlineData(FontFamilies.SegoeUI)]
-        [InlineData(FontFamilies.Tahoma)]
-        [InlineData(FontFamilies.TimesNewRoman)]
-        [InlineData(FontFamilies.TrebuchetMS)]
-        [InlineData(FontFamilies.Verdana)]
+        [MemberData(nameof(ValidateFontFamily_ShouldReturnExpectedFamilyName_Data))]
         public void ValidateFontFamily_ShouldReturnExpectedFamilyName(FontFamilies family)
         {
             var expected = FontFamily.FromFontFamilies(family);
