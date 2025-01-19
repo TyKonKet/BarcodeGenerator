@@ -91,3 +91,17 @@ jobs:
           comment-on-alert: true
           #summary-always: true
           alert-comment-cc-users: '@TyKonKet'
+
+      - name: Store Code93Encoder benchmark results
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          name: Code93Encoder
+          tool: 'benchmarkdotnet'
+          output-file-path: Tests/TyKonKet.BarcodeGenerator.CB/BenchmarkDotNet.Artifacts/results/TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder-report-full-compressed.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
+          benchmark-data-dir-path: ''
+          alert-threshold: '200%'
+          comment-on-alert: true
+          #summary-always: true
+          alert-comment-cc-users: '@TyKonKet'
