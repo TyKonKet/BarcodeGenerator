@@ -41,7 +41,7 @@ jobs:
         with:
           name: Ean8Encoder
           tool: 'benchmarkdotnet'
-          output-file-path: artifacts/bin/TyKonKet.BarcodeGenerator.CB/release/BenchmarkDotNet.Artifacts/results/TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder-report-full-compressed.json
+          output-file-path: Tests/TyKonKet.BarcodeGenerator.CB/BenchmarkDotNet.Artifacts/results/TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder-report-full-compressed.json
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
           benchmark-data-dir-path: ''

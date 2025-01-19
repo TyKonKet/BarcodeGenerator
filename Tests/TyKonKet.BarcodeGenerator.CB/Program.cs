@@ -1,7 +1,6 @@
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 using System;
-using System.IO;
 
 namespace TyKonKet.BarcodeGenerator.CB
 {
