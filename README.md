@@ -36,15 +36,27 @@ nuget install TyKonKet.BarcodeGenerator
 
 You can generate all the barcodes using the `Barcode` class. The `Barcode` class has a constructor that accepts an `Action<BarcodeOptions>` delegate to set the barcode options. The `BarcodeOptions` class has the following properties:
 
-- `Encode`: Specifies the encoding type (e.g., `Encodes.Code93`).
-- `Height`: Sets the height of the barcode.
-- `Scale`: Sets the scale of the barcode.
+- `Type`: Specifies the encoding type (e.g., `BarcodeTypes.Ean8`).
+- `Height`: Sets the height of the barcode bars.
+- `Scaling`: Sets the scale of the barcode image.
 - `Margins`: Sets the margins around the barcode.
 - `BackgroundColor`: Sets the background color of the barcode.
-- `Color`: Sets the color of the barcode.
-- `Font`: Sets the font for the barcode text.
-- `FontStyle`: Sets the font style for the barcode text.
-- `DrawText`: Specifies whether to draw text below the barcode.
+- `ForegroundColor`: Sets the color of the barcode.
+- `RenderText`: Specifies whether to draw text below the barcode.
+
+The `BarcodeOptions` class also provides several methods to configure the font used for the barcode text:
+
+- `UseTypeface(SKTypeface typeface)`: Sets the `SKTypeface` for the barcode text.
+- `UseTypeface(FontFamily fontFamily)`: Sets the font family for the barcode text, this can be either a string representing the font family name or a `FontFamilies` enum value.
+- `UseTypeface(FontFamily fontFamily, SKFontStyle fontStyle)`: Sets the font family and style for the barcode text.
+- `UseTypeface(FontFamily fontFamily, int weight, int width, SKFontStyleSlant fontStyleSlant)`: Sets the font family, weight, width, and style slant for the barcode text.
+- `UseTypeface(FontFamily fontFamily, SKFontStyleWeight weight, SKFontStyleWidth width, SKFontStyleSlant fontStyleSlant)`: Sets the font family, weight, width, and style slant for the barcode text using `SKFontStyleWeight` and `SKFontStyleWidth`.
+- `UseTypefaceFromFile(string path, int index = 0)`: Sets the typeface from a font file.
+- `UseTypefaceFromData(SKData data, int index = 0)`: Sets the typeface from font data.
+- `UseTypefaceFromStream(SKStreamAsset stream, int index = 0)`: Sets the typeface from a font stream.
+- `UseTypefaceFromStream(Stream stream, int index = 0)`: Sets the typeface from a font stream.
+
+These methods allow you to customize the font used for rendering text in the barcode, providing flexibility in font selection and styling.
 
 ## Getting Started
 
