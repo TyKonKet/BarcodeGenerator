@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+	<DebugType>pdbonly</DebugType>
+	<DebugSymbols>True</DebugSymbols>
+  </PropertyGroup>
+	
+  <PropertyGroup>
+	<OutputType>Exe</OutputType>
+	<PlatformTarget>AnyCPU</PlatformTarget>
+	<Configuration>Release</Configuration>
+	<IsPackable>false</IsPackable>
+	<Optimize>true</Optimize>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\..\TyKonKet.BarcodeGenerator\TyKonKet.BarcodeGenerator.csproj" />
+  </ItemGroup>
+</Project>

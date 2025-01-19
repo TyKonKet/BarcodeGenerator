@@ -1,0 +1,51 @@
+name: .NET Benchmark Runner
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "master" ]
+
+permissions:
+  # deployments permission to deploy GitHub pages website
+  deployments: write
+  # contents permission to update benchmark contents in gh-pages branch
+  contents: write
+
+jobs:
+  benchmark:
+    name: Performance regression check
+    runs-on: ubuntu-latest
+    
+    env:
+      TERM: xterm
+      DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION: true
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.x
+          
+      - name: Run benchmark
+        run: dotnet run --configuration Release --exporters json --filter '*'
+        working-directory: Tests/TyKonKet.BarcodeGenerator.CB
+
+      - name: Store Ean8Encoder benchmark results
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          name: Ean8Encoder
+          tool: 'benchmarkdotnet'
+          output-file-path: artifacts/bin/TyKonKet.BarcodeGenerator.CB/release/BenchmarkDotNet.Artifacts/results/TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder-report-full-compressed.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
+          benchmark-data-dir-path: ''
+          alert-threshold: '200%'
+          comment-on-alert: true
+          #summary-always: true
+          alert-comment-cc-users: '@TyKonKet'
