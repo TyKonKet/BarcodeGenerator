@@ -8,7 +8,10 @@ labels:
 assignees: []
 ---
 
-<!-- Prefer using the Issue Form titled "Feature request". Use this Markdown template only if you cannot use forms. -->
+<!--
+Thanks for filing a bug! Please fill out as much as possible.
+Items marked with (required) help us triage faster.
+-->
 
 ## Checklist (required)
 - [ ] I searched existing issues and discussions, and reviewed the README Roadmap to avoid duplicates.
@@ -48,4 +51,4 @@ Links to standards/specs, prior art, related issues/PRs.
 
 ## Willing to contribute?
 - [ ] Yes, I'm willing to help design/implement
-- [ ] No
+- [ ] No, I'm just suggesting the feature
