@@ -9,7 +9,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for proposing a feature! This form is preferred. Please provide as much detail as possible.
+        Thanks for proposing a feature! Please provide as much detail as possible. Fields marked (required) help us triage faster.
 
   - type: checkboxes
     id: checklist
