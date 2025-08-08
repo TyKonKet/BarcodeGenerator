@@ -1,20 +1,50 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
+name: Feature request (legacy)
+about: Suggest an idea for the BarcodeGenerator .NET library (Markdown alternative; prefer the Issue Form)
+title: "[Feature]: "
+labels:
+  - enhancement
+  - needs triage
+assignees: []
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+<!-- Prefer using the Issue Form titled "Feature request". Use this Markdown template only if you cannot use forms. -->
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## Checklist (required)
+- [ ] I searched existing issues and discussions, and reviewed the README Roadmap to avoid duplicates.
+- [ ] This is a feature request (not a bug report or support question).
+- [ ] This request aligns with the scope of the BarcodeGenerator .NET library.
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## Summary / Problem to solve (required)
+Describe the problem or limitation you're facing.
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## Motivation / Use cases (required)
+Why is this needed? List concrete scenarios and who benefits.
+
+## Proposed solution / API (required)
+Describe the desired change. If this is an API change, show a small example of how it would be used.
+
+```csharp
+// Sample C# usage showing the proposed API or behavior
+```
+
+## Alternatives considered
+List any alternative approaches you considered and why they're less ideal.
+
+## Area and scope
+- Area/category: [Encoders / Export/Rendering / API usability / Validation / Performance/Memory / Documentation / Other]
+- Symbology/types involved: [EAN-13 / UPC-A / ISBN / EAN-8 / CODE93 / CODE39 / CODE128 / Other]
+- Desired output format(s) (if relevant): [PNG / JPEG / Other]
+
+## Compatibility / Breaking changes
+Would this require breaking changes? If yes, describe mitigations or migration path.
+
+## Performance considerations
+Any expected performance/throughput/memory impact? Benchmarks if available.
+
+## Additional context / References
+Links to standards/specs, prior art, related issues/PRs.
+
+## Willing to contribute?
+- [ ] Yes, I'm willing to help design/implement
+- [ ] No

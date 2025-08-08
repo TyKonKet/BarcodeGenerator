@@ -1,0 +1,140 @@
+name: Feature request
+description: Suggest an idea to improve the BarcodeGenerator .NET library
+title: "[Feature]: "
+labels:
+  - enhancement
+  - needs triage
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a feature! This form is preferred. Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist (required)
+      options:
+        - label: I searched existing issues and discussions, and reviewed the README Roadmap to avoid duplicates.
+          required: true
+        - label: This is a feature request (not a bug report or support question).
+          required: true
+        - label: This request aligns with the scope of the BarcodeGenerator .NET library.
+          required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary / Problem to solve (required)
+      description: Describe the problem or limitation you're facing.
+      placeholder: What do you want to achieve that the library cannot currently do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation / Use cases (required)
+      description: Why is this needed? List concrete scenarios and who benefits.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution / API (required)
+      description: Describe the desired behavior, API surface, or UX. Include a short C# example if possible.
+      render: csharp
+      placeholder: |
+        // Sample C# usage showing the proposed API or behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What other solutions did you consider and why are they less ideal?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area/category
+      options:
+        - Encoders
+        - Export/Rendering
+        - API usability
+        - Validation
+        - Performance/Memory
+        - Documentation
+        - Other
+    validations:
+      required: false
+
+  - type: dropdown
+    id: symbologies
+    attributes:
+      label: Symbology/types involved
+      description: Select one or more, or choose Other.
+      multiple: true
+      options:
+        - EAN-13
+        - UPC-A
+        - ISBN
+        - EAN-8
+        - CODE93
+        - CODE39
+        - CODE128
+        - Other (specify in context)
+    validations:
+      required: false
+
+  - type: dropdown
+    id: formats
+    attributes:
+      label: Desired output format(s) (if relevant)
+      description: Choose one or more, or select Other.
+      multiple: true
+      options:
+        - PNG
+        - JPEG
+        - Other (specify in context)
+    validations:
+      required: false
+
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility / Breaking changes
+      description: Would this require breaking changes? If yes, describe mitigations or migration path.
+    validations:
+      required: false
+
+  - type: textarea
+    id: performance
+    attributes:
+      label: Performance considerations
+      description: Any expected performance/throughput/memory impact? Include benchmarks if available.
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context / References
+      description: Links to standards/specs, prior art, related issues/PRs, or a small prototype repo.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Willing to contribute?
+      options:
+        - label: Yes, I'm willing to help design/implement
+        - label: No
+    validations:
+      required: false
