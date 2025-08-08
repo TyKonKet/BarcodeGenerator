@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a reproducible defect to help us improve
+about: Report a reproducible bug to help us improve
 title: "[Bug]: "
 labels:
   - bug
@@ -31,7 +31,7 @@ A clear and concise description of the problem.
 <!-- If possible, include a minimal, self-contained repro (code and exact options). If your repro shows all options used (Type, Height, Scaling, Margins, Colors, RenderText, Typeface, Export format/quality), you can skip the "Barcode Details" section below. -->
 ### Minimal Reproduction
 ```text
-// C# code demonstrating the issue
+// .NET code demonstrating the issue (C#, VB.NET, F#, etc.)
 // Include exact input data and the options used
 ```
 
@@ -50,7 +50,7 @@ What actually happened. Include error messages and how it differs from expected.
 - Container/CI (if any): [Docker image / GitHub Actions runner / etc.]
 
 ## Barcode Details
-<!-- Not required if your Minimal Reproduction above already shows these settings -->
+**Note:** Not required if your Minimal Reproduction above already shows these settings.
 - Symbology/type: [EAN-13 / UPC-A / ISBN / EAN-8 / CODE93]
 - Input data (small sample):
 ```
@@ -68,7 +68,7 @@ Your example data here
 - Export quality (1-100): [e.g., 100]
 
 ## Screenshots / Output
-If applicable, add screenshots or attach generated images/files.
+**Important:** If applicable, add screenshots or attach generated images/files. This is especially critical for image rendering issues.
 
 ## Logs / Stack Traces
 ```

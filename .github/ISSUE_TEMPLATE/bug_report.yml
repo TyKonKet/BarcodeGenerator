@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible defect in the BarcodeGenerator library
+description: Report a reproducible bug in the BarcodeGenerator library
 title: "[Bug]: "
 labels:
   - bug
@@ -51,10 +51,10 @@ body:
     id: minimal-repro
     attributes:
       label: Minimal Reproduction (recommended)
-      description: Provide a small C# snippet we can copy/paste and run. Include exact input data and the options used.
+      description: Provide a small .NET snippet we can copy/paste and run (.NET language: C#, VB.NET, F#, etc.). Include exact input data and the options used.
       render: csharp
       placeholder: |
-        // C# code demonstrating the issue
+        // .NET code demonstrating the issue (C#, VB.NET, F#, etc.)
         // Include exact input data and options
     validations:
       required: false
@@ -140,8 +140,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Barcode Details (optional)
-        If your Minimal Reproduction already shows all settings, you can skip this section.
+        ## Barcode Details (optional)
+        **Note:** If your Minimal Reproduction already shows all settings, you can skip this section.
 
   - type: dropdown
     id: symbology
@@ -202,7 +202,7 @@ body:
     id: screenshots
     attributes:
       label: Screenshots / Output
-      description: If applicable, paste Base64, attach images, or describe the output.
+      description: If applicable, paste Base64, attach images, or describe the output. This is especially critical for image rendering issues.
     validations:
       required: false
 
