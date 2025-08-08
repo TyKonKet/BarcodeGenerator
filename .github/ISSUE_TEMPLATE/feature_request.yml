@@ -135,6 +135,6 @@ body:
       label: Willing to contribute?
       options:
         - label: Yes, I'm willing to help design/implement
-        - label: No
+        - label: No, I'm just suggesting the feature
     validations:
       required: false
