@@ -1,0 +1,266 @@
+name: Bug report
+description: Report a reproducible defect in the BarcodeGenerator library
+title: "[Bug]: "
+labels:
+  - bug
+  - needs triage
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug! Please provide as much detail as possible. Fields marked (required) help us triage faster.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist (required)
+      options:
+        - label: I searched existing issues to avoid duplicates.
+          required: true
+        - label: I can reproduce this with the latest version.
+          required: true
+        - label: I included clear reproduction steps and, if possible, a minimal reproducible example.
+          required: true
+        - label: This is a bug report (not a usage question or feature request).
+          required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary (required)
+      description: A clear and concise description of the problem.
+      placeholder: Describe what went wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce (required)
+      description: List the exact steps to reproduce the issue.
+      placeholder: |
+        1. …
+        2. …
+        3. …
+        4. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: minimal-repro
+    attributes:
+      label: Minimal Reproduction (recommended)
+      description: Provide a small C# snippet we can copy/paste and run. Include exact input data and the options used.
+      render: csharp
+      placeholder: |
+        // C# code demonstrating the issue
+        // Include exact input data and options
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior (required)
+      description: What you expected to happen. If applicable, reference the relevant symbology/spec.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior (required)
+      description: What actually happened. Include error messages and how it differs from expected.
+      render: text
+      placeholder: Paste full error messages/stack traces, if any.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Environment (required)
+
+  - type: input
+    id: version
+    attributes:
+      label: BarcodeGenerator version
+      placeholder: e.g., 2.0.0 or commit SHA
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install
+    attributes:
+      label: Install method
+      options:
+        - NuGet (Package Manager Console)
+        - nuget.exe
+        - .NET CLI (dotnet add package)
+        - source
+    validations:
+      required: true
+
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime/Language
+      placeholder: .NET 8 + C# 12 (or .NET 7 + C# 11)
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: Windows/macOS/Linux + version
+    validations:
+      required: true
+
+  - type: dropdown
+    id: arch
+    attributes:
+      label: CPU architecture
+      options:
+        - x64
+        - arm64
+        - other
+    validations:
+      required: true
+
+  - type: input
+    id: ci
+    attributes:
+      label: Container/CI (if any)
+      placeholder: Docker image, GitHub Actions runner, etc.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        Barcode Details (optional)
+        If your Minimal Reproduction already shows all settings, you can skip this section.
+
+  - type: dropdown
+    id: symbology
+    attributes:
+      label: Symbology/type
+      options:
+        - EAN-13
+        - UPC-A
+        - ISBN
+        - EAN-8
+        - CODE93
+    validations:
+      required: false
+
+  - type: textarea
+    id: input-data
+    attributes:
+      label: Input data (small sample)
+      placeholder: Put the exact data string that triggers the issue here.
+    validations:
+      required: false
+
+  - type: textarea
+    id: options
+    attributes:
+      label: Options and rendering used
+      description: Provide the specific options used.
+      placeholder: |
+        Height: 30
+        Scaling: 10
+        Margins: 2
+        BackgroundColor: Transparent
+        ForegroundColor: Black
+        RenderText: true
+        Typeface: Arial (style/weight)
+    validations:
+      required: false
+
+  - type: dropdown
+    id: format
+    attributes:
+      label: Output format
+      options:
+        - PNG
+        - JPEG
+    validations:
+      required: false
+
+  - type: input
+    id: quality
+    attributes:
+      label: Export quality (1-100)
+      placeholder: 100
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / Output
+      description: If applicable, paste Base64, attach images, or describe the output.
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Stack Traces
+      render: text
+      placeholder: Paste relevant logs here
+    validations:
+      required: false
+
+  - type: dropdown
+    id: regression
+    attributes:
+      label: Regression?
+      options:
+        - Unknown
+        - Yes
+        - No
+    validations:
+      required: false
+
+  - type: input
+    id: last-good
+    attributes:
+      label: Last known good version
+      placeholder: e.g., 2.0.0
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - blocking
+        - critical
+        - high
+        - medium
+        - low
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Links to a small repro repo, spec excerpts, related issues/PRs, etc.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Willing to contribute a fix?
+      options:
+        - label: Yes, I'm willing to open a PR
+        - label: No
+    validations:
+      required: false
