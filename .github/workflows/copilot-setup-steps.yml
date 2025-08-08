@@ -27,7 +27,9 @@ jobs:
           dotnet-version: |
             6.0.x
             8.0.x
-            9.0.x
+            6.0.x   # Required for legacy/test projects
+            8.0.x   # Main library target framework support
+            9.0.x   # Early adoption/testing of upcoming .NET features
 
       - name: Install SkiaSharp Linux dependencies
         run: |
