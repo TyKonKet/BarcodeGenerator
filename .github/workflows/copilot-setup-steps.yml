@@ -29,7 +29,7 @@ jobs:
             8.0.x
             6.0.x   # Required for legacy/test projects
             8.0.x
-            9.0.x   # Early adoption/testing of upcoming .NET features
+            9.0.x   # Required for test projects
 
       - name: Install SkiaSharp Linux dependencies
         run: |
