@@ -24,10 +24,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            6.0.x   # Required for legacy/test projects
-            8.0.x
-            9.0.x   # Required for test projects
+          dotnet-version: 6.0.x, 8.0.x, 9.0.x
 
       - name: Install SkiaSharp Linux dependencies
         run: |
