@@ -1,6 +1,6 @@
 ---
-name: Bug report
-about: Report a reproducible bug to help us improve
+name: Bug report (legacy)
+about: Report a reproducible bug to help us improve the BarcodeGenerator .NET library (Markdown alternative; prefer the Issue Form)
 title: "[Bug]: "
 labels:
   - bug
@@ -88,4 +88,4 @@ Anything else we should know.
 
 ## Willing to contribute a fix?
 - [ ] Yes, I'm willing to open a PR
-- [ ] No
+- [ ] No, I'm just reporting the bug
