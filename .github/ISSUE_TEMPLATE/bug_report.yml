@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible bug in the BarcodeGenerator library
+description: Report a reproducible bug in the BarcodeGenerator .NET library
 title: "[Bug]: "
 labels:
   - bug
@@ -9,7 +9,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for filing a bug! Please provide as much detail as possible. Fields marked (required) help us triage faster.
+        Thanks for reporting a bug! Please provide as much detail as possible. Fields marked (required) help us triage faster.
 
   - type: checkboxes
     id: checklist
@@ -261,6 +261,6 @@ body:
       label: Willing to contribute a fix?
       options:
         - label: "Yes, I'm willing to open a PR"
-        - label: "No, I'm just reporting the issue"
+        - label: "No, I'm just reporting the bug"
     validations:
       required: false
