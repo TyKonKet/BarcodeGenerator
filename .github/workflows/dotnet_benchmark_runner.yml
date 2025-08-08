@@ -3,7 +3,7 @@ name: .NET Benchmark Runner
 on:
   workflow_dispatch:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 permissions:
   # deployments permission to deploy GitHub pages website
