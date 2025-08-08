@@ -44,10 +44,10 @@ body:
     id: proposal
     attributes:
       label: Proposed solution / API (required)
-      description: Describe the desired behavior, API surface, or UX. Include a short C# example if possible.
-      render: csharp
+      description: Describe the desired behavior, API surface, or UX. Include a short .NET code example if possible.
       placeholder: |
-        // Sample C# usage showing the proposed API or behavior
+        // Sample .NET usage showing the proposed API or behavior
+        // (C#, VB.NET, F#, or any .NET language)
     validations:
       required: true
 

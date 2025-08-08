@@ -24,8 +24,9 @@ Why is this needed? List concrete scenarios and who benefits.
 ## Proposed solution / API (required)
 Describe the desired change. If this is an API change, show a small example of how it would be used.
 
-```csharp
-// Sample C# usage showing the proposed API or behavior
+```
+// Sample .NET usage showing the proposed API or behavior
+// (C#, VB.NET, F#, or any .NET language)
 ```
 
 ## Alternatives considered
