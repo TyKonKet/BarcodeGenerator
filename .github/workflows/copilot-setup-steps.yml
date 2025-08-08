@@ -1,0 +1,46 @@
+name: "Copilot Setup Steps"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+          
+      - name: Set up .NET 8.0 (also needed for some components)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+          
+      - name: Set up .NET 6.0 (target framework)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+      
+      - name: Install SkiaSharp Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libfontconfig1 libfreetype6
+          # No need to explicitly install SkiaSharp.NativeAssets.Linux.NoDependencies as it will come from NuGet
+      
+      - name: Verify .NET installation
+        run: |
+          dotnet --info
