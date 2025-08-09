@@ -60,6 +60,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// </summary>
         /// <param name="barcode">Barcode chars / digits.</param>
         /// <returns>Returns the validated barcode chars / digits.</returns>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="System.FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by the specific encoder charset.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         public abstract string Encode(string barcode);
 
         /// <summary>

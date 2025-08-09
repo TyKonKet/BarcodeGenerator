@@ -209,6 +209,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// </summary>
         /// <param name="barcode">The barcode string to encode.</param>
         /// <returns>The encoded barcode string.</returns>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="System.FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by Code 93 charset (A–Z, 0–9, space and .$+%-/).</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "DisposedByBaseClass")]
         public override string Encode(string barcode)
         {

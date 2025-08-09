@@ -43,6 +43,9 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         /// <param name="barcode">The alphanumeric barcode to encode.</param>
         /// <returns>The validated barcode string with added check digits if the encoding requires them.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by the selected encoder's charset (e.g., only digits for EAN/UPC; Code 93 allows A–Z, 0–9, and specific symbols).</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         public string Encode(string barcode)
         {
             return this.barcodeEncoder.Encode(barcode);
