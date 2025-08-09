@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754746262255,
+  "lastUpdate": 1754759783233,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -1346,6 +1346,60 @@ window.BENCHMARK_DATA = {
             "value": 535415.4454627404,
             "unit": "ns",
             "range": "± 1022.018306579172"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "9b663a09d61be856abe3d5a374bbf5a124a91a0f",
+          "message": "Add exception documentation to Encode methods\n\nEnhanced the `Encode` method in multiple classes within the `TyKonKet.BarcodeGenerator` namespace by adding detailed exception documentation. Included `ArgumentNullException`, `FormatException`, and `ArgumentOutOfRangeException` to clarify potential errors during barcode encoding, improving error handling and developer guidance.",
+          "timestamp": "2025-08-09T19:06:52+02:00",
+          "tree_id": "2585b6f10bd712112511e3676ca40fbcb7469609",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/9b663a09d61be856abe3d5a374bbf5a124a91a0f"
+        },
+        "date": 1754759782290,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 15625.430310930524,
+            "unit": "ns",
+            "range": "± 151.20206611230253"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 16180.562173025948,
+            "unit": "ns",
+            "range": "± 122.56725313339591"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 19007.337923322404,
+            "unit": "ns",
+            "range": "± 55.426513030656146"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 26249.182877760668,
+            "unit": "ns",
+            "range": "± 60.42716695435621"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
+            "value": 538124.2067708333,
+            "unit": "ns",
+            "range": "± 1777.8615944907415"
           }
         ]
       }
