@@ -65,26 +65,39 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <summary>
         /// Exports the barcode image to a file.
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
+        /// <param name="filePath">
+        /// Path to the file (can be relative or absolute). The following special keywords are supported:
+        /// <list type="bullet">
+        /// <item><description><c>{barcode}</c>: Replaced with the barcode string, sanitized for file names.</description></item>
+        /// <item><description><c>{format}</c>: Replaced with the file extension corresponding to the image format (e.g., "png").</description></item>
+        /// <item><description><c>{quality}</c>: Replaced with the image quality value.</description></item>
+        /// </list>
+        /// </param>
         /// <param name="format">Image export format.</param>
         /// <param name="quality">Image export quality.</param>
         /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
-        public virtual void Export(string fileName, SKEncodedImageFormat format, int quality)
+        public virtual void Export(string filePath, SKEncodedImageFormat format, int quality)
         {
             if (this.Image == null)
             {
                 throw new InvalidOperationException("The barcode must be encoded before exported");
             }
 
-            fileName = GetFinalFileName(fileName, this.Barcode, format, quality);
+            filePath = GetFinalFileName(filePath, this.Barcode, format, quality);
 
-            var path = Path.GetDirectoryName(fileName);
-            if (!Directory.Exists(path))
+            // Convert relative paths to absolute paths
+            if (!Path.IsPathRooted(filePath))
             {
-                Directory.CreateDirectory(path);
+                filePath = Path.GetFullPath(filePath);
             }
 
-            using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
+            var directory = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            using (var fileStream = new FileStream(filePath, FileMode.OpenOrCreate))
             {
                 this.Export(fileStream, format, quality);
             }
