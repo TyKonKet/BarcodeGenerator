@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754746260442,
+  "lastUpdate": 1754746261321,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -4850,6 +4850,60 @@ window.BENCHMARK_DATA = {
             "value": 728873.800920759,
             "unit": "ns",
             "range": "± 695.9142439274918"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "57881e83d86ad2f3fd42ee2a3478d196b1b65fee",
+          "message": "Refactor Export method to use filePath parameter\n\nUpdated the Export method in the BarcodeGenerator to change the parameter from fileName to filePath. Enhanced documentation to clarify that filePath can be relative or absolute, and included special keywords for dynamic path generation. Improved logic to ensure the directory exists before exporting, preventing errors related to missing directories.",
+          "timestamp": "2025-08-09T15:22:05+02:00",
+          "tree_id": "dc7a0f83d0f01a392dd905cf96c72935365fff5e",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/57881e83d86ad2f3fd42ee2a3478d196b1b65fee"
+        },
+        "date": 1754746261068,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 18192.52299194336,
+            "unit": "ns",
+            "range": "± 293.5333992304781"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 20440.02432047526,
+            "unit": "ns",
+            "range": "± 321.1469662172078"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 24400.11008780343,
+            "unit": "ns",
+            "range": "± 49.04820255924516"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 37146.974060058594,
+            "unit": "ns",
+            "range": "± 93.67694544786785"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
+            "value": 727132.828500601,
+            "unit": "ns",
+            "range": "± 771.798921809463"
           }
         ]
       }
