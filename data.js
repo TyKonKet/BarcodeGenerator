@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754866810938,
+  "lastUpdate": 1754866811834,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -6362,6 +6362,60 @@ window.BENCHMARK_DATA = {
             "value": 745844.598063151,
             "unit": "ns",
             "range": "± 1042.1147122261557"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9761664fa69d1b23408fe641fd0d9ae84c28d193",
+          "message": "Merge pull request #16 from TyKonKet/copilot/fix-15\n\nImprove documentation formatting for better readability",
+          "timestamp": "2025-08-11T00:51:50+02:00",
+          "tree_id": "0b045b8c98491d0760dd1539b54bc33f7fbf2ab3",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/9761664fa69d1b23408fe641fd0d9ae84c28d193"
+        },
+        "date": 1754866811572,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 18179.96994488056,
+            "unit": "ns",
+            "range": "± 67.41181384603716"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 20273.759229387557,
+            "unit": "ns",
+            "range": "± 237.2169352853589"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 24076.221528273363,
+            "unit": "ns",
+            "range": "± 23.104130384698852"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 36947.422236851286,
+            "unit": "ns",
+            "range": "± 167.77654869931254"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
+            "value": 726366.9108723958,
+            "unit": "ns",
+            "range": "± 573.2911411286569"
           }
         ]
       }
