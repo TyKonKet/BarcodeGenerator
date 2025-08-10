@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754833178774,
+  "lastUpdate": 1754833179682,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -2856,6 +2856,60 @@ window.BENCHMARK_DATA = {
             "value": 724427.8396935096,
             "unit": "ns",
             "range": "± 764.2204520486737"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "623166c9f6e0c25e6eb8fd87e0e10132dd9b1667",
+          "message": "Refactor Export method parameters and documentation\n\nUpdated the `Export` method in the `TyKonKet.BarcodeGenerator` namespace to change the parameter name from `fileName` to `filePath` for clarity. Enhanced documentation to include special keywords for `filePath` and added new exceptions for null values and directory issues.\n\nIn the `TyKonKet.BarcodeGenerator.Encoders.Abstract` namespace, updated the `Export` method documentation to include new exceptions for both `filePath` and `stream` parameters, improving robustness by clearly defining potential error conditions.",
+          "timestamp": "2025-08-10T15:28:02+02:00",
+          "tree_id": "cf01572fcf3d18a0daa4330edb69f43f5cf86009",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/623166c9f6e0c25e6eb8fd87e0e10132dd9b1667"
+        },
+        "date": 1754833179460,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 20007.26649039132,
+            "unit": "ns",
+            "range": "± 858.3802056390077"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 21012.50441040039,
+            "unit": "ns",
+            "range": "± 1303.4854779360273"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 26799.777090454103,
+            "unit": "ns",
+            "range": "± 303.9691628161169"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 38911.655318196616,
+            "unit": "ns",
+            "range": "± 489.878360784807"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
+            "value": 734508.5026692708,
+            "unit": "ns",
+            "range": "± 6640.362901384994"
           }
         ]
       }
