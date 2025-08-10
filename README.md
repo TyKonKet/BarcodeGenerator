@@ -7,6 +7,8 @@
 
 A high-performance .NET library for generating barcodes using [SkiaSharp](https://github.com/mono/SkiaSharp). Create professional-quality barcodes with customizable appearance, cross-platform compatibility, and support for multiple barcode types.
 
+---
+
 ## 📖 Documentation
 
 **👉 [Complete Documentation](docs/README.md)** - Comprehensive guides, API reference, and examples
@@ -18,7 +20,11 @@ A high-performance .NET library for generating barcodes using [SkiaSharp](https:
 - **[Code Examples](docs/README.md#examples)** - Common usage patterns and scenarios
 - **[Advanced Topics](docs/README.md#advanced-topics)** - Custom fonts, validation, and optimization
 
+---
+
 ## 🚀 Supported Barcode Types
+
+BarcodeGenerator supports five major barcode formats commonly used across different industries:
 
 - **EAN-13** - European Article Number, 13 digits
 - **UPC-A** - Universal Product Code, widely used in North America  
@@ -26,7 +32,11 @@ A high-performance .NET library for generating barcodes using [SkiaSharp](https:
 - **EAN-8** - Compact version of EAN-13 for small packages
 - **CODE-93** - Alphanumeric barcode used in logistics
 
+---
+
 ## ✨ Key Features
+
+Designed for performance, flexibility, and ease of use across all .NET platforms:
 
 - 🎯 **High Performance** - Optimized for speed and memory efficiency
 - 🎨 **Customizable** - Colors, fonts, scaling, margins fully configurable
@@ -36,19 +46,23 @@ A high-performance .NET library for generating barcodes using [SkiaSharp](https:
 - ✅ **Validation** - Automatic check digit calculation and validation
 - 🔌 **Framework Support** - .NET Standard 2.0, .NET Framework 4.6.2, .NET 6.0, .NET 8.0
 
+---
+
 ## 📦 Installation
 
-Install BarcodeGenerator via NuGet Package Manager:
+Choose your preferred installation method:
 
+**Package Manager Console:**
 ```powershell
 Install-Package TyKonKet.BarcodeGenerator
 ```
 
-Or via .NET CLI:
-
+**CLI Command:**
 ```bash
 dotnet add package TyKonKet.BarcodeGenerator
 ```
+
+---
 
 ## 🎯 Quick Start
 
@@ -75,30 +89,44 @@ barcode.Export("my-barcode.png", SKEncodedImageFormat.Png, 100);
 
 > **💡 Need more help?** Check out our [Getting Started Guide](docs/getting-started.md) for step-by-step tutorials and examples.
 
+---
+
 ## 📋 Configuration Options
 
-The `BarcodeOptions` class provides extensive customization:
+The `BarcodeOptions` class provides extensive customization capabilities:
 
-- **Type** - Barcode encoding type (EAN-13, UPC-A, ISBN-13, EAN-8, CODE-93)
-- **Height** - Height of barcode bars  
-- **Scaling** - Scale factor for the entire image
-- **Margins** - Spacing around the barcode
-- **Colors** - Background and foreground colors
-- **Text Rendering** - Show/hide text below barcode
-- **Font Options** - Custom fonts, styles, and loading methods
+| Option | Description | Default |
+|--------|-------------|---------|
+| **Type** | Barcode encoding type (EAN-13, UPC-A, ISBN-13, EAN-8, CODE-93) | EAN-8 |
+| **Height** | Height of barcode bars | 30 pixels |
+| **Scaling** | Scale factor for the entire image | 5x |
+| **Margins** | Spacing around the barcode | 2 pixels |
+| **Colors** | Background and foreground colors | White/Black |
+| **Text Rendering** | Show/hide text below barcode | Enabled |
+| **Font Options** | Custom fonts, styles, and loading methods | System default |
 
 > **📚 Detailed Configuration:** See our [BarcodeOptions API Reference](docs/api/barcode-options.md) for complete documentation.
 
+---
+
 ## 🔧 Framework Compatibility
 
-- **.NET Standard 2.0** - Core compatibility for most scenarios
-- **.NET Framework 4.6.2** - Legacy Windows applications  
-- **.NET 6.0** - Long-term support version
-- **.NET 8.0** - Latest stable version
+BarcodeGenerator supports multiple .NET framework versions for maximum compatibility:
+
+| Framework | Version | Target Scenario |
+|-----------|---------|-----------------|
+| **.NET Standard 2.0** | 2.0+ | Core compatibility for most scenarios |
+| **.NET Framework** | 4.6.2+ | Legacy Windows applications |
+| **.NET 6.0** | 6.0+ | Long-term support version |
+| **.NET 8.0** | 8.0+ | Latest stable version |
+
+---
 
 ## 🔄 Breaking Changes
 
 ### Version 2.0.0+
+
+**Important changes to be aware of when upgrading:**
 
 - **Framework Requirement:** No longer supports .NET Standard 1.3 (requires .NET Standard 2.0+)
 - **API Changes:** Redesigned for improved usability and customization
@@ -106,16 +134,35 @@ The `BarcodeOptions` class provides extensive customization:
 
 > **📖 Migration Guide:** See our [Getting Started documentation](docs/getting-started.md) for updated API usage patterns.
 
+---
+
 ## 🗺️ Roadmap
+
+### Planned Features and Improvements
 
 - [x] ~~Update the README.md documentation~~ ✅ **Completed**
 - [ ] Add support for CODE39 and CODE128 encoders
 - [ ] Add support for more barcode types  
 - [ ] Add an API to validate the barcode
 
+---
+
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our [Code of Conduct](CODE_OF_CONDUCT.md) and check the project's [GitHub repository](https://github.com/TyKonKet/BarcodeGenerator) for contribution guidelines.
+We welcome contributions from the community! Here's how you can help:
+
+**Getting Started:**
+- Read our [Code of Conduct](CODE_OF_CONDUCT.md)
+- Check the project's [GitHub repository](https://github.com/TyKonKet/BarcodeGenerator) for contribution guidelines
+- Look for issues labeled "good first issue" or "help wanted"
+
+**Ways to Contribute:**
+- Report bugs and suggest features
+- Submit pull requests for bug fixes
+- Improve documentation and examples
+- Share your use cases and feedback
+
+---
 
 ## 📄 License
 

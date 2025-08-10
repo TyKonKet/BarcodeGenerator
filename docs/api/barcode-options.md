@@ -2,6 +2,8 @@
 
 The `BarcodeOptions` class provides configuration options for customizing barcode appearance, behavior, and font settings. Options are configured using an action delegate pattern.
 
+---
+
 ## Options Locking Mechanism
 
 **Important**: Once a `Barcode` instance is created, the options are automatically locked and cannot be modified. This ensures thread safety and prevents configuration changes after the encoder has been initialized.
@@ -14,17 +16,21 @@ using var barcode = new Barcode(opt => opt.Type = BarcodeTypes.Ean13);
 // Options are now locked - any attempt to modify them will be ignored
 ```
 
-## Namespace
+---
 
+## Class Information
+
+### Namespace
 ```csharp
 TyKonKet.BarcodeGenerator
 ```
 
-## Inheritance
-
+### Inheritance
 ```csharp
 public sealed class BarcodeOptions
 ```
+
+---
 
 ## Static Fields
 
@@ -36,8 +42,7 @@ The default typeface used for rendering text in barcodes when no custom typeface
 public static readonly SKTypeface DefaultTypeface
 ```
 
-#### Example
-
+**Example Usage:**
 ```csharp
 // Check if using default typeface
 if (options.Typeface == BarcodeOptions.DefaultTypeface)
@@ -45,6 +50,8 @@ if (options.Typeface == BarcodeOptions.DefaultTypeface)
     Console.WriteLine("Using default system font");
 }
 ```
+
+---
 
 ## Properties
 
@@ -56,18 +63,20 @@ Gets or sets the type of barcode to generate.
 public BarcodeTypes Type { get; set; }
 ```
 
-#### Default Value
+| Attribute | Value |
+|-----------|-------|
+| **Default Value** | `BarcodeTypes.Ean8` |
+| **Available Types** | EAN-13, UPC-A, ISBN-13, EAN-8, CODE-93 |
 
-`BarcodeTypes.Ean8`
-
-#### Example
-
+**Example:**
 ```csharp
 var options = new BarcodeOptions
 {
     Type = BarcodeTypes.Ean13
 };
 ```
+
+---
 
 ### Height
 
@@ -77,15 +86,18 @@ Gets or sets the height of the barcode bars in pixels.
 public int Height { get; set; }
 ```
 
-#### Default Value
+| Attribute | Value |
+|-----------|-------|
+| **Default Value** | `30` pixels |
+| **Recommended Range** | 20-100 pixels |
+| **Use Case** | Larger values improve scanning reliability |
 
-`30`
-
-#### Example
-
+**Example:**
 ```csharp
 options.Height = 50; // Taller bars for better scanning
 ```
+
+---
 
 ### Scaling
 
@@ -95,20 +107,18 @@ Gets or sets the scaling factor for the barcode. Minimum value is 1.
 public int Scaling { get; set; }
 ```
 
-#### Default Value
+| Attribute | Value |
+|-----------|-------|
+| **Default Value** | `5` |
+| **Minimum Value** | `1` |
+| **Behavior** | Values < 1 adjusted to 1, negative values converted to absolute |
 
-`5`
-
-#### Behavior
-
-- Values less than 1 are automatically adjusted to 1
-- Negative values are converted to their absolute value
-
-#### Example
-
+**Example:**
 ```csharp
 options.Scaling = 3; // 3x scale for larger output
 ```
+
+---
 
 ### Margins
 
@@ -118,15 +128,18 @@ Gets or sets the margins around the barcode in pixels.
 public int Margins { get; set; }
 ```
 
-#### Default Value
+| Attribute | Value |
+|-----------|-------|
+| **Default Value** | `2` pixels |
+| **Purpose** | Provides white space around barcode for better scanning |
+| **Recommended** | 5-20 pixels for most applications |
 
-`2`
-
-#### Example
-
+**Example:**
 ```csharp
 options.Margins = 10; // More white space around barcode
 ```
+
+---
 
 ### BackgroundColor
 
@@ -136,16 +149,19 @@ Gets or sets the background color of the barcode.
 public SKColor BackgroundColor { get; set; }
 ```
 
-#### Default Value
+| Attribute | Value |
+|-----------|-------|
+| **Default Value** | `SKColors.White` |
+| **Common Options** | White, Transparent, Light Gray |
+| **Best Practice** | High contrast with foreground color |
 
-`SKColors.White`
-
-#### Example
-
+**Examples:**
 ```csharp
 options.BackgroundColor = SKColors.Transparent; // Transparent background
 options.BackgroundColor = SKColor.Parse("#F0F0F0"); // Light gray
 ```
+
+---
 
 ### ForegroundColor
 
@@ -155,16 +171,19 @@ Gets or sets the color of the barcode bars and text.
 public SKColor ForegroundColor { get; set; }
 ```
 
-#### Default Value
+| Attribute | Value |
+|-----------|-------|
+| **Default Value** | `SKColors.Black` |
+| **Best Practice** | Dark colors for better contrast |
+| **Scanner Compatibility** | Black provides best scanning results |
 
-`SKColors.Black`
-
-#### Example
-
+**Examples:**
 ```csharp
 options.ForegroundColor = SKColors.DarkBlue;
 options.ForegroundColor = SKColor.Parse("#FF0000"); // Red bars
 ```
+
+---
 
 ### RenderText
 
@@ -174,19 +193,39 @@ Gets or sets a value indicating whether to render text below the barcode.
 public bool RenderText { get; set; }
 ```
 
-#### Default Value
+| Attribute | Value |
+|-----------|-------|
+| **Default Value** | `true` |
+| **When to Disable** | Space-constrained layouts, purely machine-readable codes |
+| **When to Enable** | Human verification needed, retail applications |
 
-`true`
-
-#### Example
-
+**Example:**
 ```csharp
 options.RenderText = false; // Bars only, no text
 ```
 
+---
+
 ### Typeface
 
 Gets the typeface used for rendering text in the barcode. This is read-only; use the `UseTypeface` methods to set it.
+
+```csharp
+public SKTypeface Typeface { get; }
+```
+
+| Attribute | Value |
+|-----------|-------|
+| **Access** | Read-only property |
+| **Modification** | Use `UseTypeface()` methods to change |
+| **Default** | System default font |
+
+**Example:**
+```csharp
+Console.WriteLine($"Current font: {options.Typeface.FamilyName}");
+```
+
+---
 
 ```csharp
 public SKTypeface Typeface { get; }

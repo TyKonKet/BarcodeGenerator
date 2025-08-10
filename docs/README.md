@@ -2,6 +2,8 @@
 
 Welcome to the comprehensive API documentation for the BarcodeGenerator .NET library. This library provides high-performance barcode generation capabilities using SkiaSharp for cross-platform graphics rendering.
 
+---
+
 ## Quick Links
 
 - [Getting Started](getting-started.md) - Your first barcode in minutes
@@ -9,29 +11,49 @@ Welcome to the comprehensive API documentation for the BarcodeGenerator .NET lib
 - [Examples](#examples) - Code samples for common scenarios
 - [Advanced Topics](#advanced-topics) - In-depth customization guides
 
+---
+
 ## Overview
 
 BarcodeGenerator is a .NET library that supports multiple barcode types with a fluent, easy-to-use API. Built on SkiaSharp, it provides consistent rendering across Windows, macOS, and Linux platforms.
 
 ### Supported Barcode Types
 
-- **EAN-13** - European Article Number, 13 digits
-- **UPC-A** - Universal Product Code, widely used in North America
-- **ISBN-13** - International Standard Book Number for books
-- **EAN-8** - Compact version of EAN-13 for small packages
-- **CODE-93** - Alphanumeric barcode used in logistics
+| Type | Description | Format |
+|------|-------------|--------|
+| **EAN-13** | European Article Number | 13 digits |
+| **UPC-A** | Universal Product Code | Widely used in North America |
+| **ISBN-13** | International Standard Book Number | For books |
+| **EAN-8** | Compact EAN version | For small packages |
+| **CODE-93** | Alphanumeric barcode | Used in logistics |
 
 ### Key Features
 
-- 🚀 **High Performance** - Optimized for speed and memory efficiency
-- 🎨 **Customizable** - Colors, fonts, scaling, margins fully configurable
-- 📱 **Cross-Platform** - Works on Windows, macOS, Linux, and mobile platforms
-- 🔧 **Action Delegate Configuration** - Intuitive configuration with lambda expressions
-- 📸 **Multiple Export Formats** - PNG, JPEG, and other image formats
-- ✅ **Validation** - Automatic check digit calculation and validation
-- 🎯 **Framework Support** - .NET Standard 2.0, .NET Framework 4.6.2, .NET 6.0, .NET 8.0
+🚀 **Performance & Quality**
+- High-performance optimization for speed and memory efficiency
+- Professional-quality output suitable for commercial use
+- Consistent rendering across all supported platforms
+
+🎨 **Customization & Flexibility**
+- Fully configurable colors, fonts, scaling, and margins
+- Intuitive configuration with lambda expressions
+- Support for custom font loading and styling
+
+📱 **Cross-Platform Compatibility**
+- Works seamlessly on Windows, macOS, Linux, and mobile platforms
+- Multiple export formats: PNG, JPEG, WEBP, and more
+- Framework support: .NET Standard 2.0, .NET Framework 4.6.2, .NET 6.0, .NET 8.0
+
+✅ **Validation & Reliability**
+- Automatic check digit calculation and validation
+- Comprehensive error handling and informative exceptions
+- Input validation for all supported barcode types
+
+---
 
 ## Quick Example
+
+Get started with a simple barcode generation example:
 
 ```csharp
 using SkiaSharp;
@@ -52,59 +74,73 @@ string validatedCode = barcode.Encode("123456789012");
 barcode.Export("my-barcode.png", SKEncodedImageFormat.Png, 100);
 ```
 
+---
+
 ## API Reference
 
 ### Core Classes
 
-| Class | Description |
-|-------|-------------|
-| [Barcode](api/barcode.md) | Main entry point for barcode generation |
-| [BarcodeOptions](api/barcode-options.md) | Configuration options for barcode appearance |
-| [BarcodeTypes](api/barcode-types.md) | Enumeration of supported barcode types |
+| Class | Description | Documentation |
+|-------|-------------|---------------|
+| [Barcode](api/barcode.md) | Main entry point for barcode generation | Complete API reference |
+| [BarcodeOptions](api/barcode-options.md) | Configuration options for barcode appearance | All properties and methods |
+| [BarcodeTypes](api/barcode-types.md) | Enumeration of supported barcode types | Type definitions |
 
 ### Font System
 
-| Class/Enum | Description |
-|------------|-------------|
-| [FontFamily](api/fonts.md#fontfamily) | Font family wrapper with implicit conversions |
-| [FontFamilies](api/fonts.md#fontfamilies) | Predefined font family enumeration |
+| Class/Enum | Description | Documentation |
+|------------|-------------|---------------|
+| [FontFamily](api/fonts.md#fontfamily) | Font family wrapper with implicit conversions | Usage examples |
+| [FontFamilies](api/fonts.md#fontfamilies) | Predefined font family enumeration | Available fonts |
+
+---
 
 ## Examples
 
 ### Basic Usage
-- [Simple Barcode Generation](examples/basic-usage.md)
-- [Configuration Options](examples/customization.md)
-- [Export Formats](examples/export-formats.md)
+- [Simple Barcode Generation](examples/basic-usage.md) - Get started with basic barcode creation
+- [Configuration Options](examples/customization.md) - Customize appearance and behavior
+- [Export Formats](examples/export-formats.md) - Different output formats and quality settings
 
 ### Barcode Types
-- [Supported Barcode Types](examples/supported-types.md)
+- [Supported Barcode Types](examples/supported-types.md) - Examples for each supported format
+
+---
 
 ## Advanced Topics
 
-- [Custom Font Loading](advanced/custom-fonts.md)
-- [Export Options and File Naming](advanced/export-options.md)
-- [Barcode Validation](advanced/validation.md)
+Explore advanced features and customization options:
+
+- [Custom Font Loading](advanced/custom-fonts.md) - Load fonts from files, streams, and embedded resources
+- [Export Options and File Naming](advanced/export-options.md) - Advanced export scenarios and dynamic naming
+- [Barcode Validation](advanced/validation.md) - Input validation, check digits, and error handling
+
+---
 
 ## Installation
 
-Install via NuGet Package Manager:
-
+### Package Manager Console
 ```powershell
 Install-Package TyKonKet.BarcodeGenerator
 ```
 
-Or via .NET CLI:
-
+### .NET CLI
 ```bash
 dotnet add package TyKonKet.BarcodeGenerator
 ```
 
+---
+
 ## Framework Compatibility
 
-- **.NET Standard 2.0** - Core compatibility for most scenarios
-- **.NET Framework 4.6.2** - Legacy Windows applications
-- **.NET 6.0** - Long-term support version
-- **.NET 8.0** - Latest stable version
+| Framework | Version | Target Scenario |
+|-----------|---------|-----------------|
+| **.NET Standard 2.0** | 2.0+ | Core compatibility for most scenarios |
+| **.NET Framework** | 4.6.2+ | Legacy Windows applications |
+| **.NET 6.0** | 6.0+ | Long-term support version |
+| **.NET 8.0** | 8.0+ | Latest stable version |
+
+---
 
 ## License
 
