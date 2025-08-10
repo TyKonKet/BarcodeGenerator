@@ -1,4 +1,6 @@
-﻿namespace TyKonKet.BarcodeGenerator.Encoders
+﻿using System;
+
+namespace TyKonKet.BarcodeGenerator.Encoders
 {
     /// <summary>
     /// Encoder for ISBN-13 barcodes.
@@ -40,16 +42,20 @@
         /// </summary>
         /// <param name="barcode">The barcode to format.</param>
         /// <returns>The formatted barcode string.</returns>
+        /// <exception cref="FormatException">Thrown when the barcode prefix is invalid.</exception>
         internal static new string FormatBarcode(string barcode)
         {
-            // Format barcode following ISBN-13 rules
-            if (barcode.Length > 3 && string.Equals(barcode.Substring(0, 3), "978", System.StringComparison.Ordinal))
-            {
-                barcode = barcode.Remove(0, 3);
-            }
+            // Validate and extract prefix
+            string prefix = (barcode.Length > 3 && (string.Equals(barcode.Substring(0, 3), "978", StringComparison.Ordinal) || string.Equals(barcode.Substring(0, 3), "979", StringComparison.Ordinal))
+                ? barcode.Substring(0, 3)
+                : null) ?? throw new FormatException("Invalid ISBN-13 prefix. Only '978' or '979' are allowed.");
 
+            // Remove prefix from barcode
+            barcode = barcode.Remove(0, 3);
+
+            // Pad and reformat barcode
             barcode = barcode.PadLeft(9, '0');
-            barcode = $"978{barcode.Substring(0, 9)}";
+            barcode = $"{prefix}{barcode.Substring(0, 9)}";
 
             return barcode;
         }
