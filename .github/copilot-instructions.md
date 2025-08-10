@@ -212,6 +212,7 @@ BenchmarkDotNet tests in `TyKonKet.BarcodeGenerator.CB` measure:
 3. **Testing changes**: If .NET 9.x available, run full test suite; otherwise validate with manual testing
 4. **Before committing**: Ensure build completes without NEW warnings/errors (existing analyzer warnings are acceptable)
 5. **Documentation updates**: Any changes to the library API, behavior, exceptions, or functionality **must** be reflected in the documentation found in the `docs/` folder to keep it accurate and up to date
-6. **Trust these instructions**: Only search for additional information if the instructions are incomplete or incorrect
+6. **Repository updates**: Any changes to the repository structure, features, build process, or general information **must** be reflected in the root `README.md` file to keep it current and accurate
+7. **Trust these instructions**: Only search for additional information if the instructions are incomplete or incorrect
 
 The repository is well-structured and builds reliably when using the correct .NET SDK version. Focus on the main library for most changes, as the test projects have additional version requirements.
