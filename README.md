@@ -1,119 +1,126 @@
-# Barcode Generator
+# BarcodeGenerator
 
 [![NuGet](https://img.shields.io/nuget/v/TyKonKet.BarcodeGenerator.svg)](https://www.nuget.org/packages/TyKonKet.BarcodeGenerator/)
 [![NuGet](https://img.shields.io/nuget/dt/TyKonKet.BarcodeGenerator.svg)](https://www.nuget.org/packages/TyKonKet.BarcodeGenerator/)  
 [![.NET Test Runner](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_test_runner.yml/badge.svg)](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_test_runner.yml)  
 [![.NET Benchmark Runner](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_benchmark_runner.yml/badge.svg)](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_benchmark_runner.yml)  
 
+A high-performance .NET library for generating barcodes using [SkiaSharp](https://github.com/mono/SkiaSharp). Create professional-quality barcodes with customizable appearance, cross-platform compatibility, and support for multiple barcode types.
 
-Barcode generator based on [SkiaSharp](https://github.com/mono/SkiaSharp) library, supports the following encoders:
-- EAN-13
-- UPC-A
-- ISBN
-- EAN-8
-- CODE93
+## 📖 Documentation
 
+**👉 [Complete Documentation](docs/README.md)** - Comprehensive guides, API reference, and examples
 
-## Table of Contents
+### Quick Links
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Getting Started](#getting-started)
-- [Breaking Changes](#breaking-changes)
-- [Roadmap](#roadmap)
+- **[Getting Started Guide](docs/getting-started.md)** - Generate your first barcode in minutes
+- **[API Reference](docs/README.md#api-reference)** - Complete class and method documentation  
+- **[Code Examples](docs/README.md#examples)** - Common usage patterns and scenarios
+- **[Advanced Topics](docs/README.md#advanced-topics)** - Custom fonts, validation, and optimization
 
-## Installation
+## 🚀 Supported Barcode Types
 
-BarcodeGenerator is available as a convenient [NuGet package](https://www.nuget.org/packages/TyKonKet.BarcodeGenerator/).  
-To install the package, use one of the following commands:
-```` powershell
-PM> Install-Package TyKonKet.BarcodeGenerator
-````
-````
-nuget install TyKonKet.BarcodeGenerator
-````
+- **EAN-13** - European Article Number, 13 digits
+- **UPC-A** - Universal Product Code, widely used in North America  
+- **ISBN-13** - International Standard Book Number for books
+- **EAN-8** - Compact version of EAN-13 for small packages
+- **CODE-93** - Alphanumeric barcode used in logistics
 
+## ✨ Key Features
 
-## Usage
+- 🎯 **High Performance** - Optimized for speed and memory efficiency
+- 🎨 **Customizable** - Colors, fonts, scaling, margins fully configurable
+- 📱 **Cross-Platform** - Works on Windows, macOS, Linux, and mobile platforms
+- 🔧 **Action Delegate Configuration** - Intuitive configuration with lambda expressions
+- 📸 **Multiple Export Formats** - PNG, JPEG, and other image formats
+- ✅ **Validation** - Automatic check digit calculation and validation
+- 🔌 **Framework Support** - .NET Standard 2.0, .NET Framework 4.6.2, .NET 6.0, .NET 8.0
 
-You can generate all the barcodes using the `Barcode` class. The `Barcode` class has a constructor that accepts an `Action<BarcodeOptions>` delegate to set the barcode options. The `BarcodeOptions` class has the following properties:
+## 📦 Installation
 
-- `Type`: Specifies the encoding type (e.g., `BarcodeTypes.Ean8`).
-- `Height`: Sets the height of the barcode bars.
-- `Scaling`: Sets the scale of the barcode image.
-- `Margins`: Sets the margins around the barcode.
-- `BackgroundColor`: Sets the background color of the barcode.
-- `ForegroundColor`: Sets the color of the barcode.
-- `RenderText`: Specifies whether to draw text below the barcode.
+Install BarcodeGenerator via NuGet Package Manager:
 
-The `BarcodeOptions` class also provides several methods to configure the font used for the barcode text:
+```powershell
+Install-Package TyKonKet.BarcodeGenerator
+```
 
-- `UseTypeface(SKTypeface typeface)`: Sets the `SKTypeface` for the barcode text.
-- `UseTypeface(FontFamily fontFamily)`: Sets the font family for the barcode text, this can be either a string representing the font family name or a `FontFamilies` enum value.
-- `UseTypeface(FontFamily fontFamily, SKFontStyle fontStyle)`: Sets the font family and style for the barcode text.
-- `UseTypeface(FontFamily fontFamily, int weight, int width, SKFontStyleSlant fontStyleSlant)`: Sets the font family, weight, width, and style slant for the barcode text.
-- `UseTypeface(FontFamily fontFamily, SKFontStyleWeight weight, SKFontStyleWidth width, SKFontStyleSlant fontStyleSlant)`: Sets the font family, weight, width, and style slant for the barcode text using `SKFontStyleWeight` and `SKFontStyleWidth`.
-- `UseTypefaceFromFile(string path, int index = 0)`: Sets the typeface from a font file.
-- `UseTypefaceFromData(SKData data, int index = 0)`: Sets the typeface from font data.
-- `UseTypefaceFromStream(SKStreamAsset stream, int index = 0)`: Sets the typeface from a font stream.
-- `UseTypefaceFromStream(Stream stream, int index = 0)`: Sets the typeface from a font stream.
+Or via .NET CLI:
 
-These methods allow you to customize the font used for rendering text in the barcode, providing flexibility in font selection and styling.
+```bash
+dotnet add package TyKonKet.BarcodeGenerator
+```
 
-## Getting Started
+## 🎯 Quick Start
 
-Here is an example of how to generate a barcode using the `Barcode` class:
+Generate your first barcode in just a few lines of code:
 
 ```csharp
 using SkiaSharp;
 using TyKonKet.BarcodeGenerator;
 
-internal static class Example
+// Create and configure a barcode
+using var barcode = new Barcode(options =>
 {
-    private static void CreateBarcodeImage()
-    {
-        // Set up the barcode generator with specific options
-        using var barcodeGenerator = new Barcode(options =>
-        {
-            // Set the type of barcode to Code93
-            options.Type = BarcodeTypes.Code93;
-            // Set the height of the barcode
-            options.Height = 30;
-            // Set the scaling factor for the barcode
-            options.Scaling = 10;
-            // Set the margins around the barcode
-            options.Margins = 2;
-            // Set the background color of the barcode to transparent
-            options.BackgroundColor = SKColors.Transparent;
-            // Set the foreground color of the barcode to black
-            options.ForegroundColor = SKColors.Black;
-            // Enable rendering of text below the barcode
-            options.RenderText = true;
-            // Use the specified font family and style for the text
-            options.UseTypeface("Arial", SKFontStyle.Normal);
-        });
+    options.Type = BarcodeTypes.Ean13;
+    options.Height = 50;
+    options.Scaling = 3;
+    options.RenderText = true;
+    options.UseTypeface("Arial", SKFontStyle.Normal);
+});
 
-        // Encode the barcode with the specified string
-        barcodeGenerator.Encode("THE-BARCODE");
-
-        // Export the barcode image to a file
-        // The file path can include the following keywords:
-        // - {barcode}: The barcode string.
-        // - {format}: The image format (e.g., png, jpg).
-        // - {quality}: The image quality (1-100).
-        barcodeGenerator.Export("path/{barcode}_{quality}.{format}", SKEncodedImageFormat.Png, 100);
-    }
-}
+// Generate and export
+string validatedCode = barcode.Encode("123456789012");
+barcode.Export("my-barcode.png", SKEncodedImageFormat.Png, 100);
 ```
 
-## Breaking Changes
+> **💡 Need more help?** Check out our [Getting Started Guide](docs/getting-started.md) for step-by-step tutorials and examples.
 
-- Starting with version 2.0.0, the library is no longer compatible with .NET Standard 1.3 since it uses SkiaSharp 3.116.1, which requires .NET Standard 2.0.
-- Starting with version 2.0.0, the API has been changed to be more user-friendly and to allow more customization. Follow the examples in the README.md file to see how to use the new API.
+## 📋 Configuration Options
 
-## Roadmap
+The `BarcodeOptions` class provides extensive customization:
 
-- [ ] Update the README.md documentation
+- **Type** - Barcode encoding type (EAN-13, UPC-A, ISBN-13, EAN-8, CODE-93)
+- **Height** - Height of barcode bars  
+- **Scaling** - Scale factor for the entire image
+- **Margins** - Spacing around the barcode
+- **Colors** - Background and foreground colors
+- **Text Rendering** - Show/hide text below barcode
+- **Font Options** - Custom fonts, styles, and loading methods
+
+> **📚 Detailed Configuration:** See our [BarcodeOptions API Reference](docs/api/barcode-options.md) for complete documentation.
+
+## 🔧 Framework Compatibility
+
+- **.NET Standard 2.0** - Core compatibility for most scenarios
+- **.NET Framework 4.6.2** - Legacy Windows applications  
+- **.NET 6.0** - Long-term support version
+- **.NET 8.0** - Latest stable version
+
+## 🔄 Breaking Changes
+
+### Version 2.0.0+
+
+- **Framework Requirement:** No longer supports .NET Standard 1.3 (requires .NET Standard 2.0+)
+- **API Changes:** Redesigned for improved usability and customization
+- **SkiaSharp Update:** Updated to SkiaSharp 3.116.1 for better performance
+
+> **📖 Migration Guide:** See our [Getting Started documentation](docs/getting-started.md) for updated API usage patterns.
+
+## 🗺️ Roadmap
+
+- [ ] ~~Update the README.md documentation~~ ✅ **Completed**
 - [ ] Add support for CODE39 and CODE128 encoders
-- [ ] Add support for more barcode types
+- [ ] Add support for more barcode types  
 - [ ] Add an API to validate the barcode
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Code of Conduct](CODE_OF_CONDUCT.md) and check the project's [GitHub repository](https://github.com/TyKonKet/BarcodeGenerator) for contribution guidelines.
+
+## 📄 License
+
+This library is released under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+**📚 [Explore Full Documentation](docs/README.md)** | **🚀 [Getting Started Guide](docs/getting-started.md)** | **🔧 [API Reference](docs/README.md#api-reference)**
