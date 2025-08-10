@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754828874086,
+  "lastUpdate": 1754828875261,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -2748,6 +2748,60 @@ window.BENCHMARK_DATA = {
             "value": 726337.2473307292,
             "unit": "ns",
             "range": "± 858.9772480318741"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "73bb4bb3d6480ea979663daf0dbed474f3a079bc",
+          "message": "Enhance ISBN-13 prefix validation in Isbn13Encoder\n\nUpdated the `FormatBarcode` method to validate barcode prefixes, allowing only \"978\" or \"979\". Introduced a `FormatException` for invalid prefixes and modified the barcode formatting to use the extracted prefix instead of hardcoding \"978\". This improves error handling and flexibility in barcode processing.",
+          "timestamp": "2025-08-10T14:18:13+02:00",
+          "tree_id": "ddeda4ef701c4f9584b4e7c9157cd1cf66613e13",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/73bb4bb3d6480ea979663daf0dbed474f3a079bc"
+        },
+        "date": 1754828874855,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 18207.92659348708,
+            "unit": "ns",
+            "range": "± 140.7742621822267"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 20019.15919494629,
+            "unit": "ns",
+            "range": "± 156.1792836904305"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 25418.910369873047,
+            "unit": "ns",
+            "range": "± 71.1955239484043"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 38368.240626743864,
+            "unit": "ns",
+            "range": "± 112.26444622368828"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
+            "value": 724427.8396935096,
+            "unit": "ns",
+            "range": "± 764.2204520486737"
           }
         ]
       }
