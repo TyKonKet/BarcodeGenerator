@@ -38,10 +38,12 @@ string result = barcode.Encode("123456789012"); // Returns: "1234567890128"
 barcode.Encode("123456789012");     // 12 digits
 barcode.Encode("999888777666");     // Any 12 digits
 
-// Invalid inputs - will throw ArgumentException
-barcode.Encode("12345678901");      // Too short (11 digits)
-barcode.Encode("1234567890123");    // Too long (13 digits)
-barcode.Encode("12345678901A");     // Contains letter
+// Automatic handling
+barcode.Encode("12345678901");      // Too short - auto-padded with leading zeros
+barcode.Encode("1234567890123");    // Too long - end-truncated to 12 digits
+
+// Invalid inputs - will throw FormatException
+barcode.Encode("12345678901A");     // Contains invalid characters
 ```
 
 ### Upca = 2
@@ -66,9 +68,12 @@ string result = barcode.Encode("12345678901"); // Returns: "123456789012"
 barcode.Encode("12345678901");      // 11 digits
 barcode.Encode("03600029145");      // Example UPC
 
-// Invalid inputs
-barcode.Encode("1234567890");       // Too short (10 digits)
-barcode.Encode("123456789012");     // Too long (12 digits)
+// Automatic handling
+barcode.Encode("1234567890");       // Too short - auto-padded with leading zeros
+barcode.Encode("123456789012");     // Too long - end-truncated to 11 digits
+
+// Invalid inputs - will throw FormatException
+barcode.Encode("1234567890A");      // Contains invalid characters
 ```
 
 ### Isbn13 = 3
@@ -88,7 +93,7 @@ using var barcode = new Barcode(options => options.Type = BarcodeTypes.Isbn13);
 string result = barcode.Encode("978012345678"); // Returns: "9780123456786"
 ```
 
-#### Common ISBN Prefixes
+#### Allowed ISBN Prefixes
 ```csharp
 // Books published before 2007 (978 prefix)
 barcode.Encode("978123456789");
@@ -96,8 +101,8 @@ barcode.Encode("978123456789");
 // Books published after 2007 (979 prefix)
 barcode.Encode("979123456789");
 
-// Any valid 12-digit sequence works
-barcode.Encode("980123456789");
+// Invalid prefix - will throw FormatException
+barcode.Encode("980123456789");  // 980 is not a valid ISBN prefix
 ```
 
 ### Ean8 = 4
@@ -122,9 +127,12 @@ string result = barcode.Encode("1234567"); // Returns: "12345670"
 barcode.Encode("1234567");          // 7 digits
 barcode.Encode("9876543");          // Any 7 digits
 
-// Invalid inputs
-barcode.Encode("123456");           // Too short (6 digits)
-barcode.Encode("12345678");         // Too long (8 digits)
+// Automatic handling
+barcode.Encode("123456");           // Too short - auto-padded with leading zeros
+barcode.Encode("12345678");         // Too long - end-truncated to 7 digits
+
+// Invalid inputs - will throw FormatException
+barcode.Encode("123456A");          // Contains invalid characters
 ```
 
 ### Code93 = 7
@@ -143,7 +151,7 @@ Code 93 is a more compact version of Code 39, used in logistics and inventory ma
 #### Example
 ```csharp
 using var barcode = new Barcode(options => options.Type = BarcodeTypes.Code93);
-string result = barcode.Encode("HELLO-WORLD"); // Returns: "HELLO-WORLD"
+string result = barcode.Encode("HELLO-WORLD"); // Returns: "HELLO-WORLD3L"
 ```
 
 #### Character Set Examples
@@ -170,7 +178,7 @@ barcode.Encode("ABC123");           // Alphanumeric
 barcode.Encode("ITEM-001");         // With hyphen
 barcode.Encode("A B C");            // With spaces
 
-// Invalid inputs - will throw ArgumentException
+// Invalid inputs - will throw FormatException
 barcode.Encode("hello");            // Lowercase letters not supported
 barcode.Encode("item@123");         // @ symbol not supported
 barcode.Encode("test_case");        // Underscore not supported
@@ -281,7 +289,10 @@ public void ProcessMixedBarcodes()
 
 ## Check Digit Calculation
 
-For numeric barcode types (EAN-13, UPC-A, ISBN-13, EAN-8), the library automatically calculates and appends the check digit:
+For all supported barcode types, the library automatically calculates and appends check digits when required:
+
+**Numeric types** (EAN-13, UPC-A, ISBN-13, EAN-8): Use standard check digit algorithms
+**Alphanumeric types** (CODE-93): Use modulo-47 check digit calculation
 
 ```csharp
 // Input: 12 digits, Output: 13 digits with check digit
@@ -291,24 +302,6 @@ string result = ean13.Encode("123456789012"); // Returns: "1234567890128"
 // Input: 11 digits, Output: 12 digits with check digit  
 using var upca = new Barcode(options => options.Type = BarcodeTypes.Upca);
 string result2 = upca.Encode("12345678901"); // Returns: "123456789012"
-```
-
-## Error Handling
-
-```csharp
-public string SafeEncode(string data, BarcodeTypes type)
-{
-    try
-    {
-        using var barcode = new Barcode(options => options.Type = type);
-        return barcode.Encode(data);
-    }
-    catch (ArgumentException ex)
-    {
-        Console.WriteLine($"Invalid data for {type}: {ex.Message}");
-        return null;
-    }
-}
 ```
 
 ## Related Documentation

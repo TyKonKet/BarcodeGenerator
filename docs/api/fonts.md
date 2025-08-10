@@ -107,7 +107,7 @@ public enum FontFamilies
 ```csharp
 // Using enum values directly
 options.UseTypeface(FontFamilies.Arial);
-options.UseTypeface(FontFamilies.ConsoleFont);
+options.UseTypeface(FontFamilies.Consolas);
 options.UseTypeface(FontFamilies.TimesNewRoman);
 
 // With font styles
@@ -179,7 +179,7 @@ options.UseTypefaceFromStream(fileStream);
 // Clean, readable fonts work best
 options.UseTypeface(FontFamilies.Arial);
 options.UseTypeface(FontFamilies.Calibri);
-options.UseTypeface(FontFamilies.Segoe);
+options.UseTypeface(FontFamilies.SegoeUI);
 ```
 
 #### Alphanumeric Barcodes (CODE-93)
@@ -346,15 +346,19 @@ options.BackgroundColor = SKColors.Black;
 ## Error Handling
 
 ```csharp
-public void SafeConfigureFont(BarcodeOptions options, string fontName)
+public void SafeConfigureFont(BarcodeOptions options, string fontPath)
 {
     try
     {
-        options.UseTypeface(fontName);
+        options.UseTypefaceFromFile(fontPath);
     }
-    catch (Exception ex) when (ex is ArgumentException || ex is FileNotFoundException)
+    catch (InvalidOperationException ex)
     {
-        Console.WriteLine($"Font '{fontName}' not available, using default");
+        Console.WriteLine($"Options are locked: {ex.Message}");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Font loading failed, using default: {ex.Message}");
         // BarcodeOptions.DefaultTypeface will be used automatically
     }
 }

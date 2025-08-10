@@ -26,7 +26,7 @@ BarcodeGenerator is a .NET library that supports multiple barcode types with a f
 - 🚀 **High Performance** - Optimized for speed and memory efficiency
 - 🎨 **Customizable** - Colors, fonts, scaling, margins fully configurable
 - 📱 **Cross-Platform** - Works on Windows, macOS, Linux, and mobile platforms
-- 🔧 **Fluent API** - Intuitive configuration with method chaining
+- 🔧 **Action Delegate Configuration** - Intuitive configuration with lambda expressions
 - 📸 **Multiple Export Formats** - PNG, JPEG, and other image formats
 - ✅ **Validation** - Automatic check digit calculation and validation
 - 🎯 **Framework Support** - .NET Standard 2.0, .NET Framework 4.6.2, .NET 6.0, .NET 8.0

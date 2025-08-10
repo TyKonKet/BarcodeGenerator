@@ -1,6 +1,18 @@
 # BarcodeOptions Class
 
-The `BarcodeOptions` class provides configuration options for customizing barcode appearance, behavior, and font settings. It uses a fluent API pattern for easy configuration.
+The `BarcodeOptions` class provides configuration options for customizing barcode appearance, behavior, and font settings. Options are configured using an action delegate pattern.
+
+## Options Locking Mechanism
+
+**Important**: Once a `Barcode` instance is created, the options are automatically locked and cannot be modified. This ensures thread safety and prevents configuration changes after the encoder has been initialized.
+
+```csharp
+var options = new BarcodeOptions();
+options.Type = BarcodeTypes.Ean13; // This works
+
+using var barcode = new Barcode(opt => opt.Type = BarcodeTypes.Ean13);
+// Options are now locked - any attempt to modify them will be ignored
+```
 
 ## Namespace
 
@@ -364,7 +376,7 @@ public void UseTypefaceFromStream(SKStreamAsset stream, int index = 0)
 #### Example
 
 ```csharp
-using var fontStream = SKStreamAsset.OpenFromFile("fonts/custom.ttf");
+using var fontStream = new SKFileStream("fonts/custom.ttf");
 options.UseTypefaceFromStream(fontStream);
 ```
 
@@ -465,7 +477,7 @@ webOptions.UseTypeface("Arial", SKFontStyle.Normal);
 
 ## Usage Patterns
 
-### Fluent Configuration with Action
+### Configuration with Action Delegate
 ```csharp
 using var barcode = new Barcode(options =>
 {

@@ -167,15 +167,23 @@ The library throws exceptions for invalid input. Always wrap in try-catch:
 try
 {
     using var barcode = new Barcode(options => options.Type = BarcodeTypes.Ean13);
-    string result = barcode.Encode("invalid-length"); // Will throw exception
-}
-catch (ArgumentException ex)
-{
-    Console.WriteLine($"Invalid barcode data: {ex.Message}");
+    string result = barcode.Encode("invalid-chars!@#"); // Will throw exception
 }
 catch (InvalidOperationException ex)
 {
-    Console.WriteLine($"Operation error: {ex.Message}");
+    Console.WriteLine($"Barcode initialization error: {ex.Message}");
+}
+catch (ArgumentNullException ex)
+{
+    Console.WriteLine($"Null argument: {ex.Message}");
+}
+catch (FormatException ex)
+{
+    Console.WriteLine($"Invalid barcode format: {ex.Message}");
+}
+catch (ArgumentOutOfRangeException ex)
+{
+    Console.WriteLine($"Argument out of range: {ex.Message}");
 }
 ```
 
@@ -191,15 +199,7 @@ Now that you have the basics down, explore more advanced topics:
 
 ## Common Patterns
 
-### Fluent Configuration
-```csharp
-using var barcode = new Barcode(options => options
-    .Type = BarcodeTypes.Ean13)
-    .Height = 60)
-    .Scaling = 2)
-    .RenderText = true)
-    .UseTypeface("Arial", SKFontStyle.Normal));
-```
+
 
 ### Reusable Configuration
 ```csharp
@@ -220,9 +220,9 @@ using var barcode = new Barcode(ConfigureOptions);
 ```csharp
 string[] productCodes = { "123456789012", "987654321098", "456789012345" };
 
+using var barcode = new Barcode(options => options.Type = BarcodeTypes.Ean13);
 foreach (string code in productCodes)
 {
-    using var barcode = new Barcode(options => options.Type = BarcodeTypes.Ean13);
     string validatedCode = barcode.Encode(code);
     barcode.Export($"product_{validatedCode}.png");
 }

@@ -1,6 +1,6 @@
 # Barcode Class
 
-The `Barcode` class is the main entry point for barcode generation in the BarcodeGenerator library. It provides a simple, fluent API for creating and exporting barcodes.
+The `Barcode` class is the main entry point for barcode generation in the BarcodeGenerator library. It provides a simple API for creating and exporting barcodes using action delegate configuration.
 
 ## Namespace
 
@@ -110,8 +110,9 @@ public string Encode(string barcode)
 
 #### Exceptions
 
-- `ArgumentException` - Thrown when the barcode format is invalid for the selected barcode type.
 - `ArgumentNullException` - Thrown when the barcode parameter is null.
+- `FormatException` - Thrown when the barcode contains characters not allowed by the selected encoder's charset.
+- `ArgumentOutOfRangeException` - Thrown when a numeric character falls outside the valid range during internal conversion.
 
 #### Examples
 
@@ -126,7 +127,7 @@ Console.WriteLine(result); // Output: "1234567890128" (13 digits with check digi
 ```csharp
 using var barcode = new Barcode(options => options.Type = BarcodeTypes.Code93);
 string result = barcode.Encode("HELLO-WORLD");
-Console.WriteLine(result); // Output: "HELLO-WORLD"
+Console.WriteLine(result); // Output: "HELLO-WORLD3L"
 ```
 
 **Error handling:**
@@ -134,11 +135,11 @@ Console.WriteLine(result); // Output: "HELLO-WORLD"
 try
 {
     using var barcode = new Barcode(options => options.Type = BarcodeTypes.Ean13);
-    string result = barcode.Encode("invalid"); // Too short for EAN-13
+    string result = barcode.Encode("invalid@chars"); // Invalid characters for EAN-13
 }
-catch (ArgumentException ex)
+catch (FormatException ex)
 {
-    Console.WriteLine($"Invalid barcode: {ex.Message}");
+    Console.WriteLine($"Invalid barcode format: {ex.Message}");
 }
 ```
 
@@ -165,7 +166,11 @@ public void Export(string fileName, SKEncodedImageFormat format = SKEncodedImage
 #### Exceptions
 
 - `InvalidOperationException` - Thrown when the barcode has not been encoded before export.
-- `ArgumentNullException` - Thrown when fileName is null.
+- `ArgumentNullException` - Thrown when filePath is null.
+- `DirectoryNotFoundException` - Thrown when the directory for the file path does not exist and cannot be created.
+- `IOException` - Thrown when an I/O error occurs during file operations.
+
+**Note**: The directory will be automatically created if it doesn't exist.
 - `DirectoryNotFoundException` - Thrown when the specified directory doesn't exist.
 
 #### Examples
@@ -193,8 +198,7 @@ barcode.Export("products/{barcode}_q{quality}.{format}", SKEncodedImageFormat.Pn
 
 **Directory structure:**
 ```csharp
-// Ensure directory exists
-Directory.CreateDirectory("output/barcodes");
+// Directory is automatically created if it doesn't exist
 barcode.Export("output/barcodes/product-{barcode}.png");
 ```
 
@@ -216,6 +220,7 @@ public void Export(Stream stream, SKEncodedImageFormat format = SKEncodedImageFo
 
 - `InvalidOperationException` - Thrown when the barcode has not been encoded before export.
 - `ArgumentNullException` - Thrown when stream is null.
+- `IOException` - Thrown when an I/O error occurs during stream operations.
 
 #### Examples
 
@@ -316,15 +321,15 @@ barcode.Export("products/{barcode}.png", SKEncodedImageFormat.Png, 100);
 ```csharp
 string[] productCodes = { "123456789012", "987654321098" };
 
+using var barcode = new Barcode(options =>
+{
+    options.Type = BarcodeTypes.Ean13;
+    options.Height = 50;
+    options.Scaling = 2;
+});
+
 foreach (string code in productCodes)
 {
-    using var barcode = new Barcode(options =>
-    {
-        options.Type = BarcodeTypes.Ean13;
-        options.Height = 50;
-        options.Scaling = 2;
-    });
-    
     string validatedCode = barcode.Encode(code);
     barcode.Export($"output/{validatedCode}.png");
 }
@@ -347,13 +352,25 @@ public void GenerateBarcode(string input, string outputPath)
         
         Console.WriteLine($"Successfully generated barcode: {validatedCode}");
     }
-    catch (ArgumentException ex)
+    catch (ArgumentNullException ex)
     {
-        Console.WriteLine($"Invalid input: {ex.Message}");
+        Console.WriteLine($"Null argument: {ex.Message}");
+    }
+    catch (FormatException ex)
+    {
+        Console.WriteLine($"Invalid format: {ex.Message}");
+    }
+    catch (ArgumentOutOfRangeException ex)
+    {
+        Console.WriteLine($"Argument out of range: {ex.Message}");
     }
     catch (InvalidOperationException ex)
     {
         Console.WriteLine($"Operation failed: {ex.Message}");
+    }
+    catch (IOException ex)
+    {
+        Console.WriteLine($"I/O error: {ex.Message}");
     }
     catch (Exception ex)
     {
