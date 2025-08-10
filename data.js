@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754857410216,
+  "lastUpdate": 1754864076004,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -1562,6 +1562,60 @@ window.BENCHMARK_DATA = {
             "value": 537261.6704852765,
             "unit": "ns",
             "range": "± 691.819866539529"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7cbcc0faa91e6396d06de5eba37b414c5431c392",
+          "message": "Merge pull request #9 from TyKonKet/copilot/fix-8\n\nAdd comprehensive API documentation with corrected exceptions, AI disclaimers, and modern repository presentation",
+          "timestamp": "2025-08-11T00:05:25+02:00",
+          "tree_id": "cb719e99ada38fac19462939c17e1e1d37fbca8a",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/7cbcc0faa91e6396d06de5eba37b414c5431c392"
+        },
+        "date": 1754864075594,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 15136.68407389323,
+            "unit": "ns",
+            "range": "± 187.96072021643226"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 16784.62358194987,
+            "unit": "ns",
+            "range": "± 312.59102125686616"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 19368.203989664715,
+            "unit": "ns",
+            "range": "± 37.35030546702456"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 26125.204315185547,
+            "unit": "ns",
+            "range": "± 26.71958765757721"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
+            "value": 538645.4585658482,
+            "unit": "ns",
+            "range": "± 3729.185581841313"
           }
         ]
       }
