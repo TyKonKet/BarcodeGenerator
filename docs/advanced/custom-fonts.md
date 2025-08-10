@@ -1,5 +1,8 @@
 # Custom Font Loading
 
+> **⚠️ AI-Generated Content Disclaimer**  
+> This document has been AI-generated and may contain issues or mistakes. Please verify the information against the actual source code and report any inaccuracies.
+
 This guide demonstrates advanced font loading techniques for the BarcodeGenerator library, including loading fonts from files, embedded resources, streams, and handling cross-platform font scenarios.
 
 ## Overview

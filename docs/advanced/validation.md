@@ -1,5 +1,8 @@
 # Barcode Validation and Check Digits
 
+> **⚠️ AI-Generated Content Disclaimer**  
+> This document has been AI-generated and may contain issues or mistakes. Please verify the information against the actual source code and report any inaccuracies.
+
 This guide explains the validation rules, check digit calculation, and error handling mechanisms in the BarcodeGenerator library. Understanding these concepts helps ensure data integrity and successful barcode generation.
 
 ## Overview
@@ -457,17 +460,35 @@ public static class SafeBarcodeGenerator
             result.Success = true;
             result.ProcessingTime = DateTime.UtcNow - result.StartTime;
         }
-        catch (ArgumentException argEx)
-        {
-            result.Success = false;
-            result.ErrorType = BarcodeErrorType.InvalidArgument;
-            result.ErrorMessage = argEx.Message;
-        }
         catch (InvalidOperationException opEx)
         {
             result.Success = false;
             result.ErrorType = BarcodeErrorType.InvalidOperation;
             result.ErrorMessage = opEx.Message;
+        }
+        catch (ArgumentNullException nullEx)
+        {
+            result.Success = false;
+            result.ErrorType = BarcodeErrorType.InvalidArgument;
+            result.ErrorMessage = nullEx.Message;
+        }
+        catch (FormatException formatEx)
+        {
+            result.Success = false;
+            result.ErrorType = BarcodeErrorType.ValidationError;
+            result.ErrorMessage = formatEx.Message;
+        }
+        catch (ArgumentOutOfRangeException rangeEx)
+        {
+            result.Success = false;
+            result.ErrorType = BarcodeErrorType.InvalidArgument;
+            result.ErrorMessage = rangeEx.Message;
+        }
+        catch (IOException ioEx)
+        {
+            result.Success = false;
+            result.ErrorType = BarcodeErrorType.ExportError;
+            result.ErrorMessage = $"Export I/O error: {ioEx.Message}";
         }
         catch (Exception ex)
         {

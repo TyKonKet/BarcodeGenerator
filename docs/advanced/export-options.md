@@ -1,5 +1,8 @@
 # Export Options and Advanced Export Scenarios
 
+> **⚠️ AI-Generated Content Disclaimer**  
+> This document has been AI-generated and may contain issues or mistakes. Please verify the information against the actual source code and report any inaccuracies.
+
 This guide covers advanced export scenarios, batch processing, optimization techniques, and specialized export configurations for the BarcodeGenerator library.
 
 ## Advanced File Naming Strategies
