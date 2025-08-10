@@ -36,5 +36,21 @@ namespace TyKonKet.BarcodeGenerator.Tests.Encoders
         {
             Assert.True(new Isbn13Encoder().EnsureValidCharset(barcode));
         }
+
+        [Theory]
+        [InlineData("123456789")]        // Missing prefix - too short
+        [InlineData("12")]               // Very short input
+        [InlineData("")]                 // Empty string
+        [InlineData("977123456789")]     // Invalid prefix 977
+        [InlineData("980123456789")]     // Invalid prefix 980
+        [InlineData("876123456789")]     // Invalid prefix 876
+        [InlineData("123123456789")]     // Invalid prefix 123
+        [InlineData("abc123456789")]     // Non-numeric prefix
+        [InlineData("97X123456789")]     // Invalid character in prefix
+        public void FormatBarcode_ShouldThrowFormatException_ForInvalidPrefix(string barcode)
+        {
+            var exception = Assert.Throws<FormatException>(() => Isbn13Encoder.FormatBarcode(barcode));
+            Assert.Equal("Invalid ISBN-13 prefix. Only '978' or '979' are allowed.", exception.Message);
+        }
     }
 }
