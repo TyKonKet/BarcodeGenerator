@@ -526,9 +526,17 @@ public void ProcessMixedBarcodeTypes()
             barcode.Export($"{type}_{result}.png");
             Console.WriteLine($"Generated {type}: {result} ({description})");
         }
-        catch (ArgumentException ex)
+        catch (ArgumentNullException ex)
         {
-            Console.WriteLine($"Failed to generate {type} for '{data}': {ex.Message}");
+            Console.WriteLine($"Null input for {type}: {ex.Message}");
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine($"Format error for {type} '{data}': {ex.Message}");
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine($"Range error for {type} '{data}': {ex.Message}");
         }
     }
 }
@@ -555,52 +563,7 @@ private void ConfigureForType(BarcodeOptions options, BarcodeTypes type)
 }
 ```
 
-## Testing and Validation
 
-### Comprehensive Validation Suite
-
-```csharp
-public static class BarcodeTestSuite
-{
-    public static void RunValidationTests()
-    {
-        TestEan13();
-        TestUpca();
-        TestIsbn13();
-        TestEan8();
-        TestCode93();
-    }
-    
-    private static void TestEan13()
-    {
-        using var barcode = new Barcode(options => options.Type = BarcodeTypes.Ean13);
-        
-        // Valid cases
-        Assert.AreEqual("1234567890128", barcode.Encode("123456789012"));
-        Assert.AreEqual("0490000289118", barcode.Encode("049000028911"));
-        
-        // Invalid cases should throw
-        Assert.ThrowsException<ArgumentException>(() => barcode.Encode("12345678901"));   // Too short
-        Assert.ThrowsException<ArgumentException>(() => barcode.Encode("1234567890123")); // Too long
-        Assert.ThrowsException<ArgumentException>(() => barcode.Encode("12345678901A"));  // Non-numeric
-    }
-    
-    private static void TestCode93()
-    {
-        using var barcode = new Barcode(options => options.Type = BarcodeTypes.Code93);
-        
-        // Valid cases
-        Assert.AreEqual("HELLO123", barcode.Encode("HELLO123"));
-        Assert.AreEqual("ITEM-001", barcode.Encode("ITEM-001"));
-        Assert.AreEqual("PART+ABC/123", barcode.Encode("PART+ABC/123"));
-        
-        // Invalid cases should throw
-        Assert.ThrowsException<ArgumentException>(() => barcode.Encode("hello123"));    // Lowercase
-        Assert.ThrowsException<ArgumentException>(() => barcode.Encode("ITEM@001"));    // Invalid char @
-        Assert.ThrowsException<ArgumentException>(() => barcode.Encode("PART_ABC"));    // Invalid char _
-    }
-}
-```
 
 ## Related Documentation
 

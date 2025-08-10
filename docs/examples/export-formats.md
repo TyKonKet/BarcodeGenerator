@@ -77,9 +77,6 @@ barcode.Export("barcode.gif", SKEncodedImageFormat.Gif, 100);
 
 // ICO (for icons)
 barcode.Export("barcode.ico", SKEncodedImageFormat.Ico, 100);
-
-// PDF (vector format)
-barcode.Export("barcode.pdf", SKEncodedImageFormat.Pdf, 100);
 ```
 
 ## File Export Options
@@ -129,16 +126,12 @@ barcode.Export($"archive/{timestamp}_{{{barcode}}}.png");
 // Result: archive/20240115_143022_1234567890128.png
 ```
 
-### Directory Management
+### Automatic Directory Creation
 
 ```csharp
-// Ensure directory exists before export
-string outputDir = "generated/barcodes";
-Directory.CreateDirectory(outputDir);
-barcode.Export($"{outputDir}/{{barcode}}.png");
-
-// Create nested directories
-barcode.Export("products/electronics/{barcode}.png");  // Creates directories if needed
+// Directories are automatically created - no manual setup needed
+barcode.Export("products/electronics/{barcode}.png");
+barcode.Export("nested/deep/folder/structure/{barcode}.png");
 ```
 
 ### File Naming Best Practices
@@ -151,17 +144,12 @@ public static class FileNamingHelper
         var invalidChars = Path.GetInvalidFileNameChars();
         return string.Join("_", filename.Split(invalidChars, StringSplitOptions.RemoveEmptyEntries));
     }
-    
-    public static string GenerateBarcodeFilename(string barcode, string format = "png", int quality = 100)
-    {
-        string sanitized = SanitizeFilename(barcode);
-        return $"barcode_{sanitized}_q{quality}.{format}";
-    }
 }
 
-// Usage
-string filename = FileNamingHelper.GenerateBarcodeFilename("ITEM-001", "png", 100);
-barcode.Export($"output/{filename}");
+// Usage - library handles barcode, format, and quality embedding automatically
+string customPrefix = "custom_prefix";
+string sanitizedPrefix = FileNamingHelper.SanitizeFilename(customPrefix);
+barcode.Export($"output/{sanitizedPrefix}_{barcode}.png");
 ```
 
 ## Stream Export
@@ -437,11 +425,13 @@ public async Task<List<ExportResult>> BatchExportAsync(
 {
     var results = new List<ExportResult>();
     
+    // Reuse barcode instance for better performance
+    using var barcode = new Barcode(options => options.Type = type);
+    
     for (int i = 0; i < barcodeCodes.Count; i++)
     {
         try
         {
-            using var barcode = new Barcode(options => options.Type = type);
             string validatedCode = barcode.Encode(barcodeCodes[i]);
             
             string filePath = Path.Combine(outputDirectory, $"{validatedCode}.png");
@@ -493,45 +483,28 @@ public bool TryExportBarcode(Barcode barcode, string filePath, out string error)
     
     try
     {
-        // Validate directory exists
-        string directory = Path.GetDirectoryName(filePath);
-        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-        
-        // Check if file is writable
-        string tempFile = filePath + ".tmp";
-        File.WriteAllText(tempFile, "test");
-        File.Delete(tempFile);
-        
-        // Export barcode
+        // Export barcode (directory auto-creation is handled by the library)
         barcode.Export(filePath);
         return true;
     }
-    catch (UnauthorizedAccessException)
+    catch (InvalidOperationException)
     {
-        error = "Access denied to output path";
+        error = "Barcode not encoded before export";
+        return false;
+    }
+    catch (ArgumentNullException)
+    {
+        error = "File path cannot be null";
         return false;
     }
     catch (DirectoryNotFoundException)
     {
-        error = "Output directory not found";
-        return false;
-    }
-    catch (PathTooLongException)
-    {
-        error = "File path is too long";
+        error = "Output directory not found and cannot be created";
         return false;
     }
     catch (IOException ex)
     {
         error = $"IO error: {ex.Message}";
-        return false;
-    }
-    catch (Exception ex)
-    {
-        error = $"Unexpected error: {ex.Message}";
         return false;
     }
 }
@@ -568,35 +541,81 @@ public bool TryExportToStream(Barcode barcode, Stream stream, SKEncodedImageForm
 ### Memory Management
 
 ```csharp
-// Efficient memory usage for large batches
+// Efficient memory usage for large batches - reuse the same instance
 public void ExportLargeBatch(List<string> codes, BarcodeTypes type)
 {
+    using var barcode = new Barcode(options => options.Type = type);
+    
     foreach (string code in codes)
     {
-        using var barcode = new Barcode(options => options.Type = type);
         string result = barcode.Encode(code);
         barcode.Export($"output/{result}.png");
-        
-        // Barcode is automatically disposed here, freeing memory
     }
+    
+    // Single barcode instance is disposed here, optimal memory usage
 }
 ```
 
-### Parallel Processing
+### Advanced Parallel Processing with Barcode Pools
 
 ```csharp
-public async Task ExportInParallel(List<string> codes, BarcodeTypes type)
+using System.Collections.Concurrent;
+using System.Threading;
+
+public async Task ExportInParallelWithPools(List<string> codes, BarcodeTypes type, int maxConcurrency = Environment.ProcessorCount)
 {
-    var tasks = codes.Select(async code =>
-    {
-        using var barcode = new Barcode(options => options.Type = type);
-        string result = barcode.Encode(code);
-        barcode.Export($"output/{result}.png");
-        return result;
-    });
+    // Create a pool of barcode instances for thread safety
+    var barcodePool = new ConcurrentQueue<Barcode>();
+    var semaphore = new SemaphoreSlim(maxConcurrency);
     
-    var results = await Task.WhenAll(tasks);
-    Console.WriteLine($"Exported {results.Length} barcodes");
+    try
+    {
+        // Pre-populate the pool
+        for (int i = 0; i < maxConcurrency; i++)
+        {
+            barcodePool.Enqueue(new Barcode(options => options.Type = type));
+        }
+        
+        var tasks = codes.Select(async code =>
+        {
+            await semaphore.WaitAsync();
+            try
+            {
+                // Get barcode instance from pool
+                if (barcodePool.TryDequeue(out var barcode))
+                {
+                    try
+                    {
+                        string result = barcode.Encode(code);
+                        barcode.Export($"output/{result}.png");
+                        return result;
+                    }
+                    finally
+                    {
+                        // Return to pool for reuse
+                        barcodePool.Enqueue(barcode);
+                    }
+                }
+                return null;
+            }
+            finally
+            {
+                semaphore.Release();
+            }
+        });
+        
+        var results = await Task.WhenAll(tasks);
+        Console.WriteLine($"Exported {results.Count(r => r != null)} barcodes");
+    }
+    finally
+    {
+        // Dispose all pooled instances
+        while (barcodePool.TryDequeue(out var barcode))
+        {
+            barcode.Dispose();
+        }
+        semaphore.Dispose();
+    }
 }
 ```
 

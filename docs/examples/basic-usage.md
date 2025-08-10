@@ -255,9 +255,25 @@ public IActionResult GenerateBarcode(string code)
         
         return File(stream, "image/png", $"{validatedCode}.png");
     }
-    catch (ArgumentException)
+    catch (InvalidOperationException)
+    {
+        return BadRequest("Barcode configuration error");
+    }
+    catch (ArgumentNullException)
+    {
+        return BadRequest("Invalid barcode input");
+    }
+    catch (FormatException)
     {
         return BadRequest("Invalid barcode format");
+    }
+    catch (ArgumentOutOfRangeException)
+    {
+        return BadRequest("Barcode value out of range");
+    }
+    catch (IOException)
+    {
+        return StatusCode(500, "Export error");
     }
 }
 ```
@@ -276,17 +292,29 @@ public void GenerateBarcodeWithErrorHandling(string input)
         barcode.Export($"output/{result}.png");
         Console.WriteLine($"Successfully generated: {result}");
     }
-    catch (ArgumentException ex)
-    {
-        Console.WriteLine($"Invalid input '{input}': {ex.Message}");
-    }
     catch (InvalidOperationException ex)
     {
-        Console.WriteLine($"Operation failed: {ex.Message}");
+        Console.WriteLine($"Configuration error: {ex.Message}");
     }
-    catch (Exception ex)
+    catch (ArgumentNullException ex)
     {
-        Console.WriteLine($"Unexpected error: {ex.Message}");
+        Console.WriteLine($"Null input provided: {ex.Message}");
+    }
+    catch (FormatException ex)
+    {
+        Console.WriteLine($"Invalid format '{input}': {ex.Message}");
+    }
+    catch (ArgumentOutOfRangeException ex)
+    {
+        Console.WriteLine($"Value out of range '{input}': {ex.Message}");
+    }
+    catch (DirectoryNotFoundException ex)
+    {
+        Console.WriteLine($"Output directory error: {ex.Message}");
+    }
+    catch (IOException ex)
+    {
+        Console.WriteLine($"Export error: {ex.Message}");
     }
 }
 ```
@@ -354,24 +382,28 @@ public void GenerateMultipleBarcodes()
         "789012345678"
     };
     
+    using var barcode = new Barcode(options =>
+    {
+        options.Type = BarcodeTypes.Ean13;
+        options.Height = 50;
+        options.Scaling = 2;
+    });
+    
     foreach (string code in productCodes)
     {
-        using var barcode = new Barcode(options =>
-        {
-            options.Type = BarcodeTypes.Ean13;
-            options.Height = 50;
-            options.Scaling = 2;
-        });
-        
         try
         {
             string result = barcode.Encode(code);
             barcode.Export($"products/product_{result}.png");
             Console.WriteLine($"Generated: {result}");
         }
-        catch (ArgumentException ex)
+        catch (FormatException ex)
         {
             Console.WriteLine($"Failed to generate barcode for '{code}': {ex.Message}");
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            Console.WriteLine($"Value out of range for '{code}': {ex.Message}");
         }
     }
 }
@@ -391,23 +423,46 @@ public void GenerateMixedBarcodes()
         ("ITEM-001", BarcodeTypes.Code93, "inventory")
     };
     
-    foreach (var (data, type, category) in barcodeData)
+    // Create a cache of Barcode instances by type for performance
+    var barcodeCache = new Dictionary<BarcodeTypes, Barcode>();
+    
+    try
     {
-        using var barcode = new Barcode(options =>
+        foreach (var (data, type, category) in barcodeData)
         {
-            options.Type = type;
-            options.Height = 50;
-            options.Scaling = 2;
-        });
-        
-        try
-        {
-            string result = barcode.Encode(data);
-            barcode.Export($"{category}/{result}.png");
+            // Get or create barcode instance for this type
+            if (!barcodeCache.TryGetValue(type, out var barcode))
+            {
+                barcode = new Barcode(options =>
+                {
+                    options.Type = type;
+                    options.Height = 50;
+                    options.Scaling = 2;
+                });
+                barcodeCache[type] = barcode;
+            }
+            
+            try
+            {
+                string result = barcode.Encode(data);
+                barcode.Export($"{category}/{result}.png");
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine($"Format error processing {data}: {ex.Message}");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine($"Range error processing {data}: {ex.Message}");
+            }
         }
-        catch (Exception ex)
+    }
+    finally
+    {
+        // Dispose all cached instances
+        foreach (var barcode in barcodeCache.Values)
         {
-            Console.WriteLine($"Error processing {data}: {ex.Message}");
+            barcode.Dispose();
         }
     }
 }
