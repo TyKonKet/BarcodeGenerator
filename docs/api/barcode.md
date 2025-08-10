@@ -145,15 +145,16 @@ catch (FormatException ex)
 
 ### Export(string, SKEncodedImageFormat, int)
 
-Exports the barcode image to a file with the specified format and quality.
+Exports the barcode image to a file with the specified format and quality.  
+_**Note**: The directory will be automatically created if it doesn't exist._
 
 ```csharp
-public void Export(string fileName, SKEncodedImageFormat format = SKEncodedImageFormat.Png, int quality = 100)
+public void Export(string filePath, SKEncodedImageFormat format = SKEncodedImageFormat.Png, int quality = 100)
 ```
 
 #### Parameters
 
-- `fileName` (string) - The name of the file to export the image to. Supports keyword substitution (see below).
+- `filePath` (string) - Path to the file (can be relative or absolute). Supports keyword substitution (see below).
 - `format` (SKEncodedImageFormat) - The image export format. Default is PNG.
 - `quality` (int) - The image export quality (1-100). Default is 100. Only affects JPEG and WEBP formats.
 
@@ -167,11 +168,8 @@ public void Export(string fileName, SKEncodedImageFormat format = SKEncodedImage
 
 - `InvalidOperationException` - Thrown when the barcode has not been encoded before export.
 - `ArgumentNullException` - Thrown when filePath is null.
-- `DirectoryNotFoundException` - Thrown when the directory for the file path does not exist and cannot be created.
 - `IOException` - Thrown when an I/O error occurs during file operations.
-
-**Note**: The directory will be automatically created if it doesn't exist.
-- `DirectoryNotFoundException` - Thrown when the specified directory doesn't exist.
+- `DirectoryNotFoundException` - Thrown when the directory for the file path does not exist and cannot be created.
 
 #### Examples
 
