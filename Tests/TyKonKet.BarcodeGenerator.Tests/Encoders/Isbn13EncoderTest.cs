@@ -9,10 +9,9 @@ namespace TyKonKet.BarcodeGenerator.Tests.Encoders
         [Theory]
         [InlineData("9781234567897", "978123456789")]
         [InlineData("978123456789", "978123456789")]
-        [InlineData("123456789", "978123456789")]
         [InlineData("9781234567897532", "978123456789")]
-        [InlineData("34567897532", "978345678975")]
-        [InlineData("567894567897532", "978567894567")]
+        [InlineData("978345678975", "978345678975")]
+        [InlineData("978567894567", "978567894567")]
         public void Isbn13Validate_ShouldReturnExpectedResult(string input, string expected)
         {
             Assert.Equal(expected, Isbn13Encoder.FormatBarcode(input));
@@ -36,6 +35,22 @@ namespace TyKonKet.BarcodeGenerator.Tests.Encoders
         public void ValidateCharset_ShouldReturnTrue_ForValidCharset(string barcode)
         {
             Assert.True(new Isbn13Encoder().EnsureValidCharset(barcode));
+        }
+
+        [Theory]
+        [InlineData("123456789")]        // Missing prefix - too short
+        [InlineData("12")]               // Very short input
+        [InlineData("")]                 // Empty string
+        [InlineData("977123456789")]     // Invalid prefix 977
+        [InlineData("980123456789")]     // Invalid prefix 980
+        [InlineData("876123456789")]     // Invalid prefix 876
+        [InlineData("123123456789")]     // Invalid prefix 123
+        [InlineData("abc123456789")]     // Non-numeric prefix
+        [InlineData("97X123456789")]     // Invalid character in prefix
+        public void FormatBarcode_ShouldThrowFormatException_ForInvalidPrefix(string barcode)
+        {
+            var exception = Assert.Throws<FormatException>(() => Isbn13Encoder.FormatBarcode(barcode));
+            Assert.Equal("Invalid ISBN-13 prefix. Only '978' or '979' are allowed.", exception.Message);
         }
     }
 }
