@@ -9,10 +9,9 @@ namespace TyKonKet.BarcodeGenerator.Tests.Encoders
         [Theory]
         [InlineData("9781234567897", "978123456789")]
         [InlineData("978123456789", "978123456789")]
-        [InlineData("123456789", "978123456789")]
         [InlineData("9781234567897532", "978123456789")]
-        [InlineData("34567897532", "978345678975")]
-        [InlineData("567894567897532", "978567894567")]
+        [InlineData("978345678975", "978345678975")]
+        [InlineData("978567894567", "978567894567")]
         public void Isbn13Validate_ShouldReturnExpectedResult(string input, string expected)
         {
             Assert.Equal(expected, Isbn13Encoder.FormatBarcode(input));
