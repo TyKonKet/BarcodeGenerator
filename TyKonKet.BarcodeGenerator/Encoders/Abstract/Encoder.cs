@@ -79,6 +79,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <param name="format">Image export format.</param>
         /// <param name="quality">Image export quality.</param>
         /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="filePath"/> is <c>null</c>.</exception>
+        /// <exception cref="DirectoryNotFoundException">Thrown when the directory for the file path does not exist and cannot be created.</exception>
+        /// <exception cref="IOException">Thrown when an I/O error occurs during file operations.</exception>
         public virtual void Export(string filePath, SKEncodedImageFormat format, int quality)
         {
             if (this.Image == null)
@@ -113,6 +116,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <param name="format">Image export format.</param>
         /// <param name="quality">Image export quality.</param>
         /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="stream"/> is <c>null</c>.</exception>
+        /// <exception cref="IOException">Thrown when an I/O error occurs during stream operations.</exception>
         public virtual void Export(Stream stream, SKEncodedImageFormat format, int quality)
         {
             if (this.Image == null)
