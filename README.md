@@ -108,7 +108,7 @@ The `BarcodeOptions` class provides extensive customization:
 
 ## 🗺️ Roadmap
 
-- [ ] ~~Update the README.md documentation~~ ✅ **Completed**
+- [x] ~~Update the README.md documentation~~ ✅ **Completed**
 - [ ] Add support for CODE39 and CODE128 encoders
 - [ ] Add support for more barcode types  
 - [ ] Add an API to validate the barcode
