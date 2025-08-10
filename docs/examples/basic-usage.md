@@ -2,6 +2,8 @@
 
 This guide provides practical examples for the most common barcode generation scenarios using the BarcodeGenerator library.
 
+---
+
 ## Simple Barcode Generation
 
 ### Minimal Example
@@ -18,6 +20,12 @@ string result = barcode.Encode("1234567");  // Returns: "12345670" (with check d
 barcode.Export("simple-barcode.png");
 ```
 
+**What this does:**
+- Creates a barcode with all default settings
+- Uses EAN-8 format (default type)
+- Automatically calculates and adds the check digit
+- Exports as PNG image
+
 ### Specific Barcode Type
 
 Generate a specific barcode type:
@@ -28,6 +36,8 @@ using var ean13 = new Barcode(options => options.Type = BarcodeTypes.Ean13);
 string result = ean13.Encode("123456789012");  // Returns: "1234567890128"
 ean13.Export("ean13-barcode.png");
 ```
+
+---
 
 ## Configuration Examples
 
@@ -48,9 +58,20 @@ string result = barcode.Encode("123456789012");
 barcode.Export("configured-barcode.png");
 ```
 
+**Configuration breakdown:**
+
+| Setting | Value | Effect |
+|---------|-------|--------|
+| `Type` | `BarcodeTypes.Ean13` | Uses EAN-13 format |
+| `Height` | `50` | Makes bars 50 pixels tall |
+| `Scaling` | `3` | Enlarges entire barcode 3x |
+| `RenderText` | `true` | Shows numbers below bars |
+
+---
+
 ### Complete Configuration
 
-All available options configured:
+All available options configured for maximum control:
 
 ```csharp
 using var barcode = new Barcode(options =>
@@ -74,9 +95,21 @@ string result = barcode.Encode("PRODUCT-001");
 barcode.Export("complete-barcode.png");
 ```
 
+**Advanced Options:**
+
+| Category | Options | Purpose |
+|----------|---------|---------|
+| **Dimensions** | Height, Scaling, Margins | Control size and spacing |
+| **Colors** | Background, Foreground | Visual appearance |
+| **Text** | RenderText, Typeface | Human readability |
+
+---
+
 ## Different Barcode Types
 
 ### EAN-13 (Retail Products)
+
+**Best for:** International retail products, grocery items
 
 ```csharp
 using var ean13 = new Barcode(options =>
@@ -92,6 +125,8 @@ ean13.Export("product-{barcode}.png");         // Saves as: product-123456789012
 ```
 
 ### UPC-A (North American Retail)
+
+**Best for:** US and Canadian retail products
 
 ```csharp
 using var upca = new Barcode(options =>
@@ -537,8 +572,17 @@ using var barcode = new Barcode(BarcodeConfigurations.Professional);
 
 Now that you understand the basic usage patterns, explore more advanced topics:
 
+**🎨 Styling & Customization:**
 - [Customization Examples](customization.md) - Advanced styling and appearance options
 - [Export Formats](export-formats.md) - Detailed export options and file handling
+
+**📋 Type-Specific Documentation:**
 - [Supported Types](supported-types.md) - Comprehensive examples for each barcode type
+
+**🔧 Advanced Features:**
 - [Custom Fonts](../advanced/custom-fonts.md) - Loading and using custom fonts
 - [Validation](../advanced/validation.md) - Input validation and error handling
+
+**📚 API Reference:**
+- [Barcode Class](../api/barcode.md) - Complete API documentation
+- [BarcodeOptions](../api/barcode-options.md) - All configuration options
