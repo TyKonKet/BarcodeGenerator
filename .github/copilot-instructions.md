@@ -2,7 +2,7 @@
 
 ## Repository Overview
 
-**BarcodeGenerator** is a .NET library for generating barcodes using SkiaSharp. The library supports multiple barcode types (EAN-13, UPC-A, ISBN-13, EAN-8, CODE-93) and provides a fluent API for configuration and export. It's distributed as a NuGet package and targets multiple .NET frameworks.
+**BarcodeGenerator** is a .NET library for generating barcodes using SkiaSharp. The library supports multiple barcode types (EAN-13, UPC-A, ISBN-13, EAN-8, CODE-93) and provides an action delegate configuration with lambda expressions. It's distributed as a NuGet package and targets multiple .NET frameworks.
 
 **Repository Size**: Medium (~50 source files)  
 **Project Type**: .NET Class Library  
