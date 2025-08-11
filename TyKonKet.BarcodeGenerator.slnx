@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/TyKonKet.BarcodeGenerator.Benchmarks/TyKonKet.BarcodeGenerator.Benchmarks.csproj" />
+    <Project Path="Tests/TyKonKet.BarcodeGenerator.CB/TyKonKet.BarcodeGenerator.CB.csproj" />
+    <Project Path="Tests/TyKonKet.BarcodeGenerator.Playground/TyKonKet.BarcodeGenerator.Playground.csproj" />
+    <Project Path="Tests/TyKonKet.BarcodeGenerator.Tests/TyKonKet.BarcodeGenerator.Tests.csproj" />
+  </Folder>
+  <Project Path="TyKonKet.BarcodeGenerator/TyKonKet.BarcodeGenerator.csproj" />
+</Solution>

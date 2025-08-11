@@ -95,7 +95,7 @@ dotnet build --configuration Release
 
 ### Solution Structure
 ```
-TyKonKet.BarcodeGenerator.sln          # Main solution file
+TyKonKet.BarcodeGenerator.slnx         # Main solution file
 ├── TyKonKet.BarcodeGenerator/         # Main library project
 │   ├── Barcode.cs                     # Main API entry point
 │   ├── BarcodeOptions.cs              # Configuration options
@@ -188,7 +188,7 @@ BenchmarkDotNet tests in `TyKonKet.BarcodeGenerator.CB` measure:
 ## Key File Locations
 
 **Build Configuration**:
-- Solution file: `TyKonKet.BarcodeGenerator.sln`
+- Solution file: `TyKonKet.BarcodeGenerator.slnx`
 - Main project: `TyKonKet.BarcodeGenerator/TyKonKet.BarcodeGenerator.csproj`
 - Build properties: `Directory.Build.props`
 
