@@ -18,8 +18,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// Initializes a new instance of the <see cref="Isbn13Encoder"/> class with the specified options.
         /// </summary>
         /// <param name="options">The barcode options.</param>
-        public Isbn13Encoder(BarcodeOptions options)
-            : base(options)
+        public Isbn13Encoder(BarcodeOptions options) : base(options)
         {
         }
 
@@ -28,9 +27,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// </summary>
         /// <param name="barcode">The barcode to encode.</param>
         /// <returns>The encoded barcode string.</returns>
-        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
-        /// <exception cref="System.FormatException">Thrown when the resulting ISBN-13 barcode contains characters not allowed by EAN charset (only digits 0–9).</exception>
-        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="FormatException">Thrown when the resulting ISBN-13 barcode contains characters not allowed by EAN charset (only digits 0–9).</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         public override string Encode(string barcode)
         {
             barcode = FormatBarcode(barcode);
@@ -46,16 +45,16 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         internal static new string FormatBarcode(string barcode)
         {
             // Validate and extract prefix
-            string prefix = (barcode.Length > 3 && (string.Equals(barcode.Substring(0, 3), "978", StringComparison.Ordinal) || string.Equals(barcode.Substring(0, 3), "979", StringComparison.Ordinal))
-                ? barcode.Substring(0, 3)
+            string prefix = (barcode.Length > 3 && (string.Equals(barcode[..3], "978", StringComparison.Ordinal) || string.Equals(barcode[..3], "979", StringComparison.Ordinal))
+                ? barcode[..3]
                 : null) ?? throw new FormatException("Invalid ISBN-13 prefix. Only '978' or '979' are allowed.");
 
             // Remove prefix from barcode
-            barcode = barcode.Remove(0, 3);
+            barcode = barcode[3..];
 
             // Pad and reformat barcode
             barcode = barcode.PadLeft(9, '0');
-            barcode = $"{prefix}{barcode.Substring(0, 9)}";
+            barcode = $"{prefix}{barcode[..9]}";
 
             return barcode;
         }

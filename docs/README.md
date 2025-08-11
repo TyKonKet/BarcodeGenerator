@@ -139,6 +139,7 @@ dotnet add package TyKonKet.BarcodeGenerator
 | **.NET Framework** | 4.6.2+ | Legacy Windows applications |
 | **.NET 6.0** | 6.0+ | Long-term support version |
 | **.NET 8.0** | 8.0+ | Latest stable version |
+| **.NET 10.0** | 10.0+ | Future-ready version |
 
 ---
 

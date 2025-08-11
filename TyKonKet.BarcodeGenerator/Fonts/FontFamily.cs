@@ -29,45 +29,27 @@ namespace TyKonKet.BarcodeGenerator.Fonts
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the <paramref name="fontFamily"/> is not a valid <see cref="FontFamilies"/> value.</exception>
         internal static string FromFontFamilies(FontFamilies fontFamily)
         {
-            switch (fontFamily)
+            return fontFamily switch
             {
-                case FontFamilies.Arial:
-                    return "Arial";
-                case FontFamilies.Calibri:
-                    return "Calibri";
-                case FontFamilies.Cambria:
-                    return "Cambria";
-                case FontFamilies.ComicSans:
-                    return "Comic Sans MS";
-                case FontFamilies.Consolas:
-                    return "Consolas";
-                case FontFamilies.CourierNew:
-                    return "Courier New";
-                case FontFamilies.FranklinGothic:
-                    return "Franklin Gothic";
-                case FontFamilies.Georgia:
-                    return "Georgia";
-                case FontFamilies.Impact:
-                    return "Impact";
-                case FontFamilies.LucidaConsole:
-                    return "Lucida Console";
-                case FontFamilies.PalatinoLinotype:
-                    return "Palatino Linotype";
-                case FontFamilies.SegoeUI:
-                    return "Segoe UI";
-                case FontFamilies.Tahoma:
-                    return "Tahoma";
-                case FontFamilies.TimesNewRoman:
-                    return "Times New Roman";
-                case FontFamilies.TrebuchetMS:
-                    return "Trebuchet MS";
-                case FontFamilies.Verdana:
-                    return "Verdana";
-                case FontFamilies.DejaVuSerif:
-                    return "DejaVu Serif";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(fontFamily), fontFamily, message: null);
-            }
+                FontFamilies.Arial => "Arial",
+                FontFamilies.Calibri => "Calibri",
+                FontFamilies.Cambria => "Cambria",
+                FontFamilies.ComicSans => "Comic Sans MS",
+                FontFamilies.Consolas => "Consolas",
+                FontFamilies.CourierNew => "Courier New",
+                FontFamilies.FranklinGothic => "Franklin Gothic",
+                FontFamilies.Georgia => "Georgia",
+                FontFamilies.Impact => "Impact",
+                FontFamilies.LucidaConsole => "Lucida Console",
+                FontFamilies.PalatinoLinotype => "Palatino Linotype",
+                FontFamilies.SegoeUI => "Segoe UI",
+                FontFamilies.Tahoma => "Tahoma",
+                FontFamilies.TimesNewRoman => "Times New Roman",
+                FontFamilies.TrebuchetMS => "Trebuchet MS",
+                FontFamilies.Verdana => "Verdana",
+                FontFamilies.DejaVuSerif => "DejaVu Serif",
+                _ => throw new ArgumentOutOfRangeException(nameof(fontFamily), fontFamily, message: null),
+            };
         }
 
         /// <summary>

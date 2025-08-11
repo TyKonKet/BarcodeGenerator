@@ -14,7 +14,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
     /// </summary>
     internal abstract class Encoder : IDisposable
     {
-        private static readonly HashSet<char> InvalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+        private static readonly HashSet<char> InvalidChars = [.. Path.GetInvalidFileNameChars()];
 
         private bool disposed = false;
 
@@ -60,9 +60,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// </summary>
         /// <param name="barcode">Barcode chars / digits.</param>
         /// <returns>Returns the validated barcode chars / digits.</returns>
-        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
-        /// <exception cref="System.FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by the specific encoder charset.</exception>
-        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by the specific encoder charset.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         public abstract string Encode(string barcode);
 
         /// <summary>
@@ -103,10 +103,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
                 Directory.CreateDirectory(directory);
             }
 
-            using (var fileStream = new FileStream(filePath, FileMode.OpenOrCreate))
-            {
-                this.Export(fileStream, format, quality);
-            }
+            using var fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
+            this.Export(fileStream, format, quality);
         }
 
         /// <summary>
@@ -125,10 +123,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
                 throw new InvalidOperationException("The barcode must be encoded before exported");
             }
 
-            using (var encodedImage = this.Image.Encode(format, quality))
-            {
-                encodedImage.SaveTo(stream);
-            }
+            using var encodedImage = this.Image.Encode(format, quality);
+            encodedImage.SaveTo(stream);
         }
 
         /// <summary>

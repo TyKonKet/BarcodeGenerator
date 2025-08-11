@@ -6,8 +6,8 @@
 
 **Repository Size**: Medium (~50 source files)  
 **Project Type**: .NET Class Library  
-**Languages**: C# (.NET Standard 2.0, .NET 6.0, .NET 8.0, .NET Framework 4.6.2)  
-**Main Dependencies**: SkiaSharp 3.116.1, System.ValueTuple  
+**Languages**: C# (.NET Standard 2.0, .NET 6.0, .NET 8.0, .NET 10.0, .NET Framework 4.6.2)  
+**Main Dependencies**: SkiaSharp 3.119.0, System.ValueTuple, PolySharp 1.15.0, System.Memory 4.5.5, System.Threading.Tasks.Extensions 4.5.4, System.Buffers 4.5.1  
 **Test Framework**: xUnit with BenchmarkDotNet for performance testing
 
 ## Build Instructions
@@ -147,19 +147,19 @@ barcode.Export("path/{barcode}.png", SKEncodedImageFormat.Png, 100);
 
 ### Framework Targeting
 - **.NET Standard 2.0**: Core compatibility target
-- **.NET Framework 4.6.2**: Legacy Windows support  
+- **.NET Framework 4.6.2**: Legacy Windows support
 - **.NET 6.0**: LTS version support
 - **.NET 8.0**: Current stable version
+- **.NET 10.0**: Future-ready version
 
 ### Runtime Dependencies
-- **SkiaSharp 3.116.1**: Cross-platform 2D graphics (core dependency)
-- **SkiaSharp.NativeAssets.Linux.NoDependencies**: Linux native support
-- **System.ValueTuple 4.5.0**: Compatibility for older frameworks
-
-### Breaking Changes (v2.0.0+)
-- No longer supports .NET Standard 1.3 (requires 2.0+)
-- API redesigned for better usability and customization
-- SkiaSharp updated to 3.116.1
+- **SkiaSharp 3.119.0**: Cross-platform 2D graphics (core dependency)
+- **SkiaSharp.NativeAssets.Linux.NoDependencies 3.119.0**: Linux native support
+- **System.ValueTuple 4.6.1**: Compatibility for older frameworks
+- **System.Memory 4.5.5**: Memory management utilities for older frameworks
+- **System.Threading.Tasks.Extensions 4.5.4**: Task-based asynchronous programming for older frameworks
+- **System.Buffers 4.5.1**: Provides array pool and memory management utilities
+- **PolySharp 1.15.0**: Enhances compatibility with older runtimes
 
 ## Testing Guidelines
 

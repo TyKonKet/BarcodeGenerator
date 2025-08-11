@@ -13,7 +13,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
     internal sealed class Ean8Encoder : EanEncoder
     {
         private readonly byte[] barsHeight =
-        {
+        [
                     1, 1, 1,
                     0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0,
@@ -25,7 +25,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                     0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0,
                     1, 1, 1,
-        };
+        ];
 
         /// <summary>
         /// Indicates whether the object has been disposed.
@@ -100,8 +100,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// Initializes a new instance of the <see cref="Ean8Encoder"/> class with the specified options.
         /// </summary>
         /// <param name="options">The barcode options.</param>
-        public Ean8Encoder(BarcodeOptions options)
-            : base(options)
+        public Ean8Encoder(BarcodeOptions options) : base(options)
         {
         }
 
@@ -119,7 +118,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
 
             var longBarHeight = imageHeight - (this.imagePadding * 2);
             var shortBarHeight = (int)(longBarHeight * 0.76);
-            this.barHeightValues = new[] { shortBarHeight, longBarHeight };
+            this.barHeightValues = [shortBarHeight, longBarHeight];
 
             var imageInfo = new SKImageInfo(imageWidth, imageHeight);
 
@@ -169,9 +168,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// </summary>
         /// <param name="barcode">The barcode string to encode.</param>
         /// <returns>The encoded barcode string.</returns>
-        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
-        /// <exception cref="System.FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by EAN charset (only digits 0–9).</exception>
-        /// <exception cref="System.ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by EAN charset (only digits 0–9).</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "DisposedByBaseClass")]
         public override string Encode(string barcode)
         {
@@ -218,7 +217,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         private void RenderBarcodeText()
         {
             // Draw the barcode text
-            var leftText = this.Barcode.Substring(0, 4);
+            var leftText = this.Barcode[..4];
             var rightText = this.Barcode.Substring(4, 4);
 
             // Offset for the text

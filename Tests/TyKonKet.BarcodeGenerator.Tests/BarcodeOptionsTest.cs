@@ -76,11 +76,9 @@ namespace TyKonKet.BarcodeGenerator.Tests
         public void UseTypefaceFromStream_ShouldSetTypeface()
         {
             var options = new BarcodeOptions();
-            using (var stream = new MemoryStream(new byte[] { 0 }))
-            {
-                options.UseTypefaceFromStream(stream);
-                Assert.NotNull(options.Typeface);
-            }
+            using var stream = new MemoryStream([0]);
+            options.UseTypefaceFromStream(stream);
+            Assert.NotNull(options.Typeface);
         }
 
         [Fact]
@@ -88,10 +86,8 @@ namespace TyKonKet.BarcodeGenerator.Tests
         {
             var options = new BarcodeOptions();
             options.Lock();
-            using (var stream = new MemoryStream(new byte[] { 0 }))
-            {
-                Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromStream(stream));
-            }
+            using var stream = new MemoryStream([0]);
+            Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromStream(stream));
         }
 
         [Fact]
@@ -102,10 +98,8 @@ namespace TyKonKet.BarcodeGenerator.Tests
             Assert.Throws<InvalidOperationException>(() => options.UseTypeface(SKTypeface.FromFamilyName("Arial")));
             Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromFile("path/to/font.ttf"));
             Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromData(SKData.Create(1)));
-            using (var stream = new MemoryStream(new byte[] { 0 }))
-            {
-                Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromStream(stream));
-            }
+            using var stream = new MemoryStream([0]);
+            Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromStream(stream));
         }
     }
 }

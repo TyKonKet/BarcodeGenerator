@@ -44,7 +44,7 @@ Designed for performance, flexibility, and ease of use across all .NET platforms
 - 🔧 **Action Delegate Configuration** - Intuitive configuration with lambda expressions
 - 📸 **Multiple Export Formats** - PNG, JPEG, and other image formats
 - ✅ **Validation** - Automatic check digit calculation and validation
-- 🔌 **Framework Support** - .NET Standard 2.0, .NET Framework 4.6.2, .NET 6.0, .NET 8.0
+- 🔌 **Framework Support** - .NET Standard 2.0, .NET Framework 4.6.2, .NET 6.0, .NET 8.0, .NET 10.0
 
 ---
 
@@ -119,18 +119,21 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 | **.NET Framework** | 4.6.2+ | Legacy Windows applications |
 | **.NET 6.0** | 6.0+ | Long-term support version |
 | **.NET 8.0** | 8.0+ | Latest stable version |
+| **.NET 10.0** | 10.0+ | Future-ready version |
 
 ---
 
 ## 🔄 Breaking Changes
 
-### Version 2.0.0+
+### Version 2.1.0
 
-**Important changes to be aware of when upgrading:**
+- **PolySharp Integration:** The library now includes the `PolySharp` package to enhance compatibility. If you encounter any issues, please report them by opening an issue on our GitHub repository. For more details, visit the [PolySharp GitHub repository](https://github.com/Sergio0694/PolySharp).
 
-- **Framework Requirement:** No longer supports .NET Standard 1.3 (requires .NET Standard 2.0+)
-- **API Changes:** Redesigned for improved usability and customization
-- **SkiaSharp Update:** Updated to SkiaSharp 3.116.1 for better performance
+### Version 2.0.0
+
+- **Framework Requirement:** No longer supports .NET Standard 1.3 (requires .NET Standard 2.0+).
+- **API Changes:** Redesigned for improved usability and customization.
+- **SkiaSharp Update:** Updated to SkiaSharp 3.116.1 for better performance.
 
 > **📖 Migration Guide:** See our [Getting Started documentation](docs/getting-started.md) for updated API usage patterns.
 
@@ -140,7 +143,6 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 
 ### Planned Features and Improvements
 
-- [x] ~~Update the README.md documentation~~ ✅ **Completed**
 - [ ] Add support for CODE39 and CODE128 encoders
 - [ ] Add support for more barcode types  
 - [ ] Add an API to validate the barcode

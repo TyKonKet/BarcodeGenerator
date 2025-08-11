@@ -13,42 +13,42 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// Encoding patterns for digits 0-9 using encoding set A.
         /// </summary>
         protected static readonly string[] EncodingA =
-        {
+        [
                     "0001101", "0011001", "0010011", "0111101", "0100011",
                     "0110001", "0101111", "0111011", "0110111", "0001011",
-        };
+        ];
 
         /// <summary>
         /// Encoding patterns for digits 0-9 using encoding set B.
         /// </summary>
         protected static readonly string[] EncodingB =
-        {
+        [
                     "0100111", "0110011", "0011011", "0100001", "0011101",
                     "0111001", "0000101", "0010001", "0001001", "0010111",
-        };
+        ];
 
         /// <summary>
         /// Encoding patterns for digits 0-9 using encoding set C.
         /// </summary>
         protected static readonly string[] EncodingC =
-        {
+        [
                     "1110010", "1100110", "1101100", "1000010", "1011100",
                     "1001110", "1010000", "1000100", "1001000", "1110100",
-        };
+        ];
 
         /// <summary>
         /// Encoding table for the first digit of EAN-13 barcodes.
         /// </summary>
         protected static readonly string[] EncodingTable =
-        {
+        [
                     "000000", "001011", "001101", "001110", "010011",
                     "011001", "011100", "010101", "010110", "011010",
-        };
+        ];
 
         /// <summary>
         /// Guard patterns used in EAN barcodes.
         /// </summary>
-        protected static readonly string[] Guards = { "101", "01010", "101" };
+        protected static readonly string[] Guards = ["101", "01010", "101"];
 
         /// <summary>
         /// Gets the accepted character set for the barcode.
@@ -81,7 +81,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         {
             length--;
             barcode = barcode.PadLeft(length, '0');
-            barcode = barcode.Substring(0, length);
+            barcode = barcode[..length];
 
             return $"{barcode}{GetCheckDigit(barcode)}";
         }
@@ -96,7 +96,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
             var checkSumValue = 0;
             for (var i = 1; i <= barcode.Length; i++)
             {
-                checkSumValue += (((i % 2) * 2) + 1) * barcode[barcode.Length - i].ToInt();
+                checkSumValue += (((i % 2) * 2) + 1) * barcode[^i].ToInt();
             }
 
             checkSumValue %= 10;

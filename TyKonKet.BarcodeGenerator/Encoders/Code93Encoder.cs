@@ -16,8 +16,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <summary>
         /// Encoding table for Code 93 characters.
         /// </summary>
-        internal static readonly Dictionary<char, (int, string)> EncodingTable = new Dictionary<char, (int, string)>
-            {
+        internal static readonly Dictionary<char, (int, string)> EncodingTable = new()
+        {
                 { '0', (0, "100010100") },
                 { '1', (1, "101001000") },
                 { '2', (2, "101000100") },
@@ -66,12 +66,12 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 { '>', (45, "111010110") },
                 { '?', (46, "100110010") },
                 { '*', (47, "101011110") },
-            };
+        };
 
         /// <summary>
         /// Keys of the encoding table.
         /// </summary>
-        private static readonly char[] EncodingTableKeys = EncodingTable.Keys.ToArray();
+        private static readonly char[] EncodingTableKeys = [.. EncodingTable.Keys];
 
         /// <summary>
         /// Gets the allowed character set pattern for Code 93.
@@ -151,8 +151,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// Initializes a new instance of the <see cref="Code93Encoder"/> class with the specified options.
         /// </summary>
         /// <param name="options">The barcode options.</param>
-        public Code93Encoder(BarcodeOptions options)
-            : base(options)
+        public Code93Encoder(BarcodeOptions options) : base(options)
         {
         }
 
@@ -273,7 +272,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         private void RenderBarcodeText(int imageWidth)
         {
             // Get the barcode text (without the check digits)
-            var barcodeText = this.Barcode.Substring(0, this.Barcode.Length - 2);
+            var barcodeText = this.Barcode[..^2];
 
             // Offset for the text
             var textOffset = new SKPoint(0, 0);

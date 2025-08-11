@@ -21,39 +21,24 @@ namespace TyKonKet.BarcodeGenerator.Utils
         /// </example>
         public static string ToFileExtension(this SKEncodedImageFormat format)
         {
-            switch (format)
+            return format switch
             {
-                case SKEncodedImageFormat.Jpegxl:
-                    return "jxl";
-                case SKEncodedImageFormat.Avif:
-                    return "avif";
-                case SKEncodedImageFormat.Dng:
-                    return "dng";
-                case SKEncodedImageFormat.Astc:
-                    return "astc";
-                case SKEncodedImageFormat.Ktx:
-                    return "ktx";
-                case SKEncodedImageFormat.Pkm:
-                    return "pkm";
-                case SKEncodedImageFormat.Jpeg:
-                    return "jpg";
-                case SKEncodedImageFormat.Png:
-                    return "png";
-                case SKEncodedImageFormat.Webp:
-                    return "webp";
-                case SKEncodedImageFormat.Wbmp:
-                    return "wbmp";
-                case SKEncodedImageFormat.Ico:
-                    return "ico";
-                case SKEncodedImageFormat.Bmp:
-                    return "bmp";
-                case SKEncodedImageFormat.Gif:
-                    return "gif";
-                case SKEncodedImageFormat.Heif:
-                    return "heif";
-                default:
-                    return format.ToString().ToLower(CultureInfo.CurrentCulture);
-            }
+                SKEncodedImageFormat.Jpegxl => "jxl",
+                SKEncodedImageFormat.Avif => "avif",
+                SKEncodedImageFormat.Dng => "dng",
+                SKEncodedImageFormat.Astc => "astc",
+                SKEncodedImageFormat.Ktx => "ktx",
+                SKEncodedImageFormat.Pkm => "pkm",
+                SKEncodedImageFormat.Jpeg => "jpg",
+                SKEncodedImageFormat.Png => "png",
+                SKEncodedImageFormat.Webp => "webp",
+                SKEncodedImageFormat.Wbmp => "wbmp",
+                SKEncodedImageFormat.Ico => "ico",
+                SKEncodedImageFormat.Bmp => "bmp",
+                SKEncodedImageFormat.Gif => "gif",
+                SKEncodedImageFormat.Heif => "heif",
+                _ => format.ToString().ToLower(CultureInfo.CurrentCulture),
+            };
         }
     }
 }
