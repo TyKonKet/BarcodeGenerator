@@ -143,7 +143,8 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 
 ### Planned Features and Improvements
 
-- [ ] Add support for CODE39 and CODE128 encoders
+- [ ] Add support for CODE39 encoder
+- [ ] Add support for CODE128 encoder
 - [ ] Add support for more barcode types  
 - [ ] Add an API to validate the barcode
 
