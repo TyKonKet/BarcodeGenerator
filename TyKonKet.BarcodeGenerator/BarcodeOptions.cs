@@ -80,9 +80,11 @@ namespace TyKonKet.BarcodeGenerator
         public SKColor? TextColor { get; set; } = null;
 
         /// <summary>
-        /// Gets the effective text color to use for rendering. Returns TextColor if set, otherwise ForegroundColor.
+        /// Gets the effective text color to use for rendering. This internal property provides
+        /// a computed value that returns TextColor if set, otherwise falls back to ForegroundColor.
+        /// Used by encoders to determine the appropriate color for text rendering.
         /// </summary>
-        public SKColor EffectiveTextColor => this.TextColor ?? this.ForegroundColor;
+        internal SKColor EffectiveTextColor => this.TextColor ?? this.ForegroundColor;
 
         /// <summary>
         /// Gets or sets a value indicating whether to render text below the barcode.
