@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755027877404,
+  "lastUpdate": 1755027878617,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -7226,6 +7226,60 @@ window.BENCHMARK_DATA = {
             "value": 724850.4604116586,
             "unit": "ns",
             "range": "± 616.8869783793662"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "af6d6c485c0ed3bceda0f729ecdc3ae97f29da6d",
+          "message": "Update benchmark configuration to target .NET 10.0 runtime",
+          "timestamp": "2025-08-12T21:37:42+02:00",
+          "tree_id": "76506b6998d1bff7a13efa4349a2ef20bcea76ec",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/af6d6c485c0ed3bceda0f729ecdc3ae97f29da6d"
+        },
+        "date": 1755027878372,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 19861.135127766927,
+            "unit": "ns",
+            "range": "± 337.3866572070188"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 21533.892742580836,
+            "unit": "ns",
+            "range": "± 460.244646799292"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 24544.090116060695,
+            "unit": "ns",
+            "range": "± 103.42599428319801"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 38011.529292179985,
+            "unit": "ns",
+            "range": "± 170.77209633593685"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
+            "value": 766146.9314313616,
+            "unit": "ns",
+            "range": "± 1024.6969068815556"
           }
         ]
       }
