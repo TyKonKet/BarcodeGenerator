@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755036137088,
+  "lastUpdate": 1755036138015,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -5824,6 +5824,60 @@ window.BENCHMARK_DATA = {
             "value": 762480.1766880581,
             "unit": "ns",
             "range": "± 1207.8147199899615"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "25ffb38bcc6184917c4cddab715b831842aaf4df",
+          "message": "Merge pull request #24 from TyKonKet/copilot/fix-17\n\nAdd TextColor property for independent barcode text color control",
+          "timestamp": "2025-08-12T23:55:32+02:00",
+          "tree_id": "899e8029342be61f44e3de2941b3c5631e303ce4",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/25ffb38bcc6184917c4cddab715b831842aaf4df"
+        },
+        "date": 1755036137783,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 18963.456311907088,
+            "unit": "ns",
+            "range": "± 145.9450214241264"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 20264.87563382662,
+            "unit": "ns",
+            "range": "± 82.24127318927394"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25765.464928260215,
+            "unit": "ns",
+            "range": "± 90.51238957844343"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40489.123084435094,
+            "unit": "ns",
+            "range": "± 201.54680274442552"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
+            "value": 764145.9091796875,
+            "unit": "ns",
+            "range": "± 1552.461976681979"
           }
         ]
       }
