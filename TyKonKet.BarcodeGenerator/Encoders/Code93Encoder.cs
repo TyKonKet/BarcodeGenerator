@@ -194,7 +194,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 this.textBrush?.Dispose();
                 this.textBrush = new SKPaint()
                 {
-                    Color = this.Options.ForegroundColor,
+                    Color = this.Options.EffectiveTextColor,
                     IsAntialias = true,
                 };
 

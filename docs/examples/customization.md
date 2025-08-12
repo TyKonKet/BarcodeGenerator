@@ -42,6 +42,57 @@ using var transparentBarcode = new Barcode(options =>
 });
 ```
 
+#### Text Color Customization (NEW)
+
+The library now supports independent text color control, allowing you to create more visually appealing barcodes with enhanced readability:
+
+```csharp
+// Dark bars with red text for emphasis
+using var redTextBarcode = new Barcode(options =>
+{
+    options.Type = BarcodeTypes.Ean13;
+    options.Height = 50;
+    options.Scaling = 3;
+    options.BackgroundColor = SKColors.White;
+    options.ForegroundColor = SKColors.Black;        // Bar color
+    options.TextColor = SKColors.Red;               // Text color (independent)
+    options.RenderText = true;
+});
+
+// Blue theme with yellow text for high visibility
+using var highVisibilityBarcode = new Barcode(options =>
+{
+    options.Type = BarcodeTypes.Code93;
+    options.Height = 60;
+    options.Scaling = 3;
+    options.BackgroundColor = SKColor.Parse("#003366");  // Dark blue background
+    options.ForegroundColor = SKColors.White;           // White bars
+    options.TextColor = SKColors.Yellow;                // Yellow text for contrast
+    options.RenderText = true;
+});
+
+// Subtle gray text for minimalist designs
+using var subtleBarcode = new Barcode(options =>
+{
+    options.Type = BarcodeTypes.Ean13;
+    options.Height = 40;
+    options.Scaling = 2;
+    options.BackgroundColor = SKColors.White;
+    options.ForegroundColor = SKColors.Black;
+    options.TextColor = SKColor.Parse("#666666");       // Subtle gray text
+    options.RenderText = true;
+});
+
+// Backward compatibility - when TextColor is not set, uses ForegroundColor
+using var compatibleBarcode = new Barcode(options =>
+{
+    options.Type = BarcodeTypes.Ean13;
+    options.ForegroundColor = SKColors.Black;
+    // TextColor not specified - will use Black (ForegroundColor)
+    options.RenderText = true;
+});
+```
+
 #### Brand Color Integration
 
 ```csharp
@@ -248,8 +299,23 @@ public static void ConfigureEcommerce(BarcodeOptions options)
     options.UseTypeface("Arial", SKFontStyle.Normal);
 }
 
+// Enhanced e-commerce with branded text color
+public static void ConfigureEcommerceBranded(BarcodeOptions options)
+{
+    options.Type = BarcodeTypes.Ean13;
+    options.Height = 45;
+    options.Scaling = 2;
+    options.Margins = 8;
+    options.BackgroundColor = SKColors.White;
+    options.ForegroundColor = SKColors.Black;        // Standard black bars
+    options.TextColor = SKColor.Parse("#E74C3C");    // Brand red text
+    options.RenderText = true;
+    options.UseTypeface("Arial", SKFontStyle.Normal);
+}
+
 // Usage
 using var productBarcode = new Barcode(ConfigureEcommerce);
+using var brandedBarcode = new Barcode(ConfigureEcommerceBranded);
 string result = productBarcode.Encode("123456789012");
 productBarcode.Export("product_{barcode}.png", SKEncodedImageFormat.Png, 100);
 ```
