@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755036136059,
+  "lastUpdate": 1755036137088,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -3936,6 +3936,60 @@ window.BENCHMARK_DATA = {
             "value": 763250.1279296875,
             "unit": "ns",
             "range": "± 1573.0399257497363"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "25ffb38bcc6184917c4cddab715b831842aaf4df",
+          "message": "Merge pull request #24 from TyKonKet/copilot/fix-17\n\nAdd TextColor property for independent barcode text color control",
+          "timestamp": "2025-08-12T23:55:32+02:00",
+          "tree_id": "899e8029342be61f44e3de2941b3c5631e303ce4",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/25ffb38bcc6184917c4cddab715b831842aaf4df"
+        },
+        "date": 1755036136834,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 19370.228066077598,
+            "unit": "ns",
+            "range": "± 182.3910086433936"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 21166.420054844446,
+            "unit": "ns",
+            "range": "± 338.9992051979056"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 26070.046545410158,
+            "unit": "ns",
+            "range": "± 174.0491068611825"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 39066.91463998648,
+            "unit": "ns",
+            "range": "± 293.7750871659455"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
+            "value": 762978.4291992188,
+            "unit": "ns",
+            "range": "± 1439.2794643133377"
           }
         ]
       }
