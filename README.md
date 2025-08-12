@@ -87,6 +87,24 @@ string validatedCode = barcode.Encode("123456789012");
 barcode.Export("my-barcode.png", SKEncodedImageFormat.Png, 100);
 ```
 
+**NEW: Independent Text Color Control**
+
+```csharp
+// Create a barcode with custom text color
+using var customBarcode = new Barcode(options =>
+{
+    options.Type = BarcodeTypes.Ean13;
+    options.Height = 50;
+    options.Scaling = 3;
+    options.ForegroundColor = SKColors.Black;    // Bar color
+    options.TextColor = SKColors.Red;           // Text color (NEW!)
+    options.RenderText = true;
+});
+
+string result = customBarcode.Encode("123456789012");
+customBarcode.Export("custom-text-color.png", SKEncodedImageFormat.Png, 100);
+```
+
 > **💡 Need more help?** Check out our [Getting Started Guide](docs/getting-started.md) for step-by-step tutorials and examples.
 
 ---
@@ -101,7 +119,7 @@ The `BarcodeOptions` class provides extensive customization capabilities:
 | **Height** | Height of barcode bars | 30 pixels |
 | **Scaling** | Scale factor for the entire image | 5x |
 | **Margins** | Spacing around the barcode | 2 pixels |
-| **Colors** | Background and foreground colors | White/Black |
+| **Colors** | Background, foreground, and text colors (independent control) | White/Black |
 | **Text Rendering** | Show/hide text below barcode | Enabled |
 | **Font Options** | Custom fonts, styles, and loading methods | System default |
 

@@ -10,7 +10,7 @@ namespace TyKonKet.BarcodeGenerator
     /// <summary>
     /// Represents the options for generating barcodes.
     /// </summary>
-    [DebuggerDisplay("Encode = {EncodingName}, Height = {Height}, Scaling = {Scaling}, RenderText = {RenderText}")]
+    [DebuggerDisplay("Encode = {EncodingName}, Height = {Height}, Scaling = {Scaling}, RenderText = {RenderText}, TextColor = {EffectiveTextColor}")]
     public sealed class BarcodeOptions
     {
         /// <summary>
@@ -73,6 +73,18 @@ namespace TyKonKet.BarcodeGenerator
         /// Gets or sets the foreground color of the barcode.
         /// </summary>
         public SKColor ForegroundColor { get; set; } = SKColors.Black;
+
+        /// <summary>
+        /// Gets or sets the text color of the barcode. If not specified, uses the foreground color.
+        /// </summary>
+        public SKColor? TextColor { get; set; } = null;
+
+        /// <summary>
+        /// Gets the effective text color to use for rendering. This internal property provides
+        /// a computed value that returns TextColor if set, otherwise falls back to ForegroundColor.
+        /// Used by encoders to determine the appropriate color for text rendering.
+        /// </summary>
+        internal SKColor EffectiveTextColor => this.TextColor ?? this.ForegroundColor;
 
         /// <summary>
         /// Gets or sets a value indicating whether to render text below the barcode.
