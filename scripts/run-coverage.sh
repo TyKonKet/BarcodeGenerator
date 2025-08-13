@@ -15,12 +15,18 @@ echo -e "${GREEN}🧪 Running BarcodeGenerator Tests with Code Coverage${NC}"
 echo "=============================================="
 
 # Navigate to test directory
-cd "$(dirname "$0")/../Tests/TyKonKet.BarcodeGenerator.Tests"
+SCRIPT_DIR="$(dirname "$0")"
+TEST_DIR="$SCRIPT_DIR/../Tests/TyKonKet.BarcodeGenerator.Tests"
+cd "$TEST_DIR" || { echo -e "${RED}❌ Failed to navigate to test directory${NC}"; exit 1; }
 
 # Clean previous coverage results
 echo -e "${YELLOW}🧹 Cleaning previous coverage results...${NC}"
-rm -rf coverage/
-rm -rf TestResults/
+if [ -d "coverage" ]; then
+    rm -rf coverage/ || { echo -e "${RED}❌ Failed to clean coverage directory${NC}"; exit 1; }
+fi
+if [ -d "TestResults" ]; then
+    rm -rf TestResults/ || { echo -e "${RED}❌ Failed to clean TestResults directory${NC}"; exit 1; }
+fi
 
 # Run tests with coverage
 echo -e "${YELLOW}🚀 Running tests with coverage collection...${NC}"
@@ -34,7 +40,7 @@ dotnet test \
 # Check if reportgenerator is installed
 if ! command -v reportgenerator &> /dev/null; then
     echo -e "${YELLOW}📦 Installing ReportGenerator global tool...${NC}"
-    dotnet tool install -g dotnet-reportgenerator-globaltool
+    dotnet tool install -g dotnet-reportgenerator-globaltool || { echo -e "${RED}❌ Failed to install ReportGenerator${NC}"; exit 1; }
 fi
 
 # Generate HTML report
@@ -43,7 +49,7 @@ reportgenerator \
     -reports:"coverage/**/coverage.opencover.xml" \
     -targetdir:"coverage/report" \
     -reporttypes:"Html;Badges;TextSummary" \
-    -verbosity:Info
+    -verbosity:Info || { echo -e "${RED}❌ Failed to generate coverage report${NC}"; exit 1; }
 
 # Display summary
 echo -e "${GREEN}✅ Coverage report generated successfully!${NC}"

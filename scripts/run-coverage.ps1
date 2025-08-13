@@ -11,21 +11,44 @@ Write-Host "=============================================="
 # Navigate to test directory
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $testPath = Join-Path (Split-Path -Parent $scriptPath) "Tests\TyKonKet.BarcodeGenerator.Tests"
+
+if (-not (Test-Path $testPath)) {
+    Write-Host "❌ Test directory not found: $testPath" -ForegroundColor Red
+    exit 1
+}
+
 Set-Location $testPath
 
 # Clean previous coverage results
 Write-Host "🧹 Cleaning previous coverage results..." -ForegroundColor Yellow
-if (Test-Path "coverage") { Remove-Item -Recurse -Force "coverage" }
-if (Test-Path "TestResults") { Remove-Item -Recurse -Force "TestResults" }
+try {
+    if (Test-Path "coverage") { Remove-Item -Recurse -Force "coverage" }
+    if (Test-Path "TestResults") { Remove-Item -Recurse -Force "TestResults" }
+}
+catch {
+    Write-Host "❌ Failed to clean previous results: $($_.Exception.Message)" -ForegroundColor Red
+    exit 1
+}
 
 # Run tests with coverage
 Write-Host "🚀 Running tests with coverage collection..." -ForegroundColor Yellow
-dotnet test `
-    --configuration Release `
-    --collect:"XPlat Code Coverage" `
-    --results-directory ./coverage `
-    --logger "console;verbosity=minimal" `
-    -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+try {
+    dotnet test `
+        --configuration Release `
+        --collect:"XPlat Code Coverage" `
+        --results-directory ./coverage `
+        --logger "console;verbosity=minimal" `
+        -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+    
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "❌ Tests failed with exit code $LASTEXITCODE" -ForegroundColor Red
+        exit $LASTEXITCODE
+    }
+}
+catch {
+    Write-Host "❌ Failed to run tests: $($_.Exception.Message)" -ForegroundColor Red
+    exit 1
+}
 
 # Check if reportgenerator is installed
 $reportGeneratorInstalled = $false
@@ -35,18 +58,41 @@ try {
 }
 catch {
     Write-Host "📦 Installing ReportGenerator global tool..." -ForegroundColor Yellow
-    dotnet tool install -g dotnet-reportgenerator-globaltool
-    $reportGeneratorInstalled = $true
+    try {
+        dotnet tool install -g dotnet-reportgenerator-globaltool
+        if ($LASTEXITCODE -eq 0) {
+            $reportGeneratorInstalled = $true
+        }
+        else {
+            Write-Host "❌ Failed to install ReportGenerator tool with exit code $LASTEXITCODE" -ForegroundColor Red
+            exit 1
+        }
+    }
+    catch {
+        Write-Host "❌ Failed to install ReportGenerator tool: $($_.Exception.Message)" -ForegroundColor Red
+        exit 1
+    }
 }
 
 if ($reportGeneratorInstalled) {
     # Generate HTML report
     Write-Host "📊 Generating HTML coverage report..." -ForegroundColor Yellow
-    reportgenerator `
-        -reports:"coverage/**/coverage.opencover.xml" `
-        -targetdir:"coverage/report" `
-        -reporttypes:"Html;Badges;TextSummary" `
-        -verbosity:Info
+    try {
+        reportgenerator `
+            -reports:"coverage/**/coverage.opencover.xml" `
+            -targetdir:"coverage/report" `
+            -reporttypes:"Html;Badges;TextSummary" `
+            -verbosity:Info
+        
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "❌ Failed to generate coverage report with exit code $LASTEXITCODE" -ForegroundColor Red
+            exit 1
+        }
+    }
+    catch {
+        Write-Host "❌ Failed to generate coverage report: $($_.Exception.Message)" -ForegroundColor Red
+        exit 1
+    }
 
     # Display summary
     Write-Host "✅ Coverage report generated successfully!" -ForegroundColor Green

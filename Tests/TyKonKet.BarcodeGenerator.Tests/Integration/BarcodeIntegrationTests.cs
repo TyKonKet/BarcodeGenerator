@@ -83,11 +83,13 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
 
             // Verify it's a valid PNG by reading the header
             using var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            var pngHeader = new byte[8];
-            fileStream.Read(pngHeader, 0, 8);
+            const int pngHeaderSize = 8;
+            var pngHeader = new byte[pngHeaderSize];
+            fileStream.Read(pngHeader, 0, pngHeaderSize);
             
             // PNG signature: 137 80 78 71 13 10 26 10
-            Assert.Equal(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 }, pngHeader);
+            var expectedPngSignature = new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 };
+            Assert.Equal(expectedPngSignature, pngHeader);
         }
 
         [Fact]
@@ -116,11 +118,13 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
 
             // Verify it's a valid JPEG by checking the header
             using var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            var jpegHeader = new byte[2];
-            fileStream.Read(jpegHeader, 0, 2);
+            const int jpegHeaderSize = 2;
+            var jpegHeader = new byte[jpegHeaderSize];
+            fileStream.Read(jpegHeader, 0, jpegHeaderSize);
             
             // JPEG header: FF D8
-            Assert.Equal(new byte[] { 0xFF, 0xD8 }, jpegHeader);
+            var expectedJpegSignature = new byte[] { 0xFF, 0xD8 };
+            Assert.Equal(expectedJpegSignature, jpegHeader);
         }
 
         [Fact]

@@ -133,7 +133,8 @@ namespace TyKonKet.BarcodeGenerator.Tests
         public void UseTypefaceFromData_ShouldSetTypeface()
         {
             var options = new BarcodeOptions();
-            var data = SKData.Create(1);
+            const int testDataSize = 1;
+            var data = SKData.Create(testDataSize);
             options.UseTypefaceFromData(data);
             Assert.NotNull(options.Typeface);
         }
@@ -143,14 +144,16 @@ namespace TyKonKet.BarcodeGenerator.Tests
         {
             var options = new BarcodeOptions();
             options.Lock();
-            Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromData(SKData.Create(1)));
+            const int testDataSize = 1;
+            Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromData(SKData.Create(testDataSize)));
         }
 
         [Fact]
         public void UseTypefaceFromStream_ShouldSetTypeface()
         {
             var options = new BarcodeOptions();
-            using var stream = new MemoryStream([0]);
+            var testData = new byte[] { 0 };
+            using var stream = new MemoryStream(testData);
             options.UseTypefaceFromStream(stream);
             Assert.NotNull(options.Typeface);
         }
@@ -160,7 +163,8 @@ namespace TyKonKet.BarcodeGenerator.Tests
         {
             var options = new BarcodeOptions();
             options.Lock();
-            using var stream = new MemoryStream([0]);
+            var testData = new byte[] { 0 };
+            using var stream = new MemoryStream(testData);
             Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromStream(stream));
         }
 
@@ -171,8 +175,10 @@ namespace TyKonKet.BarcodeGenerator.Tests
             options.Lock();
             Assert.Throws<InvalidOperationException>(() => options.UseTypeface(SKTypeface.FromFamilyName("Arial")));
             Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromFile("path/to/font.ttf"));
-            Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromData(SKData.Create(1)));
-            using var stream = new MemoryStream([0]);
+            const int testDataSize = 1;
+            Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromData(SKData.Create(testDataSize)));
+            var testData = new byte[] { 0 };
+            using var stream = new MemoryStream(testData);
             Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromStream(stream));
         }
 
