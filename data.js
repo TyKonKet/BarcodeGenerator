@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755117223563,
+  "lastUpdate": 1755117225130,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -4260,6 +4260,60 @@ window.BENCHMARK_DATA = {
             "value": 763662.5596400669,
             "unit": "ns",
             "range": "± 1027.190657406904"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "8523f367cec2d0fa32462a9730e348ea848e143a",
+          "message": "Improve encoder creation\n\n- Refactored encoder creation in `EncodersFactory.cs` to use LINQ, enhancing efficiency and error handling.\n- Added `performance-improvements.md` to document performance enhancements, starting with a 6.4% improvement in `EncodersFactory.Create`.\n- Introduced `EncodersFactoryBenchmark.cs` for benchmarking the encoder creation process using BenchmarkDotNet.",
+          "timestamp": "2025-08-13T22:26:57+02:00",
+          "tree_id": "2964a2d8acf3dfb1b744f38907f2aabeacd49e7e",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/8523f367cec2d0fa32462a9730e348ea848e143a"
+        },
+        "date": 1755117224537,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 19053.257608347925,
+            "unit": "ns",
+            "range": "± 836.0515404319708"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 20437.40502342811,
+            "unit": "ns",
+            "range": "± 169.79979834540907"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 25506.610167283277,
+            "unit": "ns",
+            "range": "± 48.277741308639136"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 39501.5121882512,
+            "unit": "ns",
+            "range": "± 119.21772157916995"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
+            "value": 762030.1984675481,
+            "unit": "ns",
+            "range": "± 623.8097465122563"
           }
         ]
       }
