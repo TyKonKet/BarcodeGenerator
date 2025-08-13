@@ -183,6 +183,12 @@ We welcome contributions from the community! Here's how you can help:
 - Improve documentation and examples
 - Share your use cases and feedback
 
+**Testing:**
+- Run the comprehensive test suite: `dotnet test --configuration Release`
+- Generate code coverage reports: `./scripts/run-coverage.sh` (Linux/macOS) or `.\scripts\run-coverage.ps1` (Windows)
+- Review [test documentation](Tests/TyKonKet.BarcodeGenerator.Tests/README.md) for testing guidelines
+- Ensure 80%+ code coverage for new features
+
 ---
 
 ## 📄 License
