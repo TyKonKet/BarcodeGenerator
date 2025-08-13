@@ -4,36 +4,83 @@ This document outlines the steps to follow for optimizing methods in the Barcode
 
 ## Todo List for Method Optimization
 
-1. **Duplicate the Method**:
+1. **Pre-Optimization Validation**:
+   - Run tests and benchmarks on the current method to establish a baseline.
+   - Document the baseline results.
+   - **Checklist**:
+     - [ ] Ensure all tests pass for the current method.
+     - [ ] Run benchmarks to capture baseline performance metrics.
+
+2. **Duplicate the Method**:
    - Create a duplicate of the current method (e.g., `MethodName_Old`) for benchmarking purposes.
    - Ensure the duplicate is clearly marked as the old implementation.
+   - **Checklist**:
+     - [ ] Verify the duplicate is functional and compiles without errors.
+     - [ ] Add comments to indicate it is for benchmarking only.
 
-2. **Set Up Benchmark**:
-   - Use BenchmarkDotNet to create a benchmark comparing the original and optimized methods.
-   - Ensure the benchmark is focused and isolates the method being optimized.
+3. **Validate Correctness**:
+   - Run tests on the duplicated method to ensure it behaves identically to the original.
+   - **Checklist**:
+     - [ ] Ensure all tests pass for the duplicated method.
+     - [ ] Add new test cases for edge scenarios uncovered during validation.
 
-3. **Optimize the Method**:
-   - Refactor the method to improve performance. Common techniques include:
+4. **Set Up and Run Benchmarks**:
+   - Use BenchmarkDotNet to compare the original and duplicated methods.
+   - Validate the benchmark setup by running it once before optimization.
+   - **Checklist**:
+     - [ ] Include both the old and new methods in the benchmark.
+     - [ ] Ensure benchmarks isolate the method being optimized.
+
+5. **Optimize the Method**:
+   - Refactor the method iteratively, running benchmarks and tests after each change.
+   - Focus on measurable improvements and document each iteration.
+   - Common techniques include:
      - Reducing memory allocations.
      - Using spans (`Span<T>` or `ReadOnlySpan<T>`) for efficient memory access.
      - Caching results to avoid redundant computations.
      - Replacing LINQ with more efficient loops where necessary.
-   - Avoid premature optimization; focus on measurable improvements.
-
-4. **Validate Correctness**:
-   - Write unit tests to ensure the optimized method produces the same results as the original.
-   - Test edge cases and invalid inputs to ensure robustness.
-
-5. **Run Benchmarks**:
-   - Execute the benchmarks to measure performance improvements.
-   - Use the latest .NET version possible to ensure results are relevant and take advantage of runtime improvements.
+   - **Checklist**:
+     - [ ] Ensure the optimized method passes all tests after each iteration.
+     - [ ] Add comments explaining the changes and their expected impact.
 
 6. **Document Results**:
-   - Add the performance improvements to the `performance-improvements.md` file.
+   - Add detailed benchmark results, optimization techniques, and lessons learned to the documentation.
    - Include before/after metrics, a description of the changes, and the date of optimization.
+   - **Checklist**:
+     - [ ] Include detailed benchmark results.
+     - [ ] Summarize the optimization techniques used.
+     - [ ] Highlight lessons learned and potential future improvements.
 
 7. **Remove the Old Method**:
    - Once validated and documented, remove the old method to clean up the codebase.
+   - **Checklist**:
+     - [ ] Ensure the old method is no longer referenced anywhere in the codebase.
+     - [ ] Run the full test suite after removal to confirm no regressions.
+
+8. **Final Validation**:
+   - Run the full test suite and benchmarks to ensure no regressions.
+   - **Checklist**:
+     - [ ] Validate the optimized method against the baseline results.
+     - [ ] Confirm the codebase is clean and all tests pass.
+
+### Logging and Documentation Steps
+
+1. **Code Changes**:
+   - **Commit Messages**: Ensure every change is committed with a clear and descriptive message summarizing the update.
+   - **Changelog**: If applicable, add an entry to the `CHANGELOG.md` file describing the change.
+   - **Code Comments**: Add inline comments in the code to explain non-obvious changes or optimizations.
+
+2. **Documentation Updates**:
+   - **API Documentation**: Update relevant files in the `docs/api/` folder if the changes affect the public API.
+   - **Examples**: Modify files in `docs/examples/` to reflect changes in usage or behavior.
+   - **Optimization Procedure**: If the change involves optimization, ensure this file (`method-optimization-todo.md`) is updated to reflect the new steps or insights.
+
+3. **Testing**:
+   - **Unit Tests**: Add or update tests in `Tests/TyKonKet.BarcodeGenerator.Tests/` to validate the changes.
+   - **Benchmark Results**: Log performance improvements in `docs/performance-improvements.md`.
+
+4. **Release Notes**:
+   - **NuGet Package**: If the change is significant, include it in the release notes for the next NuGet package version.
 
 ## Best Practices and Lessons Learned
 
@@ -49,7 +96,5 @@ This document outlines the steps to follow for optimizing methods in the Barcode
 - **Validate Incrementally**:
   - Test and benchmark after each significant change to catch regressions early.
 
-- **Document Thoroughly**:
-  - Keep a detailed record of changes and their impact to maintain a clear history of improvements.
-
-By following these steps and best practices, you can ensure that method optimizations are effective, maintainable, and well-documented.
+- **Communicate Changes**:
+  - Document every change clearly to ensure future maintainers understand the rationale and impact.
