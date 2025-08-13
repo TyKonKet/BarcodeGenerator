@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755117826021,
+  "lastUpdate": 1755117827175,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -6472,6 +6472,60 @@ window.BENCHMARK_DATA = {
             "value": 765214.6169084822,
             "unit": "ns",
             "range": "± 1358.22382479936"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "23aa334d7d9f6890fc39c3be071c2c7ecbfc3793",
+          "message": "Optimize GetDisplayName method and add benchmarks\n\nUpdated project to target multiple frameworks.\nEnhanced GetDisplayName with caching for improved performance, reducing execution time from 370.7 ns to 1.931 ns.\nAdded performance improvement details to the documentation.\nIntroduced a benchmark class for performance measurement and added unit tests to validate functionality.",
+          "timestamp": "2025-08-13T22:37:28+02:00",
+          "tree_id": "56d53130d2537377d8a44e7a5c11b36219d798b4",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/23aa334d7d9f6890fc39c3be071c2c7ecbfc3793"
+        },
+        "date": 1755117826830,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 20125.676307229434,
+            "unit": "ns",
+            "range": "± 394.02106701510877"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 21348.31778172084,
+            "unit": "ns",
+            "range": "± 270.9128808010432"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25318.038447062176,
+            "unit": "ns",
+            "range": "± 65.14356589631889"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40971.91317952474,
+            "unit": "ns",
+            "range": "± 312.1992771846779"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
+            "value": 766259.7334735577,
+            "unit": "ns",
+            "range": "± 1631.004134819884"
           }
         ]
       }
