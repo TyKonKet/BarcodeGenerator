@@ -4,7 +4,7 @@ using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests.Encoders
 {
-    public class Ean8EncoderTest
+    public class Ean8EncoderTests
     {
 
         [Theory]

@@ -5,7 +5,11 @@ using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests
 {
-    public class BarcodeOptionsTest
+    /// <summary>
+    /// Contains unit tests for the <see cref="BarcodeOptions"/> class.
+    /// Tests configuration options, default values, validation, and option interactions.
+    /// </summary>
+    public class BarcodeOptionsTests
     {
         [Fact]
         public void DefaultValues_ShouldBeCorrect()
@@ -171,5 +175,99 @@ namespace TyKonKet.BarcodeGenerator.Tests
             using var stream = new MemoryStream([0]);
             Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromStream(stream));
         }
+
+        #region Boundary and Negative Tests
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(-10)]
+        [InlineData(int.MinValue)]
+        public void Height_ShouldAcceptNegativeValues_ForEdgeCaseTesting(int height)
+        {
+            // Note: Testing that negative values are accepted by the options class
+            // The actual validation may occur at encoding time
+            var options = new BarcodeOptions();
+            options.Height = height;
+            Assert.Equal(height, options.Height);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        [InlineData(int.MinValue)]
+        public void Scaling_ShouldAcceptZeroAndNegativeValues_ForEdgeCaseTesting(int scaling)
+        {
+            // Note: Testing that zero/negative values are accepted by the options class
+            // The actual validation may occur at encoding time
+            var options = new BarcodeOptions();
+            options.Scaling = scaling;
+            Assert.Equal(scaling, options.Scaling);
+        }
+
+        [Theory]
+        [InlineData(-5)]
+        [InlineData(-1)]
+        [InlineData(int.MinValue)]
+        public void Margins_ShouldAcceptNegativeValues_ForEdgeCaseTesting(int margins)
+        {
+            // Note: Testing that negative values are accepted by the options class
+            var options = new BarcodeOptions();
+            options.Margins = margins;
+            Assert.Equal(margins, options.Margins);
+        }
+
+        [Fact]
+        public void BarcodeOptions_ShouldHandleExtremeColorValues()
+        {
+            var options = new BarcodeOptions();
+            
+            // Test with extreme color values
+            options.BackgroundColor = new SKColor(0, 0, 0, 0); // Transparent
+            options.ForegroundColor = new SKColor(255, 255, 255, 255); // Opaque white
+            options.TextColor = new SKColor(128, 128, 128, 128); // Semi-transparent gray
+            
+            Assert.Equal(new SKColor(0, 0, 0, 0), options.BackgroundColor);
+            Assert.Equal(new SKColor(255, 255, 255, 255), options.ForegroundColor);
+            Assert.Equal(new SKColor(128, 128, 128, 128), options.TextColor);
+        }
+
+        [Fact]
+        public void UseTypeface_ShouldThrowArgumentNullException_WhenTypefaceIsNull()
+        {
+            var options = new BarcodeOptions();
+            Assert.Throws<ArgumentNullException>(() => options.UseTypeface(null!));
+        }
+
+        [Fact]
+        public void UseTypefaceFromFile_ShouldThrowArgumentNullException_WhenPathIsNull()
+        {
+            var options = new BarcodeOptions();
+            Assert.Throws<ArgumentNullException>(() => options.UseTypefaceFromFile(null!));
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("   ")]
+        public void UseTypefaceFromFile_ShouldThrowArgumentException_WhenPathIsEmptyOrWhitespace(string path)
+        {
+            var options = new BarcodeOptions();
+            Assert.Throws<ArgumentException>(() => options.UseTypefaceFromFile(path));
+        }
+
+        [Fact]
+        public void UseTypefaceFromData_ShouldThrowArgumentNullException_WhenDataIsNull()
+        {
+            var options = new BarcodeOptions();
+            Assert.Throws<ArgumentNullException>(() => options.UseTypefaceFromData(null!));
+        }
+
+        [Fact]
+        public void UseTypefaceFromStream_ShouldThrowArgumentNullException_WhenStreamIsNull()
+        {
+            var options = new BarcodeOptions();
+            Assert.Throws<ArgumentNullException>(() => options.UseTypefaceFromStream(null!));
+        }
+
+        #endregion
     }
 }

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests.Encoders
 {
-    public class Isbn13EncoderTest
+    public class Isbn13EncoderTests
     {
         [Theory]
         [InlineData("9781234567897", "978123456789")]

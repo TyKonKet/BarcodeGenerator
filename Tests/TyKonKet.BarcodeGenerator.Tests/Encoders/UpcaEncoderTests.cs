@@ -4,7 +4,7 @@ using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests.Encoders
 {
-    public class UpcaEncoderTest
+    public class UpcaEncoderTests
     {
         [Theory]
         [InlineData("978123456786", "978123456786")]

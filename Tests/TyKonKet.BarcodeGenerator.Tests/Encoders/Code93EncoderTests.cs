@@ -4,7 +4,7 @@ using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests.Encoders
 {
-    public class Code93EncoderTest
+    public class Code93EncoderTests
     {
         [Theory]
         [InlineData("ABC-1234-ABC", "DX")]

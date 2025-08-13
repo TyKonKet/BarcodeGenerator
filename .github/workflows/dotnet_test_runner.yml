@@ -34,10 +34,38 @@ jobs:
         with:
           dotnet-version: 10.x
       
-      - name: Run tests
+      - name: Run tests with coverage
         run: >
             dotnet test
             --configuration Release
             --logger "GitHubActions;summary.includePassedTests=true;summary.includeSkippedTests=true"
+            --collect:"XPlat Code Coverage"
+            --results-directory ./coverage
             -- 
             RunConfiguration.CollectSourceInformation=true
+            DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          directory: ./Tests/TyKonKet.BarcodeGenerator.Tests/coverage
+          files: '**/*.xml'
+          fail_ci_if_error: false
+          verbose: true
+
+      - name: Generate coverage report
+        if: always()
+        run: |
+          dotnet tool install -g dotnet-reportgenerator-globaltool
+          reportgenerator \
+            -reports:"coverage/**/*.xml" \
+            -targetdir:"coverage/report" \
+            -reporttypes:"Html;Badges" \
+            -verbosity:Info
+        
+      - name: Upload coverage report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: Tests/TyKonKet.BarcodeGenerator.Tests/coverage/report

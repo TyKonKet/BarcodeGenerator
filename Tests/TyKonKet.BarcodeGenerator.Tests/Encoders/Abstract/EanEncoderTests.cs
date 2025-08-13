@@ -3,7 +3,7 @@ using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests.Encoders.Abstract
 {
-    public class EanEncodersTest
+    public class EanEncoderTests
     {
         [Theory]
         // Random
