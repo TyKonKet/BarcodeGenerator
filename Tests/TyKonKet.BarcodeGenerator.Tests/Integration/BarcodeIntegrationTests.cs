@@ -85,7 +85,10 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
             using var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             const int pngHeaderSize = 8;
             var pngHeader = new byte[pngHeaderSize];
-            fileStream.Read(pngHeader, 0, pngHeaderSize);
+            var bytesRead = fileStream.Read(pngHeader, 0, pngHeaderSize);
+            
+            // Ensure we read the expected number of bytes
+            Assert.Equal(pngHeaderSize, bytesRead);
             
             // PNG signature: 137 80 78 71 13 10 26 10
             var expectedPngSignature = new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 };
@@ -120,7 +123,10 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
             using var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             const int jpegHeaderSize = 2;
             var jpegHeader = new byte[jpegHeaderSize];
-            fileStream.Read(jpegHeader, 0, jpegHeaderSize);
+            var bytesRead = fileStream.Read(jpegHeader, 0, jpegHeaderSize);
+            
+            // Ensure we read the expected number of bytes
+            Assert.Equal(jpegHeaderSize, bytesRead);
             
             // JPEG header: FF D8
             var expectedJpegSignature = new byte[] { 0xFF, 0xD8 };

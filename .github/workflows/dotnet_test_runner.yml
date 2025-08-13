@@ -46,7 +46,7 @@ jobs:
             DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@5ecb98a3c4b747794b0672a1e8c1953c00a3deeb
         with:
           directory: ./Tests/TyKonKet.BarcodeGenerator.Tests/coverage
           files: '**/*.xml'
