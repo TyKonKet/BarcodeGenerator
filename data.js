@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755118284974,
+  "lastUpdate": 1755118286214,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -4476,6 +4476,60 @@ window.BENCHMARK_DATA = {
             "value": 761978.0805664062,
             "unit": "ns",
             "range": "± 1148.4500743545593"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "ff57471ddac43aa8c130d501741ffbfe4e0028c7",
+          "message": "Add method optimization guidelines to documentation\n\nIntroduced a \"Method Optimization Todo List\" in the\n`method-optimization-todo.md` file. This includes a\nstructured approach for optimizing methods in the\nBarcodeGenerator library, covering steps for\nbenchmarking, code optimization, validation, and\ndocumentation. Best practices and lessons learned\nare also provided to assist developers in effective\nmethod optimizations.",
+          "timestamp": "2025-08-13T22:45:33+02:00",
+          "tree_id": "f83b1d2754b2e12ef5d46a6be9b5ac676d7a08ba",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/ff57471ddac43aa8c130d501741ffbfe4e0028c7"
+        },
+        "date": 1755118285863,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 19451.31039428711,
+            "unit": "ns",
+            "range": "± 219.39502797364716"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 19420.143146221453,
+            "unit": "ns",
+            "range": "± 105.28722096252675"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 25928.378068033853,
+            "unit": "ns",
+            "range": "± 168.60048526090645"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 38261.15106201172,
+            "unit": "ns",
+            "range": "± 173.33435494357377"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
+            "value": 760779.5455979567,
+            "unit": "ns",
+            "range": "± 833.1034143887107"
           }
         ]
       }
