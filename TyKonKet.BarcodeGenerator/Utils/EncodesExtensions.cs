@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Concurrent;
+using System.Reflection;
 using TyKonKet.BarcodeGenerator.Attributes;
 
 namespace TyKonKet.BarcodeGenerator.Utils
@@ -8,6 +9,8 @@ namespace TyKonKet.BarcodeGenerator.Utils
     /// </summary>
     public static class EncodesExtensions
     {
+        private static readonly ConcurrentDictionary<BarcodeTypes, string> DisplayNameCache = new();
+
         /// <summary>
         /// Retrieves the display name of the specified barcode encoding.
         /// </summary>
@@ -15,29 +18,19 @@ namespace TyKonKet.BarcodeGenerator.Utils
         /// <returns>The display name of the barcode encoding, or the enum name if no display name is found.</returns>
         public static string GetDisplayName(this BarcodeTypes e)
         {
-            var enumName = e.ToString();
-
-            var info = typeof(BarcodeTypes).GetRuntimeField(enumName);
-            if (info == null)
+            return DisplayNameCache.GetOrAdd(e, key =>
             {
-                return enumName;
-            }
+                var enumName = key.ToString();
 
-            var attributes = info.GetCustomAttributes(typeof(BarcodeEncodingAttribute), inherit: false);
-            if (attributes == null)
-            {
-                return enumName;
-            }
-
-            foreach (var item in attributes)
-            {
-                if (item is BarcodeEncodingAttribute encodeAttribute)
+                var info = typeof(BarcodeTypes).GetRuntimeField(enumName);
+                if (info == null)
                 {
-                    return encodeAttribute.Name;
+                    return enumName;
                 }
-            }
 
-            return enumName;
+                var attribute = info.GetCustomAttribute<BarcodeEncodingAttribute>(inherit: false);
+                return attribute?.Name ?? enumName;
+            });
         }
     }
 }

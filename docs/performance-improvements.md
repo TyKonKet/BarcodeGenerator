@@ -12,6 +12,14 @@ This document tracks the performance improvements made to the BarcodeGenerator l
   - **CreateBenchmark**: Mean = 151.9 ns, Allocated = 672 B
 - **Improvement**: ~6.4% faster execution time.
 
+### August 13, 2025
+- **Optimized Method**: `EncodesExtensions.GetDisplayName`
+- **Description**: Introduced caching and optimized attribute lookup to significantly improve performance.
+- **Performance Results**:
+  - **Before Optimization**: Mean = 370.7 ns, Allocated = 264 B
+  - **After Optimization**: Mean = 1.931 ns, Allocated = 0 B
+- **Improvement**: ~99.5% faster execution time and eliminated memory allocation.
+
 ---
 
 Future improvements will be added to this timeline as they are implemented and benchmarked.
