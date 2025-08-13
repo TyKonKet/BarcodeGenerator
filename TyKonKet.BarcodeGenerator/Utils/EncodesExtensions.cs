@@ -15,11 +15,18 @@ namespace TyKonKet.BarcodeGenerator.Utils
         /// <returns>The display name of the barcode encoding, or the enum name if no display name is found.</returns>
         public static string GetDisplayName(this BarcodeTypes e)
         {
-            var info = typeof(BarcodeTypes).GetRuntimeField(e.ToString());
+            var enumName = e.ToString();
+
+            var info = typeof(BarcodeTypes).GetRuntimeField(enumName);
+            if (info == null)
+            {
+                return enumName;
+            }
+
             var attributes = info.GetCustomAttributes(typeof(BarcodeEncodingAttribute), inherit: false);
             if (attributes == null)
             {
-                return e.ToString();
+                return enumName;
             }
 
             foreach (var item in attributes)
@@ -30,7 +37,7 @@ namespace TyKonKet.BarcodeGenerator.Utils
                 }
             }
 
-            return e.ToString();
+            return enumName;
         }
     }
 }

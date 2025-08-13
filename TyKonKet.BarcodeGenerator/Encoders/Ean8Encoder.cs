@@ -40,7 +40,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <summary>
         /// Heights of the bars in the barcode.
         /// </summary>
-        private int[] barHeightValues;
+        private int[]? barHeightValues;
 
         /// <summary>
         /// Vertical space for the text.
@@ -50,34 +50,34 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <summary>
         /// Paint brush for drawing the barcode.
         /// </summary>
-        private SKPaint paintBrush;
+        private SKPaint? paintBrush;
 
         /// <summary>
         /// Text brush for drawing the text.
         /// </summary>
-        private SKPaint textBrush;
+        private SKPaint? textBrush;
 
 #if DEBUG
         /// <summary>
         /// Paint brush for debugging purposes.
         /// </summary>
-        private SKPaint debugPaint;
+        private SKPaint? debugPaint;
 #endif
 
         /// <summary>
         /// Surface for drawing the barcode.
         /// </summary>
-        private SKSurface drawingSurface;
+        private SKSurface? drawingSurface;
 
         /// <summary>
         /// Canvas for rendering the barcode.
         /// </summary>
-        private SKCanvas renderCanvas;
+        private SKCanvas? renderCanvas;
 
         /// <summary>
         /// Font for rendering the text.
         /// </summary>
-        private SKFont textFont;
+        private SKFont? textFont;
 
         /// <summary>
         /// Position for the left text.
@@ -168,7 +168,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// </summary>
         /// <param name="barcode">The barcode string to encode.</param>
         /// <returns>The encoded barcode string.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <see langword="null"/>.</exception>
         /// <exception cref="FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by EAN charset (only digits 0–9).</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "DisposedByBaseClass")]
@@ -184,7 +184,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             var encodedBars = EncodeBars(this.Barcode);
 
             // Clear canvas
-            this.renderCanvas.Clear(this.Options.BackgroundColor);
+            this.renderCanvas!.Clear(this.Options.BackgroundColor);
 
             // Iterate over the bars and draw them
             var xPosition = this.imagePadding;
@@ -193,7 +193,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 // If the bar is a colored one, draw it
                 if (encodedBars[i] == '1')
                 {
-                    this.renderCanvas.DrawRect(xPosition, this.imagePadding, this.Options.Scaling, this.barHeightValues[this.barsHeight[i]], this.paintBrush);
+                    this.renderCanvas.DrawRect(xPosition, this.imagePadding, this.Options.Scaling, this.barHeightValues![this.barsHeight[i]], this.paintBrush);
                 }
 
                 xPosition += this.Options.Scaling;
@@ -206,7 +206,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             }
 
             // Set the image
-            this.SetImage(this.drawingSurface.Snapshot());
+            this.SetImage(this.drawingSurface!.Snapshot());
 
             return this.Barcode;
         }
@@ -217,14 +217,14 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         private void RenderBarcodeText()
         {
             // Draw the barcode text
-            var leftText = this.Barcode[..4];
+            var leftText = this.Barcode![..4];
             var rightText = this.Barcode.Substring(4, 4);
 
             // Offset for the text
             var textOffset = new SKPoint(0, 0);
 
             // Measure the texts
-            this.textFont.MeasureText(leftText, out SKRect leftTextBounds, this.textBrush);
+            this.textFont!.MeasureText(leftText, out SKRect leftTextBounds, this.textBrush);
             this.textFont.MeasureText(leftText, out SKRect rightTextBounds, this.textBrush);
 
             // Get the highest text
@@ -234,7 +234,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             textOffset.Y -= (this.verticalTextSpace - highestText) / 2;
 
             // Draw the left and right text
-            this.renderCanvas.DrawText(leftText, this.leftTextPosition + textOffset, SKTextAlign.Center, this.textFont, this.textBrush);
+            this.renderCanvas!.DrawText(leftText, this.leftTextPosition + textOffset, SKTextAlign.Center, this.textFont, this.textBrush);
             this.renderCanvas.DrawText(rightText, this.rightTextPosition + textOffset, SKTextAlign.Center, this.textFont, this.textBrush);
 
 #if DEBUG

@@ -33,6 +33,12 @@ dotnet_diagnostic.SA1009.severity = none
 dotnet_diagnostic.SA1010.severity = none
 dotnet_diagnostic.SA1000.severity = none
 dotnet_diagnostic.SA1128.severity = none
+dotnet_diagnostic.SA1011.severity = none
+dotnet_diagnostic.MA0051.severity = none
+dotnet_diagnostic.Wintellect007.severity = none
+dotnet_diagnostic.Wintellect006.severity = none
+dotnet_diagnostic.Wintellect008.severity = none
+dotnet_diagnostic.Wintellect009.severity = none
 
 [*.{cs,vb}]
 #### Naming styles ####

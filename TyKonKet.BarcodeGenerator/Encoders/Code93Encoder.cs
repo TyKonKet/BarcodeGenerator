@@ -106,18 +106,18 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <summary>
         /// Paint brush for drawing the barcode.
         /// </summary>
-        private SKPaint paintBrush;
+        private SKPaint? paintBrush;
 
         /// <summary>
         /// Text brush for drawing the text.
         /// </summary>
-        private SKPaint textBrush;
+        private SKPaint? textBrush;
 
 #if DEBUG
         /// <summary>
         /// Paint brush for debugging purposes.
         /// </summary>
-        private SKPaint debugPaint;
+        private SKPaint? debugPaint;
 #endif
 
         /// <summary>
@@ -128,17 +128,17 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <summary>
         /// Surface for drawing the barcode.
         /// </summary>
-        private SKSurface drawingSurface;
+        private SKSurface? drawingSurface;
 
         /// <summary>
         /// Canvas for rendering the barcode.
         /// </summary>
-        private SKCanvas renderCanvas;
+        private SKCanvas? renderCanvas;
 
         /// <summary>
         /// Font for rendering the text.
         /// </summary>
-        private SKFont textFont;
+        private SKFont? textFont;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Code93Encoder"/> class.
@@ -208,7 +208,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// </summary>
         /// <param name="barcode">The barcode string to encode.</param>
         /// <returns>The encoded barcode string.</returns>
-        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="barcode"/> is <see langword="null"/>.</exception>
         /// <exception cref="System.FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by Code 93 charset (A–Z, 0–9, space and .$+%-/).</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "DisposedByBaseClass")]
@@ -238,7 +238,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             }
 
             // Clear canvas
-            this.renderCanvas.Clear(this.Options.BackgroundColor);
+            this.renderCanvas!.Clear(this.Options.BackgroundColor);
 
             // Iterate over the bars and draw them
             var xPosition = this.imagePadding;
@@ -260,7 +260,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             }
 
             // Set the image
-            this.SetImage(this.drawingSurface.Snapshot());
+            this.SetImage(this.drawingSurface!.Snapshot());
 
             return this.Barcode;
         }
@@ -272,13 +272,13 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         private void RenderBarcodeText(int imageWidth)
         {
             // Get the barcode text (without the check digits)
-            var barcodeText = this.Barcode[..^2];
+            var barcodeText = this.Barcode![..^2];
 
             // Offset for the text
             var textOffset = new SKPoint(0, 0);
 
             // Measure the text
-            this.textFont.MeasureText(barcodeText, out SKRect textBounds, this.textBrush);
+            this.textFont!.MeasureText(barcodeText, out SKRect textBounds, this.textBrush);
 
             // Get the text position
             var textPosition = new SKPoint((int)(imageWidth / 2.0), this.imageHeight - this.imagePadding);
@@ -287,7 +287,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             textOffset.Y -= (this.fontSize - textBounds.Height) / 2;
 
             // Draw the barcode text
-            this.renderCanvas.DrawText(barcodeText, textPosition + textOffset, SKTextAlign.Center, this.textFont, this.paintBrush);
+            this.renderCanvas!.DrawText(barcodeText, textPosition + textOffset, SKTextAlign.Center, this.textFont, this.paintBrush);
 
 #if DEBUG
             // Offset the bounds to the center of the left text

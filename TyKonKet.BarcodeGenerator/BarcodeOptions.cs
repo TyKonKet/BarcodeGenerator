@@ -22,7 +22,7 @@ namespace TyKonKet.BarcodeGenerator
 
         private int scalingFactor = 5;
 
-        private SKTypeface typeface;
+        private SKTypeface? typeface;
 
         /// <summary>
         /// Gets the name of the encoding used for the barcode.

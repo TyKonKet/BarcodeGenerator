@@ -27,7 +27,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// </summary>
         /// <param name="barcode">The barcode to encode.</param>
         /// <returns>The encoded barcode string.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <see langword="null"/>.</exception>
         /// <exception cref="FormatException">Thrown when the resulting ISBN-13 barcode contains characters not allowed by EAN charset (only digits 0–9).</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         public override string Encode(string barcode)

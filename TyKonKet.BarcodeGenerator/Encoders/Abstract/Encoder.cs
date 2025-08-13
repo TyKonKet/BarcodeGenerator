@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using TyKonKet.BarcodeGenerator.Utils;
@@ -43,12 +44,12 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <summary>
         /// Gets or sets the SKImage representing the barcode.
         /// </summary>
-        internal SKImage Image { get; set; }
+        internal SKImage? Image { get; set; }
 
         /// <summary>
         /// Gets or sets the barcode string.
         /// </summary>
-        internal string Barcode { get; set; }
+        internal string? Barcode { get; set; }
 
         /// <summary>
         /// Gets the accepted character set for the barcode.
@@ -60,7 +61,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// </summary>
         /// <param name="barcode">Barcode chars / digits.</param>
         /// <returns>Returns the validated barcode chars / digits.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is <see langword="null"/>.</exception>
         /// <exception cref="FormatException">Thrown when <paramref name="barcode"/> contains characters not allowed by the specific encoder charset.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when a numeric character falls outside the valid range during internal conversion (documented for forward compatibility).</exception>
         public abstract string Encode(string barcode);
@@ -79,12 +80,12 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <param name="format">Image export format.</param>
         /// <param name="quality">Image export quality.</param>
         /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="filePath"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="filePath"/> is <see langword="null"/>.</exception>
         /// <exception cref="DirectoryNotFoundException">Thrown when the directory for the file path does not exist and cannot be created.</exception>
         /// <exception cref="IOException">Thrown when an I/O error occurs during file operations.</exception>
         public virtual void Export(string filePath, SKEncodedImageFormat format, int quality)
         {
-            if (this.Image == null)
+            if (this.Image == null || this.Barcode == null)
             {
                 throw new InvalidOperationException("The barcode must be encoded before exported");
             }
@@ -98,6 +99,12 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
             }
 
             var directory = Path.GetDirectoryName(filePath);
+
+            if (directory == null)
+            {
+                throw new DirectoryNotFoundException("The directory for the file path does not exist and cannot be created.");
+            }
+
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
@@ -114,7 +121,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <param name="format">Image export format.</param>
         /// <param name="quality">Image export quality.</param>
         /// <exception cref="InvalidOperationException">Thrown when the barcode has not been encoded before export.</exception>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="stream"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="stream"/> is <see langword="null"/>.</exception>
         /// <exception cref="IOException">Thrown when an I/O error occurs during stream operations.</exception>
         public virtual void Export(Stream stream, SKEncodedImageFormat format, int quality)
         {
@@ -177,10 +184,9 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <returns>Returns the final file name with placeholders replaced.</returns>
         internal static string GetFinalFileName(string fileName, string barcode, SKEncodedImageFormat format, int quality)
         {
-            fileName = fileName.Replace("{barcode}", GetSafeFilename(barcode));
-            fileName = fileName.Replace("{format}", format.ToFileExtension());
-            fileName = fileName.Replace("{quality}", $"{quality}");
-            return fileName;
+            return fileName.Replace("{barcode}", GetSafeFilename(barcode))
+                .Replace("{format}", format.ToFileExtension())
+                .Replace("{quality}", $"{quality}");
         }
 
         /// <summary>
@@ -195,16 +201,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
                 return filename;
             }
 
-            var result = new StringBuilder(filename.Length);
-            foreach (char c in filename)
-            {
-                if (!InvalidChars.Contains(c))
-                {
-                    result.Append(c);
-                }
-            }
-
-            return result.ToString();
+            return new string([.. filename.Where(c => !InvalidChars.Contains(c))]);
         }
 
         /// <summary>

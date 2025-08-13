@@ -30,7 +30,13 @@ namespace TyKonKet.BarcodeGenerator.Utils
                     ?? throw new InvalidOperationException($"{key} isn't a known {nameof(Encoder)} type");
             });
 
-            return (Encoder)Activator.CreateInstance(type, options);
+            var instance = Activator.CreateInstance(type, options);
+            if (instance is not Encoder encoder)
+            {
+                throw new InvalidOperationException($"Failed to create encoder instance for type '{type.FullName}'.");
+            }
+
+            return encoder;
         }
     }
 }
