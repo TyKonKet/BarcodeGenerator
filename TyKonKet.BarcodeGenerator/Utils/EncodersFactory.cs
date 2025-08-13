@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Linq;
 using System.Reflection;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 
@@ -24,11 +25,18 @@ namespace TyKonKet.BarcodeGenerator.Utils
         {
             var className = $"{options.Type}Encoder";
 
-            var type = TypeCache.GetOrAdd(className, key =>
+            if (!TypeCache.TryGetValue(className, out var type))
             {
-                return Array.Find(Assembly.GetTypes(), t => string.Equals(t.Name, key, StringComparison.OrdinalIgnoreCase) && EncoderType.IsAssignableFrom(t))
-                    ?? throw new InvalidOperationException($"{key} isn't a known {nameof(Encoder)} type");
-            });
+                type = Assembly.GetTypes()
+                    .FirstOrDefault(t => string.Equals(t.Name, className, StringComparison.OrdinalIgnoreCase) && EncoderType.IsAssignableFrom(t));
+
+                if (type == null)
+                {
+                    throw new InvalidOperationException($"{className} isn't a known {nameof(Encoder)} type");
+                }
+
+                TypeCache[className] = type;
+            }
 
             var instance = Activator.CreateInstance(type, options);
             if (instance is not Encoder encoder)

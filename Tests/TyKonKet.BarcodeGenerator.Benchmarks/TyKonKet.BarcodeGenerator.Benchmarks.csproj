@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net10.0;net8.0;net6.0;net481</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
       <PlatformTarget>AnyCPU</PlatformTarget>
       <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
       <Nullable>disable</Nullable>
