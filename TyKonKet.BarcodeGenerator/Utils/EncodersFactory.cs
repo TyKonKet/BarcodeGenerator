@@ -12,7 +12,7 @@ namespace TyKonKet.BarcodeGenerator.Utils
     {
         private static readonly Assembly Assembly = Assembly.GetExecutingAssembly();
         private static readonly Type EncoderType = typeof(Encoder);
-        private static readonly ConcurrentDictionary<string, Type> TypeCache = new ConcurrentDictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
+        private static readonly ConcurrentDictionary<string, Type> TypeCache = new(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
         /// Creates an instance of an <see cref="Encoder"/> based on the provided <see cref="BarcodeOptions"/>.
