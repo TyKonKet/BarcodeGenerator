@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755174332090,
+  "lastUpdate": 1755174333093,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -11222,6 +11222,60 @@ window.BENCHMARK_DATA = {
             "value": 1069559.7022235577,
             "unit": "ns",
             "range": "± 1491.8189031830375"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "531d9e2bd4dd0674b7cd4176a6488ee77209a7a7",
+          "message": "Merge pull request #26 from TyKonKet/copilot/fix-25\n\nComprehensive Improvements to Unit Test Suite: Coverage, Naming, Organization, and Code Quality",
+          "timestamp": "2025-08-14T14:19:20+02:00",
+          "tree_id": "71cf58680508458f562f81434f2abde5d3239f90",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/531d9e2bd4dd0674b7cd4176a6488ee77209a7a7"
+        },
+        "date": 1755174332818,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.SimpleInstance",
+            "value": 789.9304789861043,
+            "unit": "ns",
+            "range": "± 7.034187114788407"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.AdvancedInstance",
+            "value": 1971.359375,
+            "unit": "ns",
+            "range": "± 31.601929666207173"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithoutText",
+            "value": 40624.74541015625,
+            "unit": "ns",
+            "range": "± 255.3319376439252"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithText",
+            "value": 54823.94637858073,
+            "unit": "ns",
+            "range": "± 760.3492900521136"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
+            "value": 1068493.3177584135,
+            "unit": "ns",
+            "range": "± 2847.0313364158765"
           }
         ]
       }
