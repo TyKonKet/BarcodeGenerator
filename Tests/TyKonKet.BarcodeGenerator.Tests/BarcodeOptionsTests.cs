@@ -241,7 +241,8 @@ namespace TyKonKet.BarcodeGenerator.Tests
         public void UseTypeface_ShouldThrowArgumentNullException_WhenTypefaceIsNull()
         {
             var options = new BarcodeOptions();
-            Assert.Throws<ArgumentNullException>(() => options.UseTypeface(null!));
+            SKTypeface typeface = null!;
+            Assert.Throws<ArgumentNullException>(() => options.UseTypeface(typeface));
         }
 
         [Fact]
@@ -271,7 +272,8 @@ namespace TyKonKet.BarcodeGenerator.Tests
         public void UseTypefaceFromStream_ShouldThrowArgumentNullException_WhenStreamIsNull()
         {
             var options = new BarcodeOptions();
-            Assert.Throws<ArgumentNullException>(() => options.UseTypefaceFromStream(null!));
+            SKStreamAsset stream = null!;
+            Assert.Throws<ArgumentNullException>(() => options.UseTypefaceFromStream(stream));
         }
 
         #endregion
