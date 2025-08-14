@@ -68,6 +68,7 @@ namespace TyKonKet.BarcodeGenerator
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="filePath"/> is <see langword="null"/>.</exception>
         /// <exception cref="DirectoryNotFoundException">Thrown when the directory for the file path does not exist and cannot be created.</exception>
         /// <exception cref="IOException">Thrown when an I/O error occurs during file operations.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="filePath"/> is empty or whitespace.</exception>
         public void Export(string filePath, SKEncodedImageFormat format = SKEncodedImageFormat.Png, int quality = 100)
         {
             this.barcodeEncoder.Export(filePath, format, quality);

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests.Encoders.Abstract
 {
-    public class EncoderTest
+    public class EncoderTests
     {
         [Fact]
         public void GetSafeFilename_ShouldRemoveInvalidCharacters()

@@ -61,7 +61,7 @@ namespace TyKonKet.BarcodeGenerator
         public int Scaling
         {
             get => this.scalingFactor;
-            set => this.scalingFactor = Math.Max(Math.Abs(value), 1);
+            set => this.scalingFactor = Math.Max(value, 1);
         }
 
         /// <summary>
@@ -96,11 +96,17 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         /// <param name="typeface">The typeface to use.</param>
         /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="typeface"/> is null.</exception>
         public void UseTypeface(SKTypeface typeface)
         {
             if (this.locked)
             {
                 throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            if (typeface is null)
+            {
+                throw new ArgumentNullException(nameof(typeface), "Typeface cannot be null.");
             }
 
             this.typeface = typeface;
@@ -191,11 +197,23 @@ namespace TyKonKet.BarcodeGenerator
         /// <param name="path">The path to the font file.</param>
         /// <param name="index">The index of the font in the file.</param>
         /// <exception cref="InvalidOperationException">Thrown when the options are locked and cannot be modified.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="path"/> is null.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="path"/> is empty or whitespace.</exception>
         public void UseTypefaceFromFile(string path, int index = 0)
         {
             if (this.locked)
             {
                 throw new InvalidOperationException("Options are locked and cannot be modified.");
+            }
+
+            if (path is null)
+            {
+                throw new ArgumentNullException(nameof(path), "Font file path cannot be null.");
+            }
+
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new ArgumentException("Font file path cannot be null or whitespace.", nameof(path));
             }
 
             this.typeface = SKTypeface.FromFile(path, index);

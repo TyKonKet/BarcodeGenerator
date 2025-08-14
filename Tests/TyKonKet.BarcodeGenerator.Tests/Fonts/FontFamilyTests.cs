@@ -6,7 +6,11 @@ using Xunit;
 
 namespace TyKonKet.BarcodeGenerator.Tests.Fonts
 {
-    public class FontFamilyTest
+    /// <summary>
+    /// Contains unit tests for the <see cref="FontFamily"/> class and <see cref="FontFamilies"/> enum.
+    /// Tests font family implicit conversions, platform-specific behavior, and enum mappings.
+    /// </summary>
+    public class FontFamilyTests
     {
         public static IEnumerable<object[]> ValidateFontFamily_ShouldReturnExpectedFamilyName_Data()
         {

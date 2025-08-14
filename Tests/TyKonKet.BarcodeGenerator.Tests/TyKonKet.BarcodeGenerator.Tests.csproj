@@ -4,6 +4,14 @@
     <TargetFramework>net10.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsTestProject>True</IsTestProject>
+    <!-- Code Coverage Configuration -->
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutput>$(OutputPath)coverage/</CoverletOutput>
+    <CoverletOutputFormat>opencover,cobertura,json,lcov</CoverletOutputFormat>
+    <Threshold>80</Threshold>
+    <ThresholdType>line,branch,method</ThresholdType>
+    <ThresholdStat>minimum</ThresholdStat>
+    <ExcludeByFile>**/bin/**/*,**/obj/**/*</ExcludeByFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,8 +22,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+
     <PackageReference Include="coverlet.collector" Version="6.0.4" PrivateAssets="all" />
+    <PackageReference Include="coverlet.msbuild" Version="6.0.4" PrivateAssets="all" />
+    <PackageReference Include="ReportGenerator" Version="5.4.2" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
