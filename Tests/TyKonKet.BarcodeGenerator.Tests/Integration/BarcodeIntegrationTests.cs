@@ -32,7 +32,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
         [Theory]
         [InlineData(BarcodeTypes.Ean13, "1234567890123", "1234567890128")]
         [InlineData(BarcodeTypes.Ean8, "12345678", "12345670")]
-        [InlineData(BarcodeTypes.UpcA, "123456789012", "123456789012")]
+        [InlineData(BarcodeTypes.Upca, "123456789012", "123456789012")]
         [InlineData(BarcodeTypes.Isbn13, "9781234567897", "9781234567897")]
         [InlineData(BarcodeTypes.Code93, "HELLO123", "HELLO123")]
         public void FullWorkflow_ShouldEncodeAndGenerateImage_ForAllBarcodeTypes(BarcodeTypes type, string input, string expectedOutput)
@@ -195,8 +195,9 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
             using var barcode = new Barcode();
             barcode.Encode("12345678");
 
+            string fileName = null!;
             Assert.Throws<ArgumentNullException>(() => 
-                barcode.Export(null!, SKEncodedImageFormat.Png, 100));
+                barcode.Export(fileName, SKEncodedImageFormat.Png, 100));
         }
 
         [Theory]
