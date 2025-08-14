@@ -30,8 +30,10 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [Fact]
         public void TextColor_WhenSet_ShouldReturnSetValue()
         {
-            var options = new BarcodeOptions();
-            options.TextColor = SKColors.Red;
+            var options = new BarcodeOptions
+            {
+                TextColor = SKColors.Red
+            };
             Assert.Equal(SKColors.Red, options.TextColor);
             Assert.Equal(SKColors.Red, options.EffectiveTextColor);
         }
@@ -39,9 +41,11 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [Fact]
         public void TextColor_WhenNull_ShouldFallbackToForegroundColor()
         {
-            var options = new BarcodeOptions();
-            options.ForegroundColor = SKColors.Blue;
-            options.TextColor = null;
+            var options = new BarcodeOptions
+            {
+                ForegroundColor = SKColors.Blue,
+                TextColor = null
+            };
             Assert.Null(options.TextColor);
             Assert.Equal(SKColors.Blue, options.EffectiveTextColor);
         }
@@ -49,9 +53,11 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [Fact]
         public void TextColor_ShouldBeIndependentOfForegroundColor()
         {
-            var options = new BarcodeOptions();
-            options.ForegroundColor = SKColors.Green;
-            options.TextColor = SKColors.Yellow;
+            var options = new BarcodeOptions
+            {
+                ForegroundColor = SKColors.Green,
+                TextColor = SKColors.Yellow
+            };
             Assert.Equal(SKColors.Green, options.ForegroundColor);
             Assert.Equal(SKColors.Yellow, options.TextColor);
             Assert.Equal(SKColors.Yellow, options.EffectiveTextColor);
@@ -192,8 +198,10 @@ namespace TyKonKet.BarcodeGenerator.Tests
         {
             // Note: Testing that negative values are accepted by the options class
             // The actual validation may occur at encoding time
-            var options = new BarcodeOptions();
-            options.Height = height;
+            var options = new BarcodeOptions
+            {
+                Height = height
+            };
             Assert.Equal(height, options.Height);
         }
 
@@ -205,8 +213,10 @@ namespace TyKonKet.BarcodeGenerator.Tests
         {
             // Note: Testing that zero/negative values are accepted by the options class
             // The actual validation may occur at encoding time
-            var options = new BarcodeOptions();
-            options.Scaling = scaling;
+            var options = new BarcodeOptions
+            {
+                Scaling = scaling
+            };
             Assert.Equal(1, options.Scaling);
         }
 
@@ -217,21 +227,24 @@ namespace TyKonKet.BarcodeGenerator.Tests
         public void Margins_ShouldAcceptNegativeValues_ForEdgeCaseTesting(int margins)
         {
             // Note: Testing that negative values are accepted by the options class
-            var options = new BarcodeOptions();
-            options.Margins = margins;
+            var options = new BarcodeOptions
+            {
+                Margins = margins
+            };
             Assert.Equal(margins, options.Margins);
         }
 
         [Fact]
         public void BarcodeOptions_ShouldHandleExtremeColorValues()
         {
-            var options = new BarcodeOptions();
-            
-            // Test with extreme color values
-            options.BackgroundColor = new SKColor(0, 0, 0, 0); // Transparent
-            options.ForegroundColor = new SKColor(255, 255, 255, 255); // Opaque white
-            options.TextColor = new SKColor(128, 128, 128, 128); // Semi-transparent gray
-            
+            var options = new BarcodeOptions
+            {
+                // Test with extreme color values
+                BackgroundColor = new SKColor(0, 0, 0, 0), // Transparent
+                ForegroundColor = new SKColor(255, 255, 255, 255), // Opaque white
+                TextColor = new SKColor(128, 128, 128, 128) // Semi-transparent gray
+            };
+
             Assert.Equal(new SKColor(0, 0, 0, 0), options.BackgroundColor);
             Assert.Equal(new SKColor(255, 255, 255, 255), options.ForegroundColor);
             Assert.Equal(new SKColor(128, 128, 128, 128), options.TextColor);
@@ -279,20 +292,26 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [Fact]
         public void UseTypeface_WithFontFamily_ShouldSetTypeface()
         {
+            // On Unix, Arial may not be available, so we use DejaVu Sans as an alternative.
+            var fontName = Environment.OSVersion.Platform == PlatformID.Unix ? "DejaVu Sans" : "Arial";
+
             var options = new BarcodeOptions();
-            options.UseTypeface("Arial");
+            options.UseTypeface(fontName);
             Assert.NotNull(options.Typeface);
-            Assert.Equal("Arial", options.Typeface.FamilyName);
+            Assert.Equal(fontName, options.Typeface.FamilyName);
         }
 
         [Fact]
         public void UseTypeface_WithFontFamilyAndStyle_ShouldSetTypeface()
         {
+            // On Unix, Times New Roman may not be available, so we use DejaVu Sans as an alternative.
+            var fontName = Environment.OSVersion.Platform == PlatformID.Unix ? "DejaVu Sans" : "Times New Roman";
+
             var options = new BarcodeOptions();
             var style = new SKFontStyle(SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Italic);
-            options.UseTypeface("Times New Roman", style);
+            options.UseTypeface(fontName, style);
             Assert.NotNull(options.Typeface);
-            Assert.Equal("Times New Roman", options.Typeface.FamilyName);
+            Assert.Equal(fontName, options.Typeface.FamilyName);
             Assert.Equal(style.Weight, options.Typeface.FontWeight);
             Assert.Equal(style.Slant, options.Typeface.FontSlant);
         }
@@ -300,10 +319,13 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [Fact]
         public void UseTypeface_WithFontFamilyAndDetailedStyle_ShouldSetTypeface()
         {
+            // On Unix, Courier New may not be available, so we use DejaVu Sans as an alternative.
+            var fontName = Environment.OSVersion.Platform == PlatformID.Unix ? "DejaVu Sans" : "Courier New";
+
             var options = new BarcodeOptions();
-            options.UseTypeface("Courier New", 700, 5, SKFontStyleSlant.Upright);
+            options.UseTypeface(fontName, 700, 5, SKFontStyleSlant.Upright);
             Assert.NotNull(options.Typeface);
-            Assert.Equal("Courier New", options.Typeface.FamilyName);
+            Assert.Equal(fontName, options.Typeface.FamilyName);
             Assert.Equal(700, options.Typeface.FontWeight);
             Assert.Equal(5, options.Typeface.FontWidth);
             Assert.Equal(SKFontStyleSlant.Upright, options.Typeface.FontSlant);
@@ -312,10 +334,13 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [Fact]
         public void UseTypeface_WithFontFamilyAndEnumStyle_ShouldSetTypeface()
         {
+            // On Unix, Arial may not be available, so we use DejaVu Sans as an alternative.
+            var fontName = Environment.OSVersion.Platform == PlatformID.Unix ? "DejaVu Sans" : "Arial";
+
             var options = new BarcodeOptions();
-            options.UseTypeface("Arial", SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Oblique);
+            options.UseTypeface(fontName, SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Oblique);
             Assert.NotNull(options.Typeface);
-            Assert.Equal("Arial", options.Typeface.FamilyName);
+            Assert.Equal(fontName, options.Typeface.FamilyName);
             Assert.Equal((int)SKFontStyleWeight.Normal, options.Typeface.FontWeight);
             Assert.Equal((int)SKFontStyleWidth.Normal, options.Typeface.FontWidth);
             Assert.Equal(SKFontStyleSlant.Oblique, options.Typeface.FontSlant);
