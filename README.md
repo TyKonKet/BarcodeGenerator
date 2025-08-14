@@ -170,24 +170,21 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Here's how you can help:
+We welcome contributions from the community! 🎉
 
-**Getting Started:**
-- Read our [Code of Conduct](CODE_OF_CONDUCT.md)
-- Check the project's [GitHub repository](https://github.com/TyKonKet/BarcodeGenerator) for contribution guidelines
-- Look for issues labeled "good first issue" or "help wanted"
+**👉 [Full Contributing Guide](CONTRIBUTING.md)** - Complete guide to contributing with setup, workflows, and guidelines
 
-**Ways to Contribute:**
-- Report bugs and suggest features
-- Submit pull requests for bug fixes
-- Improve documentation and examples
-- Share your use cases and feedback
+**Quick Start:**
+- 🐛 **Found a bug?** [Report it here](https://github.com/TyKonKet/BarcodeGenerator/issues/new)
+- ✨ **Have an idea?** [Start a discussion](https://github.com/TyKonKet/BarcodeGenerator/discussions)
+- 🚀 **Ready to code?** Check out [good first issues](https://github.com/TyKonKet/BarcodeGenerator/labels/good%20first%20issue)
 
-**Testing:**
-- Run the comprehensive test suite: `dotnet test --configuration Release`
-- Generate code coverage reports: `./scripts/run-coverage.sh` (Linux/macOS) or `.\scripts\run-coverage.ps1` (Windows)
-- Review [test documentation](Tests/TyKonKet.BarcodeGenerator.Tests/README.md) for testing guidelines
-- Ensure 80%+ code coverage for new features
+**Essential Checks:**
+- Run tests: `dotnet test --configuration Release`
+- Check coverage: `./scripts/run-coverage.sh`
+- Follow our [Code of Conduct](CODE_OF_CONDUCT.md)
+
+*Every contribution matters - from typo fixes to new features!* ✨
 
 ---
 
