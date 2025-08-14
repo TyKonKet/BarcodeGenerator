@@ -338,12 +338,12 @@ namespace TyKonKet.BarcodeGenerator.Tests
             var fontName = Environment.OSVersion.Platform == PlatformID.Unix ? "DejaVu Sans" : "Arial";
 
             var options = new BarcodeOptions();
-            options.UseTypeface(fontName, SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Oblique);
+            options.UseTypeface(fontName, SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Italic);
             Assert.NotNull(options.Typeface);
             Assert.Equal(fontName, options.Typeface.FamilyName);
             Assert.Equal((int)SKFontStyleWeight.Normal, options.Typeface.FontWeight);
             Assert.Equal((int)SKFontStyleWidth.Normal, options.Typeface.FontWidth);
-            Assert.Equal(SKFontStyleSlant.Oblique, options.Typeface.FontSlant);
+            Assert.Equal(SKFontStyleSlant.Italic, options.Typeface.FontSlant);
         }
 
         [Fact]
