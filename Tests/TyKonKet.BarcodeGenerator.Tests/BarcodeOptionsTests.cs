@@ -276,6 +276,71 @@ namespace TyKonKet.BarcodeGenerator.Tests
             Assert.Throws<ArgumentNullException>(() => options.UseTypefaceFromStream(stream));
         }
 
+        [Fact]
+        public void UseTypeface_WithFontFamily_ShouldSetTypeface()
+        {
+            var options = new BarcodeOptions();
+            options.UseTypeface("Arial");
+            Assert.NotNull(options.Typeface);
+            Assert.Equal("Arial", options.Typeface.FamilyName);
+        }
+
+        [Fact]
+        public void UseTypeface_WithFontFamilyAndStyle_ShouldSetTypeface()
+        {
+            var options = new BarcodeOptions();
+            var style = new SKFontStyle(SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Italic);
+            options.UseTypeface("Times New Roman", style);
+            Assert.NotNull(options.Typeface);
+            Assert.Equal("Times New Roman", options.Typeface.FamilyName);
+            Assert.Equal(style.Weight, options.Typeface.FontWeight);
+            Assert.Equal(style.Slant, options.Typeface.FontSlant);
+        }
+
+        [Fact]
+        public void UseTypeface_WithFontFamilyAndDetailedStyle_ShouldSetTypeface()
+        {
+            var options = new BarcodeOptions();
+            options.UseTypeface("Courier New", 700, 5, SKFontStyleSlant.Upright);
+            Assert.NotNull(options.Typeface);
+            Assert.Equal("Courier New", options.Typeface.FamilyName);
+            Assert.Equal(700, options.Typeface.FontWeight);
+            Assert.Equal(5, options.Typeface.FontWidth);
+            Assert.Equal(SKFontStyleSlant.Upright, options.Typeface.FontSlant);
+        }
+
+        [Fact]
+        public void UseTypeface_WithFontFamilyAndEnumStyle_ShouldSetTypeface()
+        {
+            var options = new BarcodeOptions();
+            options.UseTypeface("Arial", SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Oblique);
+            Assert.NotNull(options.Typeface);
+            Assert.Equal("Arial", options.Typeface.FamilyName);
+            Assert.Equal((int)SKFontStyleWeight.Normal, options.Typeface.FontWeight);
+            Assert.Equal((int)SKFontStyleWidth.Normal, options.Typeface.FontWidth);
+            Assert.Equal(SKFontStyleSlant.Oblique, options.Typeface.FontSlant);
+        }
+
+        [Fact]
+        public void UseTypefaceFromStream_WithSKStreamAsset_ShouldSetTypeface()
+        {
+            var options = new BarcodeOptions();
+            var testData = new byte[] { 0, 1, 2, 3, 4 };
+            using var stream = new SKMemoryStream(testData);
+            options.UseTypefaceFromStream(stream);
+            Assert.NotNull(options.Typeface);
+        }
+
+        [Fact]
+        public void UseTypefaceFromStream_WithSKStreamAsset_ShouldThrowException_WhenLocked()
+        {
+            var options = new BarcodeOptions();
+            options.Lock();
+            var testData = new byte[] { 0, 1, 2, 3, 4 };
+            using var stream = new SKMemoryStream(testData);
+            Assert.Throws<InvalidOperationException>(() => options.UseTypefaceFromStream(stream));
+        }
+
         #endregion
     }
 }
