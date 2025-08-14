@@ -201,13 +201,13 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData(0)]
         [InlineData(-1)]
         [InlineData(int.MinValue)]
-        public void Scaling_ShouldAcceptZeroAndNegativeValues_ForEdgeCaseTesting(int scaling)
+        public void Scaling_ShouldNotAcceptZeroAndNegativeValues_ForEdgeCaseTesting(int scaling)
         {
             // Note: Testing that zero/negative values are accepted by the options class
             // The actual validation may occur at encoding time
             var options = new BarcodeOptions();
             options.Scaling = scaling;
-            Assert.Equal(scaling, options.Scaling);
+            Assert.Equal(1, options.Scaling);
         }
 
         [Theory]

@@ -294,8 +294,20 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// </summary>
         /// <param name="barcode">The barcode string to format.</param>
         /// <returns>The formatted barcode string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when the barcode is null.</exception>
+        /// <exception cref="ArgumentException">Thrown when the barcode is not 13 digits.</exception>
         internal static string FormatBarcode(string barcode)
         {
+            if (barcode is null)
+            {
+                throw new ArgumentNullException(nameof(barcode));
+            }
+
+            if (string.IsNullOrWhiteSpace(barcode))
+            {
+                throw new ArgumentException("Barcode cannot be null or whitespace.", nameof(barcode));
+            }
+
             return FormatBarcode(barcode, 13);
         }
 
@@ -304,8 +316,20 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// </summary>
         /// <param name="barcode">The barcode string to encode.</param>
         /// <returns>The encoded bars string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when the barcode is null.</exception>
+        /// <exception cref="ArgumentException">Thrown when the barcode is not 13 digits.</exception>
         internal static string EncodeBars(string barcode)
         {
+            if (barcode is null)
+            {
+                throw new ArgumentNullException(nameof(barcode));
+            }
+
+            if (barcode.Length != 13)
+            {
+                throw new ArgumentException("EAN-13 barcode must be 13 digits.", nameof(barcode));
+            }
+
             var left = new StringBuilder(42);
             var right = new StringBuilder(42);
             var encodingTable = EncodingTable[barcode[0].ToInt()];

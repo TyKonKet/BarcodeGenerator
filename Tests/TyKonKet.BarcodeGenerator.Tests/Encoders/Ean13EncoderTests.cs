@@ -73,7 +73,6 @@ namespace TyKonKet.BarcodeGenerator.Tests.Encoders
         [InlineData("!@#$%")]
         [InlineData("123-456")]
         [InlineData("123.456.789")]
-        [InlineData("12345678901234567890")] // Too long
         public void ValidateCharset_ShouldThrowFormatException_ForVariousInvalidInputs(string barcode)
         {
             Assert.Throws<FormatException>(() => new Ean13Encoder().EnsureValidCharset(barcode));

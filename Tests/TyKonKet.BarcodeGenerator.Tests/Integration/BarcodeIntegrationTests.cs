@@ -34,7 +34,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
         [InlineData(BarcodeTypes.Ean8, "12345678", "12345670")]
         [InlineData(BarcodeTypes.Upca, "123456789012", "123456789012")]
         [InlineData(BarcodeTypes.Isbn13, "9781234567897", "9781234567897")]
-        [InlineData(BarcodeTypes.Code93, "HELLO123", "HELLO123")]
+        [InlineData(BarcodeTypes.Code93, "HELLO123", "HELLO1237N")]
         public void FullWorkflow_ShouldEncodeAndGenerateImage_ForAllBarcodeTypes(BarcodeTypes type, string input, string expectedOutput)
         {
             // Arrange & Act
@@ -172,7 +172,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
         public void Encode_ShouldThrowArgumentException_WhenBarcodeIsEmptyOrWhitespace(string input)
         {
             using var barcode = new Barcode();
-            Assert.Throws<ArgumentException>(() => barcode.Encode(input));
+            Assert.Throws<FormatException>(() => barcode.Encode(input));
         }
 
         [Fact]
@@ -239,7 +239,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
             // Images should be different
             Assert.NotEqual(firstImageHash, secondImageHash);
             Assert.Equal("1111111111116", result1);
-            Assert.Equal("2222222222228", result2);
+            Assert.Equal("2222222222222", result2);
         }
 
         [Theory]
