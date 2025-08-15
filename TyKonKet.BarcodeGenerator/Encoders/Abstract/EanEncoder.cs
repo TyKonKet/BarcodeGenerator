@@ -1,4 +1,7 @@
-﻿using System.Globalization;
+﻿// Copyright (c) 2020-2025 TyKonKet and contributors
+// Licensed under the MIT License. See LICENSE in the repository root for full license information.
+
+using System.Globalization;
 using System.Text.RegularExpressions;
 using TyKonKet.BarcodeGenerator.Utils;
 
