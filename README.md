@@ -43,7 +43,7 @@ barcode.Export("barcode.png");  // Done! 🎉
 | **EAN-8** | 📦 Small packages, compact spaces | `12345670` |
 | **CODE-93** | 📋 Logistics, inventory management | `ABC123` |
 
-> **More formats coming soon:** CODE-39, CODE-128 ([see roadmap](#-roadmap))
+> **More formats coming soon:** CODE-39, CODE-128 ([see roadmap](#%EF%B8%8F-roadmap))
 
 ---
 
@@ -245,7 +245,7 @@ We welcome contributions from the community! 🎉
 **👉 [Full Contributing Guide](CONTRIBUTING.md)** - Complete guide to contributing with setup, workflows, and guidelines
 
 **Quick Start:**
-- 🐛 **Found a bug?** [Report it here](https://github.com/TyKonKet/BarcodeGenerator/issues/new)
+- 🐛 **Found a bug?** [Report it here](https://github.com/TyKonKet/BarcodeGenerator/issues/new?template=bug_report.yml)
 - ✨ **Have an idea?** [Start a discussion](https://github.com/TyKonKet/BarcodeGenerator/discussions)
 - 🚀 **Ready to code?** Check out [good first issues](https://github.com/TyKonKet/BarcodeGenerator/labels/good%20first%20issue)
 
