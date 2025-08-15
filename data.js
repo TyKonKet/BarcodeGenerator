@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755290967564,
+  "lastUpdate": 1755290968508,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -10034,6 +10034,60 @@ window.BENCHMARK_DATA = {
             "value": 767895.1524739583,
             "unit": "ns",
             "range": "± 2374.6455914789417"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "832779376fa86a0b76e80cc75833531106222113",
+          "message": "Update project configuration and documentation standards\n\n- Enhanced `.editorconfig` for StyleCop diagnostics and naming styles.\n- Modified `.gitattributes` for proper diff handling of C# and image files.\n- Updated `Directory.Build.props` to include `stylecop.json` and improved build properties.\n- Added copyright and licensing information to multiple source files for standardization.\n- Restructured `TyKonKet.BarcodeGenerator.csproj` for better organization and added new dependencies.\n- Created `stylecop.json` to enforce coding standards with specific rules.\n- Ensured consistency in namespaces and documentation across various classes and methods.",
+          "timestamp": "2025-08-15T22:42:37+02:00",
+          "tree_id": "3566dce76cc6b2030def2be60493fd51288e601f",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/832779376fa86a0b76e80cc75833531106222113"
+        },
+        "date": 1755290968279,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 19181.09627356896,
+            "unit": "ns",
+            "range": "± 230.15075533510299"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 20881.739149827223,
+            "unit": "ns",
+            "range": "± 186.20480223658438"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 23943.589638343223,
+            "unit": "ns",
+            "range": "± 97.71544198368963"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 36953.326190185544,
+            "unit": "ns",
+            "range": "± 390.5868295880957"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
+            "value": 766302.2350027902,
+            "unit": "ns",
+            "range": "± 1192.9019350084932"
           }
         ]
       }
