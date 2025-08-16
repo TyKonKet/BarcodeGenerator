@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755356932824,
+  "lastUpdate": 1755356934579,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -7930,6 +7930,60 @@ window.BENCHMARK_DATA = {
             "value": 762493.7642299107,
             "unit": "ns",
             "range": "± 1629.2638315623574"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "e895e1f420f1612077a6a4a8709ad7ee74ae6fa7",
+          "message": "Enhance performance optimization documentation\n\nUpdated `Perf.chatmode.md` to define the role of the performance optimization specialist for the BarcodeGenerator .NET library, emphasizing a strict 8-step optimization process, key performance areas, and response guidelines.\n\nRevised `Perf-Opt.prompt.md` to clarify the structure for optimizing method performance, including requirements for measuring performance baselines and maintaining API compatibility.\n\nModified `method-optimization-todo.md` to include critical reminders for benchmark setup, the importance of using the latest .NET framework, and best practices for isolating benchmarks.",
+          "timestamp": "2025-08-16T17:02:25+02:00",
+          "tree_id": "395f476e21e31a4a6f25bf03b442cb510de081ba",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/e895e1f420f1612077a6a4a8709ad7ee74ae6fa7"
+        },
+        "date": 1755356933920,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 19353.11389378139,
+            "unit": "ns",
+            "range": "± 335.4314337777239"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 21594.876485971305,
+            "unit": "ns",
+            "range": "± 499.20291373214"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 24929.031247456867,
+            "unit": "ns",
+            "range": "± 23.454003156441974"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40284.786267961776,
+            "unit": "ns",
+            "range": "± 204.92292021894426"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
+            "value": 763612.3471304086,
+            "unit": "ns",
+            "range": "± 570.0506656615204"
           }
         ]
       }
