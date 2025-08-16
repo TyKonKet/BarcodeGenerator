@@ -8,8 +8,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmarks
     {
         public static void Main(string[] args)
         {
-            var config = DefaultConfig.Instance;
-            new BenchmarkSwitcher(typeof(Program).GetTypeInfo().Assembly).Run(args, config);
+            new BenchmarkSwitcher(typeof(Program).GetTypeInfo().Assembly).Run(args);
         }
     }
 }
