@@ -50,8 +50,9 @@ barcode.Export("path/{barcode}.png", SKEncodedImageFormat.Png, 100);
 ## Testing
 - **xUnit** with `[Theory]`/`[InlineData]` for parameterized tests
 - **80% coverage** threshold enforced
-- **4 test projects**: Tests (unit), Benchmarks, CB (CI benchmarks), Playground
+- **4 test projects**: Tests (unit), Benchmarks (development), CB (CI benchmarks), Playground
 - **BenchmarkDotNet** for performance regression detection (200% threshold)
+- **Performance Optimization**: Use `Tests/TyKonKet.BarcodeGenerator.Benchmarks/` for development benchmarks (NOT CB project)
 
 ## Code Quality
 - **13 analyzers** enabled with `EnforceCodeStyleInBuild=True`

@@ -29,7 +29,9 @@ This document outlines the steps to follow for optimizing methods in the Barcode
    - Validate the benchmark setup by running it once before optimization.
    - **Critical**: Always run benchmarks with the latest .NET framework version flag.
    - **Critical**: Ensure the correct benchmark method is selected or use appropriate filters.
+   - **Critical**: Use the `TyKonKet.BarcodeGenerator.Benchmarks` project for development benchmarks (NOT the CB project which is for CI).
    - **Checklist**:
+     - [ ] Create benchmark classes in `Tests/TyKonKet.BarcodeGenerator.Benchmarks/` directory.
      - [ ] Include both the old and new methods in the benchmark.
      - [ ] Ensure benchmarks isolate the method being optimized.
      - [ ] Run with `--framework net10.0` (or latest available) flag.
@@ -96,6 +98,8 @@ This document outlines the steps to follow for optimizing methods in the Barcode
   - For specific method benchmarks: `dotnet run --configuration Release --framework net10.0 -- --filter *BenchmarkName*`
   - For full benchmark suites: `dotnet run --configuration Release --framework net10.0`
   - Always use Release configuration for accurate performance measurements.
+  - **Important**: Run benchmarks from `Tests/TyKonKet.BarcodeGenerator.Benchmarks/` directory (development benchmarks)
+  - **Avoid**: Using `Tests/TyKonKet.BarcodeGenerator.CB/` directory (CI-specific benchmarks)
 
 - **Focus on Hotspots**:
   - Use profiling tools to identify performance-critical areas before optimizing.
