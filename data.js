@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755374670225,
+  "lastUpdate": 1755374671429,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -8902,6 +8902,60 @@ window.BENCHMARK_DATA = {
             "value": 764078.3697916666,
             "unit": "ns",
             "range": "± 1682.9060911389486"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "67421de11ccb29af88d08929d11d332c5952fee4",
+          "message": "Update filename tests for extreme quality values\n\nModified the `GetFinalFileName_ShouldHandleExtremeQualityValues` method by removing the test case for `\"test\\\\filename?.png\"` and adding a new case for `\"test\\\\file/name?.png\"`. This ensures better handling of invalid characters in file names across different operating systems.",
+          "timestamp": "2025-08-16T21:58:37+02:00",
+          "tree_id": "f50de7fe049a40ba10566b001c5d44209ea5b767",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/67421de11ccb29af88d08929d11d332c5952fee4"
+        },
+        "date": 1755374671015,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 16703.93354143415,
+            "unit": "ns",
+            "range": "± 144.55490392906876"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 19343.09836324056,
+            "unit": "ns",
+            "range": "± 195.49296963705314"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25569.4953120305,
+            "unit": "ns",
+            "range": "± 74.73402612438886"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40810.8902752216,
+            "unit": "ns",
+            "range": "± 142.48985544087301"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
+            "value": 762798.4141322544,
+            "unit": "ns",
+            "range": "± 985.9354993173692"
           }
         ]
       }
