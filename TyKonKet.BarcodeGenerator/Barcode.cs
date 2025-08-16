@@ -6,7 +6,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
-using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator
 {

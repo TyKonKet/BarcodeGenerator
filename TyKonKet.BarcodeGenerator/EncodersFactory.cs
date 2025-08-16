@@ -3,12 +3,13 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 
-namespace TyKonKet.BarcodeGenerator.Utils
+namespace TyKonKet.BarcodeGenerator
 {
     /// <summary>
     /// Factory class for creating instances of <see cref="Encoder"/>.
@@ -17,7 +18,6 @@ namespace TyKonKet.BarcodeGenerator.Utils
     {
         private static readonly Assembly Assembly = Assembly.GetExecutingAssembly();
         private static readonly Type EncoderType = typeof(Encoder);
-        private static readonly ConcurrentDictionary<string, Type> TypeCache = new(StringComparer.OrdinalIgnoreCase);
 
         // Factory delegate cache for direct instantiation (performance optimization)
         private static readonly ConcurrentDictionary<string, Func<BarcodeOptions, Encoder>> FactoryCache = new(StringComparer.OrdinalIgnoreCase);
@@ -25,13 +25,6 @@ namespace TyKonKet.BarcodeGenerator.Utils
         // Static constructor to pre-populate cache with known encoders
         static EncodersFactory()
         {
-            // Pre-populate type cache with known encoder types to eliminate reflection overhead
-            TypeCache["Code93Encoder"] = typeof(Encoders.Code93Encoder);
-            TypeCache["Ean13Encoder"] = typeof(Encoders.Ean13Encoder);
-            TypeCache["Ean8Encoder"] = typeof(Encoders.Ean8Encoder);
-            TypeCache["Isbn13Encoder"] = typeof(Encoders.Isbn13Encoder);
-            TypeCache["UpcaEncoder"] = typeof(Encoders.UpcaEncoder);
-
             // Pre-populate factory delegate cache for direct instantiation (eliminates Activator.CreateInstance overhead)
             FactoryCache["Code93Encoder"] = options => new Encoders.Code93Encoder(options);
             FactoryCache["Ean13Encoder"] = options => new Encoders.Ean13Encoder(options);
@@ -58,17 +51,7 @@ namespace TyKonKet.BarcodeGenerator.Utils
             }
 
             // Fallback to reflection for unknown encoder types (extensibility)
-            if (!TypeCache.TryGetValue(className, out var type))
-            {
-                type = Assembly.GetTypes().FirstOrDefault(t => string.Equals(t.Name, className, StringComparison.OrdinalIgnoreCase) && EncoderType.IsAssignableFrom(t));
-
-                if (type == null)
-                {
-                    throw new InvalidOperationException($"{className} isn't a known {nameof(Encoder)} type");
-                }
-
-                TypeCache[className] = type;
-            }
+            var type = Assembly.GetTypes().FirstOrDefault(t => string.Equals(t.Name, className, StringComparison.OrdinalIgnoreCase) && EncoderType.IsAssignableFrom(t)) ?? throw new InvalidOperationException($"{className} isn't a known {nameof(Encoder)} type");
 
             // Create factory delegate for newly discovered types and cache it
             var newFactory = CreateFactoryDelegate(type);
@@ -82,10 +65,41 @@ namespace TyKonKet.BarcodeGenerator.Utils
         /// </summary>
         /// <param name="encoderType">The encoder type to create a factory for.</param>
         /// <returns>A factory delegate that creates instances of the encoder type.</returns>
-        private static Func<BarcodeOptions, Encoder> CreateFactoryDelegate(Type encoderType)
+        [SuppressMessage("Roslynator", "RCS1075:Avoid empty catch clause that catches System.Exception", Justification = "Deliberately catching all exceptions to provide failsafe behavior")]
+        [SuppressMessage("Design", "Wintellect014:Catch blocks should rethrow or throw", Justification = "Deliberately catching all exceptions to provide failsafe behavior")]
+        [SuppressMessage("CodeSmell", "ERP022:Unobserved exception in generic exception handler", Justification = "Deliberately catching all exceptions to provide failsafe behavior")]
+        internal static Func<BarcodeOptions, Encoder> CreateFactoryDelegate(Type encoderType)
         {
-            // Use Activator.CreateInstance as fallback for unknown types
-            // Future optimization: Could use compiled expressions for even better performance
+            try
+            {
+                // Create parameter expression for BarcodeOptions
+                var optionsParameter = Expression.Parameter(typeof(BarcodeOptions), "options");
+
+                // Find constructor that takes BarcodeOptions parameter
+                var constructor = encoderType.GetConstructor([typeof(BarcodeOptions)]);
+
+                if (constructor != null)
+                {
+                    // Create constructor call expression: new EncoderType(options)
+                    var constructorCall = Expression.New(constructor, optionsParameter);
+
+                    // Convert to base Encoder type if needed
+                    var convert = Expression.Convert(constructorCall, typeof(Encoder));
+
+                    // Create and compile lambda expression: options => (Encoder)new EncoderType(options)
+                    var lambda = Expression.Lambda<Func<BarcodeOptions, Encoder>>(convert, optionsParameter);
+
+                    return lambda.Compile();
+                }
+            }
+            catch (Exception)
+            {
+                // Fallback to Activator.CreateInstance if expression compilation fails
+                // This ensures backward compatibility and graceful handling of edge cases
+                // Deliberately catching all exceptions to provide failsafe behavior
+            }
+
+            // Fallback for types without appropriate constructor or if expression compilation fails
             return options => (Encoder)Activator.CreateInstance(encoderType, options)!;
         }
     }
