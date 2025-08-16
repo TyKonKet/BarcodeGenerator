@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755374671429,
+  "lastUpdate": 1755374672600,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -11762,6 +11762,60 @@ window.BENCHMARK_DATA = {
             "value": 764993.958984375,
             "unit": "ns",
             "range": "± 665.7742919612976"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "67421de11ccb29af88d08929d11d332c5952fee4",
+          "message": "Update filename tests for extreme quality values\n\nModified the `GetFinalFileName_ShouldHandleExtremeQualityValues` method by removing the test case for `\"test\\\\filename?.png\"` and adding a new case for `\"test\\\\file/name?.png\"`. This ensures better handling of invalid characters in file names across different operating systems.",
+          "timestamp": "2025-08-16T21:58:37+02:00",
+          "tree_id": "f50de7fe049a40ba10566b001c5d44209ea5b767",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/67421de11ccb29af88d08929d11d332c5952fee4"
+        },
+        "date": 1755374672174,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 16668.21310933431,
+            "unit": "ns",
+            "range": "± 128.38618494774292"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 18493.3510538737,
+            "unit": "ns",
+            "range": "± 114.13692629909117"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 24207.903299184945,
+            "unit": "ns",
+            "range": "± 54.95952071614528"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 37714.94464111328,
+            "unit": "ns",
+            "range": "± 208.17536635107604"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
+            "value": 762806.64765625,
+            "unit": "ns",
+            "range": "± 1278.0493860199451"
           }
         ]
       }
