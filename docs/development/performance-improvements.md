@@ -4,13 +4,17 @@ This document tracks the performance improvements made to the BarcodeGenerator l
 
 ## Timeline
 
-### August 13, 2025
+
+### August 16, 2025
 - **Optimized Method**: `EncodersFactory.Create`
-- **Description**: Replaced inefficient array operations with a streamlined LINQ-based approach.
+- **Description**: Replaced Activator.CreateInstance reflection calls with pre-populated factory delegate cache for direct constructor invocation.
 - **Performance Results**:
-  - **Create_OldBenchmark**: Mean = 162.3 ns, Allocated = 648 B
-  - **CreateBenchmark**: Mean = 151.9 ns, Allocated = 672 B
-- **Improvement**: ~6.4% faster execution time.
+  - **Before Optimization (Create_Old)**: Mean = 208.61 ns, Allocated = 544 B
+  - **After Optimization (Create)**: Mean = 47.38 ns, Allocated = 200 B
+- **Improvement**: 
+  - **340% faster execution** (4.4x speed improvement)
+  - **63% memory reduction** (2.7x less allocation)
+  - **Technical Impact**: Eliminated reflection overhead for all known encoder types while maintaining extensibility through fallback pattern
 
 ### August 13, 2025
 - **Optimized Method**: `EncodesExtensions.GetDisplayName`
