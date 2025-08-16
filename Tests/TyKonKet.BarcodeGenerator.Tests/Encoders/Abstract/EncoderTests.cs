@@ -120,7 +120,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Encoders.Abstract
         [Theory]
         [InlineData("test*file:name?.png", "testfilename.png", "test*file:name?.png")]
         [InlineData("test|file<>name?.png", "testfilename.png", "test|file<>name?.png")]
-        [InlineData("test\\filename?.png", "testfilename.png", "test\\file/name?.png")]
+        [InlineData("test\\file/name?.png", "testfilename.png", "test\\filename?.png")]
         [InlineData("test\"file:name?.png", "testfilename.png", "test\"file:name?.png")]
         public void GetSafeFilename_ShouldRemoveAllInvalidCharacters(string filename, string expectedWindows, string expectedLinux)
         {
