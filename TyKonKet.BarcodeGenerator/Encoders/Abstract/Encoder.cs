@@ -104,7 +104,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
                 throw new InvalidOperationException("The barcode must be encoded before exported");
             }
 
-            filePath = GetFinalFileName(filePath, this.Barcode, format, quality);
+            filePath = FormatFileName(filePath, this.Barcode, format, quality);
 
             // Convert relative paths to absolute paths
             if (!Path.IsPathRooted(filePath))
@@ -112,12 +112,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
                 filePath = Path.GetFullPath(filePath);
             }
 
-            var directory = Path.GetDirectoryName(filePath);
-
-            if (directory == null)
-            {
-                throw new DirectoryNotFoundException("The directory for the file path does not exist and cannot be created.");
-            }
+            var directory = Path.GetDirectoryName(filePath) ?? throw new DirectoryNotFoundException("The directory for the file path does not exist and cannot be created.");
 
             if (!Directory.Exists(directory))
             {
@@ -196,7 +191,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <param name="format">The image format.</param>
         /// <param name="quality">The image quality.</param>
         /// <returns>Returns the final file name with placeholders replaced.</returns>
-        internal static string GetFinalFileName(string fileName, string barcode, SKEncodedImageFormat format, int quality)
+        internal static string FormatFileName(string fileName, string barcode, SKEncodedImageFormat format, int quality)
         {
             return fileName.Replace("{barcode}", GetSafeFilename(barcode))
                 .Replace("{format}", format.ToFileExtension())
