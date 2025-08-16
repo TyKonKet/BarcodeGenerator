@@ -38,6 +38,20 @@ jobs:
         run: dotnet run --configuration Release --exporters json --filter '*'
         working-directory: Tests/TyKonKet.BarcodeGenerator.CB
 
+      - name: Store Global benchmark results
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          name: Global
+          tool: 'benchmarkdotnet'
+          output-file-path: Tests/TyKonKet.BarcodeGenerator.CB/BenchmarkDotNet.Artifacts/results/TyKonKet.BarcodeGenerator.CB.Benchmarks.Global-report-full-compressed.json
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
+          benchmark-data-dir-path: ''
+          alert-threshold: '200%'
+          comment-on-alert: true
+          #summary-always: true
+          alert-comment-cc-users: '@TyKonKet'
+
       - name: Store Ean8Encoder benchmark results
         uses: benchmark-action/github-action-benchmark@v1
         with:

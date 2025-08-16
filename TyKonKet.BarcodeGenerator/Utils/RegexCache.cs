@@ -9,7 +9,7 @@ namespace TyKonKet.BarcodeGenerator.Utils
     /// <summary>
     /// Provides cached regular expressions for barcode validation.
     /// </summary>
-    internal static partial class RegexCache
+    public static partial class RegexCache
     {
         // Pattern for validating EAN barcodes (only digits are allowed).
         private const string EanAllowedCharsetPattern = "^[0-9]+$";
