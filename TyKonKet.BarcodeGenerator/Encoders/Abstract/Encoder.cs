@@ -210,7 +210,23 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
                 return filename;
             }
 
-            return new string([.. filename.Where(c => !InvalidChars.Contains(c))]);
+            // Use stackalloc for small buffers to avoid heap allocation
+            Span<char> buffer = filename.Length <= 256 ? stackalloc char[filename.Length] : new char[filename.Length];
+
+            ReadOnlySpan<char> source = filename.AsSpan();
+            int writeIndex = 0;
+
+            // Manual loop instead of LINQ for better performance
+            for (int i = 0; i < source.Length; i++)
+            {
+                char c = source[i];
+                if (!InvalidChars.Contains(c))
+                {
+                    buffer[writeIndex++] = c;
+                }
+            }
+
+            return buffer[..writeIndex].ToString();
         }
 
         /// <summary>

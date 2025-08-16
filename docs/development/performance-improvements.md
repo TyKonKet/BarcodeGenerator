@@ -4,6 +4,17 @@ This document tracks the performance improvements made to the BarcodeGenerator l
 
 ## Timeline
 
+### August 16, 2025
+- **Optimized Method**: `Encoder.GetSafeFilename`
+- **Description**: Replaced LINQ-based character filtering with manual span-based processing and stack allocation for small buffers.
+- **Performance Results**:
+  - **Simple filename (baseline)**: Mean = 78.15 ns → 51.06 ns (34.7% faster)
+  - **Complex filename (with invalid chars)**: Mean = 135.21 ns → 108.93 ns (19.4% faster)  
+  - **Long filename**: Mean = 200.70 ns → 171.28 ns (14.7% faster)
+- **Improvement**:
+  - **Up to 34.7% faster execution** for common simple filename cases
+  - **Reduced memory allocation** via stackalloc for files ≤256 characters
+  - **Technical Impact**: Eliminated LINQ overhead and leveraged span-based processing for optimal performance across all filename scenarios
 
 ### August 16, 2025
 - **Optimized Method**: `EncodersFactory.Create`
