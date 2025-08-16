@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755371194762,
+  "lastUpdate": 1755371195955,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -8254,6 +8254,60 @@ window.BENCHMARK_DATA = {
             "value": 765075.814453125,
             "unit": "ns",
             "range": "± 1045.2556452654946"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "87979799f6fb3504788a69400944a86efcbb4c0a",
+          "message": "Enhance EncodersFactory with new tests and optimizations\n\nUpdated `EncodersFactoryTests.cs` to add tests for factory delegate creation, including handling null options and abstract types. Removed unused `using` directive in `Barcode.cs`. Rewrote `EncodersFactory.cs` to utilize compiled expressions for improved performance, with enhanced error handling and caching for encoder types.",
+          "timestamp": "2025-08-16T21:00:00+02:00",
+          "tree_id": "8cbe8fec96a052762a78a9efde5dd6156cdaf2c0",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/87979799f6fb3504788a69400944a86efcbb4c0a"
+        },
+        "date": 1755371195533,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 18006.88457782452,
+            "unit": "ns",
+            "range": "± 139.1578892124662"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 20271.399912516277,
+            "unit": "ns",
+            "range": "± 207.77038999585812"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25458.149287632532,
+            "unit": "ns",
+            "range": "± 97.5077766620944"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40414.267896379744,
+            "unit": "ns",
+            "range": "± 254.78129208660224"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
+            "value": 767339.0018028846,
+            "unit": "ns",
+            "range": "± 1242.1830124008304"
           }
         ]
       }
