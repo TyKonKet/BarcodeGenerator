@@ -10,7 +10,7 @@ namespace TyKonKet.BarcodeGenerator.Utils
     /// <summary>
     /// Provides extension methods for the <see cref="BarcodeTypes"/> enum.
     /// </summary>
-    public static class EncodesExtensions
+    public static class BarcodeTypeExtensions
     {
         private static readonly ConcurrentDictionary<BarcodeTypes, string> DisplayNameCache = new();
 
