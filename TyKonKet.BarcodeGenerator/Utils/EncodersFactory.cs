@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
@@ -18,6 +19,17 @@ namespace TyKonKet.BarcodeGenerator.Utils
         private static readonly Type EncoderType = typeof(Encoder);
         private static readonly ConcurrentDictionary<string, Type> TypeCache = new(StringComparer.OrdinalIgnoreCase);
 
+        // Static constructor to pre-populate cache with known encoders
+        static EncodersFactory()
+        {
+            // Pre-populate cache with known encoder types to eliminate reflection overhead
+            TypeCache["Code93Encoder"] = typeof(Encoders.Code93Encoder);
+            TypeCache["Ean13Encoder"] = typeof(Encoders.Ean13Encoder);
+            TypeCache["Ean8Encoder"] = typeof(Encoders.Ean8Encoder);
+            TypeCache["Isbn13Encoder"] = typeof(Encoders.Isbn13Encoder);
+            TypeCache["UpcaEncoder"] = typeof(Encoders.UpcaEncoder);
+        }
+
         /// <summary>
         /// Creates an instance of an <see cref="Encoder"/> based on the provided <see cref="BarcodeOptions"/>.
         /// </summary>
@@ -30,8 +42,8 @@ namespace TyKonKet.BarcodeGenerator.Utils
 
             if (!TypeCache.TryGetValue(className, out var type))
             {
-                type = Assembly.GetTypes()
-                    .FirstOrDefault(t => string.Equals(t.Name, className, StringComparison.OrdinalIgnoreCase) && EncoderType.IsAssignableFrom(t));
+                // Fallback to reflection for unknown encoder types (extensibility)
+                type = Assembly.GetTypes().FirstOrDefault(t => string.Equals(t.Name, className, StringComparison.OrdinalIgnoreCase) && EncoderType.IsAssignableFrom(t));
 
                 if (type == null)
                 {
@@ -41,6 +53,7 @@ namespace TyKonKet.BarcodeGenerator.Utils
                 TypeCache[className] = type;
             }
 
+            // Use more efficient object creation for known types
             var instance = Activator.CreateInstance(type, options);
             if (instance is not Encoder encoder)
             {
