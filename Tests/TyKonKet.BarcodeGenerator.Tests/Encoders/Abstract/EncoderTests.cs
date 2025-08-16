@@ -118,12 +118,15 @@ namespace TyKonKet.BarcodeGenerator.Tests.Encoders.Abstract
         }
 
         [Theory]
-        [InlineData("test*file:name?.png", "testfilename.png")]
-        [InlineData("test|file<>name?.png", "testfilename.png")]
-        [InlineData("test\\file/name?.png", "testfilename.png")]
-        [InlineData("test\"file:name?.png", "testfilename.png")]
-        public void GetSafeFilename_ShouldRemoveAllInvalidCharacters(string filename, string expected)
+        [InlineData("test*file:name?.png", "testfilename.png", "test*file:name?.png")]
+        [InlineData("test|file<>name?.png", "testfilename.png", "test|file<>name?.png")]
+        [InlineData("test\\file/name?.png", "testfilename.png", "test\\file/name?.png")]
+        [InlineData("test\"file:name?.png", "testfilename.png", "test\"file:name?.png")]
+        public void GetSafeFilename_ShouldRemoveAllInvalidCharacters(string filename, string expectedWindows, string expectedLinux)
         {
+            // Arrange
+            string expected = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? expectedWindows : expectedLinux;
+
             // Act
             string result = Encoder.GetSafeFilename(filename);
 
