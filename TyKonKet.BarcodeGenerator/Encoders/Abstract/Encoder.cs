@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using TyKonKet.BarcodeGenerator.Utils;
 
@@ -193,9 +191,15 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <returns>Returns the final file name with placeholders replaced.</returns>
         internal static string FormatFileName(string fileName, string barcode, SKEncodedImageFormat format, int quality)
         {
+#if NET6_0_OR_GREATER
+            return fileName.Replace("{barcode}", GetSafeFilename(barcode), StringComparison.Ordinal)
+                          .Replace("{format}", format.ToFileExtension(), StringComparison.Ordinal)
+                          .Replace("{quality}", quality.ToString(System.Globalization.CultureInfo.InvariantCulture), StringComparison.Ordinal);
+#else
             return fileName.Replace("{barcode}", GetSafeFilename(barcode))
-                .Replace("{format}", format.ToFileExtension())
-                .Replace("{quality}", $"{quality}");
+                          .Replace("{format}", format.ToFileExtension())
+                          .Replace("{quality}", quality.ToString(System.Globalization.CultureInfo.InvariantCulture));
+#endif
         }
 
         /// <summary>
