@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755371195955,
+  "lastUpdate": 1755371197157,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -10898,6 +10898,60 @@ window.BENCHMARK_DATA = {
             "value": 767710.0083333333,
             "unit": "ns",
             "range": "± 1078.7953189703885"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "87979799f6fb3504788a69400944a86efcbb4c0a",
+          "message": "Enhance EncodersFactory with new tests and optimizations\n\nUpdated `EncodersFactoryTests.cs` to add tests for factory delegate creation, including handling null options and abstract types. Removed unused `using` directive in `Barcode.cs`. Rewrote `EncodersFactory.cs` to utilize compiled expressions for improved performance, with enhanced error handling and caching for encoder types.",
+          "timestamp": "2025-08-16T21:00:00+02:00",
+          "tree_id": "8cbe8fec96a052762a78a9efde5dd6156cdaf2c0",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/87979799f6fb3504788a69400944a86efcbb4c0a"
+        },
+        "date": 1755371196716,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 17028.502159705527,
+            "unit": "ns",
+            "range": "± 78.3871813548465"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 19231.67714436849,
+            "unit": "ns",
+            "range": "± 87.42031353233992"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 23797.36996459961,
+            "unit": "ns",
+            "range": "± 156.86252021997512"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 36646.598219651445,
+            "unit": "ns",
+            "range": "± 176.56540054524334"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
+            "value": 770261.2759540265,
+            "unit": "ns",
+            "range": "± 1603.5044918126978"
           }
         ]
       }
