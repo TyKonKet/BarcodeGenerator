@@ -48,12 +48,6 @@ window.BENCHMARK_DATA = {
             "value": 25688.44629313151,
             "unit": "ns",
             "range": "± 207.68607199647292"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 531231.4305338542,
-            "unit": "ns",
-            "range": "± 6439.157378778705"
           }
         ]
       },
@@ -102,12 +96,6 @@ window.BENCHMARK_DATA = {
             "value": 26742.74525756836,
             "unit": "ns",
             "range": "± 139.30580764388228"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537160.6462239583,
-            "unit": "ns",
-            "range": "± 1816.8948731355295"
           }
         ]
       },
@@ -156,12 +144,6 @@ window.BENCHMARK_DATA = {
             "value": 25957.6183497111,
             "unit": "ns",
             "range": "± 108.4572204787267"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537750.0522786458,
-            "unit": "ns",
-            "range": "± 3412.011923469711"
           }
         ]
       },
@@ -210,12 +192,6 @@ window.BENCHMARK_DATA = {
             "value": 26416.60712843675,
             "unit": "ns",
             "range": "± 114.86742572034082"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 540173.2554408482,
-            "unit": "ns",
-            "range": "± 2666.405592895706"
           }
         ]
       },
@@ -264,12 +240,6 @@ window.BENCHMARK_DATA = {
             "value": 26066.355817522322,
             "unit": "ns",
             "range": "± 77.43106299259819"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 584670.0451171875,
-            "unit": "ns",
-            "range": "± 1802.9365296751093"
           }
         ]
       },
@@ -318,12 +288,6 @@ window.BENCHMARK_DATA = {
             "value": 25760.8744140625,
             "unit": "ns",
             "range": "± 101.13079658697261"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537500.6487862723,
-            "unit": "ns",
-            "range": "± 1427.7834007276801"
           }
         ]
       },
@@ -370,12 +334,6 @@ window.BENCHMARK_DATA = {
             "value": 26055.94486287435,
             "unit": "ns",
             "range": "± 123.13101423377529"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 536988.7414362981,
-            "unit": "ns",
-            "range": "± 1108.9269842535746"
           }
         ]
       },
@@ -424,12 +382,6 @@ window.BENCHMARK_DATA = {
             "value": 26018.012093098958,
             "unit": "ns",
             "range": "± 106.53304066997032"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537754.0449869792,
-            "unit": "ns",
-            "range": "± 2107.241463655702"
           }
         ]
       },
@@ -476,12 +428,6 @@ window.BENCHMARK_DATA = {
             "value": 25883.198174031575,
             "unit": "ns",
             "range": "± 99.55315322250141"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537364.5171223958,
-            "unit": "ns",
-            "range": "± 1771.325813259534"
           }
         ]
       },
@@ -530,12 +476,6 @@ window.BENCHMARK_DATA = {
             "value": 25956.54774240347,
             "unit": "ns",
             "range": "± 109.40653691601503"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 535876.535563151,
-            "unit": "ns",
-            "range": "± 718.0000119010607"
           }
         ]
       },
@@ -584,12 +524,6 @@ window.BENCHMARK_DATA = {
             "value": 26129.66055094401,
             "unit": "ns",
             "range": "± 43.05345236515323"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 536307.2486746652,
-            "unit": "ns",
-            "range": "± 584.4447051702172"
           }
         ]
       },
@@ -638,12 +572,6 @@ window.BENCHMARK_DATA = {
             "value": 26235.007322184243,
             "unit": "ns",
             "range": "± 55.862691297860586"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 536108.6976143973,
-            "unit": "ns",
-            "range": "± 554.0787747646835"
           }
         ]
       },
@@ -692,12 +620,6 @@ window.BENCHMARK_DATA = {
             "value": 26075.448827107746,
             "unit": "ns",
             "range": "± 40.604470026184615"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 535586.8519005409,
-            "unit": "ns",
-            "range": "± 398.3392794718939"
           }
         ]
       },
@@ -746,12 +668,6 @@ window.BENCHMARK_DATA = {
             "value": 25942.496826171875,
             "unit": "ns",
             "range": "± 57.56337889375034"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 536052.6669170673,
-            "unit": "ns",
-            "range": "± 900.524327737406"
           }
         ]
       },
@@ -800,12 +716,6 @@ window.BENCHMARK_DATA = {
             "value": 25966.839708600724,
             "unit": "ns",
             "range": "± 82.39819095270164"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 536610.765764509,
-            "unit": "ns",
-            "range": "± 1307.7181336241015"
           }
         ]
       },
@@ -854,12 +764,6 @@ window.BENCHMARK_DATA = {
             "value": 26285.848765781946,
             "unit": "ns",
             "range": "± 36.38686282989764"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 535935.9443359375,
-            "unit": "ns",
-            "range": "± 499.3125771997082"
           }
         ]
       },
@@ -908,12 +812,6 @@ window.BENCHMARK_DATA = {
             "value": 26633.421279907227,
             "unit": "ns",
             "range": "± 107.17666277843215"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 536621.1458333334,
-            "unit": "ns",
-            "range": "± 411.65474540888096"
           }
         ]
       },
@@ -962,12 +860,6 @@ window.BENCHMARK_DATA = {
             "value": 26179.007016863143,
             "unit": "ns",
             "range": "± 64.06093950076546"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 536695.6820591518,
-            "unit": "ns",
-            "range": "± 687.7416411730691"
           }
         ]
       },
@@ -1016,12 +908,6 @@ window.BENCHMARK_DATA = {
             "value": 27836.99877493722,
             "unit": "ns",
             "range": "± 255.16976164343612"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 550328.8302873884,
-            "unit": "ns",
-            "range": "± 1395.9476430186726"
           }
         ]
       },
@@ -1070,12 +956,6 @@ window.BENCHMARK_DATA = {
             "value": 26376.59273000864,
             "unit": "ns",
             "range": "± 76.29240596117393"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537539.5410531851,
-            "unit": "ns",
-            "range": "± 1166.1556775034956"
           }
         ]
       },
@@ -1124,12 +1004,6 @@ window.BENCHMARK_DATA = {
             "value": 26298.05119527181,
             "unit": "ns",
             "range": "± 273.2368591317408"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 538275.3431490385,
-            "unit": "ns",
-            "range": "± 1268.051546261453"
           }
         ]
       },
@@ -1178,12 +1052,6 @@ window.BENCHMARK_DATA = {
             "value": 26421.599272507887,
             "unit": "ns",
             "range": "± 48.85672309438333"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 536322.745718149,
-            "unit": "ns",
-            "range": "± 977.0689111155349"
           }
         ]
       },
@@ -1232,12 +1100,6 @@ window.BENCHMARK_DATA = {
             "value": 26471.465249197823,
             "unit": "ns",
             "range": "± 102.5601966522031"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 539310.5406668527,
-            "unit": "ns",
-            "range": "± 585.1626814485726"
           }
         ]
       },
@@ -1286,12 +1148,6 @@ window.BENCHMARK_DATA = {
             "value": 26027.242649958684,
             "unit": "ns",
             "range": "± 63.496679411867895"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 538893.6802455357,
-            "unit": "ns",
-            "range": "± 1217.5450003926046"
           }
         ]
       },
@@ -1340,12 +1196,6 @@ window.BENCHMARK_DATA = {
             "value": 25912.078443254744,
             "unit": "ns",
             "range": "± 87.48547497687758"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 535415.4454627404,
-            "unit": "ns",
-            "range": "± 1022.018306579172"
           }
         ]
       },
@@ -1394,12 +1244,6 @@ window.BENCHMARK_DATA = {
             "value": 26249.182877760668,
             "unit": "ns",
             "range": "± 60.42716695435621"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 538124.2067708333,
-            "unit": "ns",
-            "range": "± 1777.8615944907415"
           }
         ]
       },
@@ -1448,12 +1292,6 @@ window.BENCHMARK_DATA = {
             "value": 25973.896028791154,
             "unit": "ns",
             "range": "± 90.95304857573441"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 536742.8171735491,
-            "unit": "ns",
-            "range": "± 886.5664124527983"
           }
         ]
       },
@@ -1502,12 +1340,6 @@ window.BENCHMARK_DATA = {
             "value": 27194.313051350913,
             "unit": "ns",
             "range": "± 270.65912438875074"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 548744.2694661458,
-            "unit": "ns",
-            "range": "± 3665.835035947693"
           }
         ]
       },
@@ -1556,12 +1388,6 @@ window.BENCHMARK_DATA = {
             "value": 27277.14107622419,
             "unit": "ns",
             "range": "± 76.10906698353311"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537261.6704852765,
-            "unit": "ns",
-            "range": "± 691.819866539529"
           }
         ]
       },
@@ -1610,12 +1436,6 @@ window.BENCHMARK_DATA = {
             "value": 26125.204315185547,
             "unit": "ns",
             "range": "± 26.71958765757721"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 538645.4585658482,
-            "unit": "ns",
-            "range": "± 3729.185581841313"
           }
         ]
       },
@@ -1664,12 +1484,6 @@ window.BENCHMARK_DATA = {
             "value": 27970.796889241537,
             "unit": "ns",
             "range": "± 114.44279565171252"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 550939.5668569711,
-            "unit": "ns",
-            "range": "± 893.6522343687694"
           }
         ]
       },
@@ -1718,12 +1532,6 @@ window.BENCHMARK_DATA = {
             "value": 26482.55081830706,
             "unit": "ns",
             "range": "± 42.573413001580384"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537188.8850446428,
-            "unit": "ns",
-            "range": "± 812.6586386954232"
           }
         ]
       },
@@ -1772,12 +1580,6 @@ window.BENCHMARK_DATA = {
             "value": 26115.743599446614,
             "unit": "ns",
             "range": "± 106.91289297228428"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 538009.9349190848,
-            "unit": "ns",
-            "range": "± 997.9343099020314"
           }
         ]
       },
@@ -1826,12 +1628,6 @@ window.BENCHMARK_DATA = {
             "value": 25818.179048665366,
             "unit": "ns",
             "range": "± 49.12079937226205"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537640.7734375,
-            "unit": "ns",
-            "range": "± 600.0946417408696"
           }
         ]
       },
@@ -1880,12 +1676,6 @@ window.BENCHMARK_DATA = {
             "value": 26254.958354404993,
             "unit": "ns",
             "range": "± 31.855509645079756"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 537705.8154296875,
-            "unit": "ns",
-            "range": "± 1170.9820195285884"
           }
         ]
       },
@@ -1934,12 +1724,6 @@ window.BENCHMARK_DATA = {
             "value": 26702.035137469953,
             "unit": "ns",
             "range": "± 80.89113595321045"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 574910.4910714285,
-            "unit": "ns",
-            "range": "± 871.2376550573317"
           }
         ]
       },
@@ -1988,12 +1772,6 @@ window.BENCHMARK_DATA = {
             "value": 26504.229502751277,
             "unit": "ns",
             "range": "± 95.81652255129674"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 564780.5904296875,
-            "unit": "ns",
-            "range": "± 1904.0835173780447"
           }
         ]
       },
@@ -2042,12 +1820,6 @@ window.BENCHMARK_DATA = {
             "value": 26037.98729177622,
             "unit": "ns",
             "range": "± 52.0390561911277"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 564059.4320963542,
-            "unit": "ns",
-            "range": "± 1779.4924041674078"
           }
         ]
       },
@@ -2096,12 +1868,6 @@ window.BENCHMARK_DATA = {
             "value": 26228.420772298177,
             "unit": "ns",
             "range": "± 283.65246093756696"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 564633.4031700721,
-            "unit": "ns",
-            "range": "± 670.4515062309598"
           }
         ]
       },
@@ -2150,12 +1916,6 @@ window.BENCHMARK_DATA = {
             "value": 26664.33484825721,
             "unit": "ns",
             "range": "± 159.42804499579705"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 565143.7159830729,
-            "unit": "ns",
-            "range": "± 589.7594154378155"
           }
         ]
       },
@@ -2204,12 +1964,6 @@ window.BENCHMARK_DATA = {
             "value": 26255.17060139974,
             "unit": "ns",
             "range": "± 388.1586237554683"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 564197.9597005208,
-            "unit": "ns",
-            "range": "± 1549.6069696998177"
           }
         ]
       },
@@ -2258,12 +2012,6 @@ window.BENCHMARK_DATA = {
             "value": 25966.838388061522,
             "unit": "ns",
             "range": "± 282.1117999897935"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 563236.3440987723,
-            "unit": "ns",
-            "range": "± 1028.5753844278192"
           }
         ]
       },
@@ -2312,12 +2060,6 @@ window.BENCHMARK_DATA = {
             "value": 25926.31931813558,
             "unit": "ns",
             "range": "± 58.95114098683025"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 566151.1074969952,
-            "unit": "ns",
-            "range": "± 1191.1568263536747"
           }
         ]
       },
@@ -2366,12 +2108,6 @@ window.BENCHMARK_DATA = {
             "value": 26121.224607195174,
             "unit": "ns",
             "range": "± 166.02929581218055"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 563574.9364483173,
-            "unit": "ns",
-            "range": "± 435.28438490969216"
           }
         ]
       },
@@ -2420,12 +2156,6 @@ window.BENCHMARK_DATA = {
             "value": 26093.755041269156,
             "unit": "ns",
             "range": "± 142.55120082128988"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 562290.2119791667,
-            "unit": "ns",
-            "range": "± 1600.5404017336164"
           }
         ]
       },
@@ -2474,12 +2204,6 @@ window.BENCHMARK_DATA = {
             "value": 27261.37113647461,
             "unit": "ns",
             "range": "± 334.3860303060818"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 564217.0126953125,
-            "unit": "ns",
-            "range": "± 1104.272278547"
           }
         ]
       },
@@ -2528,12 +2252,6 @@ window.BENCHMARK_DATA = {
             "value": 26404.626408894856,
             "unit": "ns",
             "range": "± 57.88996950917295"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 561310.802358774,
-            "unit": "ns",
-            "range": "± 1056.2525565684555"
           }
         ]
       },
@@ -2582,12 +2300,6 @@ window.BENCHMARK_DATA = {
             "value": 26355.8771878756,
             "unit": "ns",
             "range": "± 47.28138971665993"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 564409.2886439732,
-            "unit": "ns",
-            "range": "± 1300.4188988907554"
           }
         ]
       },
@@ -2636,12 +2348,6 @@ window.BENCHMARK_DATA = {
             "value": 26044.72213236491,
             "unit": "ns",
             "range": "± 40.0694255642596"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 563693.099609375,
-            "unit": "ns",
-            "range": "± 1573.1700519096107"
           }
         ]
       },
@@ -2690,12 +2396,6 @@ window.BENCHMARK_DATA = {
             "value": 26116.57698059082,
             "unit": "ns",
             "range": "± 84.08601246163022"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 562545.2177734375,
-            "unit": "ns",
-            "range": "± 692.2694561382812"
           }
         ]
       },
@@ -2744,12 +2444,6 @@ window.BENCHMARK_DATA = {
             "value": 26057.803592388445,
             "unit": "ns",
             "range": "± 116.19634506216767"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 562310.7416992188,
-            "unit": "ns",
-            "range": "± 693.5916049465494"
           }
         ]
       },
@@ -2798,12 +2492,6 @@ window.BENCHMARK_DATA = {
             "value": 25818.23745258038,
             "unit": "ns",
             "range": "± 81.89210318171651"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 562757.7722516741,
-            "unit": "ns",
-            "range": "± 647.4662625122041"
           }
         ]
       },
@@ -2852,12 +2540,6 @@ window.BENCHMARK_DATA = {
             "value": 26189.931311471122,
             "unit": "ns",
             "range": "± 92.90717944702715"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 563430.9405048077,
-            "unit": "ns",
-            "range": "± 1481.4923223364274"
           }
         ]
       },
@@ -2906,12 +2588,6 @@ window.BENCHMARK_DATA = {
             "value": 26099.845896794246,
             "unit": "ns",
             "range": "± 68.51836587626228"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 563786.7232840402,
-            "unit": "ns",
-            "range": "± 1010.396489607812"
           }
         ]
       },
@@ -2960,12 +2636,6 @@ window.BENCHMARK_DATA = {
             "value": 25846.533611591047,
             "unit": "ns",
             "range": "± 66.93984585999556"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 563634.8250558035,
-            "unit": "ns",
-            "range": "± 2206.2400935016954"
           }
         ]
       },
@@ -3014,12 +2684,6 @@ window.BENCHMARK_DATA = {
             "value": 25838.847041203426,
             "unit": "ns",
             "range": "± 39.43886879655471"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 563505.7460123698,
-            "unit": "ns",
-            "range": "± 465.8642431710193"
           }
         ]
       },
@@ -3068,12 +2732,6 @@ window.BENCHMARK_DATA = {
             "value": 26309.796657017298,
             "unit": "ns",
             "range": "± 124.5288266454241"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 561933.3888811384,
-            "unit": "ns",
-            "range": "± 1015.0646689820234"
           }
         ]
       },
@@ -3122,12 +2780,6 @@ window.BENCHMARK_DATA = {
             "value": 25898.945251464844,
             "unit": "ns",
             "range": "± 100.34739360492952"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.ExportToFile",
-            "value": 564163.8950892857,
-            "unit": "ns",
-            "range": "± 1962.7260296150341"
           }
         ]
       }
@@ -3178,12 +2830,6 @@ window.BENCHMARK_DATA = {
             "value": 38422.52017211914,
             "unit": "ns",
             "range": "± 117.32239997942864"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 723317.2261067708,
-            "unit": "ns",
-            "range": "± 1616.8623273424532"
           }
         ]
       },
@@ -3232,12 +2878,6 @@ window.BENCHMARK_DATA = {
             "value": 38344.58363560268,
             "unit": "ns",
             "range": "± 232.86825801009158"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 723766.0440755208,
-            "unit": "ns",
-            "range": "± 1865.451445367533"
           }
         ]
       },
@@ -3286,12 +2926,6 @@ window.BENCHMARK_DATA = {
             "value": 37861.52638026646,
             "unit": "ns",
             "range": "± 164.18227195740747"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 724067.0674525669,
-            "unit": "ns",
-            "range": "± 2065.7429615871524"
           }
         ]
       },
@@ -3340,12 +2974,6 @@ window.BENCHMARK_DATA = {
             "value": 38540.288186209546,
             "unit": "ns",
             "range": "± 161.6798207699137"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 723967.4229910715,
-            "unit": "ns",
-            "range": "± 4755.287237065345"
           }
         ]
       },
@@ -3392,12 +3020,6 @@ window.BENCHMARK_DATA = {
             "value": 38129.726407877606,
             "unit": "ns",
             "range": "± 90.5038200577473"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 728495.3243489583,
-            "unit": "ns",
-            "range": "± 1893.9491386199606"
           }
         ]
       },
@@ -3446,12 +3068,6 @@ window.BENCHMARK_DATA = {
             "value": 38352.570861816406,
             "unit": "ns",
             "range": "± 230.27347633115124"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 725066.2390485491,
-            "unit": "ns",
-            "range": "± 3094.5960716650166"
           }
         ]
       },
@@ -3498,12 +3114,6 @@ window.BENCHMARK_DATA = {
             "value": 37980.559765625,
             "unit": "ns",
             "range": "± 173.06484156973767"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 725700.7102864584,
-            "unit": "ns",
-            "range": "± 2559.336804153177"
           }
         ]
       },
@@ -3552,12 +3162,6 @@ window.BENCHMARK_DATA = {
             "value": 38095.02457838792,
             "unit": "ns",
             "range": "± 137.8525662497637"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 727538.1430989583,
-            "unit": "ns",
-            "range": "± 2381.5806088636464"
           }
         ]
       },
@@ -3606,12 +3210,6 @@ window.BENCHMARK_DATA = {
             "value": 38187.009373256136,
             "unit": "ns",
             "range": "± 175.99363126633762"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 724897.4307338169,
-            "unit": "ns",
-            "range": "± 902.1948849476003"
           }
         ]
       },
@@ -3660,12 +3258,6 @@ window.BENCHMARK_DATA = {
             "value": 38715.03581891741,
             "unit": "ns",
             "range": "± 121.63974401023621"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 724254.4716796875,
-            "unit": "ns",
-            "range": "± 544.2412761283432"
           }
         ]
       },
@@ -3714,12 +3306,6 @@ window.BENCHMARK_DATA = {
             "value": 38589.705998011996,
             "unit": "ns",
             "range": "± 97.22048957086602"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 721888.0539899553,
-            "unit": "ns",
-            "range": "± 616.812312659665"
           }
         ]
       },
@@ -3768,12 +3354,6 @@ window.BENCHMARK_DATA = {
             "value": 37950.36783071665,
             "unit": "ns",
             "range": "± 104.66582156394774"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 723557.678125,
-            "unit": "ns",
-            "range": "± 994.5641403887305"
           }
         ]
       },
@@ -3822,12 +3402,6 @@ window.BENCHMARK_DATA = {
             "value": 37826.53712565104,
             "unit": "ns",
             "range": "± 198.10342441426099"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 722356.2283528646,
-            "unit": "ns",
-            "range": "± 1106.3391187376992"
           }
         ]
       },
@@ -3876,12 +3450,6 @@ window.BENCHMARK_DATA = {
             "value": 37809.846165248324,
             "unit": "ns",
             "range": "± 79.77819852848434"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 723888.6503155048,
-            "unit": "ns",
-            "range": "± 1058.3460190215571"
           }
         ]
       },
@@ -3930,12 +3498,6 @@ window.BENCHMARK_DATA = {
             "value": 38230.351172814,
             "unit": "ns",
             "range": "± 62.20798256535698"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 723784.1743164062,
-            "unit": "ns",
-            "range": "± 956.2582841651271"
           }
         ]
       },
@@ -3984,12 +3546,6 @@ window.BENCHMARK_DATA = {
             "value": 37838.10674176897,
             "unit": "ns",
             "range": "± 63.831488442611914"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 722627.251171875,
-            "unit": "ns",
-            "range": "± 1287.283168453891"
           }
         ]
       },
@@ -4038,12 +3594,6 @@ window.BENCHMARK_DATA = {
             "value": 39822.000126429964,
             "unit": "ns",
             "range": "± 76.28620682641882"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 742733.8528180803,
-            "unit": "ns",
-            "range": "± 1289.8850511550554"
           }
         ]
       },
@@ -4092,12 +3642,6 @@ window.BENCHMARK_DATA = {
             "value": 39028.20309448242,
             "unit": "ns",
             "range": "± 86.76365958597472"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 728909.5472237723,
-            "unit": "ns",
-            "range": "± 2000.1523647391982"
           }
         ]
       },
@@ -4146,12 +3690,6 @@ window.BENCHMARK_DATA = {
             "value": 38773.42982584635,
             "unit": "ns",
             "range": "± 104.7170539688533"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 726246.0344050481,
-            "unit": "ns",
-            "range": "± 619.7565752538442"
           }
         ]
       },
@@ -4200,12 +3738,6 @@ window.BENCHMARK_DATA = {
             "value": 38874.17346191406,
             "unit": "ns",
             "range": "± 122.28178274621423"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 722156.9592285156,
-            "unit": "ns",
-            "range": "± 730.6914146230172"
           }
         ]
       },
@@ -4254,12 +3786,6 @@ window.BENCHMARK_DATA = {
             "value": 38723.8063659668,
             "unit": "ns",
             "range": "± 128.59909364285832"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 725827.7279897836,
-            "unit": "ns",
-            "range": "± 1053.1561213812436"
           }
         ]
       },
@@ -4308,12 +3834,6 @@ window.BENCHMARK_DATA = {
             "value": 38134.30524117606,
             "unit": "ns",
             "range": "± 106.85121103737566"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 724592.7111816406,
-            "unit": "ns",
-            "range": "± 515.9122812573555"
           }
         ]
       },
@@ -4362,12 +3882,6 @@ window.BENCHMARK_DATA = {
             "value": 38403.5889444987,
             "unit": "ns",
             "range": "± 81.40448778752429"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 733703.9084123884,
-            "unit": "ns",
-            "range": "± 1931.1987554698799"
           }
         ]
       },
@@ -4416,12 +3930,6 @@ window.BENCHMARK_DATA = {
             "value": 38560.3147664388,
             "unit": "ns",
             "range": "± 112.9908959062392"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 726337.2473307292,
-            "unit": "ns",
-            "range": "± 858.9772480318741"
           }
         ]
       },
@@ -4470,12 +3978,6 @@ window.BENCHMARK_DATA = {
             "value": 38368.240626743864,
             "unit": "ns",
             "range": "± 112.26444622368828"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 724427.8396935096,
-            "unit": "ns",
-            "range": "± 764.2204520486737"
           }
         ]
       },
@@ -4524,12 +4026,6 @@ window.BENCHMARK_DATA = {
             "value": 38911.655318196616,
             "unit": "ns",
             "range": "± 489.878360784807"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 734508.5026692708,
-            "unit": "ns",
-            "range": "± 6640.362901384994"
           }
         ]
       },
@@ -4578,12 +4074,6 @@ window.BENCHMARK_DATA = {
             "value": 38496.944056919645,
             "unit": "ns",
             "range": "± 62.48127266004123"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 723392.3836495535,
-            "unit": "ns",
-            "range": "± 1238.4545840571197"
           }
         ]
       },
@@ -4632,12 +4122,6 @@ window.BENCHMARK_DATA = {
             "value": 37791.20075276693,
             "unit": "ns",
             "range": "± 207.60463684703797"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 724817.394391741,
-            "unit": "ns",
-            "range": "± 1573.6686856960043"
           }
         ]
       },
@@ -4686,12 +4170,6 @@ window.BENCHMARK_DATA = {
             "value": 39979.1580851237,
             "unit": "ns",
             "range": "± 462.3195753093127"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 743060.5576869419,
-            "unit": "ns",
-            "range": "± 1047.475096755243"
           }
         ]
       },
@@ -4740,12 +4218,6 @@ window.BENCHMARK_DATA = {
             "value": 37715.259911170375,
             "unit": "ns",
             "range": "± 58.60033364845091"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 724519.5934012277,
-            "unit": "ns",
-            "range": "± 565.0823718082347"
           }
         ]
       },
@@ -4794,12 +4266,6 @@ window.BENCHMARK_DATA = {
             "value": 37744.02653151292,
             "unit": "ns",
             "range": "± 40.83614622404923"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 723493.1960100447,
-            "unit": "ns",
-            "range": "± 1217.977986696446"
           }
         ]
       },
@@ -4848,12 +4314,6 @@ window.BENCHMARK_DATA = {
             "value": 37985.64099121094,
             "unit": "ns",
             "range": "± 69.02181356143497"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 722406.6735491072,
-            "unit": "ns",
-            "range": "± 575.4368965652487"
           }
         ]
       },
@@ -4902,12 +4362,6 @@ window.BENCHMARK_DATA = {
             "value": 38020.2918308803,
             "unit": "ns",
             "range": "± 231.88766460926655"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 722664.1508091518,
-            "unit": "ns",
-            "range": "± 588.8247439467149"
           }
         ]
       },
@@ -4956,12 +4410,6 @@ window.BENCHMARK_DATA = {
             "value": 39723.674560546875,
             "unit": "ns",
             "range": "± 246.732089505451"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 765213.0161132812,
-            "unit": "ns",
-            "range": "± 1536.0650367130593"
           }
         ]
       },
@@ -5010,12 +4458,6 @@ window.BENCHMARK_DATA = {
             "value": 38714.22441813151,
             "unit": "ns",
             "range": "± 379.38105180199767"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 763250.1279296875,
-            "unit": "ns",
-            "range": "± 1573.0399257497363"
           }
         ]
       },
@@ -5064,12 +4506,6 @@ window.BENCHMARK_DATA = {
             "value": 39066.91463998648,
             "unit": "ns",
             "range": "± 293.7750871659455"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 762978.4291992188,
-            "unit": "ns",
-            "range": "± 1439.2794643133377"
           }
         ]
       },
@@ -5118,12 +4554,6 @@ window.BENCHMARK_DATA = {
             "value": 39243.59682791574,
             "unit": "ns",
             "range": "± 250.27198328589134"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 761345.3701171875,
-            "unit": "ns",
-            "range": "± 1700.34007768225"
           }
         ]
       },
@@ -5172,12 +4602,6 @@ window.BENCHMARK_DATA = {
             "value": 39766.94986833845,
             "unit": "ns",
             "range": "± 251.5158533103982"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 763662.5596400669,
-            "unit": "ns",
-            "range": "± 1027.190657406904"
           }
         ]
       },
@@ -5226,12 +4650,6 @@ window.BENCHMARK_DATA = {
             "value": 39501.5121882512,
             "unit": "ns",
             "range": "± 119.21772157916995"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 762030.1984675481,
-            "unit": "ns",
-            "range": "± 623.8097465122563"
           }
         ]
       },
@@ -5280,12 +4698,6 @@ window.BENCHMARK_DATA = {
             "value": 38210.757807804985,
             "unit": "ns",
             "range": "± 252.8906453830795"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 761978.0805664062,
-            "unit": "ns",
-            "range": "± 1148.4500743545593"
           }
         ]
       },
@@ -5334,12 +4746,6 @@ window.BENCHMARK_DATA = {
             "value": 38261.15106201172,
             "unit": "ns",
             "range": "± 173.33435494357377"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 760779.5455979567,
-            "unit": "ns",
-            "range": "± 833.1034143887107"
           }
         ]
       },
@@ -5388,12 +4794,6 @@ window.BENCHMARK_DATA = {
             "value": 38645.43497721354,
             "unit": "ns",
             "range": "± 128.27052260111026"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 761018.8736746652,
-            "unit": "ns",
-            "range": "± 691.0801690960863"
           }
         ]
       },
@@ -5442,12 +4842,6 @@ window.BENCHMARK_DATA = {
             "value": 38576.35637723483,
             "unit": "ns",
             "range": "± 127.68179147536534"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 762334.6102818081,
-            "unit": "ns",
-            "range": "± 790.8382562459773"
           }
         ]
       },
@@ -5496,12 +4890,6 @@ window.BENCHMARK_DATA = {
             "value": 39712.90919596354,
             "unit": "ns",
             "range": "± 262.3640152058131"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 764762.7930501302,
-            "unit": "ns",
-            "range": "± 1975.8448989912831"
           }
         ]
       },
@@ -5550,12 +4938,6 @@ window.BENCHMARK_DATA = {
             "value": 38941.98452758789,
             "unit": "ns",
             "range": "± 552.3284834573817"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 762922.3471679688,
-            "unit": "ns",
-            "range": "± 1077.7091297639465"
           }
         ]
       },
@@ -5604,12 +4986,6 @@ window.BENCHMARK_DATA = {
             "value": 38855.13641357422,
             "unit": "ns",
             "range": "± 220.88773675396945"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 762392.5270647322,
-            "unit": "ns",
-            "range": "± 1525.0290755660105"
           }
         ]
       },
@@ -5658,12 +5034,6 @@ window.BENCHMARK_DATA = {
             "value": 38408.70451002855,
             "unit": "ns",
             "range": "± 127.56880795520675"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 767737.5529622396,
-            "unit": "ns",
-            "range": "± 7044.2576350885"
           }
         ]
       },
@@ -5712,12 +5082,6 @@ window.BENCHMARK_DATA = {
             "value": 38860.6827545166,
             "unit": "ns",
             "range": "± 85.0249051401461"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 764589.2233886719,
-            "unit": "ns",
-            "range": "± 1380.5842459197413"
           }
         ]
       },
@@ -5766,12 +5130,6 @@ window.BENCHMARK_DATA = {
             "value": 38594.77393450056,
             "unit": "ns",
             "range": "± 284.72710770621177"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 760208.6291316106,
-            "unit": "ns",
-            "range": "± 744.6758250987532"
           }
         ]
       },
@@ -5820,12 +5178,6 @@ window.BENCHMARK_DATA = {
             "value": 38514.75833565848,
             "unit": "ns",
             "range": "± 251.84706366567008"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 762184.7762974331,
-            "unit": "ns",
-            "range": "± 1909.0736640277585"
           }
         ]
       },
@@ -5874,12 +5226,6 @@ window.BENCHMARK_DATA = {
             "value": 38430.487178257536,
             "unit": "ns",
             "range": "± 230.00559794176033"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 763446.3240885417,
-            "unit": "ns",
-            "range": "± 1970.5304290255406"
           }
         ]
       },
@@ -5928,12 +5274,6 @@ window.BENCHMARK_DATA = {
             "value": 38575.66272442158,
             "unit": "ns",
             "range": "± 136.38086434238758"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 762530.6144080529,
-            "unit": "ns",
-            "range": "± 878.8104273776452"
           }
         ]
       },
@@ -5982,12 +5322,6 @@ window.BENCHMARK_DATA = {
             "value": 38394.99666419396,
             "unit": "ns",
             "range": "± 211.34426074002795"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 763043.7030552456,
-            "unit": "ns",
-            "range": "± 1973.8079780931564"
           }
         ]
       },
@@ -6036,12 +5370,6 @@ window.BENCHMARK_DATA = {
             "value": 38186.8488507952,
             "unit": "ns",
             "range": "± 272.97640480470733"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 763500.0867745535,
-            "unit": "ns",
-            "range": "± 904.2454590889255"
           }
         ]
       },
@@ -6090,12 +5418,6 @@ window.BENCHMARK_DATA = {
             "value": 39017.7242173415,
             "unit": "ns",
             "range": "± 262.4587526520479"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 759755.4207356771,
-            "unit": "ns",
-            "range": "± 943.569701164805"
           }
         ]
       },
@@ -6144,12 +5466,6 @@ window.BENCHMARK_DATA = {
             "value": 38654.9040788923,
             "unit": "ns",
             "range": "± 289.72968952149694"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
-            "value": 761037.5650809152,
-            "unit": "ns",
-            "range": "± 3959.210132109319"
           }
         ]
       }
@@ -6200,12 +5516,6 @@ window.BENCHMARK_DATA = {
             "value": 40844.69263712565,
             "unit": "ns",
             "range": "± 218.7914730005403"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 730117.4622628348,
-            "unit": "ns",
-            "range": "± 2329.709206920336"
           }
         ]
       },
@@ -6254,12 +5564,6 @@ window.BENCHMARK_DATA = {
             "value": 39732.094364420576,
             "unit": "ns",
             "range": "± 205.3785468953175"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 724946.925641741,
-            "unit": "ns",
-            "range": "± 1983.3468325201702"
           }
         ]
       },
@@ -6308,12 +5612,6 @@ window.BENCHMARK_DATA = {
             "value": 40146.72788783482,
             "unit": "ns",
             "range": "± 216.0587437846472"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 727744.9460286458,
-            "unit": "ns",
-            "range": "± 1553.6880759873045"
           }
         ]
       },
@@ -6360,12 +5658,6 @@ window.BENCHMARK_DATA = {
             "value": 40818.9112941197,
             "unit": "ns",
             "range": "± 91.78268654963493"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 728145.6283365885,
-            "unit": "ns",
-            "range": "± 725.550468417474"
           }
         ]
       },
@@ -6414,12 +5706,6 @@ window.BENCHMARK_DATA = {
             "value": 41143.61023763021,
             "unit": "ns",
             "range": "± 145.61068308601708"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 728355.0440104167,
-            "unit": "ns",
-            "range": "± 3041.930811793828"
           }
         ]
       },
@@ -6466,12 +5752,6 @@ window.BENCHMARK_DATA = {
             "value": 39629.97029215495,
             "unit": "ns",
             "range": "± 173.03278881843036"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 727339.2903878348,
-            "unit": "ns",
-            "range": "± 2216.9137712094866"
           }
         ]
       },
@@ -6520,12 +5800,6 @@ window.BENCHMARK_DATA = {
             "value": 41012.66944231306,
             "unit": "ns",
             "range": "± 133.8845720232684"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 722587.083577474,
-            "unit": "ns",
-            "range": "± 564.7128499411953"
           }
         ]
       },
@@ -6574,12 +5848,6 @@ window.BENCHMARK_DATA = {
             "value": 41121.33154296875,
             "unit": "ns",
             "range": "± 183.17387387236184"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 725499.0302734375,
-            "unit": "ns",
-            "range": "± 698.6257016686269"
           }
         ]
       },
@@ -6628,12 +5896,6 @@ window.BENCHMARK_DATA = {
             "value": 41181.3697672526,
             "unit": "ns",
             "range": "± 478.45477451342214"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 725393.9515625,
-            "unit": "ns",
-            "range": "± 1179.7263722764355"
           }
         ]
       },
@@ -6682,12 +5944,6 @@ window.BENCHMARK_DATA = {
             "value": 41343.75513102214,
             "unit": "ns",
             "range": "± 157.66044360531387"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 723887.585797991,
-            "unit": "ns",
-            "range": "± 957.3672837724234"
           }
         ]
       },
@@ -6736,12 +5992,6 @@ window.BENCHMARK_DATA = {
             "value": 40719.523001534595,
             "unit": "ns",
             "range": "± 43.55681303715039"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 724640.0467447917,
-            "unit": "ns",
-            "range": "± 1458.563031591116"
           }
         ]
       },
@@ -6790,12 +6040,6 @@ window.BENCHMARK_DATA = {
             "value": 41254.43351963588,
             "unit": "ns",
             "range": "± 83.93912590095529"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 725686.9987229567,
-            "unit": "ns",
-            "range": "± 1008.1885468027716"
           }
         ]
       },
@@ -6844,12 +6088,6 @@ window.BENCHMARK_DATA = {
             "value": 40583.714935302734,
             "unit": "ns",
             "range": "± 71.7270645358893"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 725736.1500901442,
-            "unit": "ns",
-            "range": "± 993.5819186823135"
           }
         ]
       },
@@ -6898,12 +6136,6 @@ window.BENCHMARK_DATA = {
             "value": 41151.48545328776,
             "unit": "ns",
             "range": "± 81.71975352307727"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 723894.1530949519,
-            "unit": "ns",
-            "range": "± 538.2765767155147"
           }
         ]
       },
@@ -6952,12 +6184,6 @@ window.BENCHMARK_DATA = {
             "value": 40319.13485514323,
             "unit": "ns",
             "range": "± 164.02568714717586"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 724240.8560221355,
-            "unit": "ns",
-            "range": "± 755.5044760468629"
           }
         ]
       },
@@ -7006,12 +6232,6 @@ window.BENCHMARK_DATA = {
             "value": 41969.841872151694,
             "unit": "ns",
             "range": "± 205.39716546148932"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 743553.0228097098,
-            "unit": "ns",
-            "range": "± 1419.3152423744427"
           }
         ]
       },
@@ -7060,12 +6280,6 @@ window.BENCHMARK_DATA = {
             "value": 41558.36095721905,
             "unit": "ns",
             "range": "± 89.22326013108871"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 728046.7835036058,
-            "unit": "ns",
-            "range": "± 593.697519045798"
           }
         ]
       },
@@ -7114,12 +6328,6 @@ window.BENCHMARK_DATA = {
             "value": 40822.33303833008,
             "unit": "ns",
             "range": "± 111.5105385069944"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 726088.1182391827,
-            "unit": "ns",
-            "range": "± 797.4139927650842"
           }
         ]
       },
@@ -7168,12 +6376,6 @@ window.BENCHMARK_DATA = {
             "value": 41566.611643473305,
             "unit": "ns",
             "range": "± 215.85957075125586"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 725243.9672475961,
-            "unit": "ns",
-            "range": "± 852.2273774173391"
           }
         ]
       },
@@ -7222,12 +6424,6 @@ window.BENCHMARK_DATA = {
             "value": 41658.89492563101,
             "unit": "ns",
             "range": "± 54.46126444878795"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 727931.3998046875,
-            "unit": "ns",
-            "range": "± 730.3821246385957"
           }
         ]
       },
@@ -7276,12 +6472,6 @@ window.BENCHMARK_DATA = {
             "value": 41416.210837227954,
             "unit": "ns",
             "range": "± 90.06367410963772"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 725486.2701590402,
-            "unit": "ns",
-            "range": "± 778.9255321673687"
           }
         ]
       },
@@ -7330,12 +6520,6 @@ window.BENCHMARK_DATA = {
             "value": 41197.52745408278,
             "unit": "ns",
             "range": "± 80.84164844392875"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 726128.7728097098,
-            "unit": "ns",
-            "range": "± 486.22828607391676"
           }
         ]
       },
@@ -7384,12 +6568,6 @@ window.BENCHMARK_DATA = {
             "value": 41778.027012751656,
             "unit": "ns",
             "range": "± 67.14607850036764"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 728089.1271972656,
-            "unit": "ns",
-            "range": "± 930.1633604809219"
           }
         ]
       },
@@ -7438,12 +6616,6 @@ window.BENCHMARK_DATA = {
             "value": 41172.644273024336,
             "unit": "ns",
             "range": "± 76.60209438806285"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 725434.9990234375,
-            "unit": "ns",
-            "range": "± 976.0900952617546"
           }
         ]
       },
@@ -7492,12 +6664,6 @@ window.BENCHMARK_DATA = {
             "value": 41485.87768147786,
             "unit": "ns",
             "range": "± 325.0646823197668"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 732219.9375,
-            "unit": "ns",
-            "range": "± 2779.285412590589"
           }
         ]
       },
@@ -7546,12 +6712,6 @@ window.BENCHMARK_DATA = {
             "value": 40985.7401570638,
             "unit": "ns",
             "range": "± 151.38759656379582"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 725795.773577009,
-            "unit": "ns",
-            "range": "± 1101.876065551494"
           }
         ]
       },
@@ -7600,12 +6760,6 @@ window.BENCHMARK_DATA = {
             "value": 41495.3463297526,
             "unit": "ns",
             "range": "± 169.91682712786445"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 726079.65625,
-            "unit": "ns",
-            "range": "± 2982.286012394115"
           }
         ]
       },
@@ -7654,12 +6808,6 @@ window.BENCHMARK_DATA = {
             "value": 43167.82938561073,
             "unit": "ns",
             "range": "± 92.67501150090203"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 744445.4054827009,
-            "unit": "ns",
-            "range": "± 1011.4279289528163"
           }
         ]
       },
@@ -7708,12 +6856,6 @@ window.BENCHMARK_DATA = {
             "value": 41171.901803152905,
             "unit": "ns",
             "range": "± 82.16628633855149"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 726130.4160853794,
-            "unit": "ns",
-            "range": "± 672.429585646058"
           }
         ]
       },
@@ -7762,12 +6904,6 @@ window.BENCHMARK_DATA = {
             "value": 41509.01772635324,
             "unit": "ns",
             "range": "± 79.90520996057903"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 730996.9985351562,
-            "unit": "ns",
-            "range": "± 553.2502987019354"
           }
         ]
       },
@@ -7816,12 +6952,6 @@ window.BENCHMARK_DATA = {
             "value": 41689.14923531668,
             "unit": "ns",
             "range": "± 163.20281466316004"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 724544.3169270833,
-            "unit": "ns",
-            "range": "± 1309.6513309976726"
           }
         ]
       },
@@ -7870,12 +7000,6 @@ window.BENCHMARK_DATA = {
             "value": 41143.47938654973,
             "unit": "ns",
             "range": "± 123.22296586939304"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 724956.5899564303,
-            "unit": "ns",
-            "range": "± 697.8267326051008"
           }
         ]
       },
@@ -7924,12 +7048,6 @@ window.BENCHMARK_DATA = {
             "value": 42174.86590140207,
             "unit": "ns",
             "range": "± 275.2065574351508"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 779758.0412597656,
-            "unit": "ns",
-            "range": "± 559.8976806003004"
           }
         ]
       },
@@ -7978,12 +7096,6 @@ window.BENCHMARK_DATA = {
             "value": 40440.93014526367,
             "unit": "ns",
             "range": "± 134.79925953899"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 762480.1766880581,
-            "unit": "ns",
-            "range": "± 1207.8147199899615"
           }
         ]
       },
@@ -8032,12 +7144,6 @@ window.BENCHMARK_DATA = {
             "value": 40489.123084435094,
             "unit": "ns",
             "range": "± 201.54680274442552"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 764145.9091796875,
-            "unit": "ns",
-            "range": "± 1552.461976681979"
           }
         ]
       },
@@ -8086,12 +7192,6 @@ window.BENCHMARK_DATA = {
             "value": 40795.37873722957,
             "unit": "ns",
             "range": "± 377.73874608452275"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 766096.0262169471,
-            "unit": "ns",
-            "range": "± 1580.4764948594132"
           }
         ]
       },
@@ -8140,12 +7240,6 @@ window.BENCHMARK_DATA = {
             "value": 41299.19834391276,
             "unit": "ns",
             "range": "± 311.27493871268894"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 768453.6756998698,
-            "unit": "ns",
-            "range": "± 774.5237319941526"
           }
         ]
       },
@@ -8194,12 +7288,6 @@ window.BENCHMARK_DATA = {
             "value": 40920.841256277905,
             "unit": "ns",
             "range": "± 144.83714518619695"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 765214.6169084822,
-            "unit": "ns",
-            "range": "± 1358.22382479936"
           }
         ]
       },
@@ -8248,12 +7336,6 @@ window.BENCHMARK_DATA = {
             "value": 40971.91317952474,
             "unit": "ns",
             "range": "± 312.1992771846779"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 766259.7334735577,
-            "unit": "ns",
-            "range": "± 1631.004134819884"
           }
         ]
       },
@@ -8302,12 +7384,6 @@ window.BENCHMARK_DATA = {
             "value": 40264.32091346154,
             "unit": "ns",
             "range": "± 215.72560188519526"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 765521.0285807292,
-            "unit": "ns",
-            "range": "± 2437.1566742108753"
           }
         ]
       },
@@ -8356,12 +7432,6 @@ window.BENCHMARK_DATA = {
             "value": 40709.93889944894,
             "unit": "ns",
             "range": "± 300.17204579985247"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 763315.9537760416,
-            "unit": "ns",
-            "range": "± 391.7192431404538"
           }
         ]
       },
@@ -8410,12 +7480,6 @@ window.BENCHMARK_DATA = {
             "value": 40406.00370788574,
             "unit": "ns",
             "range": "± 121.35521589418404"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 763344.2151227678,
-            "unit": "ns",
-            "range": "± 848.4523096655363"
           }
         ]
       },
@@ -8464,12 +7528,6 @@ window.BENCHMARK_DATA = {
             "value": 41446.986836751305,
             "unit": "ns",
             "range": "± 416.2286609914043"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 766849.7443359375,
-            "unit": "ns",
-            "range": "± 2182.686252481775"
           }
         ]
       },
@@ -8518,12 +7576,6 @@ window.BENCHMARK_DATA = {
             "value": 41013.4060886928,
             "unit": "ns",
             "range": "± 470.9773030375004"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 765882.2421499399,
-            "unit": "ns",
-            "range": "± 2571.241309022522"
           }
         ]
       },
@@ -8572,12 +7624,6 @@ window.BENCHMARK_DATA = {
             "value": 40699.32013375418,
             "unit": "ns",
             "range": "± 362.2817304152886"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 764622.0658804086,
-            "unit": "ns",
-            "range": "± 1504.8068141471304"
           }
         ]
       },
@@ -8626,12 +7672,6 @@ window.BENCHMARK_DATA = {
             "value": 40112.117919921875,
             "unit": "ns",
             "range": "± 224.7392268010502"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 763533.7510463169,
-            "unit": "ns",
-            "range": "± 1071.5059281746267"
           }
         ]
       },
@@ -8680,12 +7720,6 @@ window.BENCHMARK_DATA = {
             "value": 40700.32963209886,
             "unit": "ns",
             "range": "± 185.68318097589975"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 762493.7642299107,
-            "unit": "ns",
-            "range": "± 1629.2638315623574"
           }
         ]
       },
@@ -8734,12 +7768,6 @@ window.BENCHMARK_DATA = {
             "value": 40284.786267961776,
             "unit": "ns",
             "range": "± 204.92292021894426"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 763612.3471304086,
-            "unit": "ns",
-            "range": "± 570.0506656615204"
           }
         ]
       },
@@ -8788,12 +7816,6 @@ window.BENCHMARK_DATA = {
             "value": 39920.18231201172,
             "unit": "ns",
             "range": "± 143.48290905905162"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 765075.814453125,
-            "unit": "ns",
-            "range": "± 1045.2556452654946"
           }
         ]
       },
@@ -8842,12 +7864,6 @@ window.BENCHMARK_DATA = {
             "value": 40414.267896379744,
             "unit": "ns",
             "range": "± 254.78129208660224"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 767339.0018028846,
-            "unit": "ns",
-            "range": "± 1242.1830124008304"
           }
         ]
       },
@@ -8896,12 +7912,6 @@ window.BENCHMARK_DATA = {
             "value": 40147.85107421875,
             "unit": "ns",
             "range": "± 134.40514171230097"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 765942.1654575893,
-            "unit": "ns",
-            "range": "± 1585.4845624921977"
           }
         ]
       },
@@ -8950,12 +7960,6 @@ window.BENCHMARK_DATA = {
             "value": 40173.21930367606,
             "unit": "ns",
             "range": "± 546.2210440718057"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 766260.4966195914,
-            "unit": "ns",
-            "range": "± 979.6506457553064"
           }
         ]
       },
@@ -9004,12 +8008,6 @@ window.BENCHMARK_DATA = {
             "value": 40372.706290108814,
             "unit": "ns",
             "range": "± 237.40259384588904"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 764078.3697916666,
-            "unit": "ns",
-            "range": "± 1682.9060911389486"
           }
         ]
       },
@@ -9058,12 +8056,6 @@ window.BENCHMARK_DATA = {
             "value": 40810.8902752216,
             "unit": "ns",
             "range": "± 142.48985544087301"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 762798.4141322544,
-            "unit": "ns",
-            "range": "± 985.9354993173692"
           }
         ]
       },
@@ -9112,12 +8104,6 @@ window.BENCHMARK_DATA = {
             "value": 40280.58673967634,
             "unit": "ns",
             "range": "± 187.327588248137"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.ExportToFile",
-            "value": 768687.8461216518,
-            "unit": "ns",
-            "range": "± 2667.5557618799603"
           }
         ]
       }
@@ -9168,12 +8154,6 @@ window.BENCHMARK_DATA = {
             "value": 36565.34263916015,
             "unit": "ns",
             "range": "± 233.16173522587803"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 731300.8453776041,
-            "unit": "ns",
-            "range": "± 2055.3668915060284"
           }
         ]
       },
@@ -9222,12 +8202,6 @@ window.BENCHMARK_DATA = {
             "value": 36725.01529744466,
             "unit": "ns",
             "range": "± 103.11918733020937"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 727445.9087239583,
-            "unit": "ns",
-            "range": "± 3430.2710914925706"
           }
         ]
       },
@@ -9274,12 +8248,6 @@ window.BENCHMARK_DATA = {
             "value": 36748.4954693134,
             "unit": "ns",
             "range": "± 141.21832228289568"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 728617.8016183035,
-            "unit": "ns",
-            "range": "± 2424.521011530781"
           }
         ]
       },
@@ -9328,12 +8296,6 @@ window.BENCHMARK_DATA = {
             "value": 37232.74894932338,
             "unit": "ns",
             "range": "± 258.95939454354243"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 726430.6097005209,
-            "unit": "ns",
-            "range": "± 2520.5690685317113"
           }
         ]
       },
@@ -9380,12 +8342,6 @@ window.BENCHMARK_DATA = {
             "value": 37273.91782052176,
             "unit": "ns",
             "range": "± 179.8641586983824"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 726564.234765625,
-            "unit": "ns",
-            "range": "± 2163.4668745001536"
           }
         ]
       },
@@ -9434,12 +8390,6 @@ window.BENCHMARK_DATA = {
             "value": 36856.0178894043,
             "unit": "ns",
             "range": "± 130.7497311124149"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 724508.2970252404,
-            "unit": "ns",
-            "range": "± 496.6321786383339"
           }
         ]
       },
@@ -9488,12 +8438,6 @@ window.BENCHMARK_DATA = {
             "value": 37696.648384602864,
             "unit": "ns",
             "range": "± 157.4201248618169"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 731038.1723257211,
-            "unit": "ns",
-            "range": "± 1750.7055136673937"
           }
         ]
       },
@@ -9542,12 +8486,6 @@ window.BENCHMARK_DATA = {
             "value": 37346.01671055385,
             "unit": "ns",
             "range": "± 90.31285685973256"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 726499.9493489583,
-            "unit": "ns",
-            "range": "± 1689.2911393913255"
           }
         ]
       },
@@ -9596,12 +8534,6 @@ window.BENCHMARK_DATA = {
             "value": 36898.34506225586,
             "unit": "ns",
             "range": "± 141.49874410362855"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 724967.2580915178,
-            "unit": "ns",
-            "range": "± 903.9358458424432"
           }
         ]
       },
@@ -9650,12 +8582,6 @@ window.BENCHMARK_DATA = {
             "value": 37081.70877075195,
             "unit": "ns",
             "range": "± 107.18588667085524"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 725491.6450892857,
-            "unit": "ns",
-            "range": "± 1072.0797816047432"
           }
         ]
       },
@@ -9704,12 +8630,6 @@ window.BENCHMARK_DATA = {
             "value": 36902.50814383371,
             "unit": "ns",
             "range": "± 168.32876020842804"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 726931.7300180289,
-            "unit": "ns",
-            "range": "± 1890.621726516606"
           }
         ]
       },
@@ -9758,12 +8678,6 @@ window.BENCHMARK_DATA = {
             "value": 37156.65245643029,
             "unit": "ns",
             "range": "± 78.66053643501485"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 724712.98046875,
-            "unit": "ns",
-            "range": "± 1230.0989161512525"
           }
         ]
       },
@@ -9812,12 +8726,6 @@ window.BENCHMARK_DATA = {
             "value": 37280.152317592074,
             "unit": "ns",
             "range": "± 69.48653577700375"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 725248.336344401,
-            "unit": "ns",
-            "range": "± 536.4741594156554"
           }
         ]
       },
@@ -9866,12 +8774,6 @@ window.BENCHMARK_DATA = {
             "value": 36835.78512137277,
             "unit": "ns",
             "range": "± 73.44630873859731"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 725044.8171037947,
-            "unit": "ns",
-            "range": "± 791.1776790413443"
           }
         ]
       },
@@ -9920,12 +8822,6 @@ window.BENCHMARK_DATA = {
             "value": 39151.43472726004,
             "unit": "ns",
             "range": "± 91.59934914879291"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 741403.583984375,
-            "unit": "ns",
-            "range": "± 995.0541034815686"
           }
         ]
       },
@@ -9974,12 +8870,6 @@ window.BENCHMARK_DATA = {
             "value": 37557.89678548177,
             "unit": "ns",
             "range": "± 161.50067564610413"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 730987.3924278846,
-            "unit": "ns",
-            "range": "± 1045.1747206779633"
           }
         ]
       },
@@ -10028,12 +8918,6 @@ window.BENCHMARK_DATA = {
             "value": 36643.45601947491,
             "unit": "ns",
             "range": "± 47.74527029717775"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 725167.1731520433,
-            "unit": "ns",
-            "range": "± 1106.432378603636"
           }
         ]
       },
@@ -10082,12 +8966,6 @@ window.BENCHMARK_DATA = {
             "value": 37519.20128220778,
             "unit": "ns",
             "range": "± 75.3572137550954"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 724354.8820452009,
-            "unit": "ns",
-            "range": "± 585.6112188359407"
           }
         ]
       },
@@ -10136,12 +9014,6 @@ window.BENCHMARK_DATA = {
             "value": 37303.62506539481,
             "unit": "ns",
             "range": "± 113.45394817484552"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 727203.57421875,
-            "unit": "ns",
-            "range": "± 540.582848214074"
           }
         ]
       },
@@ -10190,12 +9062,6 @@ window.BENCHMARK_DATA = {
             "value": 37411.7141418457,
             "unit": "ns",
             "range": "± 107.58939168347126"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 728873.800920759,
-            "unit": "ns",
-            "range": "± 695.9142439274918"
           }
         ]
       },
@@ -10244,12 +9110,6 @@ window.BENCHMARK_DATA = {
             "value": 37146.974060058594,
             "unit": "ns",
             "range": "± 93.67694544786785"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 727132.828500601,
-            "unit": "ns",
-            "range": "± 771.798921809463"
           }
         ]
       },
@@ -10298,12 +9158,6 @@ window.BENCHMARK_DATA = {
             "value": 37102.275202433266,
             "unit": "ns",
             "range": "± 78.01497101392636"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 726329.6403245192,
-            "unit": "ns",
-            "range": "± 816.0959060464579"
           }
         ]
       },
@@ -10352,12 +9206,6 @@ window.BENCHMARK_DATA = {
             "value": 36933.81514078776,
             "unit": "ns",
             "range": "± 93.8454838056219"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 726291.9329927885,
-            "unit": "ns",
-            "range": "± 815.456057433534"
           }
         ]
       },
@@ -10406,12 +9254,6 @@ window.BENCHMARK_DATA = {
             "value": 38029.24580485026,
             "unit": "ns",
             "range": "± 550.2643179945408"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 732095.5887695312,
-            "unit": "ns",
-            "range": "± 3927.6698000116508"
           }
         ]
       },
@@ -10460,12 +9302,6 @@ window.BENCHMARK_DATA = {
             "value": 37178.02194448618,
             "unit": "ns",
             "range": "± 79.41884355142206"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 724394.3068498884,
-            "unit": "ns",
-            "range": "± 1017.0754919782826"
           }
         ]
       },
@@ -10514,12 +9350,6 @@ window.BENCHMARK_DATA = {
             "value": 36745.95349993025,
             "unit": "ns",
             "range": "± 181.2205392526763"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 728375.7913643973,
-            "unit": "ns",
-            "range": "± 2268.6636850530926"
           }
         ]
       },
@@ -10568,12 +9398,6 @@ window.BENCHMARK_DATA = {
             "value": 38815.606201171875,
             "unit": "ns",
             "range": "± 167.17246175443995"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 745844.598063151,
-            "unit": "ns",
-            "range": "± 1042.1147122261557"
           }
         ]
       },
@@ -10622,12 +9446,6 @@ window.BENCHMARK_DATA = {
             "value": 36947.422236851286,
             "unit": "ns",
             "range": "± 167.77654869931254"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 726366.9108723958,
-            "unit": "ns",
-            "range": "± 573.2911411286569"
           }
         ]
       },
@@ -10676,12 +9494,6 @@ window.BENCHMARK_DATA = {
             "value": 37098.44553484236,
             "unit": "ns",
             "range": "± 40.030412524389845"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 728335.1987630208,
-            "unit": "ns",
-            "range": "± 979.5587824177915"
           }
         ]
       },
@@ -10730,12 +9542,6 @@ window.BENCHMARK_DATA = {
             "value": 37046.05498395647,
             "unit": "ns",
             "range": "± 185.59701087933877"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 724862.0408528646,
-            "unit": "ns",
-            "range": "± 657.4734535675675"
           }
         ]
       },
@@ -10784,12 +9590,6 @@ window.BENCHMARK_DATA = {
             "value": 36723.11905110677,
             "unit": "ns",
             "range": "± 153.4852332390613"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 724850.4604116586,
-            "unit": "ns",
-            "range": "± 616.8869783793662"
           }
         ]
       },
@@ -10838,12 +9638,6 @@ window.BENCHMARK_DATA = {
             "value": 38011.529292179985,
             "unit": "ns",
             "range": "± 170.77209633593685"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 766146.9314313616,
-            "unit": "ns",
-            "range": "± 1024.6969068815556"
           }
         ]
       },
@@ -10892,12 +9686,6 @@ window.BENCHMARK_DATA = {
             "value": 37154.375760591945,
             "unit": "ns",
             "range": "± 179.12499520335393"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 764909.2037527902,
-            "unit": "ns",
-            "range": "± 948.9099318448316"
           }
         ]
       },
@@ -10946,12 +9734,6 @@ window.BENCHMARK_DATA = {
             "value": 36874.048569899336,
             "unit": "ns",
             "range": "± 97.8821155636571"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 763329.1596679688,
-            "unit": "ns",
-            "range": "± 664.7204115326531"
           }
         ]
       },
@@ -11000,12 +9782,6 @@ window.BENCHMARK_DATA = {
             "value": 37136.427729679985,
             "unit": "ns",
             "range": "± 157.5964608313369"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 764730.2137276785,
-            "unit": "ns",
-            "range": "± 2038.654844426392"
           }
         ]
       },
@@ -11054,12 +9830,6 @@ window.BENCHMARK_DATA = {
             "value": 36708.024287632536,
             "unit": "ns",
             "range": "± 442.61871608693747"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 768570.7342247596,
-            "unit": "ns",
-            "range": "± 884.1807676500949"
           }
         ]
       },
@@ -11108,12 +9878,6 @@ window.BENCHMARK_DATA = {
             "value": 37553.05033874512,
             "unit": "ns",
             "range": "± 80.04685043170532"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 766842.9027622768,
-            "unit": "ns",
-            "range": "± 1139.4869207707875"
           }
         ]
       },
@@ -11162,12 +9926,6 @@ window.BENCHMARK_DATA = {
             "value": 37047.37137075571,
             "unit": "ns",
             "range": "± 222.1490180606262"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 764687.0593073919,
-            "unit": "ns",
-            "range": "± 1065.1547788467722"
           }
         ]
       },
@@ -11216,12 +9974,6 @@ window.BENCHMARK_DATA = {
             "value": 36860.04805501302,
             "unit": "ns",
             "range": "± 102.8267636348572"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 765566.0912388393,
-            "unit": "ns",
-            "range": "± 1623.1805016841554"
           }
         ]
       },
@@ -11270,12 +10022,6 @@ window.BENCHMARK_DATA = {
             "value": 36836.70491379958,
             "unit": "ns",
             "range": "± 208.729076622117"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 764921.6723632812,
-            "unit": "ns",
-            "range": "± 1097.2463064001854"
           }
         ]
       },
@@ -11324,12 +10070,6 @@ window.BENCHMARK_DATA = {
             "value": 37444.985068184986,
             "unit": "ns",
             "range": "± 226.41369293647946"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 769562.4727213542,
-            "unit": "ns",
-            "range": "± 1535.3173137487381"
           }
         ]
       },
@@ -11378,12 +10118,6 @@ window.BENCHMARK_DATA = {
             "value": 37455.61016845703,
             "unit": "ns",
             "range": "± 358.0262804979265"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 767949.4757161458,
-            "unit": "ns",
-            "range": "± 2224.1808607178573"
           }
         ]
       },
@@ -11432,12 +10166,6 @@ window.BENCHMARK_DATA = {
             "value": 37751.088134765625,
             "unit": "ns",
             "range": "± 145.64796464859964"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 765627.078264509,
-            "unit": "ns",
-            "range": "± 2092.526463191969"
           }
         ]
       },
@@ -11486,12 +10214,6 @@ window.BENCHMARK_DATA = {
             "value": 37359.37407977764,
             "unit": "ns",
             "range": "± 106.61102890200385"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 767895.1524739583,
-            "unit": "ns",
-            "range": "± 2374.6455914789417"
           }
         ]
       },
@@ -11540,12 +10262,6 @@ window.BENCHMARK_DATA = {
             "value": 36953.326190185544,
             "unit": "ns",
             "range": "± 390.5868295880957"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 766302.2350027902,
-            "unit": "ns",
-            "range": "± 1192.9019350084932"
           }
         ]
       },
@@ -11594,12 +10310,6 @@ window.BENCHMARK_DATA = {
             "value": 37547.99136352539,
             "unit": "ns",
             "range": "± 216.02046074947347"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 766484.8816964285,
-            "unit": "ns",
-            "range": "± 2064.9311777721673"
           }
         ]
       },
@@ -11648,12 +10358,6 @@ window.BENCHMARK_DATA = {
             "value": 36669.06095064603,
             "unit": "ns",
             "range": "± 140.6898672591946"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 763576.7887620192,
-            "unit": "ns",
-            "range": "± 876.2720958841878"
           }
         ]
       },
@@ -11702,12 +10406,6 @@ window.BENCHMARK_DATA = {
             "value": 36764.14772855319,
             "unit": "ns",
             "range": "± 220.2032508377437"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 767710.0083333333,
-            "unit": "ns",
-            "range": "± 1078.7953189703885"
           }
         ]
       },
@@ -11756,12 +10454,6 @@ window.BENCHMARK_DATA = {
             "value": 36646.598219651445,
             "unit": "ns",
             "range": "± 176.56540054524334"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 770261.2759540265,
-            "unit": "ns",
-            "range": "± 1603.5044918126978"
           }
         ]
       },
@@ -11810,12 +10502,6 @@ window.BENCHMARK_DATA = {
             "value": 36398.53679911295,
             "unit": "ns",
             "range": "± 186.63610129407127"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 766196.8487630208,
-            "unit": "ns",
-            "range": "± 1363.2227261458697"
           }
         ]
       },
@@ -11864,12 +10550,6 @@ window.BENCHMARK_DATA = {
             "value": 36738.69003530649,
             "unit": "ns",
             "range": "± 132.87497891773037"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 761577.2713541667,
-            "unit": "ns",
-            "range": "± 1018.7945710594792"
           }
         ]
       },
@@ -11918,12 +10598,6 @@ window.BENCHMARK_DATA = {
             "value": 36682.41266276042,
             "unit": "ns",
             "range": "± 424.3272308447281"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 764993.958984375,
-            "unit": "ns",
-            "range": "± 665.7742919612976"
           }
         ]
       },
@@ -11972,12 +10646,6 @@ window.BENCHMARK_DATA = {
             "value": 37714.94464111328,
             "unit": "ns",
             "range": "± 208.17536635107604"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 762806.64765625,
-            "unit": "ns",
-            "range": "± 1278.0493860199451"
           }
         ]
       },
@@ -12026,12 +10694,6 @@ window.BENCHMARK_DATA = {
             "value": 36668.28015645345,
             "unit": "ns",
             "range": "± 74.2883174392342"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.ExportToFile",
-            "value": 766783.9012169471,
-            "unit": "ns",
-            "range": "± 1498.4179364385936"
           }
         ]
       }
@@ -12082,12 +10744,6 @@ window.BENCHMARK_DATA = {
             "value": 54596.20518798828,
             "unit": "ns",
             "range": "± 180.13194529157843"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1014171.4723958333,
-            "unit": "ns",
-            "range": "± 4041.5347614568136"
           }
         ]
       },
@@ -12134,12 +10790,6 @@ window.BENCHMARK_DATA = {
             "value": 56158.2901570638,
             "unit": "ns",
             "range": "± 287.7415795056396"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1013399.4016927084,
-            "unit": "ns",
-            "range": "± 1137.2717958554938"
           }
         ]
       },
@@ -12188,12 +10838,6 @@ window.BENCHMARK_DATA = {
             "value": 55457.4416788737,
             "unit": "ns",
             "range": "± 490.99104332837993"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1012429.1183035715,
-            "unit": "ns",
-            "range": "± 3536.541866920834"
           }
         ]
       },
@@ -12242,12 +10886,6 @@ window.BENCHMARK_DATA = {
             "value": 56026.482267252606,
             "unit": "ns",
             "range": "± 450.11921972055916"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1015462.7872596154,
-            "unit": "ns",
-            "range": "± 587.6328220278048"
           }
         ]
       },
@@ -12296,12 +10934,6 @@ window.BENCHMARK_DATA = {
             "value": 56698.76042292668,
             "unit": "ns",
             "range": "± 112.86402746657693"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1011712.0217633928,
-            "unit": "ns",
-            "range": "± 1001.1696790370759"
           }
         ]
       },
@@ -12350,12 +10982,6 @@ window.BENCHMARK_DATA = {
             "value": 55236.82371403621,
             "unit": "ns",
             "range": "± 91.91945366257657"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1012419.1547526042,
-            "unit": "ns",
-            "range": "± 2023.232430331427"
           }
         ]
       },
@@ -12404,12 +11030,6 @@ window.BENCHMARK_DATA = {
             "value": 56775.90298461914,
             "unit": "ns",
             "range": "± 317.9054762565217"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1010176.0690104166,
-            "unit": "ns",
-            "range": "± 1891.7320521571776"
           }
         ]
       },
@@ -12458,12 +11078,6 @@ window.BENCHMARK_DATA = {
             "value": 56409.33391927083,
             "unit": "ns",
             "range": "± 779.8069964421258"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1014880.396484375,
-            "unit": "ns",
-            "range": "± 1039.9048171224779"
           }
         ]
       },
@@ -12512,12 +11126,6 @@ window.BENCHMARK_DATA = {
             "value": 55255.769118088945,
             "unit": "ns",
             "range": "± 87.83849377147291"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1011829.7769252232,
-            "unit": "ns",
-            "range": "± 1653.1852200604374"
           }
         ]
       },
@@ -12566,12 +11174,6 @@ window.BENCHMARK_DATA = {
             "value": 55610.56223707933,
             "unit": "ns",
             "range": "± 82.99969105599656"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1013055.3270089285,
-            "unit": "ns",
-            "range": "± 1898.0958562809399"
           }
         ]
       },
@@ -12620,12 +11222,6 @@ window.BENCHMARK_DATA = {
             "value": 55540.73960222517,
             "unit": "ns",
             "range": "± 84.0875911802594"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1014675.2904296875,
-            "unit": "ns",
-            "range": "± 6068.9102035950955"
           }
         ]
       },
@@ -12674,12 +11270,6 @@ window.BENCHMARK_DATA = {
             "value": 56198.80470393254,
             "unit": "ns",
             "range": "± 401.2746106709554"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1036628.3239397322,
-            "unit": "ns",
-            "range": "± 2532.6404079173144"
           }
         ]
       },
@@ -12728,12 +11318,6 @@ window.BENCHMARK_DATA = {
             "value": 55130.02631319486,
             "unit": "ns",
             "range": "± 121.85017235950515"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1016131.89921875,
-            "unit": "ns",
-            "range": "± 1486.6287076374942"
           }
         ]
       },
@@ -12782,12 +11366,6 @@ window.BENCHMARK_DATA = {
             "value": 56699.83333914621,
             "unit": "ns",
             "range": "± 137.3326503863344"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1017691.59765625,
-            "unit": "ns",
-            "range": "± 887.6467360568787"
           }
         ]
       },
@@ -12836,12 +11414,6 @@ window.BENCHMARK_DATA = {
             "value": 55559.97734656701,
             "unit": "ns",
             "range": "± 87.19080469903584"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1013556.3472055289,
-            "unit": "ns",
-            "range": "± 1675.2064238503965"
           }
         ]
       },
@@ -12890,12 +11462,6 @@ window.BENCHMARK_DATA = {
             "value": 56874.90708269392,
             "unit": "ns",
             "range": "± 211.340424577012"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1018097.2705829327,
-            "unit": "ns",
-            "range": "± 3312.102961665144"
           }
         ]
       },
@@ -12944,12 +11510,6 @@ window.BENCHMARK_DATA = {
             "value": 55529.53675130208,
             "unit": "ns",
             "range": "± 171.0933101739768"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1018375.2533052885,
-            "unit": "ns",
-            "range": "± 1479.7147874069296"
           }
         ]
       },
@@ -12998,12 +11558,6 @@ window.BENCHMARK_DATA = {
             "value": 55841.48212608924,
             "unit": "ns",
             "range": "± 175.2622816330622"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1012693.5461237981,
-            "unit": "ns",
-            "range": "± 946.0620336864857"
           }
         ]
       },
@@ -13052,12 +11606,6 @@ window.BENCHMARK_DATA = {
             "value": 56625.53304617746,
             "unit": "ns",
             "range": "± 150.62472389208455"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1015817.9185697115,
-            "unit": "ns",
-            "range": "± 1144.1645392629573"
           }
         ]
       },
@@ -13106,12 +11654,6 @@ window.BENCHMARK_DATA = {
             "value": 55114.841208321704,
             "unit": "ns",
             "range": "± 177.13863784459252"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1014965.6932091346,
-            "unit": "ns",
-            "range": "± 915.9282331315543"
           }
         ]
       },
@@ -13160,12 +11702,6 @@ window.BENCHMARK_DATA = {
             "value": 55946.06893513997,
             "unit": "ns",
             "range": "± 693.2559298239861"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1018114.5309895833,
-            "unit": "ns",
-            "range": "± 6307.885491765964"
           }
         ]
       },
@@ -13214,12 +11750,6 @@ window.BENCHMARK_DATA = {
             "value": 55106.13247680664,
             "unit": "ns",
             "range": "± 128.60077946916024"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1010339.4903846154,
-            "unit": "ns",
-            "range": "± 999.6283698978084"
           }
         ]
       },
@@ -13268,12 +11798,6 @@ window.BENCHMARK_DATA = {
             "value": 55591.09141235352,
             "unit": "ns",
             "range": "± 452.9502425015707"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1014749.2924107143,
-            "unit": "ns",
-            "range": "± 5176.58065462451"
           }
         ]
       },
@@ -13322,12 +11846,6 @@ window.BENCHMARK_DATA = {
             "value": 57945.386991060695,
             "unit": "ns",
             "range": "± 230.58569849459212"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1041247.9211774553,
-            "unit": "ns",
-            "range": "± 2356.784115981286"
           }
         ]
       },
@@ -13376,12 +11894,6 @@ window.BENCHMARK_DATA = {
             "value": 54601.254677908764,
             "unit": "ns",
             "range": "± 152.30611021016372"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1013227.5083705357,
-            "unit": "ns",
-            "range": "± 1229.839815544568"
           }
         ]
       },
@@ -13430,12 +11942,6 @@ window.BENCHMARK_DATA = {
             "value": 56056.26750895182,
             "unit": "ns",
             "range": "± 595.0327693871208"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1014641.9839564732,
-            "unit": "ns",
-            "range": "± 1666.5872064859625"
           }
         ]
       },
@@ -13484,12 +11990,6 @@ window.BENCHMARK_DATA = {
             "value": 56999.10719953264,
             "unit": "ns",
             "range": "± 127.24951699718753"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1011728.6751802885,
-            "unit": "ns",
-            "range": "± 2056.375991506058"
           }
         ]
       },
@@ -13538,12 +12038,6 @@ window.BENCHMARK_DATA = {
             "value": 55518.98128662109,
             "unit": "ns",
             "range": "± 622.0699108093245"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1012913.8786272322,
-            "unit": "ns",
-            "range": "± 1735.023438172084"
           }
         ]
       },
@@ -13592,12 +12086,6 @@ window.BENCHMARK_DATA = {
             "value": 55447.60448201498,
             "unit": "ns",
             "range": "± 93.01451200102876"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1074351.2752511161,
-            "unit": "ns",
-            "range": "± 5692.1249878468325"
           }
         ]
       },
@@ -13646,12 +12134,6 @@ window.BENCHMARK_DATA = {
             "value": 54035.764795939125,
             "unit": "ns",
             "range": "± 108.39830664194085"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1069201.4476841518,
-            "unit": "ns",
-            "range": "± 3763.1182499959996"
           }
         ]
       },
@@ -13700,12 +12182,6 @@ window.BENCHMARK_DATA = {
             "value": 54131.04485066732,
             "unit": "ns",
             "range": "± 134.0713929855711"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1067075.1744290865,
-            "unit": "ns",
-            "range": "± 1209.6446571855"
           }
         ]
       },
@@ -13754,12 +12230,6 @@ window.BENCHMARK_DATA = {
             "value": 55821.991430664064,
             "unit": "ns",
             "range": "± 660.1658033892777"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1071172.7111002605,
-            "unit": "ns",
-            "range": "± 1032.7795330556169"
           }
         ]
       },
@@ -13808,12 +12278,6 @@ window.BENCHMARK_DATA = {
             "value": 55718.30782376803,
             "unit": "ns",
             "range": "± 237.8568733259048"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1074910.2548828125,
-            "unit": "ns",
-            "range": "± 2902.573807861877"
           }
         ]
       },
@@ -13862,12 +12326,6 @@ window.BENCHMARK_DATA = {
             "value": 55438.47465297154,
             "unit": "ns",
             "range": "± 270.30387453602117"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1066557.580078125,
-            "unit": "ns",
-            "range": "± 525.9949686786865"
           }
         ]
       },
@@ -13916,12 +12374,6 @@ window.BENCHMARK_DATA = {
             "value": 54220.723541259766,
             "unit": "ns",
             "range": "± 374.7108475948487"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1065579.0398995536,
-            "unit": "ns",
-            "range": "± 1603.095525618116"
           }
         ]
       },
@@ -13970,12 +12422,6 @@ window.BENCHMARK_DATA = {
             "value": 55180.83658708845,
             "unit": "ns",
             "range": "± 269.96654192755517"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1065980.7279575893,
-            "unit": "ns",
-            "range": "± 2540.4579633560493"
           }
         ]
       },
@@ -14024,12 +12470,6 @@ window.BENCHMARK_DATA = {
             "value": 55655.928842397836,
             "unit": "ns",
             "range": "± 174.8386167217734"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1069559.7022235577,
-            "unit": "ns",
-            "range": "± 1491.8189031830375"
           }
         ]
       },
@@ -14078,12 +12518,6 @@ window.BENCHMARK_DATA = {
             "value": 54823.94637858073,
             "unit": "ns",
             "range": "± 760.3492900521136"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1068493.3177584135,
-            "unit": "ns",
-            "range": "± 2847.0313364158765"
           }
         ]
       },
@@ -14132,12 +12566,6 @@ window.BENCHMARK_DATA = {
             "value": 55116.43731689453,
             "unit": "ns",
             "range": "± 185.29016035988263"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1068696.46484375,
-            "unit": "ns",
-            "range": "± 3302.0974287865392"
           }
         ]
       },
@@ -14186,12 +12614,6 @@ window.BENCHMARK_DATA = {
             "value": 55524.43694196428,
             "unit": "ns",
             "range": "± 218.86619458628405"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1071048.706280048,
-            "unit": "ns",
-            "range": "± 3687.0212895841664"
           }
         ]
       },
@@ -14240,12 +12662,6 @@ window.BENCHMARK_DATA = {
             "value": 55068.882904052734,
             "unit": "ns",
             "range": "± 732.0988050731072"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1070037.9517299107,
-            "unit": "ns",
-            "range": "± 2988.6718532577734"
           }
         ]
       },
@@ -14294,12 +12710,6 @@ window.BENCHMARK_DATA = {
             "value": 54224.64600626627,
             "unit": "ns",
             "range": "± 539.1365811291327"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1067217.5830829327,
-            "unit": "ns",
-            "range": "± 1748.0515712019405"
           }
         ]
       },
@@ -14348,12 +12758,6 @@ window.BENCHMARK_DATA = {
             "value": 53725.57316080729,
             "unit": "ns",
             "range": "± 375.3543658823395"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1068529.1277901786,
-            "unit": "ns",
-            "range": "± 2054.6999424943383"
           }
         ]
       },
@@ -14402,12 +12806,6 @@ window.BENCHMARK_DATA = {
             "value": 53882.400362141925,
             "unit": "ns",
             "range": "± 810.8379444257907"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1064872.3167317708,
-            "unit": "ns",
-            "range": "± 1483.8476149699225"
           }
         ]
       },
@@ -14456,12 +12854,6 @@ window.BENCHMARK_DATA = {
             "value": 53178.17101033529,
             "unit": "ns",
             "range": "± 82.14404202931357"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1068083.6477399555,
-            "unit": "ns",
-            "range": "± 3098.1598421365834"
           }
         ]
       },
@@ -14510,12 +12902,6 @@ window.BENCHMARK_DATA = {
             "value": 53552.27252901517,
             "unit": "ns",
             "range": "± 183.234901306022"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1069140.8809988839,
-            "unit": "ns",
-            "range": "± 3117.732798684848"
           }
         ]
       },
@@ -14564,12 +12950,6 @@ window.BENCHMARK_DATA = {
             "value": 53693.86952718099,
             "unit": "ns",
             "range": "± 113.29625530638555"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1067381.2813895089,
-            "unit": "ns",
-            "range": "± 1993.8139899391538"
           }
         ]
       },
@@ -14618,12 +12998,6 @@ window.BENCHMARK_DATA = {
             "value": 54600.05466308594,
             "unit": "ns",
             "range": "± 680.979764327896"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1066979.3118024555,
-            "unit": "ns",
-            "range": "± 3246.2958600292454"
           }
         ]
       },
@@ -14672,12 +13046,6 @@ window.BENCHMARK_DATA = {
             "value": 54790.60467529297,
             "unit": "ns",
             "range": "± 243.00152998244454"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1073665.0533353365,
-            "unit": "ns",
-            "range": "± 1633.0473975111126"
           }
         ]
       },
@@ -14726,12 +13094,6 @@ window.BENCHMARK_DATA = {
             "value": 55245.89133199056,
             "unit": "ns",
             "range": "± 379.10835917814546"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1070246.150390625,
-            "unit": "ns",
-            "range": "± 3289.4237027848903"
           }
         ]
       },
@@ -14780,12 +13142,6 @@ window.BENCHMARK_DATA = {
             "value": 55282.058668870195,
             "unit": "ns",
             "range": "± 282.7604713852815"
-          },
-          {
-            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.ExportToFile",
-            "value": 1072787.8826729911,
-            "unit": "ns",
-            "range": "± 3297.8883011032294"
           }
         ]
       }
