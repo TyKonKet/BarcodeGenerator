@@ -27,9 +27,13 @@ This document outlines the steps to follow for optimizing methods in the Barcode
 4. **Set Up and Run Benchmarks**:
    - Use BenchmarkDotNet to compare the original and duplicated methods.
    - Validate the benchmark setup by running it once before optimization.
+   - **Critical**: Always run benchmarks with the latest .NET framework version flag.
+   - **Critical**: Ensure the correct benchmark method is selected or use appropriate filters.
    - **Checklist**:
      - [ ] Include both the old and new methods in the benchmark.
      - [ ] Ensure benchmarks isolate the method being optimized.
+     - [ ] Run with `--framework net10.0` (or latest available) flag.
+     - [ ] Use method filters like `--filter *BenchmarkName*` to run specific benchmarks.
 
 5. **Optimize the Method**:
    - Refactor the method iteratively, running benchmarks and tests after each change.
@@ -86,6 +90,12 @@ This document outlines the steps to follow for optimizing methods in the Barcode
 
 - **Use the Latest .NET Version**:
   - Always run tests and benchmarks on the latest .NET version to leverage runtime optimizations.
+  - Use `--framework net10.0` (or latest) when running BenchmarkDotNet projects.
+
+- **Benchmark Execution Commands**:
+  - For specific method benchmarks: `dotnet run --configuration Release --framework net10.0 -- --filter *BenchmarkName*`
+  - For full benchmark suites: `dotnet run --configuration Release --framework net10.0`
+  - Always use Release configuration for accurate performance measurements.
 
 - **Focus on Hotspots**:
   - Use profiling tools to identify performance-critical areas before optimizing.
