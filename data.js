@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755373781882,
+  "lastUpdate": 1755373783463,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -5772,6 +5772,60 @@ window.BENCHMARK_DATA = {
             "value": 762530.6144080529,
             "unit": "ns",
             "range": "± 878.8104273776452"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "41e7a7df946025203f39bcdf6b042b110528a81e",
+          "message": "Update filename validation tests for OS compatibility\n\nEnhanced `GetSafeFilename_ShouldRemoveAllInvalidCharacters`\nto support separate expected outputs for Windows and Linux.\nTest cases now reflect the appropriate expected values\nbased on the detected operating system at runtime.",
+          "timestamp": "2025-08-16T21:43:50+02:00",
+          "tree_id": "f2268eb9d256a9014c79773a34f73c8046a199ff",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/41e7a7df946025203f39bcdf6b042b110528a81e"
+        },
+        "date": 1755373782819,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 17354.36287144252,
+            "unit": "ns",
+            "range": "± 165.97782833367359"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 18300.646780160758,
+            "unit": "ns",
+            "range": "± 112.229184960686"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 25271.765990037184,
+            "unit": "ns",
+            "range": "± 78.51059576131331"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 38394.99666419396,
+            "unit": "ns",
+            "range": "± 211.34426074002795"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.ExportToFile",
+            "value": 763043.7030552456,
+            "unit": "ns",
+            "range": "± 1973.8079780931564"
           }
         ]
       }
