@@ -1,6 +1,5 @@
-﻿using System.Reflection;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Running;
+using System.Reflection;
 
 namespace TyKonKet.BarcodeGenerator.Benchmarks
 {
