@@ -47,19 +47,62 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <exception cref="FormatException">Thrown when the barcode prefix is invalid.</exception>
         internal static new string FormatBarcode(string barcode)
         {
-            // Validate and extract prefix
-            string prefix = (barcode.Length > 3 && (string.Equals(barcode[..3], "978", StringComparison.Ordinal) || string.Equals(barcode[..3], "979", StringComparison.Ordinal))
-                ? barcode[..3]
-                : null) ?? throw new FormatException("Invalid ISBN-13 prefix. Only '978' or '979' are allowed.");
+            // Quick validation - must have at least 3 characters for prefix
+            if (barcode.Length < 3)
+            {
+                throw new FormatException("Invalid ISBN-13 prefix. Only '978' or '979' are allowed.");
+            }
 
-            // Remove prefix from barcode
-            barcode = barcode[3..];
+            // Validate prefix directly to avoid span copying warnings
+            bool isValid978 = barcode[0] == '9' && barcode[1] == '7' && barcode[2] == '8';
+            bool isValid979 = barcode[0] == '9' && barcode[1] == '7' && barcode[2] == '9';
 
-            // Pad and reformat barcode
-            barcode = barcode.PadLeft(9, '0');
-            barcode = $"{prefix}{barcode[..9]}";
+            if (!isValid978 && !isValid979)
+            {
+                throw new FormatException("Invalid ISBN-13 prefix. Only '978' or '979' are allowed.");
+            }
 
-            return barcode;
+            // Use spans for the rest of the processing
+            ReadOnlySpan<char> barcodeSpan = barcode.AsSpan();
+            ReadOnlySpan<char> prefix = barcodeSpan[..3];
+            ReadOnlySpan<char> afterPrefix = barcodeSpan[3..];
+
+            // Calculate body length
+            int bodyLength = Math.Min(9, afterPrefix.Length);
+            const int totalLength = 12; // Always 12 characters total (3 prefix + 9 body)
+
+            // Use stackalloc for small buffer (safe for 12 chars)
+            Span<char> result = totalLength <= 128 ? stackalloc char[totalLength] : new char[totalLength];
+
+            // Copy prefix (always 3 chars)
+            prefix.CopyTo(result);
+
+            // Handle padding and body in one operation
+            if (bodyLength < 9)
+            {
+                // Need to pad with zeros
+                int zerosNeeded = 9 - bodyLength;
+
+                // Fill with zeros first
+                for (int i = 0; i < zerosNeeded; i++)
+                {
+                    result[3 + i] = '0';
+                }
+
+                // Then copy the actual digits
+                afterPrefix.CopyTo(result[(3 + zerosNeeded)..]);
+            }
+            else
+            {
+                // Copy exactly 9 characters (truncate if longer)
+                afterPrefix[..9].CopyTo(result[3..]);
+            }
+
+#if NET6_0_OR_GREATER
+            return new string(result);
+#else
+            return new string(result.ToArray());
+#endif
         }
     }
 }

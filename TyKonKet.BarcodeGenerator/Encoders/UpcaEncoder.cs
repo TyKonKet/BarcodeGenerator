@@ -370,7 +370,11 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             var endGuard = Guards[2].AsSpan();
             endGuard.CopyTo(result[position..]);
 
+#if NET6_0_OR_GREATER
             return new string(result);
+#else
+            return new string(result.ToArray());
+#endif
         }
 
         /// <summary>

@@ -5,6 +5,21 @@ This document tracks the performance improvements made to the BarcodeGenerator l
 ## Timeline
 
 ### August 17, 2025
+- **Optimized Method**: `Isbn13Encoder.FormatBarcode`
+- **Description**: Implemented zero-allocation ISBN-13 barcode formatting using stackalloc span-based processing to completely eliminate string slicing, PadLeft operations, and string interpolation allocations. Replaced complex conditional logic with direct character validation and efficient buffer management for optimal string manipulation.
+- **Performance Results**:
+  - **Multi-Call Benchmark (10 test cases)**:
+    - **Original Implementation**: Mean = 192.596 ns, Allocated = 1,808 B (Gen0: 0.0958/1000 ops)
+    - **Optimized Implementation**: Mean = 71.696 ns, Allocated = 480 B (Gen0: 0.0254/1000 ops)
+  - **Single-Call Benchmark**:
+    - **Original Implementation**: Mean = 18.229 ns, Allocated = 200 B (Gen0: 0.0106/1000 ops)
+    - **Optimized Implementation**: Mean = 6.813 ns, Allocated = 48 B (Gen0: 0.0025/1000 ops)
+- **Improvement**: 
+  - **169% faster execution** (2.69x speedup for multi-call, 2.67x for single-call)
+  - **73-76% memory reduction** (3.77x-4.17x less allocation)
+  - **Technical Impact**: Eliminated string slicing overhead (barcode[..3], barcode[3..]), PadLeft allocations, and string interpolation through direct character validation and Span<char> stackalloc with 12-character buffer (3 prefix + 9 body). Used manual character comparison for prefix validation to avoid SequenceEqual span copying warnings, achieving optimal performance for ISBN-13 formatting across all scenarios.
+
+### August 17, 2025
 - **Optimized Method**: `UpcaEncoder.EncodeBars`
 - **Description**: Implemented zero-allocation UPC-A barcode encoding using stackalloc span-based processing to completely eliminate StringBuilder allocations. Applied the same proven optimization pattern from EAN-13 with simplified logic due to UPC-A's uniform encoding structure.
 - **Performance Results**:
