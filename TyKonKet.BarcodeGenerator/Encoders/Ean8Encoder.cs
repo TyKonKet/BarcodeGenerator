@@ -5,7 +5,6 @@ using SkiaSharp;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 
 namespace TyKonKet.BarcodeGenerator.Encoders
@@ -280,22 +279,50 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <returns>The encoded bars string.</returns>
         internal static string EncodeBars(string barcode)
         {
-            var left = new StringBuilder(28); // 4 digits * 7 bits
-            var right = new StringBuilder(28); // 4 digits * 7 bits
-            for (var i = 0; i < barcode.Length; i++)
+            // EAN-8 structure: Guard(3) + Left(28) + Guard(5) + Right(28) + Guard(3) = 67 chars
+            const int totalLength = 67;
+
+            // Use stackalloc for zero heap allocation
+            Span<char> result = stackalloc char[totalLength];
+            var position = 0;
+
+            // Copy start guard: "101"
+            var startGuard = Guards[0].AsSpan();
+            startGuard.CopyTo(result[position..]);
+            position += startGuard.Length;
+
+            // Encode left side (first 4 digits using EncodingA)
+            for (var i = 0; i < 4; i++)
             {
-                var num = barcode[i] - '0'; // Convert char to int
-                if (i < 4)
-                {
-                    left.Append(EncodingA[num]);
-                }
-                else
-                {
-                    right.Append(EncodingC[num]);
-                }
+                var digit = barcode[i] - '0';
+                var encoding = EncodingA[digit].AsSpan();
+                encoding.CopyTo(result[position..]);
+                position += encoding.Length;
             }
 
-            return $"{Guards[0]}{left}{Guards[1]}{right}{Guards[2]}";
+            // Copy center guard: "01010"
+            var centerGuard = Guards[1].AsSpan();
+            centerGuard.CopyTo(result[position..]);
+            position += centerGuard.Length;
+
+            // Encode right side (last 4 digits using EncodingC)
+            for (var i = 4; i < 8; i++)
+            {
+                var digit = barcode[i] - '0';
+                var encoding = EncodingC[digit].AsSpan();
+                encoding.CopyTo(result[position..]);
+                position += encoding.Length;
+            }
+
+            // Copy end guard: "101"
+            var endGuard = Guards[2].AsSpan();
+            endGuard.CopyTo(result[position..]);
+
+#if NET6_0_OR_GREATER
+            return new string(result);
+#else
+            return new string(result.ToArray());
+#endif
         }
 
         /// <summary>
