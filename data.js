@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755391012761,
+  "lastUpdate": 1755391014654,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -2828,6 +2828,52 @@ window.BENCHMARK_DATA = {
             "value": 25995.676010131836,
             "unit": "ns",
             "range": "± 122.55411532898606"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "46b45f85cea73fafd90a92e61ba715b2774d9998",
+          "message": "Add global benchmark results and refactor encoders\n\n- Updated `dotnet_benchmark_runner.yml` to include a step for storing global benchmark results using `benchmark-action/github-action-benchmark@v1`.\n- Refactored multiple encoder classes to remove unused constants and change method return types from void to string.\n- Changed `RegexCache` class visibility from internal to public.\n- Introduced a new `Global` class in `Global.cs` for benchmark tests on barcode export functionalities and regex validation.",
+          "timestamp": "2025-08-16T21:53:46Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/46b45f85cea73fafd90a92e61ba715b2774d9998"
+        },
+        "date": 1755391014015,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 15638.496165556066,
+            "unit": "ns",
+            "range": "± 317.4384835339687"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 16798.04197692871,
+            "unit": "ns",
+            "range": "± 89.97825373326933"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 18904.908542339617,
+            "unit": "ns",
+            "range": "± 78.74712880961762"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 26368.55539057805,
+            "unit": "ns",
+            "range": "± 99.7475983737581"
           }
         ]
       }
