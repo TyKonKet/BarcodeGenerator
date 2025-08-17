@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755441280021,
+  "lastUpdate": 1755441281097,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -2922,6 +2922,54 @@ window.BENCHMARK_DATA = {
             "value": 26111.844826331504,
             "unit": "ns",
             "range": "± 110.93886450547996"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "315ef2c7cd5c5cc399a8d0f8aeeaa9d2ebda26be",
+          "message": "Refactor EAN encoder tests to use char instead of string for expected check digits; optimize FormatBarcode method for performance improvements and update documentation with benchmark results.",
+          "timestamp": "2025-08-17T16:28:27+02:00",
+          "tree_id": "03e3f5f86aaa198f9d3fe93e7595457a884ad7f0",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/315ef2c7cd5c5cc399a8d0f8aeeaa9d2ebda26be"
+        },
+        "date": 1755441280752,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 16208.835780552456,
+            "unit": "ns",
+            "range": "± 264.9335686906782"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 16536.78796745749,
+            "unit": "ns",
+            "range": "± 315.3978363636367"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 18749.051821027482,
+            "unit": "ns",
+            "range": "± 75.7847215311022"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 25826.157880342922,
+            "unit": "ns",
+            "range": "± 138.37920605881547"
           }
         ]
       }
