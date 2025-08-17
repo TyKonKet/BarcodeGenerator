@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755446001014,
+  "lastUpdate": 1755446001971,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -3114,6 +3114,54 @@ window.BENCHMARK_DATA = {
             "value": 25806.045427762547,
             "unit": "ns",
             "range": "± 123.51327911186365"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "e7269c582e3f0241af4a899d01002ae3e83975cd",
+          "message": "Optimize UPC-A barcode encoding in UpcaEncoder.cs\n\nRefactored the `EncodeBars` method to eliminate `StringBuilder` usage, replacing it with a stack-allocated `Span<char>` for direct character copying. This change reduces dynamic memory allocations and simplifies the encoding logic. Performance improvements are significant, with execution time reduced from ~380 ns to ~130 ns per call, achieving a 192% speedup.",
+          "timestamp": "2025-08-17T17:47:07+02:00",
+          "tree_id": "f7de10bc5be421deb2603518cbb1eabb1da21756",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/e7269c582e3f0241af4a899d01002ae3e83975cd"
+        },
+        "date": 1755446001704,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 15771.679483266977,
+            "unit": "ns",
+            "range": "± 236.70209149015224"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 16351.199411245492,
+            "unit": "ns",
+            "range": "± 192.42691365856405"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 18531.86339678083,
+            "unit": "ns",
+            "range": "± 87.80017860012465"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 26248.629676818848,
+            "unit": "ns",
+            "range": "± 117.25756683775178"
           }
         ]
       }
