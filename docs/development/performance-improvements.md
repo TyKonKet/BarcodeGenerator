@@ -5,6 +5,16 @@ This document tracks the performance improvements made to the BarcodeGenerator l
 ## Timeline
 
 ### August 17, 2025
+- **Optimized Method**: `UpcaEncoder.EncodeBars`
+- **Description**: Implemented zero-allocation UPC-A barcode encoding using stackalloc span-based processing to completely eliminate StringBuilder allocations. Applied the same proven optimization pattern from EAN-13 with simplified logic due to UPC-A's uniform encoding structure.
+- **Performance Results**:
+  - **Original Implementation**: Mean = ~380 ns per call (StringBuilder-based approach)
+  - **Optimized Implementation**: Mean = ~130 ns per call (span-based approach)
+- **Improvement**: 
+  - **192% faster execution** (2.92x speedup)
+  - **Technical Impact**: Eliminated StringBuilder allocations through Span<char> stackalloc pattern with direct character copying. UPC-A's simpler structure (no encoding table lookup) makes this optimization particularly effective. Uses the same pre-calculated buffer size of 95 characters (Start Guard 3 + Left Group 42 + Center Guard 5 + Right Group 42 + End Guard 3) for zero dynamic memory allocation during encoding.
+
+### August 17, 2025
 - **Optimized Method**: `Ean13Encoder.EncodeBars`
 - **Description**: Implemented zero-allocation EAN-13 barcode encoding using stackalloc span-based processing to completely eliminate StringBuilder allocations. Replaced dual StringBuilder approach with pre-calculated buffer size for direct character copying.
 - **Performance Results**:

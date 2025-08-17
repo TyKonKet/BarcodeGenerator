@@ -331,24 +331,46 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <returns>The encoded bars as a string.</returns>
         internal static string EncodeBars(string barcode)
         {
-            var left = new StringBuilder(42);
-            var right = new StringBuilder(42);
+            // UPC-A structure: Start Guard (3) + Left Group (42) + Center Guard (5) + Right Group (42) + End Guard (3) = 95 chars total
+            const int totalLength = 95;
+            Span<char> result = stackalloc char[totalLength];
+            var position = 0;
 
-            for (var i = 0; i < barcode.Length; i++)
+            // Start guard: "101"
+            var startGuard = Guards[0].AsSpan();
+            startGuard.CopyTo(result[position..]);
+            position += startGuard.Length;
+
+            // Left group (6 digits, positions 0-5)
+            for (var i = 0; i < 6; i++)
             {
                 var num = barcode[i] - '0';
-
-                if (i < 6)
-                {
-                    left.Append(EncodingA[num]);
-                }
-                else
-                {
-                    right.Append(EncodingC[num]);
-                }
+                var encoding = EncodingA[num];
+                var encodingSpan = encoding.AsSpan();
+                encodingSpan.CopyTo(result[position..]);
+                position += encodingSpan.Length;
             }
 
-            return $"{Guards[0]}{left}{Guards[1]}{right}{Guards[2]}";
+            // Center guard: "01010"
+            var centerGuard = Guards[1].AsSpan();
+            centerGuard.CopyTo(result[position..]);
+            position += centerGuard.Length;
+
+            // Right group (6 digits, positions 6-11)
+            for (var i = 6; i < 12; i++)
+            {
+                var num = barcode[i] - '0';
+                var encoding = EncodingC[num];
+                var encodingSpan = encoding.AsSpan();
+                encodingSpan.CopyTo(result[position..]);
+                position += encodingSpan.Length;
+            }
+
+            // End guard: "101"
+            var endGuard = Guards[2].AsSpan();
+            endGuard.CopyTo(result[position..]);
+
+            return new string(result);
         }
 
         /// <summary>
