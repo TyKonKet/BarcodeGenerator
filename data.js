@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755444450210,
+  "lastUpdate": 1755445311516,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -14932,6 +14932,66 @@ window.BENCHMARK_DATA = {
             "value": 26.272690992270196,
             "unit": "ns",
             "range": "± 0.03801967247636807"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "f251453f416923819fdfce4ce1fc6ce838450e60",
+          "message": "Optimize Ean13Encoder.EncodeBars for performance\n\nThe `EncodeBars` method in `Ean13Encoder.cs` has been refactored to eliminate allocations by replacing `StringBuilder` with a stack-allocated `Span<char>`. This allows for direct character copying into a pre-calculated buffer of 95 characters, streamlining the encoding process. The method now utilizes a single loop for both left and right digit groups, resulting in a performance improvement of approximately 213%, reducing the mean execution time from around 470 ns to about 150 ns per call.",
+          "timestamp": "2025-08-17T17:35:44+02:00",
+          "tree_id": "06575899d43310dab8f314045dbeac5d9e71fbeb",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/f251453f416923819fdfce4ce1fc6ce838450e60"
+        },
+        "date": 1755445310214,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToStream",
+            "value": 1497516.9024832589,
+            "unit": "ns",
+            "range": "± 9870.900526869567"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToFile",
+            "value": 1505438.666766827,
+            "unit": "ns",
+            "range": "± 1331.5659560327028"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToFileWithPlaceholders",
+            "value": 1528758.385044643,
+            "unit": "ns",
+            "range": "± 2361.877103175959"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.GetDisplayName",
+            "value": 32.916131790195195,
+            "unit": "ns",
+            "range": "± 0.03514852418375257"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.EanAllowedCharsetRegex",
+            "value": 28.673459406409943,
+            "unit": "ns",
+            "range": "± 0.02994084678536948"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.Code93AllowedCharsetRegex",
+            "value": 26.224539942466297,
+            "unit": "ns",
+            "range": "± 0.02177019489865622"
           }
         ]
       }
