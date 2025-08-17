@@ -333,31 +333,53 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 throw new ArgumentException("EAN-13 barcode must be 13 digits.", nameof(barcode));
             }
 
-            var left = new StringBuilder(42);
-            var right = new StringBuilder(42);
+            // EAN-13 structure: Start Guard (3) + Left Group (42) + Center Guard (5) + Right Group (42) + End Guard (3) = 95 chars total
+            const int totalLength = 95;
+            Span<char> result = stackalloc char[totalLength];
+            var position = 0;
+
+            // Start guard: "101"
+            var startGuard = Guards[0].AsSpan();
+            startGuard.CopyTo(result[position..]);
+            position += startGuard.Length;
+
+            // Get encoding table for first digit
             var encodingTable = EncodingTable[barcode[0].ToInt()];
 
-            for (var i = 1; i < barcode.Length; i++)
+            // Left group (6 digits, digits 1-6)
+            for (var i = 1; i < 7; i++)
             {
                 var num = barcode[i].ToInt();
-                if (i < 7)
-                {
-                    if (encodingTable[i - 1] == '0')
-                    {
-                        left.Append(EncodingA[num]);
-                    }
-                    else
-                    {
-                        left.Append(EncodingB[num]);
-                    }
-                }
-                else
-                {
-                    right.Append(EncodingC[num]);
-                }
+                var encoding = encodingTable[i - 1] == '0' ? EncodingA[num] : EncodingB[num];
+                var encodingSpan = encoding.AsSpan();
+                encodingSpan.CopyTo(result[position..]);
+                position += encodingSpan.Length;
             }
 
-            return $"{Guards[0]}{left}{Guards[1]}{right}{Guards[2]}";
+            // Center guard: "01010"
+            var centerGuard = Guards[1].AsSpan();
+            centerGuard.CopyTo(result[position..]);
+            position += centerGuard.Length;
+
+            // Right group (6 digits, digits 7-12)
+            for (var i = 7; i < 13; i++)
+            {
+                var num = barcode[i].ToInt();
+                var encoding = EncodingC[num];
+                var encodingSpan = encoding.AsSpan();
+                encodingSpan.CopyTo(result[position..]);
+                position += encodingSpan.Length;
+            }
+
+            // End guard: "101"
+            var endGuard = Guards[2].AsSpan();
+            endGuard.CopyTo(result[position..]);
+
+#if NET6_0_OR_GREATER
+            return new string(result);
+#else
+            return new string(result.ToArray());
+#endif
         }
 
         /// <summary>

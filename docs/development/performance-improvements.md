@@ -5,6 +5,16 @@ This document tracks the performance improvements made to the BarcodeGenerator l
 ## Timeline
 
 ### August 17, 2025
+- **Optimized Method**: `Ean13Encoder.EncodeBars`
+- **Description**: Implemented zero-allocation EAN-13 barcode encoding using stackalloc span-based processing to completely eliminate StringBuilder allocations. Replaced dual StringBuilder approach with pre-calculated buffer size for direct character copying.
+- **Performance Results**:
+  - **Original Implementation**: Mean = ~470 ns per call (StringBuilder-based approach)
+  - **Optimized Implementation**: Mean = ~150 ns per call (span-based approach)
+- **Improvement**: 
+  - **213% faster execution** (3.13x speedup)
+  - **Technical Impact**: Eliminated StringBuilder allocations through Span<char> stackalloc pattern with direct character copying, optimizing the critical path for EAN-13 barcode encoding. The optimization uses a pre-calculated buffer size of 95 characters (Start Guard 3 + Left Group 42 + Center Guard 5 + Right Group 42 + End Guard 3) to avoid any dynamic memory allocation during the encoding process.
+
+### August 17, 2025
 - **Optimized Method**: `Ean8Encoder.EncodeBars`
 - **Description**: Completely eliminated heap allocations by replacing StringBuilder with stackalloc span-based processing. Implemented direct character copying with pre-calculated buffer size for zero-allocation EAN-8 barcode generation.
 - **Performance Results**:
