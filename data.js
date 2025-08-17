@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755445316427,
+  "lastUpdate": 1755445317998,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -11982,6 +11982,54 @@ window.BENCHMARK_DATA = {
             "value": 36796.16205851237,
             "unit": "ns",
             "range": "± 144.94698904083344"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "f251453f416923819fdfce4ce1fc6ce838450e60",
+          "message": "Optimize Ean13Encoder.EncodeBars for performance\n\nThe `EncodeBars` method in `Ean13Encoder.cs` has been refactored to eliminate allocations by replacing `StringBuilder` with a stack-allocated `Span<char>`. This allows for direct character copying into a pre-calculated buffer of 95 characters, streamlining the encoding process. The method now utilizes a single loop for both left and right digit groups, resulting in a performance improvement of approximately 213%, reducing the mean execution time from around 470 ns to about 150 ns per call.",
+          "timestamp": "2025-08-17T17:35:44+02:00",
+          "tree_id": "06575899d43310dab8f314045dbeac5d9e71fbeb",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/f251453f416923819fdfce4ce1fc6ce838450e60"
+        },
+        "date": 1755445317384,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 18155.10441371373,
+            "unit": "ns",
+            "range": "± 143.46331219340604"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 19157.872924804688,
+            "unit": "ns",
+            "range": "± 97.91693702078142"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 24000.756994628908,
+            "unit": "ns",
+            "range": "± 395.5698830549439"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 36929.832188924156,
+            "unit": "ns",
+            "range": "± 157.7557342691311"
           }
         ]
       }
