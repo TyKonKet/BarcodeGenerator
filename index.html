@@ -757,7 +757,7 @@
             <div class="col-md-4">
                 <div class="card shadow-sm h-100">
                     <div class="card-body text-center">
-                        <h5 class="card-title text-warning">Average Performance</h5>
+                        <h5 class="card-title text-warning">Average Encoding</h5>
                         <h3 id="average-time">-</h3>
                         <p class="card-text text-muted mb-0">Across all encoders</p>
                     </div>
@@ -778,7 +778,7 @@
         <div class="filter-controls">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h6 class="mb-3">Filter Encoders</h6>
+                    <h6 class="mb-3">Filter Benchmarks</h6>
                     <div id="encoder-filters" class="d-flex flex-wrap">
                         <!-- Dynamic filter buttons will be inserted here -->
                     </div>
@@ -896,7 +896,7 @@
 
             renderOverviewStats() {
                 const encoders = Object.keys(this.data.entries);
-                const totalEncoders = encoders.length;
+                const totalEncoders = encoders.filter(name => name.includes('Encoder')).length;
 
                 // Calculate stats
                 let fastestEncoder = '';
@@ -910,7 +910,13 @@
 
                     entries.forEach(entry => {
                         entry.benches.forEach(bench => {
-                            allTimes.push(bench.value);
+                            if (!bench.name.includes('Encoder')) return;
+                            
+                            if (bench.name.includes('EncodingWithoutText'))
+                            {
+                                allTimes.push(bench.value);
+                            }
+
                             if (bench.value < fastestTime) {
                                 fastestTime = bench.value;
                                 fastestEncoder = encoderName;
