@@ -5,18 +5,20 @@ This document outlines the steps to follow for optimizing methods in the Barcode
 ## Todo List for Method Optimization
 
 1. **Pre-Optimization Validation**:
-   - Run tests and benchmarks on the current method to establish a baseline.
-   - Document the baseline results.
+   - Run tests on the current method to ensure functionality is correct before starting.
+   - **Note**: Skip baseline benchmarks at this stage - the method duplication step will preserve the baseline.
    - **Checklist**:
      - [ ] Ensure all tests pass for the current method.
-     - [ ] Run benchmarks to capture baseline performance metrics.
+     - [ ] Verify the method is working correctly before optimization.
 
 2. **Duplicate the Method**:
    - Create a duplicate of the current method (e.g., `MethodName_Old`) for benchmarking purposes.
+   - This duplicate serves as your baseline reference - no need to run benchmarks yet.
    - Ensure the duplicate is clearly marked as the old implementation.
    - **Checklist**:
      - [ ] Verify the duplicate is functional and compiles without errors.
      - [ ] Add comments to indicate it is for benchmarking only.
+     - [ ] Do NOT run benchmarks yet - both methods are identical at this point.
 
 3. **Validate Correctness**:
    - Run tests on the duplicated method to ensure it behaves identically to the original.
@@ -25,8 +27,9 @@ This document outlines the steps to follow for optimizing methods in the Barcode
      - [ ] Add new test cases for edge scenarios uncovered during validation.
 
 4. **Set Up and Run Benchmarks**:
-   - Use BenchmarkDotNet to compare the original and duplicated methods.
-   - Validate the benchmark setup by running it once before optimization.
+   - Set up BenchmarkDotNet to compare the original and duplicated methods.
+   - **Important**: Only run benchmarks AFTER you've made actual optimizations to one of the methods.
+   - There's no point benchmarking identical methods - they will have identical performance.
    - **Critical**: Always run benchmarks with the latest .NET framework version flag.
    - **Critical**: Ensure the correct benchmark method is selected or use appropriate filters.
    - **Critical**: Use the `TyKonKet.BarcodeGenerator.Benchmarks` project for development benchmarks (NOT the CB project which is for CI).
@@ -36,6 +39,7 @@ This document outlines the steps to follow for optimizing methods in the Barcode
      - [ ] Ensure benchmarks isolate the method being optimized.
      - [ ] Run with `--framework net10.0` (or latest available) flag.
      - [ ] Use method filters like `--filter *BenchmarkName*` to run specific benchmarks.
+     - [ ] Only run benchmarks when you have different implementations to compare.
 
 5. **Optimize the Method**:
    - Refactor the method iteratively, running benchmarks and tests after each change.
