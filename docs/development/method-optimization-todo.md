@@ -30,14 +30,14 @@ This document outlines the steps to follow for optimizing methods in the Barcode
    - Set up BenchmarkDotNet to compare the original and duplicated methods.
    - **Important**: Only run benchmarks AFTER you've made actual optimizations to one of the methods.
    - There's no point benchmarking identical methods - they will have identical performance.
-   - **Critical**: Always run benchmarks with the latest .NET framework version flag.
+   - **Critical**: Always run benchmarks with the latest .NET framework version (currently .NET 10.0): `--framework net10.0`
    - **Critical**: Ensure the correct benchmark method is selected or use appropriate filters.
    - **Critical**: Use the `TyKonKet.BarcodeGenerator.Benchmarks` project for development benchmarks (NOT the CB project which is for CI).
    - **Checklist**:
      - [ ] Create benchmark classes in `Tests/TyKonKet.BarcodeGenerator.Benchmarks/` directory.
      - [ ] Include both the old and new methods in the benchmark.
      - [ ] Ensure benchmarks isolate the method being optimized.
-     - [ ] Run with `--framework net10.0` (or latest available) flag.
+     - [ ] **MANDATORY**: Run with the latest .NET framework flag (currently `--framework net10.0`) for accurate performance measurements.
      - [ ] Use method filters like `--filter *BenchmarkName*` to run specific benchmarks.
      - [ ] Only run benchmarks when you have different implementations to compare.
 
@@ -95,12 +95,14 @@ This document outlines the steps to follow for optimizing methods in the Barcode
 ## Best Practices and Lessons Learned
 
 - **Use the Latest .NET Version**:
-  - Always run tests and benchmarks on the latest .NET version to leverage runtime optimizations.
-  - Use `--framework net10.0` (or latest) when running BenchmarkDotNet projects.
+  - Always run tests and benchmarks on the latest available .NET version to leverage the most recent runtime optimizations.
+  - **MANDATORY**: Use the latest .NET framework when running BenchmarkDotNet projects (currently `--framework net10.0`).
+  - **Future-proofing**: Update the framework version as new .NET releases become available.
 
 - **Benchmark Execution Commands**:
   - For specific method benchmarks: `dotnet run --configuration Release --framework net10.0 -- --filter *BenchmarkName*`
   - For full benchmark suites: `dotnet run --configuration Release --framework net10.0`
+  - **Note**: Replace `net10.0` with the latest available .NET version when newer releases are available.
   - Always use Release configuration for accurate performance measurements.
   - **Important**: Run benchmarks from `Tests/TyKonKet.BarcodeGenerator.Benchmarks/` directory (development benchmarks)
   - **Avoid**: Using `Tests/TyKonKet.BarcodeGenerator.CB/` directory (CI-specific benchmarks)
