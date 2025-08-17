@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1755382877763,
+  "lastUpdate": 1755391012761,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -13444,6 +13444,64 @@ window.BENCHMARK_DATA = {
             "value": 26.210748800864586,
             "unit": "ns",
             "range": "± 0.020266096324225404"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "46b45f85cea73fafd90a92e61ba715b2774d9998",
+          "message": "Add global benchmark results and refactor encoders\n\n- Updated `dotnet_benchmark_runner.yml` to include a step for storing global benchmark results using `benchmark-action/github-action-benchmark@v1`.\n- Refactored multiple encoder classes to remove unused constants and change method return types from void to string.\n- Changed `RegexCache` class visibility from internal to public.\n- Introduced a new `Global` class in `Global.cs` for benchmark tests on barcode export functionalities and regex validation.",
+          "timestamp": "2025-08-16T21:53:46Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/46b45f85cea73fafd90a92e61ba715b2774d9998"
+        },
+        "date": 1755391011567,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToStream",
+            "value": 1479683.4525240385,
+            "unit": "ns",
+            "range": "± 875.9033210241636"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToFile",
+            "value": 1590653.3822115385,
+            "unit": "ns",
+            "range": "± 2356.7611658784544"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToFileWithPlaceholders",
+            "value": 1513318.4539620536,
+            "unit": "ns",
+            "range": "± 2471.0673601720687"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.GetDisplayName",
+            "value": 32.96218572060267,
+            "unit": "ns",
+            "range": "± 0.03682444241446511"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.EanAllowedCharsetRegex",
+            "value": 25.911171515073097,
+            "unit": "ns",
+            "range": "± 0.024409024174927282"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.Code93AllowedCharsetRegex",
+            "value": 26.22525054216385,
+            "unit": "ns",
+            "range": "± 0.024067261106832695"
           }
         ]
       }
