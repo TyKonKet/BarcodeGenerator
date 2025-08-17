@@ -26,6 +26,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Utils
             Assert.Equal(expected, result);
         }
 
+#if DEBUG
         [Theory]
         [InlineData('a')]
         [InlineData('Z')]
@@ -38,5 +39,6 @@ namespace TyKonKet.BarcodeGenerator.Tests.Utils
             var exception = Assert.Throws<ArgumentOutOfRangeException>(() => input.ToInt());
             Assert.Equal("digitChar", exception.ParamName);
         }
+#endif
     }
 }

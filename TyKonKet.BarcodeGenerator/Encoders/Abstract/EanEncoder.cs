@@ -1,6 +1,7 @@
-﻿// Copyright (c) 2020-2025 TyKonKet and contributors
+// Copyright (c) 2020-2025 TyKonKet and contributors
 // Licensed under the MIT License. See LICENSE in the repository root for full license information.
 
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using TyKonKet.BarcodeGenerator.Utils;
@@ -82,11 +83,27 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// <returns>The validated barcode with the check digit appended.</returns>
         internal static string FormatBarcode(string barcode, int length)
         {
-            length--;
-            barcode = barcode.PadLeft(length, '0');
-            barcode = barcode[..length];
+            var targetLength = length - 1; // Length without check digit
 
-            return $"{barcode}{GetCheckDigit(barcode)}";
+            // Handle cases where padding and truncation can be optimized
+            if (barcode.Length == targetLength)
+            {
+                // Perfect length - just append check digit directly
+                return barcode + GetCheckDigit(barcode);
+            }
+
+            if (barcode.Length < targetLength)
+            {
+                // Need padding - optimize for common cases
+                var paddingNeeded = targetLength - barcode.Length;
+                var paddedBarcode = new string('0', paddingNeeded) + barcode;
+
+                return paddedBarcode + GetCheckDigit(paddedBarcode);
+            }
+
+            // Need truncation
+            var truncated = barcode[..targetLength];
+            return truncated + GetCheckDigit(truncated);
         }
 
         /// <summary>
@@ -94,7 +111,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
         /// </summary>
         /// <param name="barcode">The barcode digits.</param>
         /// <returns>The calculated check digit as a string.</returns>
-        internal static string GetCheckDigit(string barcode)
+        internal static char GetCheckDigit(string barcode)
         {
             var checkSumValue = 0;
             for (var i = 1; i <= barcode.Length; i++)
@@ -105,7 +122,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders.Abstract
             checkSumValue %= 10;
 
             var checkDigit = checkSumValue != 0 ? 10 - checkSumValue : checkSumValue;
-            return checkDigit.ToString(CultureInfo.InvariantCulture);
+            return (char)('0' + checkDigit);
         }
     }
 }
