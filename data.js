@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763418880329,
+  "lastUpdate": 1763418881756,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -3808,6 +3808,54 @@ window.BENCHMARK_DATA = {
             "value": 25449.10190327962,
             "unit": "ns",
             "range": "± 71.16968481175738"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e279ee224e1e8ee95233bc81b35b50e4ae06a314",
+          "message": "Configure docs-agent for README and documentation updates\n\nUpdated the docs-agent configuration for BarcodeGenerator.",
+          "timestamp": "2025-11-17T23:28:50+01:00",
+          "tree_id": "404d6a8ceda78bf0d8403908ea94dd26a6d2dca0",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/e279ee224e1e8ee95233bc81b35b50e4ae06a314"
+        },
+        "date": 1763418881178,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 13913.51511492048,
+            "unit": "ns",
+            "range": "± 132.66749613418833"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 17139.042447603664,
+            "unit": "ns",
+            "range": "± 77.30481006857971"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 20053.07454740084,
+            "unit": "ns",
+            "range": "± 32.62654039511696"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 26854.10750034877,
+            "unit": "ns",
+            "range": "± 58.38527678725802"
           }
         ]
       }
