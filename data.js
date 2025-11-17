@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763419142179,
+  "lastUpdate": 1763419143761,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -7858,6 +7858,54 @@ window.BENCHMARK_DATA = {
             "value": 38075.39548238119,
             "unit": "ns",
             "range": "± 20.57011190542666"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6806d6d256f54309b63c27dbe31e9bf47895d06e",
+          "message": "Create instructions-agent for BarcodeGenerator\n\nAdded InstructionsAgent for managing Copilot instructions.",
+          "timestamp": "2025-11-17T23:32:34+01:00",
+          "tree_id": "cf9b2ce8b1a7aae5ef0f66d6211b671b2cd7e350",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/6806d6d256f54309b63c27dbe31e9bf47895d06e"
+        },
+        "date": 1763419143082,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 20423.114419555663,
+            "unit": "ns",
+            "range": "± 444.88732465727054"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 24570.281280517578,
+            "unit": "ns",
+            "range": "± 181.74852938818418"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 26441.6478905311,
+            "unit": "ns",
+            "range": "± 47.253426851218144"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 38160.09177144369,
+            "unit": "ns",
+            "range": "± 28.00555787200064"
           }
         ]
       }
