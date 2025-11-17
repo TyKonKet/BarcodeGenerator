@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763419094507,
+  "lastUpdate": 1763419096011,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -18954,6 +18954,54 @@ window.BENCHMARK_DATA = {
             "value": 54967.52218393179,
             "unit": "ns",
             "range": "± 127.60368396528158"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "49b7b869833db8aa570548867c212c091ec18c48",
+          "message": "Create test-agent.agent.md",
+          "timestamp": "2025-11-17T23:31:06+01:00",
+          "tree_id": "34e85902ae768972141f6cd62a4ab5404647e5e3",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/49b7b869833db8aa570548867c212c091ec18c48"
+        },
+        "date": 1763419095402,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.SimpleInstance",
+            "value": 642.6386868158976,
+            "unit": "ns",
+            "range": "± 10.53833289543543"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.AdvancedInstance",
+            "value": 2443.775064256456,
+            "unit": "ns",
+            "range": "± 68.00863598116055"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithoutText",
+            "value": 41434.404681865984,
+            "unit": "ns",
+            "range": "± 79.13285122902552"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithText",
+            "value": 55512.74587140764,
+            "unit": "ns",
+            "range": "± 348.7019149235039"
           }
         ]
       }
