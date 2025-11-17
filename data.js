@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763419146954,
+  "lastUpdate": 1763419148608,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -19194,6 +19194,54 @@ window.BENCHMARK_DATA = {
             "value": 55512.74587140764,
             "unit": "ns",
             "range": "± 348.7019149235039"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6806d6d256f54309b63c27dbe31e9bf47895d06e",
+          "message": "Create instructions-agent for BarcodeGenerator\n\nAdded InstructionsAgent for managing Copilot instructions.",
+          "timestamp": "2025-11-17T23:32:34+01:00",
+          "tree_id": "cf9b2ce8b1a7aae5ef0f66d6211b671b2cd7e350",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/6806d6d256f54309b63c27dbe31e9bf47895d06e"
+        },
+        "date": 1763419147911,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.SimpleInstance",
+            "value": 733.7739073753357,
+            "unit": "ns",
+            "range": "± 21.90647140055088"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.AdvancedInstance",
+            "value": 2608.629835128784,
+            "unit": "ns",
+            "range": "± 90.62972410551605"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithoutText",
+            "value": 41941.935228620256,
+            "unit": "ns",
+            "range": "± 190.60515815313252"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithText",
+            "value": 55717.46179199219,
+            "unit": "ns",
+            "range": "± 270.8085699840751"
           }
         ]
       }
