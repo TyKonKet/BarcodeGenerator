@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763418886217,
+  "lastUpdate": 1763418887623,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -19828,6 +19828,66 @@ window.BENCHMARK_DATA = {
             "value": 25.64734380841255,
             "unit": "ns",
             "range": "± 0.03985944843089627"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "422f4d5fe09774ef550d10987ada7df11ef157e0",
+          "message": "Define feature-agent with workflow instructions\n\nUpdated feature-agent.md to define the main Copilot agent for feature issues in BarcodeGenerator, including detailed workflow instructions.",
+          "timestamp": "2025-11-17T23:26:21+01:00",
+          "tree_id": "bdd48373031909df12853b8708c243c507190cb3",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/422f4d5fe09774ef550d10987ada7df11ef157e0"
+        },
+        "date": 1763418885133,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToStream",
+            "value": 1377547.7779017857,
+            "unit": "ns",
+            "range": "± 829.4459710084814"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToFile",
+            "value": 1381797.891376202,
+            "unit": "ns",
+            "range": "± 1596.6028097050214"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToFileWithPlaceholders",
+            "value": 1385013.0511997768,
+            "unit": "ns",
+            "range": "± 1129.2029675650806"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.GetDisplayName",
+            "value": 34.8836445560058,
+            "unit": "ns",
+            "range": "± 0.024510355636061538"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.EanAllowedCharsetRegex",
+            "value": 24.816417060792446,
+            "unit": "ns",
+            "range": "± 0.024298616823204923"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.Code93AllowedCharsetRegex",
+            "value": 25.945750319531985,
+            "unit": "ns",
+            "range": "± 0.030636266429042564"
           }
         ]
       }
