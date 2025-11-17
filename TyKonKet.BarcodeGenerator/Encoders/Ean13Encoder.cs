@@ -5,7 +5,6 @@ using SkiaSharp;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 using TyKonKet.BarcodeGenerator.Utils;
 
@@ -14,6 +13,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
     /// <summary>
     /// Encoder for EAN-13 barcodes.
     /// </summary>
+    [SuppressMessage("Usage", "Wintellect012:New classes should be declared as sealed", Justification = "Class inheritance required for encoder extensibility.")]
     internal class Ean13Encoder : EanEncoder
     {
         private readonly byte[] barsHeight =

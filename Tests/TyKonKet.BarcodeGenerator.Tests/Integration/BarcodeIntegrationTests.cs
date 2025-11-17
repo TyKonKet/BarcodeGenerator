@@ -25,6 +25,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
             {
                 Directory.Delete(tempDirectory, true);
             }
+            GC.SuppressFinalize(this);
         }
 
         #region Full Workflow Tests

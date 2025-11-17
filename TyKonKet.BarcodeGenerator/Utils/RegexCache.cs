@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the repository root for full license information.
 
 using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace TyKonKet.BarcodeGenerator.Utils
@@ -9,6 +10,7 @@ namespace TyKonKet.BarcodeGenerator.Utils
     /// <summary>
     /// Provides cached regular expressions for barcode validation.
     /// </summary>
+    [DebuggerDisplay("RegexCache")]
     public static partial class RegexCache
     {
         // Pattern for validating EAN barcodes (only digits are allowed).

@@ -12,35 +12,35 @@ namespace TyKonKet.BarcodeGenerator.Tests.Fonts
     /// </summary>
     public class FontFamilyTests
     {
-        public static IEnumerable<object[]> ValidateFontFamily_ShouldReturnExpectedFamilyName_Data()
+        public static TheoryData<FontFamilies> ValidateFontFamily_ShouldReturnExpectedFamilyName_Data()
         {
-            var allData = new List<object[]>();
+            var data = new TheoryData<FontFamilies>();
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                allData.Add([FontFamilies.Arial]);
-                allData.Add([FontFamilies.Calibri]);
-                allData.Add([FontFamilies.Cambria]);
-                allData.Add([FontFamilies.ComicSans]);
-                allData.Add([FontFamilies.Consolas]);
-                allData.Add([FontFamilies.CourierNew]);
-                allData.Add([FontFamilies.FranklinGothic]);
-                allData.Add([FontFamilies.Georgia]);
-                allData.Add([FontFamilies.Impact]);
-                allData.Add([FontFamilies.LucidaConsole]);
-                allData.Add([FontFamilies.PalatinoLinotype]);
-                allData.Add([FontFamilies.SegoeUI]);
-                allData.Add([FontFamilies.Tahoma]);
-                allData.Add([FontFamilies.TimesNewRoman]);
-                allData.Add([FontFamilies.TrebuchetMS]);
-                allData.Add([FontFamilies.Verdana]);
+                data.Add(FontFamilies.Arial);
+                data.Add(FontFamilies.Calibri);
+                data.Add(FontFamilies.Cambria);
+                data.Add(FontFamilies.ComicSans);
+                data.Add(FontFamilies.Consolas);
+                data.Add(FontFamilies.CourierNew);
+                data.Add(FontFamilies.FranklinGothic);
+                data.Add(FontFamilies.Georgia);
+                data.Add(FontFamilies.Impact);
+                data.Add(FontFamilies.LucidaConsole);
+                data.Add(FontFamilies.PalatinoLinotype);
+                data.Add(FontFamilies.SegoeUI);
+                data.Add(FontFamilies.Tahoma);
+                data.Add(FontFamilies.TimesNewRoman);
+                data.Add(FontFamilies.TrebuchetMS);
+                data.Add(FontFamilies.Verdana);
             }
             else
             {
-                allData.Add([FontFamilies.DejaVuSerif]);
+                data.Add(FontFamilies.DejaVuSerif);
             }
 
-            return allData;
+            return data;
         }
 
         [Theory]

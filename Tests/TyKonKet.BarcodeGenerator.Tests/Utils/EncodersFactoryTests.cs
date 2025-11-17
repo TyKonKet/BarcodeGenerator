@@ -1,6 +1,4 @@
 using System;
-using System.Linq.Expressions;
-using System.Reflection;
 using TyKonKet.BarcodeGenerator.Encoders;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 using Xunit;
@@ -8,14 +6,9 @@ using Xunit.Abstractions;
 
 namespace TyKonKet.BarcodeGenerator.Tests.Utils
 {
-    public class EncodersFactoryTests
+    public class EncodersFactoryTests(ITestOutputHelper output)
     {
-        private readonly ITestOutputHelper _output;
-
-        public EncodersFactoryTests(ITestOutputHelper output)
-        {
-            _output = output;
-        }
+        private readonly ITestOutputHelper _output = output;
 
         #region Existing Tests
 
@@ -35,7 +28,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Utils
 
             // Assert
             Assert.NotNull(encoder);
-            Assert.IsAssignableFrom(expectedEncoderType, encoder);
+            Assert.IsType(expectedEncoderType, encoder, exactMatch: false);
         }
 
         [Fact]
@@ -90,7 +83,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Utils
             Assert.NotNull(factory);
             Assert.NotNull(encoder);
             Assert.IsType(encoderType, encoder);
-            Assert.IsAssignableFrom<Encoder>(encoder);
+            Assert.IsType<Encoder>(encoder, exactMatch: false);
         }
 
         [Fact]
@@ -293,7 +286,9 @@ namespace TyKonKet.BarcodeGenerator.Tests.Utils
         private class TestEncoderWithInvalidConstructor : Encoder
         {
             // No constructor that takes BarcodeOptions - this will cause expression compilation to fail
+#pragma warning disable IDE0060 // Remove unused parameter
             public TestEncoderWithInvalidConstructor(string invalidParameter)
+#pragma warning restore IDE0060 // Remove unused parameter
             {
                 // Invalid constructor for testing
             }

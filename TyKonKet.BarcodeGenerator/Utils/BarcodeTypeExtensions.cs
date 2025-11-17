@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the repository root for full license information.
 
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Reflection;
 using TyKonKet.BarcodeGenerator.Attributes;
 
@@ -10,6 +11,7 @@ namespace TyKonKet.BarcodeGenerator.Utils
     /// <summary>
     /// Provides extension methods for the <see cref="BarcodeTypes"/> enum.
     /// </summary>
+    [DebuggerDisplay("BarcodeTypeExtensions")]
     public static class BarcodeTypeExtensions
     {
         private static readonly ConcurrentDictionary<BarcodeTypes, string> DisplayNameCache = new();
