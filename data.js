@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763419143761,
+  "lastUpdate": 1763419145322,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -11716,6 +11716,54 @@ window.BENCHMARK_DATA = {
             "value": 39771.41312154134,
             "unit": "ns",
             "range": "± 23.598190756471084"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6806d6d256f54309b63c27dbe31e9bf47895d06e",
+          "message": "Create instructions-agent for BarcodeGenerator\n\nAdded InstructionsAgent for managing Copilot instructions.",
+          "timestamp": "2025-11-17T23:32:34+01:00",
+          "tree_id": "cf9b2ce8b1a7aae5ef0f66d6211b671b2cd7e350",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/6806d6d256f54309b63c27dbe31e9bf47895d06e"
+        },
+        "date": 1763419144664,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 20264.92118326823,
+            "unit": "ns",
+            "range": "± 256.7143241069539"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 25133.21757597082,
+            "unit": "ns",
+            "range": "± 515.6525709901987"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 26570.523308890206,
+            "unit": "ns",
+            "range": "± 59.86680529003951"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 39971.401423863004,
+            "unit": "ns",
+            "range": "± 116.01723934341857"
           }
         ]
       }
