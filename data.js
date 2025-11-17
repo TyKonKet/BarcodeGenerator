@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763419145322,
+  "lastUpdate": 1763419146954,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -15526,6 +15526,54 @@ window.BENCHMARK_DATA = {
             "value": 36678.90460205078,
             "unit": "ns",
             "range": "± 21.15115460074664"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6806d6d256f54309b63c27dbe31e9bf47895d06e",
+          "message": "Create instructions-agent for BarcodeGenerator\n\nAdded InstructionsAgent for managing Copilot instructions.",
+          "timestamp": "2025-11-17T23:32:34+01:00",
+          "tree_id": "cf9b2ce8b1a7aae5ef0f66d6211b671b2cd7e350",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/6806d6d256f54309b63c27dbe31e9bf47895d06e"
+        },
+        "date": 1763419146298,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 19843.74236246745,
+            "unit": "ns",
+            "range": "± 368.9356554215569"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 23822.326087364785,
+            "unit": "ns",
+            "range": "± 279.29177896969986"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 24907.867500305176,
+            "unit": "ns",
+            "range": "± 18.48159606995853"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 36634.137619018555,
+            "unit": "ns",
+            "range": "± 56.32823938651132"
           }
         ]
       }
