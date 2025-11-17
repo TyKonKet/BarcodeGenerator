@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763418883195,
+  "lastUpdate": 1763418884708,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -11284,6 +11284,54 @@ window.BENCHMARK_DATA = {
             "value": 40303.96051494892,
             "unit": "ns",
             "range": "± 159.82733742250056"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e279ee224e1e8ee95233bc81b35b50e4ae06a314",
+          "message": "Configure docs-agent for README and documentation updates\n\nUpdated the docs-agent configuration for BarcodeGenerator.",
+          "timestamp": "2025-11-17T23:28:50+01:00",
+          "tree_id": "404d6a8ceda78bf0d8403908ea94dd26a6d2dca0",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/e279ee224e1e8ee95233bc81b35b50e4ae06a314"
+        },
+        "date": 1763418884103,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 18967.25469970703,
+            "unit": "ns",
+            "range": "± 122.84975723334624"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 24017.99202317458,
+            "unit": "ns",
+            "range": "± 120.892117309996"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 26540.599970499676,
+            "unit": "ns",
+            "range": "± 19.50727597137278"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 39844.61868286133,
+            "unit": "ns",
+            "range": "± 115.12861312821775"
           }
         ]
       }
