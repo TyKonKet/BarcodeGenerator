@@ -36,6 +36,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
         [InlineData(BarcodeTypes.Upca, "123456789012", "123456789012")]
         [InlineData(BarcodeTypes.Isbn13, "9781234567897", "9781234567897")]
         [InlineData(BarcodeTypes.Code93, "HELLO123", "HELLO1237N")]
+        [InlineData(BarcodeTypes.Code128, "ABC123xyz", "ABC123xyz")]
         public void FullWorkflow_ShouldEncodeAndGenerateImage_ForAllBarcodeTypes(BarcodeTypes type, string input, string expectedOutput)
         {
             // Arrange & Act

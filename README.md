@@ -33,7 +33,7 @@ barcode.Export("barcode.png");  // Done! 🎉
 
 ## 🚀 Supported Barcode Types
 
-**5 industry-standard formats** for every use case:
+**6 industry-standard formats** for every use case:
 
 | Type | Use Case | Example |
 |------|----------|---------|
@@ -42,8 +42,9 @@ barcode.Export("barcode.png");  // Done! 🎉
 | **ISBN-13** | 📚 Books and publications | `9781234567897` |
 | **EAN-8** | 📦 Small packages, compact spaces | `12345670` |
 | **CODE-93** | 📋 Logistics, inventory management | `ABC123` |
+| **CODE-128** | 📊 High-density alphanumeric encoding | `ABC123xyz` |
 
-> **More formats coming soon:** CODE-39, CODE-128 ([see roadmap](#%EF%B8%8F-roadmap))
+> **More formats coming soon:** CODE-39 ([see roadmap](#%EF%B8%8F-roadmap))
 
 ---
 
@@ -163,7 +164,7 @@ The `BarcodeOptions` class provides extensive customization capabilities:
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| **Type** | Barcode encoding type (EAN-13, UPC-A, ISBN-13, EAN-8, CODE-93) | EAN-8 |
+| **Type** | Barcode encoding type (EAN-13, UPC-A, ISBN-13, EAN-8, CODE-93, CODE-128) | EAN-8 |
 | **Height** | Height of barcode bars | 30 pixels |
 | **Scaling** | Scale factor for the entire image | 5x |
 | **Margins** | Spacing around the barcode | 2 pixels |
@@ -209,7 +210,6 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 
 ### 🚧 **Coming Soon**
 - [ ] **CODE-39** encoder - Automotive and defense industry standard
-- [ ] **CODE-128** encoder - High-density alphanumeric encoding
 - [ ] **QR Code** support - 2D barcode generation
 - [ ] **Validation API** - Standalone barcode validation without generation
 - [ ] **Batch processing** - Generate multiple barcodes efficiently
