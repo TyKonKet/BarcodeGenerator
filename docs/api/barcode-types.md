@@ -184,12 +184,79 @@ barcode.Encode("item@123");         // @ symbol not supported
 barcode.Encode("test_case");        // Underscore not supported
 ```
 
+### Code128 = 5
+
+Code 128 is a high-density barcode symbology for alphanumeric or numeric-only barcodes, widely used in logistics, shipping, and inventory management.
+
+#### Specifications
+- **Encoding**: Variable length alphanumeric
+- **Input Format**: Any length string with ASCII characters (0-127)
+- **Character Set**: 
+  - Full ASCII character set (0-127)
+  - Automatic code set switching (Code A, B, C)
+  - Optimized for numeric pairs (Code C)
+- **Applications**: Shipping labels, product tracking, retail barcodes, inventory systems
+
+#### Example
+```csharp
+using var barcode = new Barcode(options => options.Type = BarcodeTypes.Code128);
+string result = barcode.Encode("ABC123xyz"); // Returns: "ABC123xyz"
+```
+
+#### Character Set Examples
+```csharp
+// Alphanumeric
+barcode.Encode("PRODUCT123");
+
+// Mixed case
+barcode.Encode("MixedCase123");
+
+// Numeric sequences (optimized using Code C)
+barcode.Encode("1234567890");
+
+// Special characters
+barcode.Encode("Item-001");
+barcode.Encode("Price:$12.99");
+barcode.Encode("Qty>5");
+
+// With spaces
+barcode.Encode("Hello World 123");
+```
+
+#### Code Set Optimization
+Code 128 automatically selects the optimal code set for maximum efficiency:
+
+- **Code A**: Control characters and uppercase
+- **Code B**: Standard printable ASCII characters (default for most text)
+- **Code C**: Numeric pairs (00-99) - most compact for numbers
+
+```csharp
+// Numeric data uses Code C for efficiency
+barcode.Encode("12345678");      // Optimized as pairs: 12,34,56,78
+
+// Mixed data switches between code sets automatically
+barcode.Encode("ABC1234XYZ");    // Code B → Code C → Code B
+
+// Text data uses Code B
+barcode.Encode("Hello World");   // Code B throughout
+```
+
+#### Input Validation
+```csharp
+// Valid inputs (all ASCII 0-127)
+barcode.Encode("ABC123");           // Alphanumeric
+barcode.Encode("test@example.com"); // With symbols
+barcode.Encode("Price: $9.99");     // With special chars
+barcode.Encode("Line1\nLine2");     // With control chars (Code A)
+
+// Invalid inputs - will throw FormatException
+barcode.Encode("Hello™");           // Extended ASCII not supported
+barcode.Encode("Test\u0200");       // Unicode beyond ASCII not supported
+```
+
 ## Future Types (Not Yet Implemented)
 
 The following barcode types are defined in the enum but not yet implemented:
-
-### Code128 = 5
-Code 128 - A high-density barcode symbology for alphanumeric or numeric-only barcodes.
 
 ### Code39 = 6
 Code 39 - An alphanumeric barcode used in various industries including automotive and defense.
@@ -208,6 +275,8 @@ public Barcode CreateBarcodeForUseCase(string data, string useCase)
         "small-package" => new Barcode(options => options.Type = BarcodeTypes.Ean8),
         "logistics" => new Barcode(options => options.Type = BarcodeTypes.Code93),
         "usa-retail" => new Barcode(options => options.Type = BarcodeTypes.Upca),
+        "shipping" => new Barcode(options => options.Type = BarcodeTypes.Code128),
+        "inventory" => new Barcode(options => options.Type = BarcodeTypes.Code128),
         _ => new Barcode(options => options.Type = BarcodeTypes.Ean13)
     };
 }
@@ -224,6 +293,7 @@ public static bool IsValidForBarcodeType(string input, BarcodeTypes type)
         BarcodeTypes.Isbn13 => input?.Length == 12 && input.All(char.IsDigit),
         BarcodeTypes.Ean8 => input?.Length == 7 && input.All(char.IsDigit),
         BarcodeTypes.Code93 => IsValidCode93(input),
+        BarcodeTypes.Code128 => IsValidCode128(input),
         _ => false
     };
 }
@@ -234,6 +304,14 @@ private static bool IsValidCode93(string input)
     
     const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 $%+-./ ";
     return input.All(c => validChars.Contains(c));
+}
+
+private static bool IsValidCode128(string input)
+{
+    if (string.IsNullOrEmpty(input)) return false;
+    
+    // Code 128 supports all ASCII characters (0-127)
+    return input.All(c => c >= 0 && c <= 127);
 }
 ```
 
@@ -256,6 +334,7 @@ public static void ConfigureForBarcodeType(BarcodeOptions options, BarcodeTypes 
             break;
             
         case BarcodeTypes.Code93:
+        case BarcodeTypes.Code128:
             // Alphanumeric - may need more height for readability
             options.Height = 60;
             options.Scaling = 3;
@@ -275,7 +354,8 @@ public void ProcessMixedBarcodes()
         ("12345678901", BarcodeTypes.Upca),
         ("978123456789", BarcodeTypes.Isbn13),
         ("1234567", BarcodeTypes.Ean8),
-        ("PRODUCT-001", BarcodeTypes.Code93)
+        ("PRODUCT-001", BarcodeTypes.Code93),
+        ("ABC123xyz", BarcodeTypes.Code128)
     };
     
     foreach (var (data, type) in barcodeData)
@@ -293,6 +373,7 @@ For all supported barcode types, the library automatically calculates and append
 
 **Numeric types** (EAN-13, UPC-A, ISBN-13, EAN-8): Use standard check digit algorithms
 **Alphanumeric types** (CODE-93): Use modulo-47 check digit calculation
+**CODE-128**: Uses modulo-103 check digit calculation with weighted sum
 
 ```csharp
 // Input: 12 digits, Output: 13 digits with check digit
@@ -302,6 +383,10 @@ string result = ean13.Encode("123456789012"); // Returns: "1234567890128"
 // Input: 11 digits, Output: 12 digits with check digit  
 using var upca = new Barcode(options => options.Type = BarcodeTypes.Upca);
 string result2 = upca.Encode("12345678901"); // Returns: "123456789012"
+
+// Input: variable length, Output: same data (check digit encoded in barcode)
+using var code128 = new Barcode(options => options.Type = BarcodeTypes.Code128);
+string result3 = code128.Encode("ABC123xyz"); // Returns: "ABC123xyz"
 ```
 
 ## Related Documentation
