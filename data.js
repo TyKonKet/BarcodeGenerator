@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763418890328,
+  "lastUpdate": 1763418891776,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -7666,6 +7666,54 @@ window.BENCHMARK_DATA = {
             "value": 38184.45708289513,
             "unit": "ns",
             "range": "± 36.482343746622604"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "422f4d5fe09774ef550d10987ada7df11ef157e0",
+          "message": "Define feature-agent with workflow instructions\n\nUpdated feature-agent.md to define the main Copilot agent for feature issues in BarcodeGenerator, including detailed workflow instructions.",
+          "timestamp": "2025-11-17T23:26:21+01:00",
+          "tree_id": "bdd48373031909df12853b8708c243c507190cb3",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/422f4d5fe09774ef550d10987ada7df11ef157e0"
+        },
+        "date": 1763418891187,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 28284.603574006454,
+            "unit": "ns",
+            "range": "± 704.7150131631762"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 33806.53702799479,
+            "unit": "ns",
+            "range": "± 762.196689540805"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 26414.0573752267,
+            "unit": "ns",
+            "range": "± 56.486820164045795"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 38245.313025841344,
+            "unit": "ns",
+            "range": "± 58.79662733662776"
           }
         ]
       }
