@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763497848170,
+  "lastUpdate": 1763497849032,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -16678,6 +16678,54 @@ window.BENCHMARK_DATA = {
             "value": 36070.85807146345,
             "unit": "ns",
             "range": "± 247.5195449887515"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ea4b0f3eeea1a32d228f87a7cb4cac87a00ebd09",
+          "message": "Merge pull request #31 from TyKonKet/copilot/add-upc-e-barcode-encoder\n\nAdd UPC-E barcode encoder",
+          "timestamp": "2025-11-18T21:22:14+01:00",
+          "tree_id": "08c56d588f1e07a8ddfbafb85cc67bf5231faaa3",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/ea4b0f3eeea1a32d228f87a7cb4cac87a00ebd09"
+        },
+        "date": 1763497848823,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 17418.687467134914,
+            "unit": "ns",
+            "range": "± 110.37108647403969"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 21368.373565673828,
+            "unit": "ns",
+            "range": "± 132.48551598344213"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 23561.615711757117,
+            "unit": "ns",
+            "range": "± 85.20628597436887"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 36751.364048549105,
+            "unit": "ns",
+            "range": "± 334.5579378039782"
           }
         ]
       }
