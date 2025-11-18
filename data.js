@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763475532661,
+  "lastUpdate": 1763475534267,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -12148,6 +12148,54 @@ window.BENCHMARK_DATA = {
             "value": 40216.161682128906,
             "unit": "ns",
             "range": "± 111.13180979256997"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "2a4eec1a1abfcf62e7d58376575fcbb6946ba0b2",
+          "message": "Update feature-agent documentation to include guidelines for prototyping with Playground and scripts",
+          "timestamp": "2025-11-18T15:12:27+01:00",
+          "tree_id": "ea1620a2409aa8a170cf9850bed9fb8598517b24",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/2a4eec1a1abfcf62e7d58376575fcbb6946ba0b2"
+        },
+        "date": 1763475533647,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 17317.7022259052,
+            "unit": "ns",
+            "range": "± 89.15235326523053"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 19318.647693340594,
+            "unit": "ns",
+            "range": "± 128.8978458101223"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25098.84356689453,
+            "unit": "ns",
+            "range": "± 78.3762033631396"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40277.42273888221,
+            "unit": "ns",
+            "range": "± 270.04853630745856"
           }
         ]
       }
