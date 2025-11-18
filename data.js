@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763497847262,
+  "lastUpdate": 1763497848170,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -12580,6 +12580,54 @@ window.BENCHMARK_DATA = {
             "value": 40660.85284423828,
             "unit": "ns",
             "range": "± 230.1950831200575"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ea4b0f3eeea1a32d228f87a7cb4cac87a00ebd09",
+          "message": "Merge pull request #31 from TyKonKet/copilot/add-upc-e-barcode-encoder\n\nAdd UPC-E barcode encoder",
+          "timestamp": "2025-11-18T21:22:14+01:00",
+          "tree_id": "08c56d588f1e07a8ddfbafb85cc67bf5231faaa3",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/ea4b0f3eeea1a32d228f87a7cb4cac87a00ebd09"
+        },
+        "date": 1763497847935,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 16774.327606201172,
+            "unit": "ns",
+            "range": "± 63.119305650765064"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 19531.676335261418,
+            "unit": "ns",
+            "range": "± 108.02191566186448"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25263.620168832633,
+            "unit": "ns",
+            "range": "± 48.08071745910903"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40336.78800310408,
+            "unit": "ns",
+            "range": "± 318.1472802989027"
           }
         ]
       }
