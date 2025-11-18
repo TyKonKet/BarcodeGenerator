@@ -184,6 +184,67 @@ barcode.Encode("item@123");         // @ symbol not supported
 barcode.Encode("test_case");        // Underscore not supported
 ```
 
+### Code39 = 6
+
+Code 39 is a widely used barcode standard for alphanumeric data, commonly found in automotive, defense, and industrial applications.
+
+#### Specifications
+- **Encoding**: Variable length alphanumeric
+- **Input Format**: Any length string with supported characters
+- **Character Set**: 
+  - Uppercase letters (A-Z)
+  - Digits (0-9)
+  - Special characters: space, $, %, +, -, ., /
+- **Start/Stop Character**: Asterisk (*) - added automatically
+- **Applications**: Automotive parts, defense logistics, industrial inventory, warehouse management
+
+#### Example
+```csharp
+using var barcode = new Barcode(options => options.Type = BarcodeTypes.Code39);
+string result = barcode.Encode("ABC-123"); // Returns: "ABC-123"
+```
+
+#### Character Set Examples
+```csharp
+// Alphanumeric
+barcode.Encode("PART123");
+
+// With special characters
+barcode.Encode("ITEM-001");
+barcode.Encode("PART+ABC");
+barcode.Encode("CODE/123");
+barcode.Encode("REF$456");
+barcode.Encode("QTY%789");
+barcode.Encode("VER.2.1");
+
+// With spaces
+barcode.Encode("HELLO WORLD");
+```
+
+#### Input Validation
+```csharp
+// Valid inputs
+barcode.Encode("ABC123");           // Alphanumeric
+barcode.Encode("ITEM-001");         // With hyphen
+barcode.Encode("A B C");            // With spaces
+
+// Automatic uppercase conversion
+barcode.Encode("abc");              // Converted to "ABC"
+barcode.Encode("Test123");          // Converted to "TEST123"
+
+// Invalid inputs - will throw FormatException
+barcode.Encode("item@123");         // @ symbol not supported
+barcode.Encode("test_case");        // Underscore not supported
+```
+
+#### Check Digit Support
+CODE-39 supports optional modulo-43 check digit calculation. You can manually calculate check digits using the encoder's static methods:
+
+```csharp
+// Get check digit for validation
+char checkDigit = Code39Encoder.GetCheckDigit("ABC123"); // Returns 'X'
+```
+
 ### Code128 = 5
 
 Code 128 is a high-density barcode symbology for alphanumeric or numeric-only barcodes, widely used in logistics, shipping, and inventory management.
