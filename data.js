@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763494819581,
+  "lastUpdate": 1763494820814,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -12436,6 +12436,54 @@ window.BENCHMARK_DATA = {
             "value": 40451.76386906551,
             "unit": "ns",
             "range": "± 169.63381644675786"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f1a4ff07be2d1717155ed47c227be2154b353a37",
+          "message": "Merge pull request #30 from TyKonKet/copilot/add-codabar-barcode-encoder\n\nAdd Codabar barcode encoder",
+          "timestamp": "2025-11-18T20:32:14+01:00",
+          "tree_id": "662764ab1c5ee89fb8848b5f3004f59a48748996",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/f1a4ff07be2d1717155ed47c227be2154b353a37"
+        },
+        "date": 1763494820393,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 17255.268465482273,
+            "unit": "ns",
+            "range": "± 171.73183346598375"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 19398.044471153848,
+            "unit": "ns",
+            "range": "± 211.59715178239955"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25041.89231436593,
+            "unit": "ns",
+            "range": "± 74.65110015211404"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40660.85284423828,
+            "unit": "ns",
+            "range": "± 230.1950831200575"
           }
         ]
       }
