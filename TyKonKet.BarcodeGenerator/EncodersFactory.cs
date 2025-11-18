@@ -32,6 +32,7 @@ namespace TyKonKet.BarcodeGenerator
             FactoryCache["Ean8Encoder"] = options => new Encoders.Ean8Encoder(options);
             FactoryCache["Isbn13Encoder"] = options => new Encoders.Isbn13Encoder(options);
             FactoryCache["UpcaEncoder"] = options => new Encoders.UpcaEncoder(options);
+            FactoryCache["UpceEncoder"] = options => new Encoders.UpceEncoder(options);
             FactoryCache["CodabarEncoder"] = options => new Encoders.CodabarEncoder(options);
         }
 
