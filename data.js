@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763503692984,
+  "lastUpdate": 1763503694568,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -16870,6 +16870,54 @@ window.BENCHMARK_DATA = {
             "value": 36751.364048549105,
             "unit": "ns",
             "range": "± 334.5579378039782"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "565a419515feebedbad3e8e965e53e5452446f6f",
+          "message": "Refactor agent documentation and remove obsolete files\n\n- Deleted `docs-agent.md`, `feature-agent.md`, `instructions-agent.md`, `test-agent.md`, and `Perf.chatmode.md` as they are no longer needed.\n- Updated `implementation-planner.agent.md` to correct the name format.\n- Added new `docs-agent.md`, `feature-agent.md`, `instructions-agent.md`, `test-agent.md`, and `perf.agent.md` with comprehensive guidelines for each agent's responsibilities and workflows.",
+          "timestamp": "2025-11-18T22:59:04+01:00",
+          "tree_id": "0fa37ba5e871b1cb4e0be77a638027d88140e082",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/565a419515feebedbad3e8e965e53e5452446f6f"
+        },
+        "date": 1763503693928,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 19785.978722205527,
+            "unit": "ns",
+            "range": "± 236.840118221674"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 23625.563893636066,
+            "unit": "ns",
+            "range": "± 177.78033770905932"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 24820.073501586914,
+            "unit": "ns",
+            "range": "± 18.787960300372294"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 37286.558725210336,
+            "unit": "ns",
+            "range": "± 67.10019326889312"
           }
         ]
       }
