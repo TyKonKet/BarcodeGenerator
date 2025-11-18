@@ -83,7 +83,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
             for (int i = 0; i < iterations; i++)
             {
                 using var barcode = new Barcode(opt => opt.Type = BarcodeTypes.Ean13);
-                var result = barcode.Encode(testBarcode);
+                barcode.Encode(testBarcode);
             }
             encodingWatch.Stop();
 

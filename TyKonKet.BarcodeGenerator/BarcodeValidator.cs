@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using TyKonKet.BarcodeGenerator.Encoders;
-using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator
@@ -171,13 +170,17 @@ namespace TyKonKet.BarcodeGenerator
                     if (ValidateCharset(barcode, type))
                     {
                         // Try to format the barcode to ensure it's fully valid
-                        var _ = ComputeValidatedBarcode(barcode, type);
+                        ComputeValidatedBarcode(barcode, type);
                         compatibleTypes.Add(type);
                     }
                 }
-                catch
+                catch (FormatException)
                 {
-                    // This type is not compatible, continue to the next one
+                    // Expected: barcode format is not compatible with this type, continue to next.
+                }
+                catch (ArgumentException)
+                {
+                    // Expected: barcode argument is not valid for this type, continue to next.
                 }
             }
 
