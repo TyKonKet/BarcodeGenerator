@@ -79,5 +79,27 @@ namespace TyKonKet.BarcodeGenerator.Utils
         public static Regex Code128AllowedCharsetRegex { get; } = new Regex(Code128AllowedCharsetPattern, RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 #endif
 
+        // Pattern for validating Code 39 barcodes (uppercase letters, digits, and specific symbols are allowed).
+        private const string Code39AllowedCharsetPattern = "^[A-Z0-9 .$+%\\-\\/]+$";
+
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Gets the compiled regular expression for validating Code 39 barcodes.
+        /// </summary>
+        /// <returns>A compiled Regex object for Code 39 barcode validation.</returns>
+        [GeneratedRegex(Code39AllowedCharsetPattern, RegexOptions.None, 1000)]
+        private static partial Regex GetCode39AllowedCharsetRegex();
+
+        /// <summary>
+        /// Gets the cached regular expression for validating Code 39 barcodes.
+        /// </summary>
+        public static Regex Code39AllowedCharsetRegex => GetCode39AllowedCharsetRegex();
+#else
+        /// <summary>
+        /// Gets the cached regular expression for validating Code 39 barcodes.
+        /// </summary>
+        public static Regex Code39AllowedCharsetRegex { get; } = new Regex(Code39AllowedCharsetPattern, RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+#endif
+
     }
 }
