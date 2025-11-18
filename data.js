@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763497849853,
+  "lastUpdate": 1763503688208,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -22576,6 +22576,66 @@ window.BENCHMARK_DATA = {
             "value": 26.63128541622843,
             "unit": "ns",
             "range": "± 0.019156411884591152"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "565a419515feebedbad3e8e965e53e5452446f6f",
+          "message": "Refactor agent documentation and remove obsolete files\n\n- Deleted `docs-agent.md`, `feature-agent.md`, `instructions-agent.md`, `test-agent.md`, and `Perf.chatmode.md` as they are no longer needed.\n- Updated `implementation-planner.agent.md` to correct the name format.\n- Added new `docs-agent.md`, `feature-agent.md`, `instructions-agent.md`, `test-agent.md`, and `perf.agent.md` with comprehensive guidelines for each agent's responsibilities and workflows.",
+          "timestamp": "2025-11-18T22:59:04+01:00",
+          "tree_id": "0fa37ba5e871b1cb4e0be77a638027d88140e082",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/565a419515feebedbad3e8e965e53e5452446f6f"
+        },
+        "date": 1763503686604,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToStream",
+            "value": 1380443.0869891827,
+            "unit": "ns",
+            "range": "± 1380.846400090848"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToFile",
+            "value": 1389734.161358173,
+            "unit": "ns",
+            "range": "± 1616.2097164831937"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.ExportToFileWithPlaceholders",
+            "value": 1385768.3111478365,
+            "unit": "ns",
+            "range": "± 1416.9487288372843"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.GetDisplayName",
+            "value": 44.13977782542889,
+            "unit": "ns",
+            "range": "± 0.04677245807093554"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.EanAllowedCharsetRegex",
+            "value": 24.808532355087145,
+            "unit": "ns",
+            "range": "± 0.047623073230044374"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Global.Code93AllowedCharsetRegex",
+            "value": 25.526809689899284,
+            "unit": "ns",
+            "range": "± 0.03271411854126278"
           }
         ]
       }
