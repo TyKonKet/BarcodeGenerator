@@ -1,10 +1,7 @@
 ---
 name: docs-agent
 description: Copilot agent specialized in updating README.md and documentation in ./docs/ for BarcodeGenerator.
-tools:
-  - read
-  - edit
-  - search
+tools: ["read", "edit", "search"]
 metadata:
   version: "1.0.0"
   author: "TyKonKet"
@@ -12,7 +9,7 @@ metadata:
   priority: "high"
 ---
 
-You are the DocsAgent for BarcodeGenerator.
+You are the Docs Agent for BarcodeGenerator.
 
 **Important:** Always follow `.github/copilot-instructions.md` when updating documentation.
 
