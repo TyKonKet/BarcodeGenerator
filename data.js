@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763503753064,
+  "lastUpdate": 1763503754329,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -4336,6 +4336,54 @@ window.BENCHMARK_DATA = {
             "value": 27148.579063415527,
             "unit": "ns",
             "range": "± 35.21789676717115"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "f89fff03dd4edb49a698498511f000a7fd654cfa",
+          "message": "Reintroduce performance optimization agent with comprehensive guidelines and processes",
+          "timestamp": "2025-11-18T23:00:50+01:00",
+          "tree_id": "420caaa74617955c8d06ae47837784db1bb9a218",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/f89fff03dd4edb49a698498511f000a7fd654cfa"
+        },
+        "date": 1763503753897,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 15403.713578796387,
+            "unit": "ns",
+            "range": "± 337.6476394814056"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 16464.186548086313,
+            "unit": "ns",
+            "range": "± 124.70980251325949"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 18533.76319013323,
+            "unit": "ns",
+            "range": "± 76.58352602754509"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 25652.632321871242,
+            "unit": "ns",
+            "range": "± 153.32777267356894"
           }
         ]
       }
