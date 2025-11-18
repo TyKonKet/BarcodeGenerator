@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763503756686,
+  "lastUpdate": 1763503757961,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -17062,6 +17062,54 @@ window.BENCHMARK_DATA = {
             "value": 37286.558725210336,
             "unit": "ns",
             "range": "± 67.10019326889312"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "f89fff03dd4edb49a698498511f000a7fd654cfa",
+          "message": "Reintroduce performance optimization agent with comprehensive guidelines and processes",
+          "timestamp": "2025-11-18T23:00:50+01:00",
+          "tree_id": "420caaa74617955c8d06ae47837784db1bb9a218",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/f89fff03dd4edb49a698498511f000a7fd654cfa"
+        },
+        "date": 1763503757489,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 18064.943821498327,
+            "unit": "ns",
+            "range": "± 215.01765391297988"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 22140.300101143974,
+            "unit": "ns",
+            "range": "± 179.95948577631663"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 23799.250384521485,
+            "unit": "ns",
+            "range": "± 78.31629359823847"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 37043.74407087053,
+            "unit": "ns",
+            "range": "± 319.2637797717229"
           }
         ]
       }
