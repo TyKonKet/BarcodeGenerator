@@ -53,5 +53,11 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         [BarcodeEncoding("CODE-93")]
         Code93 = 7,
+
+        /// <summary>
+        /// Codabar. Used in libraries, blood banks, and logistics for serial number tracking and labeling.
+        /// </summary>
+        [BarcodeEncoding("CODABAR")]
+        Codabar = 8,
     }
 }
