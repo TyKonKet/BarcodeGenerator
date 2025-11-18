@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763475530972,
+  "lastUpdate": 1763475532661,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -8146,6 +8146,54 @@ window.BENCHMARK_DATA = {
             "value": 38557.774767194474,
             "unit": "ns",
             "range": "± 311.3236699128232"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "2a4eec1a1abfcf62e7d58376575fcbb6946ba0b2",
+          "message": "Update feature-agent documentation to include guidelines for prototyping with Playground and scripts",
+          "timestamp": "2025-11-18T15:12:27+01:00",
+          "tree_id": "ea1620a2409aa8a170cf9850bed9fb8598517b24",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/2a4eec1a1abfcf62e7d58376575fcbb6946ba0b2"
+        },
+        "date": 1763475532054,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 16562.531215122766,
+            "unit": "ns",
+            "range": "± 125.56192363241034"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 18418.574951171875,
+            "unit": "ns",
+            "range": "± 134.28689327983597"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 25333.9635345459,
+            "unit": "ns",
+            "range": "± 144.39680397776513"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 38346.83449808756,
+            "unit": "ns",
+            "range": "± 46.573300926493296"
           }
         ]
       }
