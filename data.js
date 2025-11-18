@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763508630453,
+  "lastUpdate": 1763508631547,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -13156,6 +13156,54 @@ window.BENCHMARK_DATA = {
             "value": 40131.158368791854,
             "unit": "ns",
             "range": "± 344.23932453608563"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "2a19df011ba3f34537c45eb29bf9519a78d8b74f",
+          "message": "Refactor barcode validation logic: normalize input for case sensitivity, improve length validation, and update documentation examples for UPC-A",
+          "timestamp": "2025-11-19T00:21:56+01:00",
+          "tree_id": "cea932fca47b68ed2b9c541959e72eefaf5c2e24",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/2a19df011ba3f34537c45eb29bf9519a78d8b74f"
+        },
+        "date": 1763508631213,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 18374.661198207312,
+            "unit": "ns",
+            "range": "± 190.2223934318362"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 20469.988970075334,
+            "unit": "ns",
+            "range": "± 182.10556392662127"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25252.376525878906,
+            "unit": "ns",
+            "range": "± 79.8483082253143"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40693.17130824498,
+            "unit": "ns",
+            "range": "± 438.0419520100191"
           }
         ]
       }
