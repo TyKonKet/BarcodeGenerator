@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763497849032,
+  "lastUpdate": 1763497849853,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -20634,6 +20634,54 @@ window.BENCHMARK_DATA = {
             "value": 54212.49417317708,
             "unit": "ns",
             "range": "± 639.4782430834496"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ea4b0f3eeea1a32d228f87a7cb4cac87a00ebd09",
+          "message": "Merge pull request #31 from TyKonKet/copilot/add-upc-e-barcode-encoder\n\nAdd UPC-E barcode encoder",
+          "timestamp": "2025-11-18T21:22:14+01:00",
+          "tree_id": "08c56d588f1e07a8ddfbafb85cc67bf5231faaa3",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/ea4b0f3eeea1a32d228f87a7cb4cac87a00ebd09"
+        },
+        "date": 1763497849648,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.SimpleInstance",
+            "value": 425.0868169920785,
+            "unit": "ns",
+            "range": "± 3.3163285949418255"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.AdvancedInstance",
+            "value": 1869.260169728597,
+            "unit": "ns",
+            "range": "± 18.00460828175614"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithoutText",
+            "value": 40960.778592623195,
+            "unit": "ns",
+            "range": "± 110.79253196753112"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithText",
+            "value": 55522.33138602121,
+            "unit": "ns",
+            "range": "± 210.6869846366684"
           }
         ]
       }
