@@ -33,7 +33,7 @@ barcode.Export("barcode.png");  // Done! 🎉
 
 ## 🚀 Supported Barcode Types
 
-**6 industry-standard formats** for every use case:
+**7 industry-standard formats** for every use case:
 
 | Type | Use Case | Example |
 |------|----------|---------|
@@ -41,10 +41,9 @@ barcode.Export("barcode.png");  // Done! 🎉
 | **UPC-A** | 🇺🇸 North American retail, grocery | `012345678905` |
 | **ISBN-13** | 📚 Books and publications | `9781234567897` |
 | **EAN-8** | 📦 Small packages, compact spaces | `12345670` |
+| **CODE-39** | 🏭 Industrial, automotive, defense | `ABC-123` |
 | **CODE-93** | 📋 Logistics, inventory management | `ABC123` |
 | **CODE-128** | 📊 High-density alphanumeric encoding | `ABC123xyz` |
-
-> **More formats coming soon:** CODE-39 ([see roadmap](#%EF%B8%8F-roadmap))
 
 ---
 
@@ -208,8 +207,10 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 
 ## 🗺️ Roadmap
 
+### ✅ **Recently Completed**
+- [x] **CODE-39** encoder - Automotive and defense industry standard
+
 ### 🚧 **Coming Soon**
-- [ ] **CODE-39** encoder - Automotive and defense industry standard
 - [ ] **QR Code** support - 2D barcode generation
 - [ ] **Validation API** - Standalone barcode validation without generation
 - [ ] **Batch processing** - Generate multiple barcodes efficiently
