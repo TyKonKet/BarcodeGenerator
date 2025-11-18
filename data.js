@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763494821971,
+  "lastUpdate": 1763494823239,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -20394,6 +20394,54 @@ window.BENCHMARK_DATA = {
             "value": 55307.59001159668,
             "unit": "ns",
             "range": "± 71.94125190366753"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f1a4ff07be2d1717155ed47c227be2154b353a37",
+          "message": "Merge pull request #30 from TyKonKet/copilot/add-codabar-barcode-encoder\n\nAdd Codabar barcode encoder",
+          "timestamp": "2025-11-18T20:32:14+01:00",
+          "tree_id": "662764ab1c5ee89fb8848b5f3004f59a48748996",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/f1a4ff07be2d1717155ed47c227be2154b353a37"
+        },
+        "date": 1763494822799,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.SimpleInstance",
+            "value": 435.42418610254924,
+            "unit": "ns",
+            "range": "± 5.3144178148289445"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.AdvancedInstance",
+            "value": 1837.3605962480817,
+            "unit": "ns",
+            "range": "± 21.861093527966062"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithoutText",
+            "value": 40376.25060599191,
+            "unit": "ns",
+            "range": "± 207.44340485450422"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithText",
+            "value": 54212.49417317708,
+            "unit": "ns",
+            "range": "± 639.4782430834496"
           }
         ]
       }
