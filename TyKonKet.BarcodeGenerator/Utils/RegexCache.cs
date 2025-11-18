@@ -101,5 +101,27 @@ namespace TyKonKet.BarcodeGenerator.Utils
         public static Regex Code39AllowedCharsetRegex { get; } = new Regex(Code39AllowedCharsetPattern, RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 #endif
 
+        // Pattern for validating Codabar barcodes (digits, specific symbols, and start/stop characters A-D are allowed).
+        private const string CodabarAllowedCharsetPattern = "^[A-D][0-9$:\\-\\/.+]+[A-D]$";
+
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Gets the compiled regular expression for validating Codabar barcodes.
+        /// </summary>
+        /// <returns>A compiled Regex object for Codabar barcode validation.</returns>
+        [GeneratedRegex(CodabarAllowedCharsetPattern, RegexOptions.None, 1000)]
+        private static partial Regex GetCodabarAllowedCharsetRegex();
+
+        /// <summary>
+        /// Gets the cached regular expression for validating Codabar barcodes.
+        /// </summary>
+        public static Regex CodabarAllowedCharsetRegex => GetCodabarAllowedCharsetRegex();
+#else
+        /// <summary>
+        /// Gets the cached regular expression for validating Codabar barcodes.
+        /// </summary>
+        public static Regex CodabarAllowedCharsetRegex { get; } = new Regex(CodabarAllowedCharsetPattern, RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+#endif
+
     }
 }
