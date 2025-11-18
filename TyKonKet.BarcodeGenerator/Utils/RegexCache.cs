@@ -57,5 +57,27 @@ namespace TyKonKet.BarcodeGenerator.Utils
         public static Regex Code93AllowedCharsetRegex { get; } = new Regex(Code93AllowedCharsetPattern, RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 #endif
 
+        // Pattern for validating Code 128 barcodes (all ASCII printable characters 0-127 are allowed).
+        private const string Code128AllowedCharsetPattern = "^[\x00-\x7F]+$";
+
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Gets the compiled regular expression for validating Code 128 barcodes.
+        /// </summary>
+        /// <returns>A compiled Regex object for Code 128 barcode validation.</returns>
+        [GeneratedRegex(Code128AllowedCharsetPattern, RegexOptions.None, 1000)]
+        private static partial Regex GetCode128AllowedCharsetRegex();
+
+        /// <summary>
+        /// Gets the cached regular expression for validating Code 128 barcodes.
+        /// </summary>
+        public static Regex Code128AllowedCharsetRegex => GetCode128AllowedCharsetRegex();
+#else
+        /// <summary>
+        /// Gets the cached regular expression for validating Code 128 barcodes.
+        /// </summary>
+        public static Regex Code128AllowedCharsetRegex { get; } = new Regex(Code128AllowedCharsetPattern, RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+#endif
+
     }
 }

@@ -1,11 +1,7 @@
 ---
 name: test-agent
 description: Copilot agent specialized in maintaining high unit test coverage for BarcodeGenerator.
-tools:
-  - read
-  - edit
-  - search
-  - shell
+tools: ["read", "edit", "search", "shell"]
 metadata:
   version: "1.0.0"
   author: "TyKonKet"
@@ -13,7 +9,7 @@ metadata:
   priority: "high"
 ---
 
-You are the TestAgent for BarcodeGenerator.
+You are the Test Agent for BarcodeGenerator.
 
 **Important:** Always follow `.github/copilot-instructions.md` when adding or updating tests.
 

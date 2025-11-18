@@ -27,6 +27,7 @@ namespace TyKonKet.BarcodeGenerator
         {
             // Pre-populate factory delegate cache for direct instantiation (eliminates Activator.CreateInstance overhead)
             FactoryCache["Code93Encoder"] = options => new Encoders.Code93Encoder(options);
+            FactoryCache["Code128Encoder"] = options => new Encoders.Code128Encoder(options);
             FactoryCache["Ean13Encoder"] = options => new Encoders.Ean13Encoder(options);
             FactoryCache["Ean8Encoder"] = options => new Encoders.Ean8Encoder(options);
             FactoryCache["Isbn13Encoder"] = options => new Encoders.Isbn13Encoder(options);
