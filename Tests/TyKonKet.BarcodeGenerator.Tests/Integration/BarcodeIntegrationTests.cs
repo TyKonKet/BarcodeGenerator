@@ -34,6 +34,7 @@ namespace TyKonKet.BarcodeGenerator.Tests.Integration
         [InlineData(BarcodeTypes.Ean13, "1234567890123", "1234567890128")]
         [InlineData(BarcodeTypes.Ean8, "12345678", "12345670")]
         [InlineData(BarcodeTypes.Upca, "123456789012", "123456789012")]
+        [InlineData(BarcodeTypes.Upce, "0123456", "01234565")]
         [InlineData(BarcodeTypes.Isbn13, "9781234567897", "9781234567897")]
         [InlineData(BarcodeTypes.Code93, "HELLO123", "HELLO1237N")]
         [InlineData(BarcodeTypes.Code128, "ABC123xyz", "ABC123xyz")]

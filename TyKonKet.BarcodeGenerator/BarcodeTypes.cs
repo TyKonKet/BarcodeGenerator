@@ -59,5 +59,11 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         [BarcodeEncoding("CODABAR")]
         Codabar = 8,
+
+        /// <summary>
+        /// Universal Product Code (UPC) E. A compact version of UPC-A for small packages where space is limited.
+        /// </summary>
+        [BarcodeEncoding("UPC-E")]
+        Upce = 9,
     }
 }
