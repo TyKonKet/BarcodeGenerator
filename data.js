@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763475529521,
+  "lastUpdate": 1763475530972,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -4096,6 +4096,54 @@ window.BENCHMARK_DATA = {
             "value": 25614.29476224459,
             "unit": "ns",
             "range": "± 145.01326680004976"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "2a4eec1a1abfcf62e7d58376575fcbb6946ba0b2",
+          "message": "Update feature-agent documentation to include guidelines for prototyping with Playground and scripts",
+          "timestamp": "2025-11-18T15:12:27+01:00",
+          "tree_id": "ea1620a2409aa8a170cf9850bed9fb8598517b24",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/2a4eec1a1abfcf62e7d58376575fcbb6946ba0b2"
+        },
+        "date": 1763475530387,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 16096.650204467773,
+            "unit": "ns",
+            "range": "± 150.68455409022857"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 16244.781182425362,
+            "unit": "ns",
+            "range": "± 148.22728739270693"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 18776.48343985421,
+            "unit": "ns",
+            "range": "± 59.49961549473467"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 25938.014256403996,
+            "unit": "ns",
+            "range": "± 92.3619129082859"
           }
         ]
       }
