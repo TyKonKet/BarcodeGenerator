@@ -246,6 +246,6 @@ The validation API is optimized for performance:
 
 ## Compatibility
 
-- **Minimum .NET Version:** .NET Standard 2.0
+- **Minimum .NET Version:** .NET Framework 4.6.2 / .NET Standard 2.0
 - **Breaking Changes:** None - this is an additive API
 - **Thread Safety:** All methods are thread-safe
