@@ -245,6 +245,84 @@ CODE-39 supports optional modulo-43 check digit calculation. You can manually ca
 char checkDigit = Code39Encoder.GetCheckDigit("ABC123"); // Returns 'X'
 ```
 
+### Codabar = 8
+
+Codabar is a linear barcode symbology used in libraries, blood banks, and logistics for serial number tracking and labeling.
+
+#### Specifications
+- **Encoding**: Variable length numeric with special characters
+- **Input Format**: String with start/stop character, data, and end start/stop character
+- **Character Set**: 
+  - Digits (0-9)
+  - Special characters: -, $, :, /, ., +
+  - Start/Stop characters: A, B, C, D (required at both ends)
+- **Applications**: Libraries, blood banks, FedEx airbills, photo labs, medical sample tracking
+
+#### Example
+```csharp
+using var barcode = new Barcode(options => options.Type = BarcodeTypes.Codabar);
+string result = barcode.Encode("A123456A"); // Returns: "A123456A"
+```
+
+#### Start/Stop Characters
+Codabar requires start and stop characters (A, B, C, D). These characters must match or can be different:
+
+```csharp
+// Matching start/stop
+barcode.Encode("A123456A");         // Start: A, Stop: A
+barcode.Encode("B987654B");         // Start: B, Stop: B
+
+// Mixed start/stop (allowed)
+barcode.Encode("A123456B");         // Start: A, Stop: B
+barcode.Encode("C789012D");         // Start: C, Stop: D
+```
+
+#### Character Set Examples
+```csharp
+// Numeric only
+barcode.Encode("A1234567890A");
+
+// With special characters
+barcode.Encode("B12-34-56B");       // Hyphens
+barcode.Encode("C$10.50C");         // Currency
+barcode.Encode("D1:2:3D");          // Colons
+barcode.Encode("A1/2/3A");          // Slashes
+barcode.Encode("B1+2+3B");          // Plus signs
+```
+
+#### Input Validation
+```csharp
+// Valid inputs
+barcode.Encode("A123456A");         // Standard format
+barcode.Encode("B$100.00B");        // With special chars
+barcode.Encode("C1-2-3C");          // With hyphens
+
+// Automatic uppercase conversion
+barcode.Encode("a123456a");         // Converted to "A123456A"
+barcode.Encode("b987654b");         // Converted to "B987654B"
+
+// Invalid inputs - will throw FormatException
+barcode.Encode("123456");           // Missing start/stop characters
+barcode.Encode("A123456");          // Missing stop character
+barcode.Encode("E123456E");         // Invalid start/stop (E not allowed)
+barcode.Encode("A123ABC456A");      // Letters in data (not allowed)
+```
+
+#### Use Cases
+```csharp
+// Library tracking
+barcode.Encode("A1234567890A");     // Book ID
+
+// Blood bank samples
+barcode.Encode("B" + sampleId + "B");
+
+// Package tracking
+barcode.Encode("C" + trackingNumber + "C");
+
+// Photo lab orders
+barcode.Encode("D" + orderNumber + "D");
+```
+
 ### Code128 = 5
 
 Code 128 is a high-density barcode symbology for alphanumeric or numeric-only barcodes, widely used in logistics, shipping, and inventory management.
@@ -317,10 +395,11 @@ barcode.Encode("Test\u0200");       // Unicode beyond ASCII not supported
 
 ## Future Types (Not Yet Implemented)
 
-The following barcode types are defined in the enum but not yet implemented:
-
-### Code39 = 6
-Code 39 - An alphanumeric barcode used in various industries including automotive and defense.
+Currently all standard barcode types are implemented. Future enhancements may include:
+- QR codes and 2D barcodes
+- DataMatrix
+- PDF417
+- Additional 1D symbologies
 
 ## Usage Examples
 
@@ -338,6 +417,9 @@ public Barcode CreateBarcodeForUseCase(string data, string useCase)
         "usa-retail" => new Barcode(options => options.Type = BarcodeTypes.Upca),
         "shipping" => new Barcode(options => options.Type = BarcodeTypes.Code128),
         "inventory" => new Barcode(options => options.Type = BarcodeTypes.Code128),
+        "library" => new Barcode(options => options.Type = BarcodeTypes.Codabar),
+        "blood-bank" => new Barcode(options => options.Type = BarcodeTypes.Codabar),
+        "medical" => new Barcode(options => options.Type = BarcodeTypes.Codabar),
         _ => new Barcode(options => options.Type = BarcodeTypes.Ean13)
     };
 }
@@ -355,6 +437,8 @@ public static bool IsValidForBarcodeType(string input, BarcodeTypes type)
         BarcodeTypes.Ean8 => input?.Length == 7 && input.All(char.IsDigit),
         BarcodeTypes.Code93 => IsValidCode93(input),
         BarcodeTypes.Code128 => IsValidCode128(input),
+        BarcodeTypes.Code39 => IsValidCode39(input),
+        BarcodeTypes.Codabar => IsValidCodabar(input),
         _ => false
     };
 }
@@ -365,6 +449,28 @@ private static bool IsValidCode93(string input)
     
     const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 $%+-./ ";
     return input.All(c => validChars.Contains(c));
+}
+
+private static bool IsValidCode39(string input)
+{
+    if (string.IsNullOrEmpty(input)) return false;
+    
+    const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 $%+-./ ";
+    return input.All(c => validChars.Contains(c));
+}
+
+private static bool IsValidCodabar(string input)
+{
+    if (string.IsNullOrEmpty(input) || input.Length < 3) return false;
+    
+    // Must start and end with A, B, C, or D
+    char start = char.ToUpper(input[0]);
+    char end = char.ToUpper(input[^1]);
+    if (!"ABCD".Contains(start) || !"ABCD".Contains(end)) return false;
+    
+    // Middle characters must be 0-9 or special chars
+    const string validDataChars = "0123456789-$:/.+";
+    return input[1..^1].All(c => validDataChars.Contains(c));
 }
 
 private static bool IsValidCode128(string input)
@@ -396,6 +502,8 @@ public static void ConfigureForBarcodeType(BarcodeOptions options, BarcodeTypes 
             
         case BarcodeTypes.Code93:
         case BarcodeTypes.Code128:
+        case BarcodeTypes.Code39:
+        case BarcodeTypes.Codabar:
             // Alphanumeric - may need more height for readability
             options.Height = 60;
             options.Scaling = 3;
@@ -416,7 +524,9 @@ public void ProcessMixedBarcodes()
         ("978123456789", BarcodeTypes.Isbn13),
         ("1234567", BarcodeTypes.Ean8),
         ("PRODUCT-001", BarcodeTypes.Code93),
-        ("ABC123xyz", BarcodeTypes.Code128)
+        ("ABC123xyz", BarcodeTypes.Code128),
+        ("PART-123", BarcodeTypes.Code39),
+        ("A123456A", BarcodeTypes.Codabar)
     };
     
     foreach (var (data, type) in barcodeData)
