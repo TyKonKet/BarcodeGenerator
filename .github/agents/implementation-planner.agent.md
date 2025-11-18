@@ -1,5 +1,5 @@
 ---
-name: implementation-planner
+name: implementation-planner-agent
 description: Creates detailed implementation plans and technical specifications in markdown format
 tools: ["read", "search", "edit"]
 ---
