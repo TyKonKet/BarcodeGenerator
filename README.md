@@ -141,7 +141,29 @@ barcode.Export("output/{barcode}_{quality}.{format}", SKEncodedImageFormat.Png, 
 // Creates: output/1234567890128_95.png
 ```
 
-> **💡 Need more help?** Check out our [Getting Started Guide](docs/getting-started.md) for step-by-step tutorials and examples.
+### ✅ **Validate Before Encoding**
+```csharp
+// NEW: Validate barcode data without encoding
+var result = BarcodeValidator.Validate("123456789012", BarcodeTypes.Ean13);
+if (result.IsValid)
+{
+    Console.WriteLine($"✓ Valid: {result.ValidatedBarcode}");
+    // Output: ✓ Valid: 1234567890128 (with check digit)
+}
+else
+{
+    Console.WriteLine($"✗ Errors: {string.Join(", ", result.Errors)}");
+    // Get suggestions for compatible barcode types (opt-in)
+    var resultWithSuggestions = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13, includeSuggestions: true);
+    if (resultWithSuggestions.SuggestedTypes.Count > 0)
+    {
+        Console.WriteLine($"💡 Try: {string.Join(", ", resultWithSuggestions.SuggestedTypes)}");
+    }
+}
+```
+
+> **💡 Need more help?** Check out our [Getting Started Guide](docs/getting-started.md) for step-by-step tutorials and examples.  
+> **📚 Validation API:** See the complete [Validation API Documentation](docs/api/barcode-validation.md) for detailed usage.
 
 ---
 
@@ -211,10 +233,10 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 
 ### ✅ **Recently Completed**
 - [x] **CODE-39** encoder - Automotive and defense industry standard
+- [x] **Validation API** - Standalone barcode validation without generation ✨ NEW!
 
 ### 🚧 **Coming Soon**
 - [ ] **QR Code** support - 2D barcode generation
-- [ ] **Validation API** - Standalone barcode validation without generation
 - [ ] **Batch processing** - Generate multiple barcodes efficiently
 - [ ] **SVG export** - Vector format support
 
