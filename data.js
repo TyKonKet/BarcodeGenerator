@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763507004395,
+  "lastUpdate": 1763507005254,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -17254,6 +17254,54 @@ window.BENCHMARK_DATA = {
             "value": 37043.74407087053,
             "unit": "ns",
             "range": "± 319.2637797717229"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "4ff7163eb13ce7a98697eee57682b97414844221",
+          "message": "Merge pull request #33 from TyKonKet/copilot/add-barcode-validation-api\n\nAdd standalone validation API for barcodes without encoding with opt-in type suggestions",
+          "timestamp": "2025-11-18T23:55:44+01:00",
+          "tree_id": "0aded1443c11492713daf8b95b3cd7ebadbe14a2",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/4ff7163eb13ce7a98697eee57682b97414844221"
+        },
+        "date": 1763507005055,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 17869.13615199498,
+            "unit": "ns",
+            "range": "± 166.47255289413042"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 22079.446298452523,
+            "unit": "ns",
+            "range": "± 186.07448807098208"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 23262.945053100586,
+            "unit": "ns",
+            "range": "± 49.99351863938585"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 36731.88999720982,
+            "unit": "ns",
+            "range": "± 242.68440027899453"
           }
         ]
       }
