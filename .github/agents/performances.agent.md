@@ -1,4 +1,5 @@
 ---
+name: performances-agent
 description: 'Performance optimization and benchmarking assistant for BarcodeGenerator library.'
 tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'memory/*', 'microsoft-docs/*', 'sequentialthinking/*', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'extensions', 'todos', 'runSubagent', 'runTests']
 ---
