@@ -90,13 +90,13 @@ catch (ArgumentNullException ex)
 }
 ```
 
-### Using Suggested Types
+### Using Suggested Types (Opt-in)
 
-When validation fails, the API provides suggestions for compatible barcode types:
+For performance-sensitive scenarios, type suggestions are opt-in. Enable them by setting `includeSuggestions: true`:
 
 ```csharp
-// Try to validate alphanumeric data as EAN-13 (numeric only)
-var result = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13);
+// Enable suggestions for better developer experience (with slight performance cost)
+var result = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13, includeSuggestions: true);
 
 if (!result.IsValid)
 {
@@ -117,6 +117,10 @@ if (!result.IsValid)
         }
     }
 }
+
+// Default behavior (fastest, no suggestions)
+var fastResult = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13);
+// fastResult.SuggestedTypes will be empty even on failure
 ```
 
 ## API Reference
@@ -125,19 +129,23 @@ if (!result.IsValid)
 
 #### Methods
 
-##### `Validate(string barcode, BarcodeTypes type)`
+##### `Validate(string barcode, BarcodeTypes type, bool includeSuggestions = false)`
 
 Validates a barcode string for the specified barcode type.
 
 **Parameters:**
 - `barcode` (string) - The barcode string to validate
 - `type` (BarcodeTypes) - The barcode type to validate against
+- `includeSuggestions` (bool, optional) - When true, suggests compatible barcode types if validation fails. Default is false for optimal performance.
 
 **Returns:**
 - `BarcodeValidationResult` - The validation result
 
 **Throws:**
 - `ArgumentNullException` - When `barcode` is null
+
+**Performance Note:**
+Setting `includeSuggestions: true` will test the input against all barcode types when validation fails, which may impact performance in high-throughput scenarios. Use it only when you need type suggestions.
 
 ### BarcodeValidationResult Class
 

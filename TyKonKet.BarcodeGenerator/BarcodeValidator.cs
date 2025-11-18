@@ -19,9 +19,10 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         /// <param name="barcode">The barcode string to validate.</param>
         /// <param name="type">The barcode type to validate against.</param>
+        /// <param name="includeSuggestions">When true, suggests compatible barcode types if validation fails. Default is false for optimal performance.</param>
         /// <returns>A <see cref="BarcodeValidationResult"/> containing validation status and details.</returns>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is null.</exception>
-        public static BarcodeValidationResult Validate(string barcode, BarcodeTypes type)
+        public static BarcodeValidationResult Validate(string barcode, BarcodeTypes type, bool includeSuggestions = false)
         {
             if (barcode == null)
             {
@@ -38,8 +39,8 @@ namespace TyKonKet.BarcodeGenerator
                     var allowedCharset = GetAllowedCharsetDescription(type);
                     errors.Add($"Invalid character set. Only {allowedCharset} are allowed for {type.GetDisplayName()}.");
                     
-                    // Find compatible barcode types
-                    var suggestedTypes = FindCompatibleTypes(barcode, type);
+                    // Find compatible barcode types only if requested
+                    var suggestedTypes = includeSuggestions ? FindCompatibleTypes(barcode, type) : Array.Empty<BarcodeTypes>();
                     return new BarcodeValidationResult(errors, type, suggestedTypes);
                 }
 
@@ -51,13 +52,13 @@ namespace TyKonKet.BarcodeGenerator
             catch (FormatException ex)
             {
                 errors.Add(ex.Message);
-                var suggestedTypes = FindCompatibleTypes(barcode, type);
+                var suggestedTypes = includeSuggestions ? FindCompatibleTypes(barcode, type) : Array.Empty<BarcodeTypes>();
                 return new BarcodeValidationResult(errors, type, suggestedTypes);
             }
             catch (ArgumentException ex)
             {
                 errors.Add(ex.Message);
-                var suggestedTypes = FindCompatibleTypes(barcode, type);
+                var suggestedTypes = includeSuggestions ? FindCompatibleTypes(barcode, type) : Array.Empty<BarcodeTypes>();
                 return new BarcodeValidationResult(errors, type, suggestedTypes);
             }
         }

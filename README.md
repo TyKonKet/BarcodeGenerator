@@ -153,10 +153,11 @@ if (result.IsValid)
 else
 {
     Console.WriteLine($"✗ Errors: {string.Join(", ", result.Errors)}");
-    // Get suggestions for compatible barcode types
-    if (result.SuggestedTypes.Count > 0)
+    // Get suggestions for compatible barcode types (opt-in)
+    var resultWithSuggestions = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13, includeSuggestions: true);
+    if (resultWithSuggestions.SuggestedTypes.Count > 0)
     {
-        Console.WriteLine($"💡 Try: {string.Join(", ", result.SuggestedTypes)}");
+        Console.WriteLine($"💡 Try: {string.Join(", ", resultWithSuggestions.SuggestedTypes)}");
     }
 }
 ```

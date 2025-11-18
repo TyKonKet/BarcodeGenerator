@@ -147,7 +147,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("123456", BarcodeTypes.Code39)] // Should suggest numeric types like Ean8, Upca, etc.
         public void Validate_ShouldProvideSuggestedTypes_WhenValidationFails(string input, BarcodeTypes type)
         {
-            var result = BarcodeValidator.Validate(input, type);
+            var result = BarcodeValidator.Validate(input, type, includeSuggestions: true);
 
             Assert.False(result.IsValid);
             Assert.NotNull(result.SuggestedTypes);
@@ -160,7 +160,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [Fact]
         public void Validate_ShouldSuggestCode128_ForAlphanumericInput()
         {
-            var result = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13);
+            var result = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13, includeSuggestions: true);
 
             Assert.False(result.IsValid);
             Assert.Contains(BarcodeTypes.Code128, result.SuggestedTypes);
@@ -169,7 +169,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [Fact]
         public void Validate_ShouldNotHaveSuggestedTypes_WhenValidationSucceeds()
         {
-            var result = BarcodeValidator.Validate("123456789012", BarcodeTypes.Ean13);
+            var result = BarcodeValidator.Validate("123456789012", BarcodeTypes.Ean13, includeSuggestions: true);
 
             Assert.True(result.IsValid);
             Assert.Empty(result.SuggestedTypes);
@@ -179,16 +179,35 @@ namespace TyKonKet.BarcodeGenerator.Tests
         public void Validate_ShouldSuggestNumericTypes_ForNumericInput()
         {
             // Input that's numeric but fails for Code39
-            var result = BarcodeValidator.Validate("123456", BarcodeTypes.Code39);
+            var result = BarcodeValidator.Validate("123456", BarcodeTypes.Code39, includeSuggestions: true);
 
             Assert.True(result.IsValid); // Code39 accepts digits
             // But let's test with a pure numeric that might fail length checks
-            result = BarcodeValidator.Validate("12", BarcodeTypes.Ean13);
+            result = BarcodeValidator.Validate("12", BarcodeTypes.Ean13, includeSuggestions: true);
 
             Assert.False(result.IsValid);
             // Should suggest other numeric types
             var hasNumericSuggestion = result.SuggestedTypes.Count > 0;
             Assert.True(hasNumericSuggestion);
+        }
+
+        [Fact]
+        public void Validate_ShouldNotProvideSuggestions_WhenNotRequested()
+        {
+            var result = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13);
+
+            Assert.False(result.IsValid);
+            Assert.Empty(result.SuggestedTypes);
+        }
+
+        [Fact]
+        public void Validate_ShouldDefaultToNoSuggestions_ForPerformance()
+        {
+            // Default behavior should not compute suggestions
+            var result = BarcodeValidator.Validate("INVALID", BarcodeTypes.Upca);
+
+            Assert.False(result.IsValid);
+            Assert.Empty(result.SuggestedTypes);
         }
     }
 }
