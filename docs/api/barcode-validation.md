@@ -45,7 +45,7 @@ var ean13Result = BarcodeValidator.Validate("123456789012", BarcodeTypes.Ean13);
 
 // UPC-A (Universal Product Code)
 var upcaResult = BarcodeValidator.Validate("12345678905", BarcodeTypes.Upca);
-// Returns: IsValid=true, ValidatedBarcode="012345678905"
+// Returns: IsValid=true, ValidatedBarcode="123456789050"
 
 // ISBN-13 (International Standard Book Number)
 var isbnResult = BarcodeValidator.Validate("978014300723", BarcodeTypes.Isbn13);
@@ -177,7 +177,7 @@ List of suggested compatible barcode types that would accept the input data. Thi
 |------|---------------|-------------|---------|
 | **EAN-13** | Digits (0-9) | Auto-computed | `1234567890128` |
 | **EAN-8** | Digits (0-9) | Auto-computed | `12345670` |
-| **UPC-A** | Digits (0-9) | Auto-computed | `012345678905` |
+| **UPC-A** | Digits (0-9) | Auto-computed | `123456789050` |
 | **UPC-E** | Digits (0-9) | Auto-computed | `01234565` |
 | **ISBN-13** | Digits (0-9), must start with 978/979 | Auto-computed | `9780143007234` |
 | **CODE-39** | A-Z, 0-9, space, .$+%-/ | None (optional) | `HELLO-WORLD` |
@@ -204,6 +204,19 @@ The validation API differs from the encoding API in several ways:
 | **Output** | Validation result | SKImage + file export |
 | **Use Case** | Pre-validation | Final barcode generation |
 | **Dependencies** | Minimal | SkiaSharp rendering |
+
+### Normalization and length rules
+
+- Case normalization:
+    - Code39 and Codabar inputs are normalized to uppercase before validation.
+    - Code93 is strict: mixed/lowercase inputs are rejected; use uppercase A–Z, digits, and .$+%-/ only.
+    - Code128 accepts all ASCII printable characters as-is.
+- Length validation (no silent padding/truncation in validation):
+    - EAN-13 and ISBN-13: only 12 (body) or 13 (full) digits are accepted.
+    - EAN-8: only 7 or 8 digits.
+    - UPC-A: only 11 (body) or 12 (full) digits.
+    - UPC-E: only 7 or 8 digits.
+    - Non-numeric symbologies (Code39, Code93, Code128, Codabar) have no fixed length constraints.
 
 ## Migration from Encoding-based Validation
 

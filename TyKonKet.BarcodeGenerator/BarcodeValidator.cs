@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using TyKonKet.BarcodeGenerator.Encoders;
+using TyKonKet.BarcodeGenerator.Encoders.Abstract;
 using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator
@@ -32,19 +34,33 @@ namespace TyKonKet.BarcodeGenerator
 
             try
             {
+                // Normalize input for case-insensitive symbologies before charset validation
+                var normalized = NormalizeInput(barcode, type);
+
                 // Validate charset based on barcode type
-                if (!ValidateCharset(barcode, type))
+                if (!ValidateCharset(normalized, type))
                 {
                     var allowedCharset = GetAllowedCharsetDescription(type);
                     errors.Add($"Invalid character set. Only {allowedCharset} are allowed for {type.GetDisplayName()}.");
-                    
+
                     // Find compatible barcode types only if requested
-                    var suggestedTypes = includeSuggestions ? FindCompatibleTypes(barcode, type) : Array.Empty<BarcodeTypes>();
+                    var suggestedTypes = includeSuggestions ? FindCompatibleTypes(normalized, type) : Array.Empty<BarcodeTypes>();
+                    return new BarcodeValidationResult(errors, type, suggestedTypes);
+                }
+
+                // Enforce per-type length rules before formatting (avoids silent pad/truncate)
+                if (!ValidateLength(normalized, type, out string? lengthError))
+                {
+                    if (!string.IsNullOrEmpty(lengthError))
+                    {
+                        errors.Add(lengthError);
+                    }
+                    var suggestedTypes = includeSuggestions ? FindCompatibleTypes(normalized, type) : Array.Empty<BarcodeTypes>();
                     return new BarcodeValidationResult(errors, type, suggestedTypes);
                 }
 
                 // Compute the validated barcode with check digits
-                var validatedBarcode = ComputeValidatedBarcode(barcode, type);
+                var validatedBarcode = ComputeValidatedBarcodeWithTypeRules(normalized, type);
 
                 return new BarcodeValidationResult(validatedBarcode, type);
             }
@@ -60,6 +76,19 @@ namespace TyKonKet.BarcodeGenerator
                 var suggestedTypes = includeSuggestions ? FindCompatibleTypes(barcode, type) : Array.Empty<BarcodeTypes>();
                 return new BarcodeValidationResult(errors, type, suggestedTypes);
             }
+        }
+
+        /// <summary>
+        /// Normalizes the raw input according to type-specific casing rules.
+        /// </summary>
+        private static string NormalizeInput(string barcode, BarcodeTypes type)
+        {
+            return type switch
+            {
+                BarcodeTypes.Code39 => barcode.ToUpper(CultureInfo.CurrentCulture),
+                BarcodeTypes.Codabar => barcode.ToUpper(CultureInfo.CurrentCulture),
+                _ => barcode,
+            };
         }
 
         /// <summary>
@@ -109,27 +138,114 @@ namespace TyKonKet.BarcodeGenerator
             };
         }
 
+        // Removed legacy ComputeValidatedBarcode method in favor of ComputeValidatedBarcodeWithTypeRules
+
         /// <summary>
-        /// Computes the validated barcode with check digits for the given barcode type.
+        /// Applies type-specific validation/normalization and returns the final validated barcode string.
         /// </summary>
-        /// <param name="barcode">The barcode string to validate.</param>
-        /// <param name="type">The barcode type.</param>
-        /// <returns>The validated barcode with check digits.</returns>
-        private static string ComputeValidatedBarcode(string barcode, BarcodeTypes type)
+        private static string ComputeValidatedBarcodeWithTypeRules(string barcode, BarcodeTypes type)
         {
-            return type switch
+            switch (type)
             {
-                BarcodeTypes.Ean13 => Ean13Encoder.FormatBarcode(barcode),
-                BarcodeTypes.Ean8 => Ean8Encoder.FormatBarcode(barcode),
-                BarcodeTypes.Upca => UpcaEncoder.FormatBarcode(barcode),
-                BarcodeTypes.Upce => UpceEncoder.FormatBarcode(barcode),
-                BarcodeTypes.Isbn13 => Isbn13Encoder.FormatBarcode(barcode),
-                BarcodeTypes.Code39 => Code39Encoder.FormatBarcode(barcode),
-                BarcodeTypes.Code93 => Code93Encoder.FormatBarcode(barcode),
-                BarcodeTypes.Code128 => barcode, // Code128 doesn't format barcode, returns as-is
-                BarcodeTypes.Codabar => CodabarEncoder.FormatBarcode(barcode),
-                _ => throw new InvalidOperationException($"Unknown barcode type: {type}")
-            };
+                case BarcodeTypes.Isbn13:
+                    // Normalize to 12-digit ISBN body (validates 978/979 prefix), then append EAN check digit
+                    var body12 = Isbn13Encoder.FormatBarcode(barcode);
+                    return EanEncoder.FormatBarcode(body12, 13);
+
+                case BarcodeTypes.Upca:
+                    // Normalize via formatter (keeps same value if already valid). For 11-digit input, compute check digit from 11 digits.
+                    return UpcaEncoder.FormatBarcode(barcode);
+
+                case BarcodeTypes.Ean13:
+                    return Ean13Encoder.FormatBarcode(barcode);
+
+                case BarcodeTypes.Ean8:
+                    return Ean8Encoder.FormatBarcode(barcode);
+
+                case BarcodeTypes.Upce:
+                    return UpceEncoder.FormatBarcode(barcode);
+
+                case BarcodeTypes.Code39:
+                    return Code39Encoder.FormatBarcode(barcode);
+
+                case BarcodeTypes.Code93:
+                    return Code93Encoder.FormatBarcode(barcode);
+
+                case BarcodeTypes.Code128:
+                    return barcode;
+
+                case BarcodeTypes.Codabar:
+                    return CodabarEncoder.FormatBarcode(barcode);
+
+                default:
+                    throw new InvalidOperationException($"Unknown barcode type: {type}");
+            }
+        }
+
+        /// <summary>
+        /// Validates the input length rules for the given barcode type.
+        /// Returns false and sets an error message when input length is unsupported.
+        /// </summary>
+        private static bool ValidateLength(string barcode, BarcodeTypes type, out string? error)
+        {
+            error = null;
+            switch (type)
+            {
+                case BarcodeTypes.Ean13:
+                    if (barcode.Length is not 12 and not 13)
+                    {
+                        error = "EAN-13 requires 12 or 13 digits.";
+                        return false;
+                    }
+                    
+                    return true;
+
+                case BarcodeTypes.Ean8:
+                    if (barcode.Length is not 7 and not 8)
+                    {
+                        error = "EAN-8 requires 7 or 8 digits.";
+                        return false;
+                    }
+                    
+                    return true;
+
+                case BarcodeTypes.Upca:
+                    if (barcode.Length is not 11 and not 12)
+                    {
+                        error = "UPC-A requires 11 or 12 digits.";
+                        return false;
+                    }
+                    
+                    return true;
+
+                case BarcodeTypes.Upce:
+                    if (barcode.Length is not 7 and not 8)
+                    {
+                        error = "UPC-E requires 7 or 8 digits.";
+                        return false;
+                    }
+                    
+                    return true;
+
+                case BarcodeTypes.Isbn13:
+                    if (barcode.Length is not 12 and not 13)
+                    {
+                        error = "ISBN-13 requires 12 or 13 digits (including prefix 978/979).";
+                        return false;
+                    }
+                    
+                    return true;
+
+                // Non-numeric symbologies have no fixed length constraints
+                case BarcodeTypes.Code39:
+                case BarcodeTypes.Code93:
+                case BarcodeTypes.Code128:
+                case BarcodeTypes.Codabar:
+                    return true;
+
+                default:
+                    return true;
+            }
         }
 
         /// <summary>
@@ -166,11 +282,12 @@ namespace TyKonKet.BarcodeGenerator
 
                 try
                 {
-                    // Try to validate with this type
-                    if (ValidateCharset(barcode, type))
+                    // Try to validate with this type (apply normalization per type)
+                    var normalized = NormalizeInput(barcode, type);
+                    if (ValidateCharset(normalized, type) && ValidateLength(normalized, type, out _))
                     {
                         // Try to format the barcode to ensure it's fully valid
-                        ComputeValidatedBarcode(barcode, type);
+                        ComputeValidatedBarcodeWithTypeRules(normalized, type);
                         compatibleTypes.Add(type);
                     }
                 }

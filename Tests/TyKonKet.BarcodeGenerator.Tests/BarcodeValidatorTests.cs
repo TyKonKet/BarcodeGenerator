@@ -12,7 +12,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
         [InlineData("9780143007234", BarcodeTypes.Isbn13, "9780143007234")]
         [InlineData("1234567", BarcodeTypes.Ean8, "12345670")]
         [InlineData("12345670", BarcodeTypes.Ean8, "12345670")]
-        [InlineData("12345678905", BarcodeTypes.Upca, "012345678905")]
+        [InlineData("12345678905", BarcodeTypes.Upca, "123456789050")]
         [InlineData("012345678905", BarcodeTypes.Upca, "012345678905")]
         [InlineData("01234565", BarcodeTypes.Upce, "01234565")]
         [InlineData("0123456", BarcodeTypes.Upce, "01234565")]
@@ -144,7 +144,7 @@ namespace TyKonKet.BarcodeGenerator.Tests
 
         [Theory]
         [InlineData("ABC123", BarcodeTypes.Ean13)] // Should suggest Code39, Code93, Code128
-        [InlineData("123456", BarcodeTypes.Code39)] // Should suggest numeric types like Ean8, Upca, etc.
+        [InlineData("123456", BarcodeTypes.Ean13)] // Should suggest numeric types like Ean8, Upca, etc.
         public void Validate_ShouldProvideSuggestedTypes_WhenValidationFails(string input, BarcodeTypes type)
         {
             var result = BarcodeValidator.Validate(input, type, includeSuggestions: true);

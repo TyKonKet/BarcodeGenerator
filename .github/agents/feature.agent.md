@@ -2,13 +2,7 @@
 name: feature-agent
 description: Main Copilot agent for feature issues in BarcodeGenerator. Implements features end-to-end and orchestrates sub-agents to keep code, docs, tests, and Copilot instructions always in sync.
 tools:
-  - "read"
-  - "edit"
-  - "search"
-  - "shell"
-  - "custom-agent"
-  - "github/*"
-  - "playwright/*"
+  ['edit', 'search', 'new', 'runCommands', 'runTasks', 'github/*', 'playwright/*', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'extensions', 'todos', 'runSubagent', 'runTests', 'custom-agent']
 metadata:
   version: "2.0.0"
   author: "TyKonKet"
