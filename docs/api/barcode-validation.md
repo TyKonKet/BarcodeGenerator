@@ -90,6 +90,35 @@ catch (ArgumentNullException ex)
 }
 ```
 
+### Using Suggested Types
+
+When validation fails, the API provides suggestions for compatible barcode types:
+
+```csharp
+// Try to validate alphanumeric data as EAN-13 (numeric only)
+var result = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13);
+
+if (!result.IsValid)
+{
+    Console.WriteLine("Validation failed. Suggested compatible types:");
+    foreach (var suggestedType in result.SuggestedTypes)
+    {
+        Console.WriteLine($"  - {suggestedType}");
+        // Output might include: Code39, Code93, Code128
+    }
+    
+    // Automatically retry with first suggested type
+    if (result.SuggestedTypes.Count > 0)
+    {
+        var retryResult = BarcodeValidator.Validate("ABC123", result.SuggestedTypes[0]);
+        if (retryResult.IsValid)
+        {
+            Console.WriteLine($"Success with {result.SuggestedTypes[0]}: {retryResult.ValidatedBarcode}");
+        }
+    }
+}
+```
+
 ## API Reference
 
 ### BarcodeValidator Class
@@ -129,6 +158,10 @@ List of validation errors. Empty if validation succeeded.
 ##### `Type` (BarcodeTypes)
 
 The barcode type that was validated.
+
+##### `SuggestedTypes` (IReadOnlyList<BarcodeTypes>)
+
+List of suggested compatible barcode types that would accept the input data. This property is populated when validation fails and contains barcode types that are compatible with the input string. Empty if validation succeeded or no compatible types were found.
 
 ## Supported Barcode Types
 

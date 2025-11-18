@@ -37,7 +37,10 @@ namespace TyKonKet.BarcodeGenerator
                 {
                     var allowedCharset = GetAllowedCharsetDescription(type);
                     errors.Add($"Invalid character set. Only {allowedCharset} are allowed for {type.GetDisplayName()}.");
-                    return new BarcodeValidationResult(errors, type);
+                    
+                    // Find compatible barcode types
+                    var suggestedTypes = FindCompatibleTypes(barcode, type);
+                    return new BarcodeValidationResult(errors, type, suggestedTypes);
                 }
 
                 // Compute the validated barcode with check digits
@@ -48,12 +51,14 @@ namespace TyKonKet.BarcodeGenerator
             catch (FormatException ex)
             {
                 errors.Add(ex.Message);
-                return new BarcodeValidationResult(errors, type);
+                var suggestedTypes = FindCompatibleTypes(barcode, type);
+                return new BarcodeValidationResult(errors, type, suggestedTypes);
             }
             catch (ArgumentException ex)
             {
                 errors.Add(ex.Message);
-                return new BarcodeValidationResult(errors, type);
+                var suggestedTypes = FindCompatibleTypes(barcode, type);
+                return new BarcodeValidationResult(errors, type, suggestedTypes);
             }
         }
 
@@ -125,6 +130,57 @@ namespace TyKonKet.BarcodeGenerator
                 BarcodeTypes.Codabar => CodabarEncoder.FormatBarcode(barcode),
                 _ => throw new InvalidOperationException($"Unknown barcode type: {type}")
             };
+        }
+
+        /// <summary>
+        /// Finds compatible barcode types that would accept the given barcode string.
+        /// </summary>
+        /// <param name="barcode">The barcode string to check.</param>
+        /// <param name="requestedType">The originally requested barcode type (to exclude from suggestions).</param>
+        /// <returns>A list of compatible barcode types.</returns>
+        private static IReadOnlyList<BarcodeTypes> FindCompatibleTypes(string barcode, BarcodeTypes requestedType)
+        {
+            var compatibleTypes = new List<BarcodeTypes>();
+
+            // Check all barcode types except the one that failed
+            var allTypes = new[]
+            {
+                BarcodeTypes.Ean13,
+                BarcodeTypes.Ean8,
+                BarcodeTypes.Upca,
+                BarcodeTypes.Upce,
+                BarcodeTypes.Isbn13,
+                BarcodeTypes.Code39,
+                BarcodeTypes.Code93,
+                BarcodeTypes.Code128,
+                BarcodeTypes.Codabar,
+            };
+
+            foreach (var type in allTypes)
+            {
+                // Skip the requested type that already failed
+                if (type == requestedType)
+                {
+                    continue;
+                }
+
+                try
+                {
+                    // Try to validate with this type
+                    if (ValidateCharset(barcode, type))
+                    {
+                        // Try to format the barcode to ensure it's fully valid
+                        var _ = ComputeValidatedBarcode(barcode, type);
+                        compatibleTypes.Add(type);
+                    }
+                }
+                catch
+                {
+                    // This type is not compatible, continue to the next one
+                }
+            }
+
+            return compatibleTypes;
         }
     }
 }

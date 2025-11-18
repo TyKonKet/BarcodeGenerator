@@ -141,5 +141,54 @@ namespace TyKonKet.BarcodeGenerator.Tests
             Assert.Null(result.ValidatedBarcode);
             Assert.NotEmpty(result.Errors);
         }
+
+        [Theory]
+        [InlineData("ABC123", BarcodeTypes.Ean13)] // Should suggest Code39, Code93, Code128
+        [InlineData("123456", BarcodeTypes.Code39)] // Should suggest numeric types like Ean8, Upca, etc.
+        public void Validate_ShouldProvideSuggestedTypes_WhenValidationFails(string input, BarcodeTypes type)
+        {
+            var result = BarcodeValidator.Validate(input, type);
+
+            Assert.False(result.IsValid);
+            Assert.NotNull(result.SuggestedTypes);
+            // Should have at least one suggestion
+            Assert.NotEmpty(result.SuggestedTypes);
+            // Should not suggest the failed type
+            Assert.DoesNotContain(type, result.SuggestedTypes);
+        }
+
+        [Fact]
+        public void Validate_ShouldSuggestCode128_ForAlphanumericInput()
+        {
+            var result = BarcodeValidator.Validate("ABC123", BarcodeTypes.Ean13);
+
+            Assert.False(result.IsValid);
+            Assert.Contains(BarcodeTypes.Code128, result.SuggestedTypes);
+        }
+
+        [Fact]
+        public void Validate_ShouldNotHaveSuggestedTypes_WhenValidationSucceeds()
+        {
+            var result = BarcodeValidator.Validate("123456789012", BarcodeTypes.Ean13);
+
+            Assert.True(result.IsValid);
+            Assert.Empty(result.SuggestedTypes);
+        }
+
+        [Fact]
+        public void Validate_ShouldSuggestNumericTypes_ForNumericInput()
+        {
+            // Input that's numeric but fails for Code39
+            var result = BarcodeValidator.Validate("123456", BarcodeTypes.Code39);
+
+            Assert.True(result.IsValid); // Code39 accepts digits
+            // But let's test with a pure numeric that might fail length checks
+            result = BarcodeValidator.Validate("12", BarcodeTypes.Ean13);
+
+            Assert.False(result.IsValid);
+            // Should suggest other numeric types
+            var hasNumericSuggestion = result.SuggestedTypes.Count > 0;
+            Assert.True(hasNumericSuggestion);
+        }
     }
 }

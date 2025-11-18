@@ -35,6 +35,13 @@ namespace TyKonKet.BarcodeGenerator
         public BarcodeTypes Type { get; }
 
         /// <summary>
+        /// Gets the list of suggested compatible barcode types.
+        /// This list contains barcode types that would accept the input barcode data.
+        /// Empty if validation succeeded or no compatible types were found.
+        /// </summary>
+        public IReadOnlyList<BarcodeTypes> SuggestedTypes { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="BarcodeValidationResult"/> class for a successful validation.
         /// </summary>
         /// <param name="validatedBarcode">The validated barcode string with check digits.</param>
@@ -45,6 +52,7 @@ namespace TyKonKet.BarcodeGenerator
             this.ValidatedBarcode = validatedBarcode;
             this.Errors = Array.Empty<string>();
             this.Type = type;
+            this.SuggestedTypes = Array.Empty<BarcodeTypes>();
         }
 
         /// <summary>
@@ -52,12 +60,14 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         /// <param name="errors">The list of validation errors.</param>
         /// <param name="type">The barcode type.</param>
-        internal BarcodeValidationResult(IReadOnlyList<string> errors, BarcodeTypes type)
+        /// <param name="suggestedTypes">The list of suggested compatible barcode types.</param>
+        internal BarcodeValidationResult(IReadOnlyList<string> errors, BarcodeTypes type, IReadOnlyList<BarcodeTypes> suggestedTypes)
         {
             this.IsValid = false;
             this.ValidatedBarcode = null;
             this.Errors = errors;
             this.Type = type;
+            this.SuggestedTypes = suggestedTypes;
         }
     }
 }

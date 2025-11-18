@@ -153,6 +153,11 @@ if (result.IsValid)
 else
 {
     Console.WriteLine($"✗ Errors: {string.Join(", ", result.Errors)}");
+    // Get suggestions for compatible barcode types
+    if (result.SuggestedTypes.Count > 0)
+    {
+        Console.WriteLine($"💡 Try: {string.Join(", ", result.SuggestedTypes)}");
+    }
 }
 ```
 
