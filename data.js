@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763475534267,
+  "lastUpdate": 1763475535745,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -16102,6 +16102,54 @@ window.BENCHMARK_DATA = {
             "value": 36778.18725992839,
             "unit": "ns",
             "range": "± 335.550283945168"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "2a4eec1a1abfcf62e7d58376575fcbb6946ba0b2",
+          "message": "Update feature-agent documentation to include guidelines for prototyping with Playground and scripts",
+          "timestamp": "2025-11-18T15:12:27+01:00",
+          "tree_id": "ea1620a2409aa8a170cf9850bed9fb8598517b24",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/2a4eec1a1abfcf62e7d58376575fcbb6946ba0b2"
+        },
+        "date": 1763475535174,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 17635.165662493026,
+            "unit": "ns",
+            "range": "± 200.16793408455234"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 18645.915685017902,
+            "unit": "ns",
+            "range": "± 162.14576241318522"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 23446.125098092216,
+            "unit": "ns",
+            "range": "± 89.69556685839365"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 36118.39577229818,
+            "unit": "ns",
+            "range": "± 314.3026594524817"
           }
         ]
       }
