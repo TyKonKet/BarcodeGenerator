@@ -1,7 +1,7 @@
 # Copilot Instructions for BarcodeGenerator
 
 ## Overview
-**.NET barcode library** using SkiaSharp. Supports EAN-13, UPC-A, ISBN-13, EAN-8, CODE-39, CODE-93, CODE-128, CODABAR. Multi-framework targeting (.NET Standard 2.0, .NET Framework 4.6.2, .NET 6/8/10).
+**.NET barcode library** using SkiaSharp. Supports EAN-13, UPC-A, UPC-E, ISBN-13, EAN-8, CODE-39, CODE-93, CODE-128, CODABAR. Multi-framework targeting (.NET Standard 2.0, .NET Framework 4.6.2, .NET 6/8/10).
 
 ## Quick Build & Test
 ```bash

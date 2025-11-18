@@ -33,12 +33,13 @@ barcode.Export("barcode.png");  // Done! 🎉
 
 ## 🚀 Supported Barcode Types
 
-**8 industry-standard formats** for every use case:
+**9 industry-standard formats** for every use case:
 
 | Type | Use Case | Example |
 |------|----------|---------|
 | **EAN-13** | 🛒 Retail products, European standard | `1234567890128` |
 | **UPC-A** | 🇺🇸 North American retail, grocery | `012345678905` |
+| **UPC-E** | 📦 Compact retail, small packages | `01234565` |
 | **ISBN-13** | 📚 Books and publications | `9781234567897` |
 | **EAN-8** | 📦 Small packages, compact spaces | `12345670` |
 | **CODE-39** | 🏭 Industrial, automotive, defense | `ABC-123` |

@@ -76,6 +76,48 @@ barcode.Encode("123456789012");     // Too long - end-truncated to 11 digits
 barcode.Encode("1234567890A");      // Contains invalid characters
 ```
 
+### Upce = 9
+
+Universal Product Code (UPC-E) is a compressed 6-digit version of UPC-A, designed for small packages where space is limited.
+
+#### Specifications
+- **Encoding**: 8 digits total (1 number system + 6 data digits + 1 check digit)
+- **Input Format**: 6-7 digits (number system defaults to 0 if not provided, check digit calculated automatically)
+- **Character Set**: Numeric only (0-9)
+- **Number System**: 0 or 1 (encoded via parity pattern)
+- **Applications**: Small retail items, cosmetics, chewing gum, travel-size products
+
+#### Example
+```csharp
+using var barcode = new Barcode(options => options.Type = BarcodeTypes.Upce);
+string result = barcode.Encode("0123456"); // Returns: "01234565"
+```
+
+#### Input Validation
+```csharp
+// Valid inputs
+barcode.Encode("0123456");          // 7 digits (number system + 6 data digits)
+barcode.Encode("123456");           // 6 digits (number system defaults to 0)
+barcode.Encode("01234565");         // 8 digits (with check digit)
+
+// Automatic handling
+barcode.Encode("12345");            // Too short - auto-padded with leading zeros
+barcode.Encode("012345678");        // Too long - truncated and check digit recalculated
+
+// Invalid inputs - will throw FormatException
+barcode.Encode("12345A");           // Contains invalid characters
+```
+
+#### Number System and Parity
+UPC-E uses parity patterns to encode the number system digit:
+```csharp
+// Number system 0 (most common)
+barcode.Encode("0123456");          // First digit is 0
+
+// Number system 1
+barcode.Encode("1234567");          // First digit is 1
+```
+
 ### Isbn13 = 3
 
 International Standard Book Number (ISBN-13) used to identify books and similar publications.
@@ -413,6 +455,7 @@ public Barcode CreateBarcodeForUseCase(string data, string useCase)
         "retail" => new Barcode(options => options.Type = BarcodeTypes.Ean13),
         "book" => new Barcode(options => options.Type = BarcodeTypes.Isbn13),
         "small-package" => new Barcode(options => options.Type = BarcodeTypes.Ean8),
+        "compact-retail" => new Barcode(options => options.Type = BarcodeTypes.Upce),
         "logistics" => new Barcode(options => options.Type = BarcodeTypes.Code93),
         "usa-retail" => new Barcode(options => options.Type = BarcodeTypes.Upca),
         "shipping" => new Barcode(options => options.Type = BarcodeTypes.Code128),
@@ -433,6 +476,7 @@ public static bool IsValidForBarcodeType(string input, BarcodeTypes type)
     {
         BarcodeTypes.Ean13 => input?.Length == 12 && input.All(char.IsDigit),
         BarcodeTypes.Upca => input?.Length == 11 && input.All(char.IsDigit),
+        BarcodeTypes.Upce => input?.Length >= 6 && input?.Length <= 8 && input.All(char.IsDigit),
         BarcodeTypes.Isbn13 => input?.Length == 12 && input.All(char.IsDigit),
         BarcodeTypes.Ean8 => input?.Length == 7 && input.All(char.IsDigit),
         BarcodeTypes.Code93 => IsValidCode93(input),
@@ -493,6 +537,7 @@ public static void ConfigureForBarcodeType(BarcodeOptions options, BarcodeTypes 
         case BarcodeTypes.Ean13:
         case BarcodeTypes.Ean8:
         case BarcodeTypes.Upca:
+        case BarcodeTypes.Upce:
         case BarcodeTypes.Isbn13:
             // Numeric barcodes - clean, standard appearance
             options.Height = 50;
@@ -521,6 +566,7 @@ public void ProcessMixedBarcodes()
     {
         ("123456789012", BarcodeTypes.Ean13),
         ("12345678901", BarcodeTypes.Upca),
+        ("0123456", BarcodeTypes.Upce),
         ("978123456789", BarcodeTypes.Isbn13),
         ("1234567", BarcodeTypes.Ean8),
         ("PRODUCT-001", BarcodeTypes.Code93),
@@ -555,9 +601,13 @@ string result = ean13.Encode("123456789012"); // Returns: "1234567890128"
 using var upca = new Barcode(options => options.Type = BarcodeTypes.Upca);
 string result2 = upca.Encode("12345678901"); // Returns: "123456789012"
 
+// Input: 6-7 digits, Output: 8 digits with check digit
+using var upce = new Barcode(options => options.Type = BarcodeTypes.Upce);
+string result3 = upce.Encode("0123456"); // Returns: "01234565"
+
 // Input: variable length, Output: same data (check digit encoded in barcode)
 using var code128 = new Barcode(options => options.Type = BarcodeTypes.Code128);
-string result3 = code128.Encode("ABC123xyz"); // Returns: "ABC123xyz"
+string result4 = code128.Encode("ABC123xyz"); // Returns: "ABC123xyz"
 ```
 
 ## Related Documentation

@@ -22,10 +22,14 @@ BarcodeGenerator is a .NET library that supports multiple barcode types with a f
 | Type | Description | Format |
 |------|-------------|--------|
 | **EAN-13** | European Article Number | 13 digits |
-| **UPC-A** | Universal Product Code | Widely used in North America |
+| **UPC-A** | Universal Product Code | 12 digits, North American retail |
+| **UPC-E** | Compact UPC | 8 digits, small packages |
 | **ISBN-13** | International Standard Book Number | For books |
 | **EAN-8** | Compact EAN version | For small packages |
+| **CODE-39** | Alphanumeric barcode | Industrial, automotive |
 | **CODE-93** | Alphanumeric barcode | Used in logistics |
+| **CODE-128** | High-density barcode | Alphanumeric encoding |
+| **CODABAR** | Numeric barcode | Libraries, blood banks |
 
 ### Key Features
 
