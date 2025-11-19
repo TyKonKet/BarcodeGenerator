@@ -14,10 +14,10 @@
   </PropertyGroup>
 	
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.15.2" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.6" />
   </ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\..\TyKonKet.BarcodeGenerator\TyKonKet.BarcodeGenerator.csproj" />
+    <ProjectReference Include="..\..\src\TyKonKet.BarcodeGenerator\TyKonKet.BarcodeGenerator.csproj" />
   </ItemGroup>
 </Project>

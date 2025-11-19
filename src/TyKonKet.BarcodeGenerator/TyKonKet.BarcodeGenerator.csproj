@@ -49,44 +49,56 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <RepositoryCommit Condition="'$(RepositoryCommit)' == '' and '$(GITHUB_SHA)' != ''">$(GITHUB_SHA)</RepositoryCommit>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <NuGetAuditMode>all</NuGetAuditMode>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
 
   <!-- Packaged Files -->
   <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="icon.png" Pack="True" PackagePath="\" />
     <None Include="icon.ico" />
-    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
-    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <!-- Runtime Dependencies -->
   <ItemGroup>
     <PackageReference Include="PolySharp" Version="1.15.0" PrivateAssets="all" />
-    <PackageReference Include="SkiaSharp" Version="3.119.0" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.119.0" />
+    <PackageReference Include="SkiaSharp" Version="3.119.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.119.1" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <!-- Compatibility (legacy TFMs) -->
   <ItemGroup Condition="'$(TargetFramework)' == 'net462' Or '$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.ValueTuple" Version="4.6.1" />
-    <PackageReference Include="System.Memory" Version="4.5.5" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-    <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="System.Memory" Version="4.6.3" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
+    <PackageReference Include="System.Buffers" Version="4.6.1" />
   </ItemGroup>
 
   <!-- Analyzers -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.100" PrivateAssets="all" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="10.15.0.120848" PrivateAssets="all" />
     <PackageReference Include="Asyncify" Version="0.9.7" PrivateAssets="all" />
     <PackageReference Include="ErrorProne.NET.CoreAnalyzers" Version="0.1.2" PrivateAssets="all" />
     <PackageReference Include="ErrorProne.NET.Structs" Version="0.1.2" PrivateAssets="all" />
     <PackageReference Include="IDisposableAnalyzers" Version="4.0.8" PrivateAssets="all" />
-    <PackageReference Include="Meziantou.Analyzer" Version="2.0.212" PrivateAssets="all" />
+    <PackageReference Include="Meziantou.Analyzer" Version="2.0.254" PrivateAssets="all" />
     <PackageReference Include="ReflectionAnalyzers" Version="0.3.1" PrivateAssets="all" />
-    <PackageReference Include="Roslynator.Analyzers" Version="4.14.0" PrivateAssets="all" />
-    <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.14.0" PrivateAssets="all" />
+    <PackageReference Include="Roslynator.Analyzers" Version="4.14.1" PrivateAssets="all" />
+    <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.14.1" PrivateAssets="all" />
     <PackageReference Include="SharpSource" Version="1.27.1" PrivateAssets="all" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
     <PackageReference Include="Wintellect.Analyzers" Version="1.0.6" PrivateAssets="all" />
