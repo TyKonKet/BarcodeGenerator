@@ -5,7 +5,7 @@ using TyKonKet.BarcodeGenerator.Fonts;
 namespace TyKonKet.BarcodeGenerator.CB.Benchmarks
 {
     [Config(typeof(BenchmarkConfig))]
-    public class CodebarEncoder
+    public class CodabarEncoder
     {
         private const string BARCODE = "A123456A";
 
