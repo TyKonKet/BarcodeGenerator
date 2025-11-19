@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763569337241,
+  "lastUpdate": 1763569349186,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "Ean8Encoder": [
@@ -23970,6 +23970,56 @@ window.BENCHMARK_DATA = {
             "value": 39343.83939034598,
             "unit": "ns",
             "range": "± 170.7871598176543"
+          }
+        ]
+      }
+    ],
+    "Code39Encoder": [
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo Autieri",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "72de2384321f0758f92d132863a7f83688a19c07",
+          "message": "Rename CodebarEncoder to CodabarEncoder\n\nRenamed the `CodebarEncoder` class to `CodabarEncoder` to better align with naming conventions. This involved:\n- Removing `CodebarEncoder` from `CodebarEncoder.cs`.\n- Adding `CodabarEncoder` to `CodabarEncoder.cs` with identical functionality.\nNo functional changes were made to the class or its methods.",
+          "timestamp": "2025-11-19T17:20:40+01:00",
+          "tree_id": "9a12708a7128820a9fa92c847f171fa5fc0136d3",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/72de2384321f0758f92d132863a7f83688a19c07"
+        },
+        "date": 1763569347768,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.SimpleInstance",
+            "value": 442.81042925516766,
+            "unit": "ns",
+            "range": "± 5.005277960741007"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.AdvancedInstance",
+            "value": 1922.8973780314127,
+            "unit": "ns",
+            "range": "± 23.180005156971202"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.EncodingWithoutText",
+            "value": 76186.16164926383,
+            "unit": "ns",
+            "range": "± 267.33597227136147"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.EncodingWithText",
+            "value": 95388.1182016226,
+            "unit": "ns",
+            "range": "± 422.2023748064506"
           }
         ]
       }
