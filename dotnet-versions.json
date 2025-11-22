@@ -2,7 +2,7 @@
   "runs": [
     {
       "Timestamp": "2025-11-22T23:11:43Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "8.0.416"
     }
   ]
 }
