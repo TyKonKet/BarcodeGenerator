@@ -34,7 +34,7 @@ barcode.Export("barcode.png");  // Done! 🎉
 
 ## 🚀 Supported Barcode Types
 
-**9 industry-standard formats** for every use case:
+**10 industry-standard formats** for every use case:
 
 | Type | Use Case | Example |
 |------|----------|---------|
@@ -47,6 +47,7 @@ barcode.Export("barcode.png");  // Done! 🎉
 | **CODE-93** | 📋 Logistics, inventory management | `ABC123` |
 | **CODE-128** | 📊 High-density alphanumeric encoding | `ABC123xyz` |
 | **CODABAR** | 🏥 Libraries, blood banks, logistics | `A123456A` |
+| **ITF** | 📦 Distribution, warehousing, cartons | `12345678` |
 
 ---
 
