@@ -3,6 +3,7 @@
 [![NuGet](https://img.shields.io/nuget/v/TyKonKet.BarcodeGenerator.svg)](https://www.nuget.org/packages/TyKonKet.BarcodeGenerator/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/TyKonKet.BarcodeGenerator.svg)](https://www.nuget.org/packages/TyKonKet.BarcodeGenerator/)
 [![Build Status](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_test_runner.yml/badge.svg)](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_test_runner.yml)
+[![codecov](https://codecov.io/github/TyKonKet/BarcodeGenerator/graph/badge.svg?token=PTPTT5KMO9)](https://codecov.io/github/TyKonKet/BarcodeGenerator)
 [![Benchmarks](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_benchmark_runner.yml/badge.svg)](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_benchmark_runner.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -276,7 +277,7 @@ We welcome contributions from the community! 🎉
 
 **Essential Checks:**
 - Run tests: `dotnet test --configuration Release`
-- Check coverage: `./scripts/run-coverage.sh`
+- Check coverage: `./tools/run-coverage.sh`
 - Follow our [Code of Conduct](CODE_OF_CONDUCT.md)
 
 *Every contribution matters - from typo fixes to new features!* ✨

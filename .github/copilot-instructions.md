@@ -17,7 +17,7 @@ cd Tests/TyKonKet.BarcodeGenerator.Tests
 dotnet test --configuration Release
 
 # Coverage report
-./scripts/run-coverage.sh
+./tools/run-coverage.sh
 ```
 
 **Critical**: Test projects require .NET 10.x SDK. Build main library individually if using older SDK.

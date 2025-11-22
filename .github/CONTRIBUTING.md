@@ -101,7 +101,7 @@ git checkout -b fix/bug-description
 ### 3. 💡 Make Your Changes
 - **Build frequently**: `dotnet build --configuration Release`
 - **Run tests**: `dotnet test --configuration Release`
-- **Check coverage**: `./scripts/run-coverage.sh`
+- **Check coverage**: `./tools/run-coverage.sh`
 - **Follow naming conventions**: `{BarcodeType}Encoder` for new encoders
 
 ### 4. ✅ Quality Checks
@@ -115,7 +115,7 @@ cd Tests/TyKonKet.BarcodeGenerator.Tests
 dotnet test --configuration Release
 
 # Coverage meets threshold (80%+)
-./scripts/run-coverage.sh
+./tools/run-coverage.sh
 ```
 
 ### 5. 📝 Commit & Push
