@@ -209,5 +209,49 @@ namespace TyKonKet.BarcodeGenerator.Tests
             Assert.False(result.IsValid);
             Assert.Empty(result.SuggestedTypes);
         }
+
+        [Theory]
+        [InlineData("12345678", BarcodeTypes.Interleaved2of5, "12345678")]
+        [InlineData("00000000", BarcodeTypes.Interleaved2of5, "00000000")]
+        [InlineData("99999999", BarcodeTypes.Interleaved2of5, "99999999")]
+        [InlineData("1234567890", BarcodeTypes.Interleaved2of5, "1234567890")]
+        public void Validate_ShouldReturnValidResult_ForInterleaved2of5Barcodes(string input, BarcodeTypes type, string expected)
+        {
+            var result = BarcodeValidator.Validate(input, type);
+
+            Assert.True(result.IsValid);
+            Assert.Equal(expected, result.ValidatedBarcode);
+            Assert.Empty(result.Errors);
+            Assert.Equal(type, result.Type);
+        }
+
+        [Theory]
+        [InlineData("123", BarcodeTypes.Interleaved2of5)]
+        [InlineData("12345", BarcodeTypes.Interleaved2of5)]
+        [InlineData("1", BarcodeTypes.Interleaved2of5)]
+        public void Validate_ShouldReturnInvalidResult_ForInterleaved2of5OddLength(string input, BarcodeTypes type)
+        {
+            var result = BarcodeValidator.Validate(input, type);
+
+            Assert.False(result.IsValid);
+            Assert.Null(result.ValidatedBarcode);
+            Assert.NotEmpty(result.Errors);
+            Assert.Contains("even-length", result.Errors[0]);
+            Assert.Equal(type, result.Type);
+        }
+
+        [Theory]
+        [InlineData("ABC123", BarcodeTypes.Interleaved2of5)]
+        [InlineData("12-34", BarcodeTypes.Interleaved2of5)]
+        [InlineData("ABCD", BarcodeTypes.Interleaved2of5)]
+        public void Validate_ShouldReturnInvalidResult_ForInterleaved2of5InvalidCharset(string input, BarcodeTypes type)
+        {
+            var result = BarcodeValidator.Validate(input, type);
+
+            Assert.False(result.IsValid);
+            Assert.Null(result.ValidatedBarcode);
+            Assert.NotEmpty(result.Errors);
+            Assert.Equal(type, result.Type);
+        }
     }
 }

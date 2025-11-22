@@ -123,5 +123,27 @@ namespace TyKonKet.BarcodeGenerator.Utils
         public static Regex CodabarAllowedCharsetRegex { get; } = new Regex(CodabarAllowedCharsetPattern, RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 #endif
 
+        // Pattern for validating Interleaved 2 of 5 barcodes (only digits are allowed).
+        private const string Interleaved2of5AllowedCharsetPattern = "^[0-9]+$";
+
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Gets the compiled regular expression for validating Interleaved 2 of 5 barcodes.
+        /// </summary>
+        /// <returns>A compiled Regex object for Interleaved 2 of 5 barcode validation.</returns>
+        [GeneratedRegex(Interleaved2of5AllowedCharsetPattern, RegexOptions.None, 1000)]
+        private static partial Regex GetInterleaved2of5AllowedCharsetRegex();
+
+        /// <summary>
+        /// Gets the cached regular expression for validating Interleaved 2 of 5 barcodes.
+        /// </summary>
+        public static Regex Interleaved2of5AllowedCharsetRegex => GetInterleaved2of5AllowedCharsetRegex();
+#else
+        /// <summary>
+        /// Gets the cached regular expression for validating Interleaved 2 of 5 barcodes.
+        /// </summary>
+        public static Regex Interleaved2of5AllowedCharsetRegex { get; } = new Regex(Interleaved2of5AllowedCharsetPattern, RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+#endif
+
     }
 }

@@ -8,6 +8,7 @@ BarcodeGenerator is a **.NET barcode library** using SkiaSharp. It supports:
 
 - EAN-13, UPC-A, UPC-E, ISBN-13, EAN-8
 - CODE-39, CODE-93, CODE-128, CODABAR
+- Interleaved 2 of 5 (ITF)
 
 The library targets multiple frameworks: **.NET Standard 2.0**, **.NET Framework 4.6.2**, **.NET 6/8/10**.
 

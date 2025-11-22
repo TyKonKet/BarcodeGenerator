@@ -113,6 +113,7 @@ namespace TyKonKet.BarcodeGenerator
                 BarcodeTypes.Code93 => RegexCache.Code93AllowedCharsetRegex,
                 BarcodeTypes.Code128 => RegexCache.Code128AllowedCharsetRegex,
                 BarcodeTypes.Codabar => RegexCache.CodabarAllowedCharsetRegex,
+                BarcodeTypes.Interleaved2of5 => RegexCache.Interleaved2of5AllowedCharsetRegex,
                 _ => throw new InvalidOperationException($"Unknown barcode type: {type}"),
             };
 
@@ -137,6 +138,7 @@ namespace TyKonKet.BarcodeGenerator
                 BarcodeTypes.Code93 => "uppercase letters (A-Z), digits (0-9), and symbols (- . $ / + % space)",
                 BarcodeTypes.Code128 => "all ASCII printable characters (space to DEL)",
                 BarcodeTypes.Codabar => "digits (0-9) and symbols (- $ : / . +)",
+                BarcodeTypes.Interleaved2of5 => "digits (0-9)",
                 _ => "unknown",
             };
         }
@@ -179,6 +181,9 @@ namespace TyKonKet.BarcodeGenerator
 
                 case BarcodeTypes.Codabar:
                     return CodabarEncoder.FormatBarcode(barcode);
+
+                case BarcodeTypes.Interleaved2of5:
+                    return barcode;
 
                 default:
                     throw new InvalidOperationException($"Unknown barcode type: {type}");
@@ -239,6 +244,15 @@ namespace TyKonKet.BarcodeGenerator
 
                     return true;
 
+                case BarcodeTypes.Interleaved2of5:
+                    if (barcode.Length % 2 != 0)
+                    {
+                        error = "Interleaved 2 of 5 requires even-length numeric data.";
+                        return false;
+                    }
+
+                    return true;
+
                 // Non-numeric symbologies have no fixed length constraints
                 case BarcodeTypes.Code39:
                 case BarcodeTypes.Code93:
@@ -274,6 +288,7 @@ namespace TyKonKet.BarcodeGenerator
                 BarcodeTypes.Code93,
                 BarcodeTypes.Code128,
                 BarcodeTypes.Codabar,
+                BarcodeTypes.Interleaved2of5,
             };
 
             foreach (var type in allTypes)
