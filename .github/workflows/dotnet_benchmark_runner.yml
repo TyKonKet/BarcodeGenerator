@@ -54,7 +54,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          MATRIX_JSON=$(dotnet scripts/bench-tools.cs "$GITHUB_WORKSPACE" \
+          MATRIX_JSON=$(dotnet tools/bench-tools.cs "$GITHUB_WORKSPACE" \
             --list \
             --format GitHubMatrix \
             --includeFailuresInMatrix \

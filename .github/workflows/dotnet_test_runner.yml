@@ -44,7 +44,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          MATRIX_JSON=$(dotnet scripts/test-tools.cs "$GITHUB_WORKSPACE" \
+          MATRIX_JSON=$(dotnet tools/test-tools.cs "$GITHUB_WORKSPACE" \
             --format GitHubMatrix \
             --workspaceRoot "$GITHUB_WORKSPACE")
           echo "matrix<<EOF" >> "$GITHUB_OUTPUT"
