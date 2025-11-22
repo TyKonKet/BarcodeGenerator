@@ -13,31 +13,22 @@ permissions:
   # contents permission to update benchmark contents in gh-pages branch
   contents: write
 
+env:
+  DOTNET_VERSION: '10.x'
+  BENCH_CATEGORY: 'CI'
+  ARTIFACT_RETENTION_DAYS: '1'
+  TERM: xterm
+  DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
 jobs:
-  benchmark:
-    name: ${{ matrix.benchmark }} benchmark
+  prepare:
+    name: Prepare matrix
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        benchmark:
-          - Global
-          - Ean8Encoder
-          - Ean13Encoder
-          - UpcaEncoder
-          - Isbn13Encoder
-          - Code93Encoder
-          - Code39Encoder
-          - Code128Encoder
-          - CodabarEncoder
-    
-    env:
-      TERM: xterm
-      DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION: true
-      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-      DOTNET_NOLOGO: true
-      DOTNET_CLI_TELEMETRY_OPTOUT: true
-    
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,26 +36,151 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 10.x
-      
-      - name: Cache NuGet packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
-          
-      - name: Run ${{ matrix.benchmark }} benchmark
-        run: dotnet run --configuration Release --exporters json --filter '*${{ matrix.benchmark }}*'
-        working-directory: Tests/TyKonKet.BarcodeGenerator.CB
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          cache: true
+          cache-dependency-path: |
+            **/*.csproj
+            **/packages.lock.json
+            **/nuget.config
+            **/Directory.Packages.props
 
-      - name: Store benchmark results
-        uses: benchmark-action/github-action-benchmark@v1
+      - name: Restore (prepare)
+        run: dotnet restore --ignore-failed-sources
+        working-directory: .
+        continue-on-error: true
+
+      - id: set-matrix
+        name: Discover benchmark classes via bench-tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          MATRIX_JSON=$(dotnet scripts/bench-tools.cs "$GITHUB_WORKSPACE" \
+            --list \
+            --format GitHubMatrix \
+            --includeFailuresInMatrix \
+            --filterAny "$BENCH_CATEGORY" \
+            --workspaceRoot "$GITHUB_WORKSPACE")
+          echo "matrix<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$MATRIX_JSON" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+  benchmark:
+    name: Benchmark (${{ matrix.failed && '[FAILED] ' || '' }}${{ matrix.benchmarkName || matrix.projectPath }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    needs: prepare
+    steps:
+      - name: Checkout
+        if: ${{ ! matrix.failed }}
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        if: ${{ ! matrix.failed }}
+        uses: actions/setup-dotnet@v4
         with:
-          name: ${{ matrix.benchmark }}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          cache: true
+          cache-dependency-path: |
+            **/*.csproj
+            **/packages.lock.json
+            **/nuget.config
+            **/Directory.Packages.props
+
+      - name: Fail due to project build failure
+        if: ${{ matrix.failed }}
+        continue-on-error: true
+        run: |
+          echo "::error::Benchmark project failed during discovery."
+          echo "Project: ${{ matrix.projectPath }}"
+          echo "${{ matrix.error }}"
+          exit 1
+
+      - name: Restore dependencies
+        if: ${{ ! matrix.failed }}
+        run: dotnet restore
+        working-directory: ${{ matrix.projectDir }}
+
+      - name: Run ${{ matrix.className }} benchmarks
+        if: ${{ ! matrix.failed }}
+        working-directory: ${{ matrix.projectDir }}
+        run: dotnet run --configuration Release --exporters json --filter "*${{ matrix.className }}*"
+
+      - name: Locate ${{ matrix.className }} report
+        id: locate-report
+        if: ${{ ! matrix.failed }}
+        shell: bash
+        working-directory: ${{ matrix.projectDir }}
+        run: |
+          set -euo pipefail
+          REPORT=$(find BenchmarkDotNet.Artifacts/results -name "*${{ matrix.className }}*-report-full-compressed.json" -print -quit)
+          if [ -z "$REPORT" ]; then
+            echo "No benchmark report found for ${{ matrix.className }}" >&2
+            exit 1
+          fi
+          ABS_REPORT="$PWD/$REPORT"
+          echo "report=$ABS_REPORT" >> "$GITHUB_OUTPUT"
+
+      - name: Upload ${{ matrix.className }} result
+        if: ${{ ! matrix.failed }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-${{ matrix.benchmarkName || matrix.className }}
+          path: ${{ steps.locate-report.outputs.report }}
+          if-no-files-found: error
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+
+  publish:
+    name: Publish (${{ matrix.failed && '[FAILED] ' || '' }}${{ matrix.benchmarkName || matrix.className }})
+    needs: [prepare, benchmark]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: gh-benchmarks-pages
+      cancel-in-progress: false
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    steps:
+      - name: Fail publish for broken project
+        if: ${{ matrix.failed }}
+        run: |
+          echo "::error::Cannot publish results for failed benchmark project."
+          echo "Project: ${{ matrix.projectPath }}"
+          exit 1
+
+      - name: Checkout
+        if: ${{ ! matrix.failed }}
+        uses: actions/checkout@v4
+
+      - name: Download artifact for ${{ matrix.className }}
+        if: ${{ ! matrix.failed }}
+        uses: actions/download-artifact@v4
+        with:
+          name: bench-${{ matrix.benchmarkName || matrix.className }}
+          path: bench
+
+      - name: Locate downloaded ${{ matrix.className }} report
+        id: locate-publish-report
+        if: ${{ ! matrix.failed }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          REPORT=$(find bench -name "*${{ matrix.className }}*-report-full-compressed.json" -print -quit)
+          if [ -z "$REPORT" ]; then
+            echo "No downloaded benchmark report found for ${{ matrix.className }}" >&2
+            exit 1
+          fi
+          echo "report=$REPORT" >> "$GITHUB_OUTPUT"
+
+      - name: Store ${{ matrix.className }} benchmark results
+        if: ${{ ! matrix.failed }}
+        uses: rhysd/github-action-benchmark@v1
+        with:
+          name: ${{ matrix.benchmarkName || matrix.className }}
           tool: 'benchmarkdotnet'
-          output-file-path: Tests/TyKonKet.BarcodeGenerator.CB/BenchmarkDotNet.Artifacts/results/TyKonKet.BarcodeGenerator.CB.Benchmarks.${{ matrix.benchmark }}-report-full-compressed.json
+          output-file-path: ${{ steps.locate-publish-report.outputs.report }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
           benchmark-data-dir-path: ''

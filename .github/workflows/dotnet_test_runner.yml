@@ -7,26 +7,57 @@ on:
   pull_request:
      branches: [ "main" ]
 
+env:
+  DOTNET_VERSION: '10.x'
+  ARTIFACT_RETENTION_DAYS: '1'
+  TERM: xterm
+  DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
 jobs:
+  prepare:
+    name: Prepare matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          cache: true
+          cache-dependency-path: |
+            **/*.csproj
+            **/packages.lock.json
+            **/nuget.config
+            **/Directory.Packages.props
+      - name: Restore (prepare)
+        run: dotnet restore --ignore-failed-sources
+        working-directory: .
+        continue-on-error: true
+      - id: set-matrix
+        name: Discover test projects via test-tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          MATRIX_JSON=$(dotnet scripts/test-tools.cs "$GITHUB_WORKSPACE" \
+            --format GitHubMatrix \
+            --workspaceRoot "$GITHUB_WORKSPACE")
+          echo "matrix<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$MATRIX_JSON" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
 
   test:
-
+    name: Test (${{ matrix.friendlyName }})
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: Tests/TyKonKet.BarcodeGenerator.Tests
-
-    permissions:
-      contents: read
-    
-    env:
-      TERM: xterm
-      DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION: true
-      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-      DOTNET_NOLOGO: true
-      DOTNET_CLI_TELEMETRY_OPTOUT: true
-
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    needs: prepare
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,11 +65,22 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 10.x
-      
-      - name: Run tests with coverage
-        run: >
-            dotnet test
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          cache: true
+          cache-dependency-path: |
+            **/*.csproj
+            **/packages.lock.json
+            **/nuget.config
+            **/Directory.Packages.props
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ${{ matrix.projectDir }}
+
+      - name: Run tests for ${{ matrix.friendlyName }}
+        working-directory: ${{ matrix.projectDir }}
+        run: > 
+          dotnet test
             --configuration Release
             --logger "GitHubActions;summary.includePassedTests=true;summary.includeSkippedTests=true"
             --collect:"XPlat Code Coverage"
@@ -50,13 +92,22 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24
         with:
-          directory: ./Tests/TyKonKet.BarcodeGenerator.Tests/coverage
+          directory: ${{ matrix.projectDir }}/coverage
           files: '**/*.xml'
           fail_ci_if_error: false
           verbose: true
 
+      - name: Cache dotnet tools
+        uses: actions/cache@v3
+        with:
+          path: ~/.dotnet/tools
+          key: ${{ runner.os }}-dotnet-tools-reportgenerator
+          restore-keys: |
+            ${{ runner.os }}-dotnet-tools-
+
       - name: Generate coverage report
         if: always()
+        working-directory: ${{ matrix.projectDir }}
         run: |
           dotnet tool install -g dotnet-reportgenerator-globaltool
           reportgenerator \
@@ -69,5 +120,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
-          path: Tests/TyKonKet.BarcodeGenerator.Tests/coverage/report
+          name: coverage-report-${{ matrix.friendlyName }}
+          path: ${{ matrix.projectDir }}/coverage/report
