@@ -65,5 +65,11 @@ namespace TyKonKet.BarcodeGenerator
         /// </summary>
         [BarcodeEncoding("UPC-E")]
         Upce = 9,
+
+        /// <summary>
+        /// Interleaved 2 of 5 (ITF). A high-density numeric barcode used in distribution and warehouse management.
+        /// </summary>
+        [BarcodeEncoding("ITF")]
+        Interleaved2of5 = 10,
     }
 }
