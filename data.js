@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763849052950,
+  "lastUpdate": 1763849064933,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -1252,6 +1252,54 @@ window.BENCHMARK_DATA = {
             "value": 98034.98767961774,
             "unit": "ns",
             "range": "± 193.24174108243238"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "27bf70d6deb3063aaae1d2fd12af2e69eeba9a0e",
+          "message": "Playground sample code",
+          "timestamp": "2025-11-22T22:57:13+01:00",
+          "tree_id": "55db938e64e215717aeb089fae338ee98e3d8abe",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/27bf70d6deb3063aaae1d2fd12af2e69eeba9a0e"
+        },
+        "date": 1763849063504,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.SimpleInstance",
+            "value": 457.0763229201822,
+            "unit": "ns",
+            "range": "± 9.10777668279718"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.AdvancedInstance",
+            "value": 1877.0119752322926,
+            "unit": "ns",
+            "range": "± 59.59039054687276"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithoutText",
+            "value": 76533.40676879883,
+            "unit": "ns",
+            "range": "± 177.78657575456774"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithText",
+            "value": 96274.64357096354,
+            "unit": "ns",
+            "range": "± 1387.1606979032274"
           }
         ]
       }
