@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763825337072,
+  "lastUpdate": 1763825350346,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -460,6 +460,56 @@ window.BENCHMARK_DATA = {
             "value": 40416.585665189305,
             "unit": "ns",
             "range": "± 69.01717478637013"
+          }
+        ]
+      }
+    ],
+    "UpceEncoder": [
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "5134171b6d50fa642de5b727c1e9d2e59dbdb76d",
+          "message": "Fix paths in benchmark and test runner scripts to use the correct tools directory",
+          "timestamp": "2025-11-22T16:22:16+01:00",
+          "tree_id": "b0467471f40230a95e2034490041db2e80e50a8f",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/5134171b6d50fa642de5b727c1e9d2e59dbdb76d"
+        },
+        "date": 1763825349069,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpceEncoder.SimpleInstance",
+            "value": 13514.539898463658,
+            "unit": "ns",
+            "range": "± 67.77222310094149"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpceEncoder.AdvancedInstance",
+            "value": 15862.594425746373,
+            "unit": "ns",
+            "range": "± 108.28454063523806"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpceEncoder.EncodingWithoutText",
+            "value": 15724.357177734375,
+            "unit": "ns",
+            "range": "± 28.911802266535823"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.UpceEncoder.EncodingWithText",
+            "value": 25720.523707798548,
+            "unit": "ns",
+            "range": "± 69.75398318050863"
           }
         ]
       }
