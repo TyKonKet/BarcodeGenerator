@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763849074077,
+  "lastUpdate": 1763849084840,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -2120,6 +2120,54 @@ window.BENCHMARK_DATA = {
             "value": 38233.13739827474,
             "unit": "ns",
             "range": "± 153.077609761455"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "27bf70d6deb3063aaae1d2fd12af2e69eeba9a0e",
+          "message": "Playground sample code",
+          "timestamp": "2025-11-22T22:57:13+01:00",
+          "tree_id": "55db938e64e215717aeb089fae338ee98e3d8abe",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/27bf70d6deb3063aaae1d2fd12af2e69eeba9a0e"
+        },
+        "date": 1763849084092,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean13Encoder.SimpleInstance",
+            "value": 17742.033791097005,
+            "unit": "ns",
+            "range": "± 216.54642880295285"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean13Encoder.AdvancedInstance",
+            "value": 21571.045885358537,
+            "unit": "ns",
+            "range": "± 107.19884791984592"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean13Encoder.EncodingWithoutText",
+            "value": 25256.509122721352,
+            "unit": "ns",
+            "range": "± 178.289253016871"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean13Encoder.EncodingWithText",
+            "value": 38152.961291973406,
+            "unit": "ns",
+            "range": "± 56.09491494109063"
           }
         ]
       }
