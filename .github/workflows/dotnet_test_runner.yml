@@ -81,14 +81,14 @@ jobs:
 
       - name: Run tests for ${{ matrix.friendlyName }}
         working-directory: ${{ matrix.projectDir }}
-        run: > 
-          dotnet test
-            --configuration Release
-            --logger "GitHubActions;summary.includePassedTests=true;summary.includeSkippedTests=true"
-            --collect:"XPlat Code Coverage"
-            --results-directory ./coverage
-            -- 
-            RunConfiguration.CollectSourceInformation=true
+        run: |
+          dotnet test \
+            --configuration Release \
+            --logger "GitHubActions;summary.includePassedTests=true;summary.includeSkippedTests=true" \
+            --collect:"XPlat Code Coverage" \
+            --results-directory ./coverage \
+            -- \
+            RunConfiguration.CollectSourceInformation=true \
             DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
 
       - name: Upload coverage to Codecov
