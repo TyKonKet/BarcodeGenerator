@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 env:
-  DOTNET_VERSION: '10.x'
+  DOTNET_VERSION: '8.x'
   BENCH_CATEGORY: 'CI'
   ARTIFACT_RETENTION_DAYS: '1'
   TERM: xterm
@@ -72,7 +72,7 @@ jobs:
           git reset --hard origin/gh-pages
           
           # Run the updater script
-          dotnet tools/dotnet-version-updater.cs
+          dotnet dotnet-version-updater.cs
           
           # Commit and push the updated JSON
           git add dotnet-versions.json
