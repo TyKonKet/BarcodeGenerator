@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763828493028,
+  "lastUpdate": 1763828502228,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -2430,6 +2430,54 @@ window.BENCHMARK_DATA = {
             "value": 26162.08952636719,
             "unit": "ns",
             "range": "± 97.72711264808305"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "eebdda79c3796b90a7b402eab2b14a1fdfd7ad0a",
+          "message": "Refactor namespaces and improve code quality\n\nRefactored namespaces to align with the new project structure, replacing `TyKonKet.BarcodeGenerator.CB` with `TyKonKet.BarcodeGenerator.Benchmarks`. Updated `BenchmarkConfig` and related classes to reflect these changes.\n\nReplaced `Array.Empty<T>()` with `[]` for simpler syntax. Added `SuppressMessage` attributes to suppress specific warnings. Introduced `const` declarations for string literals in `UpceEncoder` to improve clarity and immutability.\n\nRefactored `FindCompatibleTypes` to return `List<BarcodeTypes>` and added justification for design choices. Improved performance by using `char` instead of string in `sb.Append`. Updated `CodeSet` enum in `Code128Encoder` to explicitly define values.\n\nSimplified `using` statements in `TestSequentialRendering` and streamlined barcode rendering logic. Updated unit tests to focus on verifying start/stop characters in encoded output.\n\nRemoved legacy `ComputeValidatedBarcode` method in favor of `ComputeValidatedBarcodeWithTypeRules`. Performed general code cleanup, including formatting and spacing improvements.",
+          "timestamp": "2025-11-22T17:15:39+01:00",
+          "tree_id": "d2d2fd47227c1804d547704e4d36d7d32ffc3b2f",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/eebdda79c3796b90a7b402eab2b14a1fdfd7ad0a"
+        },
+        "date": 1763828501230,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpceEncoder.SimpleInstance",
+            "value": 13526.264705403646,
+            "unit": "ns",
+            "range": "± 72.40925026628554"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpceEncoder.AdvancedInstance",
+            "value": 17915.47650381235,
+            "unit": "ns",
+            "range": "± 91.05986094764512"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpceEncoder.EncodingWithoutText",
+            "value": 16005.873516376201,
+            "unit": "ns",
+            "range": "± 26.78487024659286"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpceEncoder.EncodingWithText",
+            "value": 26250.48273526705,
+            "unit": "ns",
+            "range": "± 50.37239461185947"
           }
         ]
       }
