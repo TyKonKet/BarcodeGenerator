@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763829607488,
+  "lastUpdate": 1763829619466,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -1110,6 +1110,54 @@ window.BENCHMARK_DATA = {
             "value": 53919.51777062049,
             "unit": "ns",
             "range": "± 387.4837176600138"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "76a1de9b3497df7c2aa14334066eefd4d52ef2e4",
+          "message": "Update Meziantou.Analyzer and add validation benchmarks\n\nUpdated the `Meziantou.Analyzer` NuGet package in the project\nfile from version 2.0.254 to 2.0.256 to incorporate the latest\nimprovements and fixes.\n\nAdded a new `ValidationBenchmarks` class to benchmark the\n`BarcodeValidator.Validate` method for various barcode types\nand scenarios. The benchmarks include tests for valid and\ninvalid inputs, covering barcode types such as Ean13, Upca,\nUpce, Isbn13, Code93, Code39, Code128, and Codabar.\n\nThese changes aim to enhance code quality and performance\nevaluation.",
+          "timestamp": "2025-11-22T17:32:52+01:00",
+          "tree_id": "79414de839e4456eb17b1437ce2bde9e48cde4b1",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/76a1de9b3497df7c2aa14334066eefd4d52ef2e4"
+        },
+        "date": 1763829618618,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code93Encoder.SimpleInstance",
+            "value": 455.2718922615051,
+            "unit": "ns",
+            "range": "± 6.5084557797474885"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code93Encoder.AdvancedInstance",
+            "value": 1917.3514526912145,
+            "unit": "ns",
+            "range": "± 31.66040266814166"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code93Encoder.EncodingWithoutText",
+            "value": 41219.811206054685,
+            "unit": "ns",
+            "range": "± 109.61770153563845"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code93Encoder.EncodingWithText",
+            "value": 55367.20205218975,
+            "unit": "ns",
+            "range": "± 115.56964052227185"
           }
         ]
       }
