@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763853603581,
+  "lastUpdate": 1763853615773,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -560,6 +560,128 @@ window.BENCHMARK_DATA = {
             "value": 26436.10591343471,
             "unit": "ns",
             "range": "± 54.79303677534332"
+          }
+        ]
+      }
+    ],
+    "Validation": [
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "7b005aca3b2cf91c2cdca89e72bd46f01dd3eaaf",
+          "message": "Add GitHub token and configure user for version update commits in benchmark runner",
+          "timestamp": "2025-11-23T00:10:39+01:00",
+          "tree_id": "761044fd07b65b91b1fc7dcf89a7c272354e0d36",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/7b005aca3b2cf91c2cdca89e72bd46f01dd3eaaf"
+        },
+        "date": 1763853614273,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Ean13_Valid_Body",
+            "value": 89.6683154463768,
+            "unit": "ns",
+            "range": "± 0.5973178044477448"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Ean13_Valid_Full",
+            "value": 100.099754011631,
+            "unit": "ns",
+            "range": "± 0.34710084143946257"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Ean13_Invalid_Length",
+            "value": 85.65059996445974,
+            "unit": "ns",
+            "range": "± 0.28039191793505536"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Ean13_Invalid_Charset",
+            "value": 170.02902376651764,
+            "unit": "ns",
+            "range": "± 0.7506256607447962"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Ean13_Invalid_WithSuggestions",
+            "value": 766.0131078866812,
+            "unit": "ns",
+            "range": "± 1.208681032787043"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Ean13_Invalid_WithoutSuggestions",
+            "value": 168.41541944344837,
+            "unit": "ns",
+            "range": "± 0.7877892170143211"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Upca_Valid_Body",
+            "value": 87.07525043884912,
+            "unit": "ns",
+            "range": "± 0.44372547363734255"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Upce_Valid_Body",
+            "value": 81.03335802044187,
+            "unit": "ns",
+            "range": "± 1.0532808647769256"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Isbn13_Valid_Body",
+            "value": 109.8566829919815,
+            "unit": "ns",
+            "range": "± 0.4316944611288475"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Isbn13_Invalid_Prefix",
+            "value": 11856.128371018629,
+            "unit": "ns",
+            "range": "± 13.801540112017085"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Code93_Valid",
+            "value": 214.29633847872415,
+            "unit": "ns",
+            "range": "± 0.9112533541845208"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Code93_InvalidCharset",
+            "value": 186.50395986239116,
+            "unit": "ns",
+            "range": "± 2.2535043607535026"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Code39_Valid",
+            "value": 82.04452527364096,
+            "unit": "ns",
+            "range": "± 0.30480795142424577"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Code128_Valid",
+            "value": 61.93540799617767,
+            "unit": "ns",
+            "range": "± 0.6843751731662034"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Codabar_Valid",
+            "value": 81.20520806709925,
+            "unit": "ns",
+            "range": "± 0.25636043671719116"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.ValidationBenchmarks.Codabar_Invalid",
+            "value": 179.67323281083787,
+            "unit": "ns",
+            "range": "± 0.6816715325473838"
           }
         ]
       }
