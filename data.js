@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763825258893,
+  "lastUpdate": 1763825267169,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -98,6 +98,56 @@ window.BENCHMARK_DATA = {
             "value": 62610.25812639509,
             "unit": "ns",
             "range": "± 64.72910899925697"
+          }
+        ]
+      }
+    ],
+    "Code39Encoder": [
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "5134171b6d50fa642de5b727c1e9d2e59dbdb76d",
+          "message": "Fix paths in benchmark and test runner scripts to use the correct tools directory",
+          "timestamp": "2025-11-22T16:22:16+01:00",
+          "tree_id": "b0467471f40230a95e2034490041db2e80e50a8f",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/5134171b6d50fa642de5b727c1e9d2e59dbdb76d"
+        },
+        "date": 1763825266408,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.SimpleInstance",
+            "value": 459.2000964800517,
+            "unit": "ns",
+            "range": "± 7.85369610523537"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.AdvancedInstance",
+            "value": 1949.6668485005696,
+            "unit": "ns",
+            "range": "± 17.24475273046075"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.EncodingWithoutText",
+            "value": 76352.42686110277,
+            "unit": "ns",
+            "range": "± 116.24103909423987"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.EncodingWithText",
+            "value": 97665.08447265625,
+            "unit": "ns",
+            "range": "± 192.76201384779642"
           }
         ]
       }
