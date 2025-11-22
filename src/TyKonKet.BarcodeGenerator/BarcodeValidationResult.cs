@@ -50,9 +50,9 @@ namespace TyKonKet.BarcodeGenerator
         {
             this.IsValid = true;
             this.ValidatedBarcode = validatedBarcode;
-            this.Errors = Array.Empty<string>();
+            this.Errors = [];
             this.Type = type;
-            this.SuggestedTypes = Array.Empty<BarcodeTypes>();
+            this.SuggestedTypes = [];
         }
 
         /// <summary>

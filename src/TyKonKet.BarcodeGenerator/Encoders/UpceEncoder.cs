@@ -346,7 +346,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             var parityPattern = GetParityPattern(numberSystem, checkDigit);
 
             // Start guard: "101"
-            var startGuard = "101";
+            const string startGuard = "101";
             var startGuardSpan = startGuard.AsSpan();
             startGuardSpan.CopyTo(result[position..]);
             position += startGuardSpan.Length;
@@ -362,7 +362,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             }
 
             // End guard: "010101"
-            var endGuard = "010101";
+            const string endGuard = "010101";
             var endGuardSpan = endGuard.AsSpan();
             endGuardSpan.CopyTo(result[position..]);
 

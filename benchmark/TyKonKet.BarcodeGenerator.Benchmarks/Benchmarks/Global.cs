@@ -3,9 +3,10 @@ using SkiaSharp;
 using System;
 using System.IO;
 using System.Reflection;
+using TyKonKet.BarcodeGenerator.Benchmarks;
 using TyKonKet.BarcodeGenerator.Utils;
 
-namespace TyKonKet.BarcodeGenerator.CB.Benchmarks
+namespace TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks
 {
     [BenchmarkCategory("CI")]
     [Config(typeof(BenchmarkConfig))]

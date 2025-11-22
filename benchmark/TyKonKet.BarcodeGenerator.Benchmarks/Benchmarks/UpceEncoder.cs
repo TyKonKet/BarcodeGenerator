@@ -4,7 +4,7 @@ using BenchmarkDotNet.Jobs;
 using SkiaSharp;
 using TyKonKet.BarcodeGenerator.Fonts;
 
-namespace TyKonKet.BarcodeGenerator.CB.Benchmarks
+namespace TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks
 {
     [BenchmarkCategory("CI")]
     [Config(typeof(BenchmarkConfig))]

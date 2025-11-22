@@ -215,7 +215,7 @@
 
                 try
                 {
-                    using (var barcode = new Barcode(options =>
+                    using var barcode = new Barcode(options =>
                     {
                         options.Type = type;
                         options.Height = 50;
@@ -224,18 +224,16 @@
                         options.BackgroundColor = SKColors.White;
                         options.ForegroundColor = SKColors.Black;
                         options.RenderText = true;
-                    }))
+                    });
+                    string result = barcode.Encode(data);
+
+                    // Export to verify rendering
+                    string filename = $"{outputDir}/mixed_{i + 1:D2}_{type}.png";
+                    barcode.Export(filename, SKEncodedImageFormat.Png, 100);
+
+                    if (barcode.Image != null)
                     {
-                        string result = barcode.Encode(data);
-                        
-                        // Export to verify rendering
-                        string filename = $"{outputDir}/mixed_{i + 1:D2}_{type}.png";
-                        barcode.Export(filename, SKEncodedImageFormat.Png, 100);
-                        
-                        if (barcode.Image != null)
-                        {
-                            System.Console.WriteLine($"  ✓ Rendered - Size: {barcode.Image.Width}x{barcode.Image.Height} px");
-                        }
+                        System.Console.WriteLine($"  ✓ Rendered - Size: {barcode.Image.Width}x{barcode.Image.Height} px");
                     }
                 }
                 catch (System.Exception ex)

@@ -376,7 +376,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 if (i > 0)
                 {
                     // Add intercharacter gap (narrow space)
-                    sb.Append("0");
+                    sb.Append('0');
                 }
 
                 var pattern = EncodingTable[barcode[i]];

@@ -20,11 +20,12 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// <summary>
         /// Code set identifiers.
         /// </summary>
+        [SuppressMessage("ApiDesign", "SS039:An enum should specify a default value", Justification = "Not applicable here")]
         private enum CodeSet
         {
-            A,
-            B,
-            C,
+            A = 0,
+            B = 1,
+            C = 2,
         }
 
         /// <summary>
@@ -42,8 +43,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
         /// Encoding patterns for Code 128 (values 0-106).
         /// Each pattern represents the bar/space widths.
         /// </summary>
-        internal static readonly string[] EncodingPatterns = new[]
-        {
+        internal static readonly string[] EncodingPatterns =
+        [
             "11011001100", "11001101100", "11001100110", "10010011000", "10010001100",
             "10001001100", "10011001000", "10011000100", "10001100100", "11001001000",
             "11001000100", "11000100100", "10110011100", "10011011100", "10011001110",
@@ -66,7 +67,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
             "10111101000", "10111100010", "11110101000", "11110100010", "10111011110",
             "10111101110", "11101011110", "11110101110", "11010000100", "11010010000",
             "11010011100", "1100011101011",
-        };
+        ];
 
         /// <summary>
         /// Gets the allowed character set pattern for Code 128.
@@ -483,7 +484,8 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 {
                     return c + 64; // Control characters
                 }
-                else if (c is >= (char)32 and <= (char)95)
+
+                if (c is >= (char)32 and <= (char)95)
                 {
                     return c - 32; // Space to underscore
                 }

@@ -78,11 +78,11 @@ namespace TyKonKet.BarcodeGenerator.Tests.Encoders
         }
 
         [Theory]
-        [InlineData("0", "*0*")]
-        [InlineData("A", "*A*")]
-        [InlineData("TEST", "*TEST*")]
-        [InlineData("123", "*123*")]
-        public void EncodeBars_ShouldIncludeStartStopCharacters(string input, string expectedPattern)
+        [InlineData("0")]
+        [InlineData("A")]
+        [InlineData("TEST")]
+        [InlineData("123")]
+        public void EncodeBars_ShouldIncludeStartStopCharacters(string input)
         {
             var encoded = Code39Encoder.EncodeBars(input);
             

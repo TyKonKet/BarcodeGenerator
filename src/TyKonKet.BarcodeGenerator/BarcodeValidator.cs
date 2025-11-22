@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using TyKonKet.BarcodeGenerator.Encoders;
 using TyKonKet.BarcodeGenerator.Encoders.Abstract;
@@ -23,6 +24,7 @@ namespace TyKonKet.BarcodeGenerator
         /// <param name="includeSuggestions">When true, suggests compatible barcode types if validation fails. Default is false for optimal performance.</param>
         /// <returns>A <see cref="BarcodeValidationResult"/> containing validation status and details.</returns>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="barcode"/> is null.</exception>
+        [SuppressMessage("Design", "Wintellect014:Catch blocks should rethrow or throw", Justification = "Design choice to capture validation errors in result.")]
         public static BarcodeValidationResult Validate(string barcode, BarcodeTypes type, bool includeSuggestions = false)
         {
             if (barcode == null)
@@ -44,7 +46,7 @@ namespace TyKonKet.BarcodeGenerator
                     errors.Add($"Invalid character set. Only {allowedCharset} are allowed for {type.GetDisplayName()}.");
 
                     // Find compatible barcode types only if requested
-                    var suggestedTypes = includeSuggestions ? FindCompatibleTypes(normalized, type) : Array.Empty<BarcodeTypes>();
+                    var suggestedTypes = includeSuggestions ? FindCompatibleTypes(normalized, type) : [];
                     return new BarcodeValidationResult(errors, type, suggestedTypes);
                 }
 
@@ -53,9 +55,10 @@ namespace TyKonKet.BarcodeGenerator
                 {
                     if (!string.IsNullOrEmpty(lengthError))
                     {
-                        errors.Add(lengthError);
+                        errors.Add(lengthError!);
                     }
-                    var suggestedTypes = includeSuggestions ? FindCompatibleTypes(normalized, type) : Array.Empty<BarcodeTypes>();
+
+                    var suggestedTypes = includeSuggestions ? FindCompatibleTypes(normalized, type) : [];
                     return new BarcodeValidationResult(errors, type, suggestedTypes);
                 }
 
@@ -67,13 +70,13 @@ namespace TyKonKet.BarcodeGenerator
             catch (FormatException ex)
             {
                 errors.Add(ex.Message);
-                var suggestedTypes = includeSuggestions ? FindCompatibleTypes(barcode, type) : Array.Empty<BarcodeTypes>();
+                var suggestedTypes = includeSuggestions ? FindCompatibleTypes(barcode, type) : [];
                 return new BarcodeValidationResult(errors, type, suggestedTypes);
             }
             catch (ArgumentException ex)
             {
                 errors.Add(ex.Message);
-                var suggestedTypes = includeSuggestions ? FindCompatibleTypes(barcode, type) : Array.Empty<BarcodeTypes>();
+                var suggestedTypes = includeSuggestions ? FindCompatibleTypes(barcode, type) : [];
                 return new BarcodeValidationResult(errors, type, suggestedTypes);
             }
         }
@@ -110,7 +113,7 @@ namespace TyKonKet.BarcodeGenerator
                 BarcodeTypes.Code93 => RegexCache.Code93AllowedCharsetRegex,
                 BarcodeTypes.Code128 => RegexCache.Code128AllowedCharsetRegex,
                 BarcodeTypes.Codabar => RegexCache.CodabarAllowedCharsetRegex,
-                _ => throw new InvalidOperationException($"Unknown barcode type: {type}")
+                _ => throw new InvalidOperationException($"Unknown barcode type: {type}"),
             };
 
             return pattern.IsMatch(barcode);
@@ -134,7 +137,7 @@ namespace TyKonKet.BarcodeGenerator
                 BarcodeTypes.Code93 => "uppercase letters (A-Z), digits (0-9), and symbols (- . $ / + % space)",
                 BarcodeTypes.Code128 => "all ASCII printable characters (space to DEL)",
                 BarcodeTypes.Codabar => "digits (0-9) and symbols (- $ : / . +)",
-                _ => "unknown"
+                _ => "unknown",
             };
         }
 
@@ -197,7 +200,7 @@ namespace TyKonKet.BarcodeGenerator
                         error = "EAN-13 requires 12 or 13 digits.";
                         return false;
                     }
-                    
+
                     return true;
 
                 case BarcodeTypes.Ean8:
@@ -206,7 +209,7 @@ namespace TyKonKet.BarcodeGenerator
                         error = "EAN-8 requires 7 or 8 digits.";
                         return false;
                     }
-                    
+
                     return true;
 
                 case BarcodeTypes.Upca:
@@ -215,7 +218,7 @@ namespace TyKonKet.BarcodeGenerator
                         error = "UPC-A requires 11 or 12 digits.";
                         return false;
                     }
-                    
+
                     return true;
 
                 case BarcodeTypes.Upce:
@@ -224,7 +227,7 @@ namespace TyKonKet.BarcodeGenerator
                         error = "UPC-E requires 7 or 8 digits.";
                         return false;
                     }
-                    
+
                     return true;
 
                 case BarcodeTypes.Isbn13:
@@ -233,7 +236,7 @@ namespace TyKonKet.BarcodeGenerator
                         error = "ISBN-13 requires 12 or 13 digits (including prefix 978/979).";
                         return false;
                     }
-                    
+
                     return true;
 
                 // Non-numeric symbologies have no fixed length constraints
@@ -254,7 +257,8 @@ namespace TyKonKet.BarcodeGenerator
         /// <param name="barcode">The barcode string to check.</param>
         /// <param name="requestedType">The originally requested barcode type (to exclude from suggestions).</param>
         /// <returns>A list of compatible barcode types.</returns>
-        private static IReadOnlyList<BarcodeTypes> FindCompatibleTypes(string barcode, BarcodeTypes requestedType)
+        [SuppressMessage("Design", "Wintellect014:Catch blocks should rethrow or throw", Justification = "Design choice to continue searching on validation failures.")]
+        private static List<BarcodeTypes> FindCompatibleTypes(string barcode, BarcodeTypes requestedType)
         {
             var compatibleTypes = new List<BarcodeTypes>();
 
