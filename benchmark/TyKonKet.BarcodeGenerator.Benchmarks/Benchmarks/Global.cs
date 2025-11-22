@@ -7,6 +7,7 @@ using TyKonKet.BarcodeGenerator.Utils;
 
 namespace TyKonKet.BarcodeGenerator.CB.Benchmarks
 {
+    [BenchmarkCategory("CI")]
     [Config(typeof(BenchmarkConfig))]
     public class Global
     {

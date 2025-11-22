@@ -1,9 +1,12 @@
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Environments;
+using BenchmarkDotNet.Jobs;
 using SkiaSharp;
 using TyKonKet.BarcodeGenerator.Fonts;
 
 namespace TyKonKet.BarcodeGenerator.CB.Benchmarks
 {
+    [BenchmarkCategory("CI")]
     [Config(typeof(BenchmarkConfig))]
     public class UpceEncoder
     {

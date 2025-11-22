@@ -4,6 +4,7 @@ using TyKonKet.BarcodeGenerator.Fonts;
 
 namespace TyKonKet.BarcodeGenerator.CB.Benchmarks
 {
+    [BenchmarkCategory("CI")]
     [Config(typeof(BenchmarkConfig))]
     public class Code128Encoder
     {
