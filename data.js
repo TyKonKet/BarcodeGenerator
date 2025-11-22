@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763826975400,
+  "lastUpdate": 1763826986645,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -726,6 +726,54 @@ window.BENCHMARK_DATA = {
             "value": 54086.6719796317,
             "unit": "ns",
             "range": "± 104.7847008073495"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "ee611e26841c726d7a61d53494e2b58b2d6dc661",
+          "message": "Update coverage script paths in documentation and workflows",
+          "timestamp": "2025-11-22T16:51:51+01:00",
+          "tree_id": "2fe40c09fa71ba48458edf3db0d02ff26dfe6b3b",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/ee611e26841c726d7a61d53494e2b58b2d6dc661"
+        },
+        "date": 1763826985721,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.SimpleInstance",
+            "value": 426.5523987452189,
+            "unit": "ns",
+            "range": "± 0.8320392735919174"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.AdvancedInstance",
+            "value": 1793.8256721496582,
+            "unit": "ns",
+            "range": "± 14.359327066211376"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithoutText",
+            "value": 40154.7716623942,
+            "unit": "ns",
+            "range": "± 42.989828264458296"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code93Encoder.EncodingWithText",
+            "value": 54482.38002929687,
+            "unit": "ns",
+            "range": "± 588.4153994609732"
           }
         ]
       }
