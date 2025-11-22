@@ -64,6 +64,21 @@ jobs:
           echo "$MATRIX_JSON" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
 
+      - name: Update .NET version JSON on gh-pages
+        run: |
+          # Checkout gh-pages branch
+          git fetch origin gh-pages
+          git checkout gh-pages
+          git reset --hard origin/gh-pages
+          
+          # Run the updater script
+          dotnet tools/dotnet-version-updater.cs
+          
+          # Commit and push the updated JSON
+          git add dotnet-versions.json
+          git commit -m "Update .NET version for benchmark run on $(date -I)"
+          git push origin gh-pages
+
   benchmark:
     name: Benchmark (${{ matrix.failed && '[FAILED] ' || '' }}${{ matrix.benchmarkName || matrix.projectPath }})
     runs-on: ubuntu-latest
