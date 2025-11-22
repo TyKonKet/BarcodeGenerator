@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763831497166,
+  "lastUpdate": 1763831512788,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -626,6 +626,54 @@ window.BENCHMARK_DATA = {
             "value": 63788.828970102164,
             "unit": "ns",
             "range": "± 140.13868346412278"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "842df97883a61d0f745faa6306b710c65562c196",
+          "message": "Update repository structure and documentation for clarity and consistency",
+          "timestamp": "2025-11-22T18:04:30+01:00",
+          "tree_id": "94aebf49b6c1e293bab24a81132d7ba546f44090",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/842df97883a61d0f745faa6306b710c65562c196"
+        },
+        "date": 1763831511256,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code128Encoder.SimpleInstance",
+            "value": 483.88148166916585,
+            "unit": "ns",
+            "range": "± 11.372353557265575"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code128Encoder.AdvancedInstance",
+            "value": 1911.6733833312987,
+            "unit": "ns",
+            "range": "± 43.596593858225305"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code128Encoder.EncodingWithoutText",
+            "value": 48717.56053059896,
+            "unit": "ns",
+            "range": "± 181.7831467535376"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code128Encoder.EncodingWithText",
+            "value": 61932.70751081194,
+            "unit": "ns",
+            "range": "± 129.70530118064914"
           }
         ]
       }
