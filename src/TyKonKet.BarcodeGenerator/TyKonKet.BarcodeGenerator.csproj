@@ -95,7 +95,7 @@
     <PackageReference Include="ErrorProne.NET.CoreAnalyzers" Version="0.1.2" PrivateAssets="all" />
     <PackageReference Include="ErrorProne.NET.Structs" Version="0.1.2" PrivateAssets="all" />
     <PackageReference Include="IDisposableAnalyzers" Version="4.0.8" PrivateAssets="all" />
-    <PackageReference Include="Meziantou.Analyzer" Version="2.0.254" PrivateAssets="all" />
+    <PackageReference Include="Meziantou.Analyzer" Version="2.0.256" PrivateAssets="all" />
     <PackageReference Include="ReflectionAnalyzers" Version="0.3.1" PrivateAssets="all" />
     <PackageReference Include="Roslynator.Analyzers" Version="4.14.1" PrivateAssets="all" />
     <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.14.1" PrivateAssets="all" />
