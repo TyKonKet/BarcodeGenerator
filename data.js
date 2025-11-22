@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763826963290,
+  "lastUpdate": 1763826975400,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -532,6 +532,54 @@ window.BENCHMARK_DATA = {
             "value": 97210.71481933593,
             "unit": "ns",
             "range": "± 1097.9108899869805"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "ee611e26841c726d7a61d53494e2b58b2d6dc661",
+          "message": "Update coverage script paths in documentation and workflows",
+          "timestamp": "2025-11-22T16:51:51+01:00",
+          "tree_id": "2fe40c09fa71ba48458edf3db0d02ff26dfe6b3b",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/ee611e26841c726d7a61d53494e2b58b2d6dc661"
+        },
+        "date": 1763826974008,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.SimpleInstance",
+            "value": 458.047532526652,
+            "unit": "ns",
+            "range": "± 2.968554131023682"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.AdvancedInstance",
+            "value": 1960.7549591064453,
+            "unit": "ns",
+            "range": "± 18.41637067431624"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.EncodingWithoutText",
+            "value": 76616.0284376878,
+            "unit": "ns",
+            "range": "± 112.10481219896143"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Code39Encoder.EncodingWithText",
+            "value": 96657.28385573167,
+            "unit": "ns",
+            "range": "± 349.45994769354667"
           }
         ]
       }
