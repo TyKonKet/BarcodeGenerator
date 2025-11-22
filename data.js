@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763831618215,
+  "lastUpdate": 1763833460056,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -336,6 +336,54 @@ window.BENCHMARK_DATA = {
             "value": 41171.679612379805,
             "unit": "ns",
             "range": "± 227.0241786372142"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "Matteo",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b10816883a1bd55f14eb4444006b5db644a047e8",
+          "message": "Merge pull request #34 from TyKonKet/copilot/add-itf-barcode-encoder\n\nAdd Interleaved 2 of 5 (ITF) barcode encoder",
+          "timestamp": "2025-11-22T18:37:32+01:00",
+          "tree_id": "a8e684c52f3710cad0fefaca8d4d8045b1b4419f",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/b10816883a1bd55f14eb4444006b5db644a047e8"
+        },
+        "date": 1763833458554,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.CodabarEncoder.SimpleInstance",
+            "value": 402.1295857747396,
+            "unit": "ns",
+            "range": "± 1.3923624492401683"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.CodabarEncoder.AdvancedInstance",
+            "value": 1869.9827041625977,
+            "unit": "ns",
+            "range": "± 10.48790950825531"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.CodabarEncoder.EncodingWithoutText",
+            "value": 28812.816401890344,
+            "unit": "ns",
+            "range": "± 119.3199228108767"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.CodabarEncoder.EncodingWithText",
+            "value": 39886.30727713449,
+            "unit": "ns",
+            "range": "± 116.95608159127777"
           }
         ]
       }
