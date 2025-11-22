@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763827018203,
+  "lastUpdate": 1763827030430,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -1550,6 +1550,54 @@ window.BENCHMARK_DATA = {
             "value": 36443.00496128627,
             "unit": "ns",
             "range": "± 161.52659482879946"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "ee611e26841c726d7a61d53494e2b58b2d6dc661",
+          "message": "Update coverage script paths in documentation and workflows",
+          "timestamp": "2025-11-22T16:51:51+01:00",
+          "tree_id": "2fe40c09fa71ba48458edf3db0d02ff26dfe6b3b",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/ee611e26841c726d7a61d53494e2b58b2d6dc661"
+        },
+        "date": 1763827028944,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 17246.077157827523,
+            "unit": "ns",
+            "range": "± 50.72839190361883"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 18241.073072160994,
+            "unit": "ns",
+            "range": "± 60.22950388933663"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 23832.405648367745,
+            "unit": "ns",
+            "range": "± 42.60792099873068"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.CB.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 36832.89441353934,
+            "unit": "ns",
+            "range": "± 95.92332472996026"
           }
         ]
       }
