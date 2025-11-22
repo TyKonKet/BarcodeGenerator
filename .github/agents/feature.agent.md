@@ -58,10 +58,10 @@ Global Rules (Always Apply)
    - When unsure, ask clarifying questions in the issue discussion rather than guessing.
 
 6. **Prototype with Playground or scripts.**
-   - When you need to spike utilities or run ad-hoc experiments, you may use the `Tests/TyKonKet.BarcodeGenerator.Playground` project or standalone `.cs` files executed directly with the `dotnet` CLI.
-   - The environment ships with the .NET 10 SDK, so you can either run the Playground or execute a single C# file without creating a project.
-   - Run the Playground with `dotnet run --project Tests/TyKonKet.BarcodeGenerator.Playground`. For single-file scripts, run `dotnet path/to/script.cs` (the CLI compiles and runs the file on the fly).
-   - Treat Playground changes and scratch `.cs` scripts as disposable; remove or stash them before finalizing a commit.
+  - When you need to spike utilities or run ad-hoc experiments, you may use the `test/TyKonKet.BarcodeGenerator.Playground` project or standalone `.cs` files executed directly with the `dotnet` CLI.
+  - The environment ships with the .NET 10 SDK, so you can either run the Playground or execute a single C# file without creating a project.
+  - Run the Playground with `dotnet run --project test/TyKonKet.BarcodeGenerator.Playground`. For single-file scripts, run `dotnet path/to/script.cs` (the CLI compiles and runs the file on the fly).
+  - Treat Playground changes and scratch `.cs` scripts as disposable; remove or stash them before finalizing a commit.
 
 ------------------------------------------------------------
 High-Level Workflow

@@ -28,10 +28,9 @@ You are a performance optimization specialist focused on the BarcodeGenerator .N
 ## Project Context:
 - **Primary methodology**: `docs/development/method-optimization-todo.md` (mandatory reference)
 - **Performance history**: `docs/development/performance-improvements.md` (for baseline comparisons)
-- **Core encoders**: `TyKonKet.BarcodeGenerator/Encoders/` (optimization targets)
-- **Utility functions**: `TyKonKet.BarcodeGenerator/Utils/` (performance-critical helpers)
-- **Benchmark suites**: `Tests/TyKonKet.BarcodeGenerator.Benchmarks/` (development benchmarks - use this!)
-- **CI Benchmarks**: `Tests/TyKonKet.BarcodeGenerator.CB/` (CI-specific - do NOT use for development)
+- **Core encoders**: `src/TyKonKet.BarcodeGenerator/Encoders/` (optimization targets)
+- **Utility functions**: `src/TyKonKet.BarcodeGenerator/Utils/` (performance-critical helpers)
+- **Benchmark suites**: `benchmark/TyKonKet.BarcodeGenerator.Benchmarks/` (development & CI benchmarks - use this project; CI benchmarks are category-marked)
 
 ## Mandatory Optimization Process:
 **Reference: `docs/development/method-optimization-todo.md`**
@@ -58,6 +57,6 @@ You are a performance optimization specialist focused on the BarcodeGenerator .N
 - **Search/Navigation** → Locate performance hotspots and similar code patterns
 - **File Operations** → Update documentation and benchmark configurations
 
-**Critical Benchmark Execution**: Always use `Tests/TyKonKet.BarcodeGenerator.Benchmarks/` directory and run `dotnet run --configuration Release --framework net10.0 -- --filter *BenchmarkName*` for targeted benchmarks.
+**Critical Benchmark Execution**: Always use the `benchmark/TyKonKet.BarcodeGenerator.Benchmarks/` project and run `dotnet run --project benchmark/TyKonKet.BarcodeGenerator.Benchmarks --configuration Release --framework net10.0 -- --filter *BenchmarkName*` for targeted benchmarks.
 
 **Success Criteria**: Every optimization must be measurable, documented, and validated through the complete 8-step process.

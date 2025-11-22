@@ -62,15 +62,34 @@ Ready to dive into the code?
 
 ### Repository Structure
 ```
-├── TyKonKet.BarcodeGenerator/     # 📦 Main library
-│   ├── Barcode.cs                 # 🏠 Main entry point
-│   ├── Encoders/                  # 🔧 Barcode type implementations
-│   └── Utils/                     # 🛠️ Helper utilities
-├── Tests/                         # 🧪 All test projects
-│   ├── *.Tests/                   # Unit tests (xUnit)
-│   ├── *.Benchmarks/              # Performance tests
-│   └── *.Playground/              # Development sandbox
-└── docs/                          # 📖 Documentation
+├── src/                          # 📁 Source code
+│   ├── TyKonKet.BarcodeGenerator/  # 📦 Main library
+│   │   ├── Barcode.cs             # 🏠 Main entry point
+│   │   ├── Encoders/              # 🔧 Barcode type implementations
+│   │   ├── Utils/                 # 🛠️ Helper utilities
+│   │   ├── Fonts/                 # ✏️ Font resources
+│   │   └── Attributes/            # 🏷️ Custom attributes
+│   ├── Directory.Build.props      # ⚙️ Build configuration
+│   └── stylecop.json              # 🎨 Code style rules
+├── test/                         # 🧪 Test projects
+│   ├── TyKonKet.BarcodeGenerator.Tests/  # Unit tests (xUnit)
+│   └── TyKonKet.BarcodeGenerator.Playground/  # Development sandbox
+├── benchmark/                    # 📊 Performance benchmarks
+│   └── TyKonKet.BarcodeGenerator.Benchmarks/  # BenchmarkDotNet tests
+├── docs/                         # 📖 Documentation
+│   ├── getting-started.md         # 🚀 Quick start guide
+│   ├── api/                       # 🔌 API reference
+│   ├── examples/                  # 💡 Usage examples
+│   ├── advanced/                  # ⚡ Advanced topics
+│   └── development/               # 🛠️ Development notes
+├── tools/                        # 🔧 Development tools
+│   ├── run-coverage.sh            # 📈 Coverage script
+│   ├── run-coverage.ps1           # 📈 Coverage script (PowerShell)
+│   ├── bench-tools.cs             # 📊 Benchmark utilities
+│   └── test-tools.cs              # 🧪 Test utilities
+├── LICENSE                       # 📜 License file
+├── README.md                     # 📖 Project README
+└── TyKonKet.BarcodeGenerator.slnx # 🏗️ Solution file
 ```
 
 ### Key Architecture Patterns
