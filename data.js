@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763914161964,
+  "lastUpdate": 1763914170165,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -11398,6 +11398,54 @@ window.BENCHMARK_DATA = {
             "value": 41065.63546142578,
             "unit": "ns",
             "range": "± 190.2264592496673"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "fe19143a8cc7cc504fad988d014ac9d110c8502c",
+          "message": "Update README to reflect recently completed features and enhancements",
+          "timestamp": "2025-11-23T17:01:00+01:00",
+          "tree_id": "9a1f083bc8d3ebc2a3a4cedeb2011ee680b0ab21",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/fe19143a8cc7cc504fad988d014ac9d110c8502c"
+        },
+        "date": 1763914169239,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 17937.473310198104,
+            "unit": "ns",
+            "range": "± 56.58561480960789"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 20112.04590657552,
+            "unit": "ns",
+            "range": "± 133.69106444894595"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25067.354253133137,
+            "unit": "ns",
+            "range": "± 36.41573906041689"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40085.75179349459,
+            "unit": "ns",
+            "range": "± 65.65221315508286"
           }
         ]
       }
