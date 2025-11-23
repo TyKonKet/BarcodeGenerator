@@ -208,23 +208,14 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 
 ## 🗺️ Roadmap
 
-### ✅ **Recently Completed**
-- [x] **CODE-39** encoder - Automotive and defense industry standard
-- [x] **Validation API** - Standalone barcode validation without generation ✨ NEW!
+### ✅ Recently completed
 
-### 🚧 **Coming Soon**
-- [ ] **QR Code** support - 2D barcode generation
-- [ ] **Batch processing** - Generate multiple barcodes efficiently
-- [ ] **SVG export** - Vector format support
-
-### 💡 **Future Enhancements**
-- [ ] **Custom symbologies** - Plugin architecture for new formats
-- [ ] **Web API** - RESTful barcode generation service
-- [ ] **Blazor components** - Ready-to-use UI components
+- **CODE-39**, **CODE-128**, **CODABAR**, **ITF** and **UPC-E**
+- Validation API: standalone validation without encoding (`BarcodeValidator`)
+- PolySharp integration to improve compatibility across target frameworks
+- Independent text color support (`BarcodeOptions.TextColor`) and rendering improvements
 
 > **Have an idea?** [Start a discussion](https://github.com/TyKonKet/BarcodeGenerator/discussions) or [vote on features](https://github.com/TyKonKet/BarcodeGenerator/discussions/categories/ideas)!
-
----
 
 ---
 
