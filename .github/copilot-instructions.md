@@ -84,6 +84,7 @@ Use these paths when searching or proposing edits:
 - **Factory**: `src/TyKonKet.BarcodeGenerator/EncodersFactory.cs` or `src/TyKonKet.BarcodeGenerator/Utils/EncodersFactory.cs` (check actual location before editing)
 - **Encoders**: `src/TyKonKet.BarcodeGenerator/Encoders/`
 - **Options & types**: `src/TyKonKet.BarcodeGenerator/BarcodeOptions.cs`, `BarcodeTypes.cs`, `BarcodeValidator.cs`
+- **Display-name helpers**: `src/TyKonKet.BarcodeGenerator/Utils/BarcodeTypeExtensions.cs` (replace the legacy `EncodesExtensions` helpers)
 - **Tests**: `test/TyKonKet.BarcodeGenerator.Tests/`
 - **Benchmarks**: `benchmark/TyKonKet.BarcodeGenerator.Benchmarks/`
 - **InternalsVisibleTo**: `src/TyKonKet.BarcodeGenerator/AssemblyInfo.cs` exposes internals to test projects
@@ -145,6 +146,7 @@ Guidelines for LLMs:
 - Use existing validation helpers (e.g., `BarcodeValidator`) instead of re-implementing logic.
 - Keep public API changes **backwards compatible**, unless the user explicitly requests a breaking change.
 - Update docs and tests together with behavior changes.
+- Prefer `BarcodeTypeExtensions.GetDisplayName` from `Utils/BarcodeTypeExtensions.cs` as the canonical way to retrieve barcode display names and avoid referencing the removed `EncodesExtensions` helper.
 
 **Don’t:**
 

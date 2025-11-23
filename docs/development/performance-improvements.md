@@ -92,7 +92,7 @@ This document tracks the performance improvements made to the BarcodeGenerator l
 ---
 
 ### August 13, 2025
-- **Optimized Method**: `EncodesExtensions.GetDisplayName`
+- **Optimized Method**: `BarcodeTypeExtensions.GetDisplayName`
 - **Description**: Introduced caching and optimized attribute lookup to significantly improve performance.
 - **Performance Results**:
   - **Before Optimization**: Mean = 370.7 ns, Allocated = 264 B

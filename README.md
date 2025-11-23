@@ -195,6 +195,8 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 ### Version 2.1.0
 
 - **PolySharp Integration:** The library now includes the `PolySharp` package to enhance compatibility. If you encounter any issues, please report them by opening an issue on our GitHub repository. For more details, visit the [PolySharp GitHub repository](https://github.com/Sergio0694/PolySharp).
+- **API Rename:** `EncodesExtensions` has been renamed to `BarcodeTypeExtensions` to better reflect its purpose. Update consuming code accordingly.
+- **Framework requirement:** .NET 6 support has been dropped in favor of the current `net8.0`/`net10.0` targets; make sure callers move to those runtimes.
 
 ### Version 2.0.0
 
