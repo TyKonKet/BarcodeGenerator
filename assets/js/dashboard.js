@@ -141,6 +141,58 @@
             const expandBtn = getElement('expand-stats-btn');
             if (collapseBtn) collapseBtn.addEventListener('click', () => window.collapseAllStats && window.collapseAllStats());
             if (expandBtn) expandBtn.addEventListener('click', () => window.expandAllStats && window.expandAllStats());
+
+            // create a floating overlay toggle button (similar to theme toggle)
+            try {
+                // read persisted preference
+                const stored = localStorage.getItem('dotnetOverlay');
+                // default to true if not set
+                window.PROTO_SHOW_DOTNET_OVERLAY = stored === null ? true : stored === 'true';
+            } catch (e) {
+                window.PROTO_SHOW_DOTNET_OVERLAY = true;
+            }
+            this.createOverlayToggleButton();
+        }
+
+        createOverlayToggleButton() {
+            // avoid duplicate button
+            if (document.getElementById('overlayToggle')) return;
+            const btn = document.createElement('button');
+            btn.id = 'overlayToggle';
+            btn.type = 'button';
+            btn.className = 'overlay-toggle';
+            btn.title = 'Toggle .NET version overlay';
+            btn.setAttribute('aria-pressed', String(window.PROTO_SHOW_DOTNET_OVERLAY));
+            btn.textContent = window.PROTO_SHOW_DOTNET_OVERLAY ? 'OVL On' : 'OVL Off';
+            btn.addEventListener('click', () => this.toggleOverlay(btn));
+            document.body.appendChild(btn);
+        }
+
+        toggleOverlay(button) {
+            const next = !(window.PROTO_SHOW_DOTNET_OVERLAY === true);
+            window.PROTO_SHOW_DOTNET_OVERLAY = next;
+            try { localStorage.setItem('dotnetOverlay', String(next)); } catch (e) {}
+            if (button) {
+                button.setAttribute('aria-pressed', String(next));
+                button.textContent = next ? 'OVL On' : 'OVL Off';
+            }
+
+            if (!next) {
+                // hide overlays: remove markers and cleanup observers
+                document.querySelectorAll('.dotnet-marker').forEach(n => n.remove());
+                document.querySelectorAll('[data-encoder]').forEach(section => {
+                    if (section._dotnetOverlayCleanup) {
+                        try { section._dotnetOverlayCleanup(); } catch (e) {}
+                    }
+                });
+            } else {
+                // show overlays: create overlays for existing canvases
+                document.querySelectorAll('canvas.benchmark-chart').forEach(canvas => {
+                    const chartDiv = canvas.parentElement;
+                    if (!chartDiv) return;
+                    try { this.createStaticVersionOverlay(chartDiv, canvas); } catch (e) { console.warn(e); }
+                });
+            }
         }
 
         toggleTheme() {
@@ -155,6 +207,19 @@
                     this.data = window.BENCHMARK_DATA;
                 } else {
                     throw new Error('Benchmark data not found');
+                }
+                // attempt to load .NET runtime runs metadata (used for overlay markers)
+                try {
+                    const resp = await fetch('dotnet-versions.json');
+                    if (resp && resp.ok) {
+                        const js = await resp.json();
+                        this._dotnetRuns = js && js.runs ? js.runs : (Array.isArray(js) ? js : []);
+                    } else {
+                        this._dotnetRuns = [];
+                    }
+                } catch (e) {
+                    console.warn('Could not load dotnet-versions.json', e);
+                    this._dotnetRuns = [];
                 }
             } catch (error) {
                 console.error('Failed to load benchmark data:', error);
@@ -602,7 +667,244 @@
                 // Pass the encoder name so charts for different benchmarks of the same
                 // encoder use the same canonical color.
                 this.createChart(canvas, encoderName, benchmarkName, benchmarkGroups[benchmarkName]);
+
+                // Prototype overlay: add static .NET version markers so we can review visuals
+                // This is a non-invasive prototype that inserts absolutely-positioned DOM
+                // markers above the canvas. Later we'll map actual timestamps to x positions.
+                try {
+                    // Controlled by a global flag so the prototype can be toggled during review
+                    if (typeof window.PROTO_SHOW_DOTNET_OVERLAY === 'undefined' || window.PROTO_SHOW_DOTNET_OVERLAY !== false) {
+                        this.createStaticVersionOverlay(chartDiv, canvas);
+                    }
+                } catch (e) {
+                    // non-fatal for prototype
+                    console.warn('Static version overlay failed', e);
+                }
             });
+        }
+
+        createStaticVersionOverlay(chartDiv, canvas) {
+            // Ensure the parent container is positioned so absolute children align to it
+            if (!chartDiv || !canvas) return;
+            chartDiv.style.position = chartDiv.style.position || 'relative';
+
+            // Remove any existing prototype markers to avoid duplication on re-render
+            chartDiv.querySelectorAll('.dotnet-marker').forEach(n => n.remove());
+
+            // helper to position markers based on chart pixels (if chart exists) or fallback
+            // We'll attempt to load real .NET runtime runs from ./dotnet-versions.json
+            // and map each run timestamp to the nearest data index in the chart's sorted data.
+            const positionMarkers = () => {
+                // Use offsetTop/Left so positioning is computed relative to the
+                // chartDiv (which we ensure is positioned). This avoids jitter
+                // when the document layout shifts during CSS transitions.
+                const canvasRect = canvas.getBoundingClientRect();
+                // place markers at the bottom of the canvas area: compute distance
+                // from the bottom of chartDiv to the bottom of the canvas and use
+                // that as 'bottom' in px so markers stay anchored to the canvas bottom.
+                // Use a larger minimum offset so pills don't overlap x-axis tick labels.
+                const canvasBottom = canvas.offsetTop + canvas.clientHeight; // relative to chartDiv
+                const bottomOffset = Math.max(18, chartDiv.clientHeight - canvasBottom + 12);
+
+                // find chart instance if available
+                const chart = this.charts.get(canvas.id);
+
+                // compute markers: prefer mapped indices from loaded versions; fall back to static sample
+                let markers = [];
+                try {
+                    if (this._dotnetRuns && this._dotnetRuns.length) {
+                        // compress runs to first occurrence of each version to avoid crowding
+                        const compressed = [];
+                        let prev = null;
+                        this._dotnetRuns.forEach(r => {
+                            const ver = r.DotNetVersion || r.version || r.DotnetVersion;
+                            const ts = Date.parse(r.Timestamp || r.timestamp || r.time || r.Date || r.date);
+                            if (!ver || !ts) return;
+                            if (prev !== ver) {
+                                compressed.push({ ts, label: String(ver) });
+                                prev = ver;
+                            }
+                        });
+
+                        // map compressed runs to nearest data index when possible
+                        if (chart && chart._sortedData && chart._sortedData.length) {
+                            const sd = chart._sortedData;
+                            const getPointTime = (p) => {
+                                if (!p) return null;
+                                if (p.date) {
+                                    const v = Date.parse(p.date);
+                                    if (!isNaN(v)) return v;
+                                }
+                                if (p.commit && p.commit.timestamp) {
+                                    const v = Date.parse(p.commit.timestamp);
+                                    if (!isNaN(v)) return v;
+                                }
+                                return null;
+                            };
+
+                            markers = compressed.map((c) => {
+                                let bestIdx = null;
+                                let bestDiff = Infinity;
+                                for (let i = 0; i < sd.length; i++) {
+                                    const pt = sd[i];
+                                    const ptTs = getPointTime(pt);
+                                    if (ptTs == null) continue;
+                                    const diff = Math.abs(ptTs - c.ts);
+                                    if (diff < bestDiff) {
+                                        bestDiff = diff;
+                                        bestIdx = i;
+                                    }
+                                }
+                                return { index: bestIdx, label: c.label, pos: bestIdx == null ? 0 : null };
+                            });
+                        } else {
+                            // no sortedData available, render by percent across chart width
+                            markers = compressed.map((c, i, arr) => ({ pos: Math.round((i / Math.max(1, arr.length - 1)) * 100) / 100, label: c.label }));
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Failed to compute markers from dotnet runs', e);
+                }
+
+                // if markers empty (no real data), use small static fallback
+                if (!markers || markers.length === 0) {
+                    markers = [
+                        { pos: 0.08, label: '8.0.416' },
+                        { pos: 0.48, label: '9.0.308' },
+                        { pos: 0.82, label: '10.0.0' }
+                    ];
+                }
+
+                markers.forEach((m, idx) => {
+                    let leftPx = null;
+
+                    if (chart && chart.getDatasetMeta) {
+                        try {
+                            const meta = chart.getDatasetMeta(0);
+                            if (meta && meta.data && meta.data.length) {
+                                // map marker to index: use provided marker.index if present, else pick a heuristic
+                                const dataIndex = typeof m.index === 'number' ? m.index : (idx === 0 ? 0 : (idx === markers.length - 1 ? Math.max(0, meta.data.length - 1) : Math.floor(meta.data.length / 2)));
+                                const point = meta.data[Math.min(dataIndex, meta.data.length - 1)];
+                                if (point && typeof point.x === 'number') {
+                                    // canvas.offsetLeft is relative to chartDiv because chartDiv is positioned
+                                    leftPx = canvas.offsetLeft + point.x;
+                                }
+                            }
+                        } catch (e) {
+                            // ignore and fallback to percent
+                            leftPx = null;
+                        }
+                    }
+
+                    const el = document.createElement('div');
+                    el.className = 'dotnet-marker';
+                    // store metadata for potential later repositioning
+                    el.dataset.markerIndex = typeof m.index === 'number' ? String(m.index) : '';
+
+                    // attach to DOM first so we can measure the pill width and avoid
+                    // horizontal overflow / clipping at chart edges
+                    const pill = document.createElement('span');
+                    pill.className = 'dotnet-pill';
+                    pill.textContent = m.label;
+                    el.appendChild(pill);
+                    // ensure bottom-anchored style by default for prototype
+                    el.classList.add('bottom');
+                    el.style.bottom = bottomOffset + 'px';
+                    el.style.top = '';
+
+                    chartDiv.appendChild(el);
+
+                    // compute desired left in pixels (relative to chartDiv)
+                    let desiredLeftPx;
+                    if (leftPx !== null) {
+                        desiredLeftPx = leftPx;
+                    } else {
+                        desiredLeftPx = Math.round(m.pos * chartDiv.clientWidth);
+                    }
+
+                    // measure and clamp so the pill doesn't overflow chart edges
+                    const halfW = Math.ceil(el.offsetWidth / 2) || 20;
+                    const minLeft = halfW + 8;
+                    const maxLeft = Math.max(halfW + 8, chartDiv.clientWidth - halfW - 8);
+                    const clamped = Math.min(Math.max(desiredLeftPx, minLeft), maxLeft);
+
+                    el.style.left = clamped + 'px';
+                    // center visually over the x coordinate
+                    el.style.transform = 'translateX(-50%)';
+                });
+            };
+
+            // initial positioning after layout
+            setTimeout(positionMarkers, 20);
+
+            // store handlers/observer so they can be cleaned if overlay recreated
+            if (chartDiv._dotnetOverlayCleanup) chartDiv._dotnetOverlayCleanup();
+
+            const resizeHandler = () => {
+                // remove existing markers and recreate to avoid stale px/percent mix
+                chartDiv.querySelectorAll('.dotnet-marker').forEach(n => n.remove());
+                // run several passes to catch layout/animation-driven shifts
+                positionMarkers();
+                // small follow-up in case other animations (Chart.js or layout) adjust positions
+                setTimeout(() => {
+                    chartDiv.querySelectorAll('.dotnet-marker').forEach(n => n.remove());
+                    positionMarkers();
+                }, 140);
+                setTimeout(() => {
+                    chartDiv.querySelectorAll('.dotnet-marker').forEach(n => n.remove());
+                    positionMarkers();
+                }, 420);
+            };
+
+            window.addEventListener('resize', resizeHandler);
+
+            // watch for stats collapse/expand changes so markers re-align when layout shifts
+            const statsEl = chartDiv.querySelector('.chart-stats');
+            let observer = null;
+            if (statsEl && typeof MutationObserver !== 'undefined') {
+                observer = new MutationObserver((mutations) => {
+                    let changed = false;
+                    for (const m of mutations) {
+                        if (m.attributeName === 'class') { changed = true; break; }
+                    }
+                    if (changed) {
+                        // If the stats element has a transition, wait for it to finish to
+                        // ensure layout has settled before repositioning. Otherwise fall
+                        // back to a small timeout.
+                        const cs = window.getComputedStyle(statsEl || document.body);
+                        const td = cs && cs.transitionDuration ? String(cs.transitionDuration).split(',')[0].trim() : '0s';
+                        const toMs = (s) => {
+                            if (!s) return 0;
+                            // handle both 'ms' and 's'
+                            if (s.endsWith('ms')) return parseFloat(s);
+                            if (s.endsWith('s')) return parseFloat(s) * 1000;
+                            return parseFloat(s) || 0;
+                        };
+                        const duration = toMs(td);
+
+                        if (duration > 0 && statsEl) {
+                            const onceHandler = () => {
+                                resizeHandler();
+                                statsEl.removeEventListener('transitionend', onceHandler);
+                            };
+                            // reposition after the transition ends (one-time)
+                            statsEl.addEventListener('transitionend', onceHandler, { once: true });
+                            // safety fallback in case transitionend doesn't fire
+                            setTimeout(resizeHandler, duration + 60);
+                        } else {
+                            // no transition — reposition shortly after the class change
+                            setTimeout(resizeHandler, 120);
+                        }
+                    }
+                });
+                observer.observe(statsEl, { attributes: true, attributeFilter: ['class'] });
+            }
+
+            chartDiv._dotnetOverlayCleanup = () => {
+                window.removeEventListener('resize', resizeHandler);
+                if (observer) observer.disconnect();
+                delete chartDiv._dotnetOverlayCleanup;
+            };
         }
 
         computeSeriesStats(series) {
@@ -761,6 +1063,8 @@
             });
 
             const chart = new Chart(ctx, chartConfig);
+            // expose the sorted data on the chart instance so overlays can map timestamps
+            try { chart._sortedData = sortedData; } catch (e) { /* ignore */ }
             this.charts.set(canvas.id, chart);
         }
 

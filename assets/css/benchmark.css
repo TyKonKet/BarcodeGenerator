@@ -919,6 +919,39 @@ body {
     color: #212529;
 }
 
+/* Floating overlay toggle (mirrors theme-toggle placement) */
+.overlay-toggle {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+    background: linear-gradient(180deg,#ffffff,#eef4f6);
+    border: 1px solid rgba(43,47,51,0.08);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    color: var(--soft-text);
+}
+
+[data-theme="dark"] .overlay-toggle {
+    background: linear-gradient(180deg,#343a40,#2b3136);
+    color: #ffdca3;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.overlay-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 30px rgba(43,47,51,0.09);
+}
+
+.overlay-toggle:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(13,110,253,0.12); }
+
 /* Dark theme tweak: set page tokens for easy overrides */
 [data-theme="dark"] {
     --page-foreground: #e9ecef;
@@ -1160,3 +1193,76 @@ body {
     font-size: 0.875rem;
     max-width: 300px;
 }
+
+/* Prototype .NET version overlay styles */
+.dotnet-marker {
+    position: absolute;
+    /* default to letting script decide top/bottom; when not bottom use a small top offset */
+    top: auto;
+    transform: translateX(-50%);
+    pointer-events: none; /* non-interactive in prototype */
+    z-index: 15;
+    white-space: nowrap;
+    will-change: left, bottom;
+}
+.dotnet-marker:not(.bottom) {
+    top: 8px;
+}
+.dotnet-marker.bottom {
+    top: auto; /* ensure top does not interfere when bottom is used */
+}
+.dotnet-pill {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #fff;
+    background: rgba(13,110,253,0.92);
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 6px 20px rgba(2,6,23,0.28);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.45);
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (prefers-color-scheme: light) {
+    .dotnet-pill {
+        color: #0d2b66;
+        background: rgba(13,110,253,0.07);
+        border-color: rgba(13,110,253,0.12);
+    }
+}
+
+/* Thin vertical line under the pill to indicate exact marker position */
+.dotnet-marker::after {
+    content: '';
+    display: block;
+    /* slightly wider and much taller for better visibility */
+    width: 4px;
+    height: 60px;
+    margin: 12px auto 0;
+    background: rgba(13,110,253,1);
+    border-radius: 3px;
+    opacity: 0.98;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.45));
+}
+
+/* For bottom-positioned markers we render the vertical line above the pill.
+   Use ::before for that and hide ::after when .bottom is present. */
+.dotnet-marker::before { content: ''; display: none; }
+.dotnet-marker.bottom::before {
+    content: '';
+    display: block;
+    /* slightly wider and much taller so the marker line reaches well into the chart area */
+    width: 4px;
+    height: 60px;
+    margin: 0 auto 12px;
+    background: rgba(13,110,253,1);
+    border-radius: 3px;
+    opacity: 0.98;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.45));
+}
+.dotnet-marker.bottom::after { display: none; }
