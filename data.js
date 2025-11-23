@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763908386200,
+  "lastUpdate": 1763909577831,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -972,6 +972,52 @@ window.BENCHMARK_DATA = {
             "value": 40728.86749267578,
             "unit": "ns",
             "range": "± 107.2086239229233"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "73668b14a0bca24ee0b225ea82886f492b3a0d84",
+          "message": "Update .NET version to 10.x in benchmark configuration and project files",
+          "timestamp": "2025-11-23T13:57:24Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/73668b14a0bca24ee0b225ea82886f492b3a0d84"
+        },
+        "date": 1763909576918,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.CodabarEncoder.SimpleInstance",
+            "value": 550.7897145197942,
+            "unit": "ns",
+            "range": "± 7.225063999887632"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.CodabarEncoder.AdvancedInstance",
+            "value": 2295.158300127302,
+            "unit": "ns",
+            "range": "± 38.822073902124096"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.CodabarEncoder.EncodingWithoutText",
+            "value": 28753.237221854073,
+            "unit": "ns",
+            "range": "± 81.92247282155896"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.CodabarEncoder.EncodingWithText",
+            "value": 40082.01907113882,
+            "unit": "ns",
+            "range": "± 74.84689561936507"
           }
         ]
       }
