@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763857578441,
+  "lastUpdate": 1763857593180,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -792,6 +792,52 @@ window.BENCHMARK_DATA = {
             "value": 98580.0770670573,
             "unit": "ns",
             "range": "± 1064.8322552358716"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "7b005aca3b2cf91c2cdca89e72bd46f01dd3eaaf",
+          "message": "Add GitHub token and configure user for version update commits in benchmark runner",
+          "timestamp": "2025-11-22T23:10:39Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/7b005aca3b2cf91c2cdca89e72bd46f01dd3eaaf"
+        },
+        "date": 1763857591622,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.SimpleInstance",
+            "value": 450.8164288202922,
+            "unit": "ns",
+            "range": "± 4.488902112154726"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.AdvancedInstance",
+            "value": 2108.5873797280447,
+            "unit": "ns",
+            "range": "± 30.659906807188545"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithoutText",
+            "value": 77530.2624267578,
+            "unit": "ns",
+            "range": "± 830.2154212492312"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithText",
+            "value": 98831.65466308594,
+            "unit": "ns",
+            "range": "± 105.52753416367449"
           }
         ]
       }
