@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763897770732,
+  "lastUpdate": 1763897783178,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -1160,6 +1160,52 @@ window.BENCHMARK_DATA = {
             "value": 62551.26174316406,
             "unit": "ns",
             "range": "± 484.7206222534991"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "1d2d3078cfcc5282336db16de456c18e2537e744",
+          "message": "Update .NET version to 9.x in benchmark configuration and project files",
+          "timestamp": "2025-11-23T01:04:39Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/1d2d3078cfcc5282336db16de456c18e2537e744"
+        },
+        "date": 1763897781605,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code128Encoder.SimpleInstance",
+            "value": 438.5097916126251,
+            "unit": "ns",
+            "range": "± 9.349188928714968"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code128Encoder.AdvancedInstance",
+            "value": 1931.4529285430908,
+            "unit": "ns",
+            "range": "± 73.17384716264725"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code128Encoder.EncodingWithoutText",
+            "value": 49273.924544270834,
+            "unit": "ns",
+            "range": "± 164.57188504810375"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code128Encoder.EncodingWithText",
+            "value": 63657.903572591145,
+            "unit": "ns",
+            "range": "± 804.4526559692072"
           }
         ]
       }
