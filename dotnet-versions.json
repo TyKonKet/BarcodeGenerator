@@ -31,6 +31,10 @@
     {
       "Timestamp": "2025-11-23T00:53:36Z",
       "DotNetVersion": "8.0.416"
+    },
+    {
+      "Timestamp": "2025-11-23T01:05:49Z",
+      "DotNetVersion": "10.0.0"
     }
   ]
 }
