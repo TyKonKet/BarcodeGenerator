@@ -6,31 +6,31 @@
     },
     {
       "Timestamp": "2025-11-22T23:27:48Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "8.0.416"
     },
     {
       "Timestamp": "2025-11-22T23:42:08Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "8.0.416"
     },
     {
       "Timestamp": "2025-11-22T23:54:21Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "8.0.416"
     },
     {
       "Timestamp": "2025-11-23T00:04:48Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "8.0.416"
     },
     {
       "Timestamp": "2025-11-23T00:19:16Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "8.0.416"
     },
     {
       "Timestamp": "2025-11-23T00:32:40Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "8.0.416"
     },
     {
       "Timestamp": "2025-11-23T00:53:36Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "8.0.416"
     }
   ]
 }
