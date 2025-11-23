@@ -34,11 +34,11 @@
     },
     {
       "Timestamp": "2025-11-23T01:05:49Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "9.0.308"
     },
     {
       "Timestamp": "2025-11-23T01:15:47Z",
-      "DotNetVersion": "10.0.0"
+      "DotNetVersion": "9.0.308"
     }
   ]
 }
