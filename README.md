@@ -7,14 +7,14 @@
 [![Benchmarks](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_benchmark_runner.yml/badge.svg)](https://github.com/TyKonKet/BarcodeGenerator/actions/workflows/dotnet_benchmark_runner.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **The fastest, most reliable .NET barcode library.** Generate professional-quality barcodes in milliseconds with [SkiaSharp](https://github.com/mono/SkiaSharp)-powered rendering.
+A compact, SkiaSharp-based .NET library for generating common 1D barcodes. Focused on reliability, correctness and a small API surface so it's easy to use from services and agent workflows.
 
-**🚀 From zero to barcode in 3 lines of code** • **📱 Cross-platform** • **⚡ High-performance** • **🎨 Fully customizable**
+Example:
 
 ```csharp
 using var barcode = new Barcode(opt => opt.Type = BarcodeTypes.Ean13);
 string validated = barcode.Encode("123456789012");
-barcode.Export("barcode.png");  // Done! 🎉
+barcode.Export("barcode.png");
 ```
 
 ---
@@ -51,31 +51,12 @@ barcode.Export("barcode.png");  // Done! 🎉
 
 ---
 
-## ⚡ Why Choose BarcodeGenerator?
+## Key points
 
-### 🎯 **Performance That Matters**
-- **<50ms generation time** for typical barcodes
-- **Memory efficient** with proper disposal patterns
-- **200% performance regression protection** via automated benchmarks
-- **Optimized for high-throughput** scenarios
-
-### 🎨 **Pixel-Perfect Quality**
-- **Vector-based rendering** with SkiaSharp
-- **Crisp output** at any scale or DPI
-- **Professional formatting** with automatic check digits
-- **Custom colors, fonts, and styling**
-
-### 🔧 **Developer Experience**
-- **Fluent API** with lambda configuration
-- **Comprehensive validation** with helpful error messages
-- **Export templating** with `{barcode}`, `{format}` placeholders
-- **80%+ test coverage** for reliability
-
-### 🌍 **Universal Compatibility**
-- **5 .NET frameworks** supported (.NET Standard 2.0 to .NET 10.0)
-- **Cross-platform** (Windows, macOS, Linux, mobile)
-- **Multiple export formats** (PNG, JPEG, WebP, and more)
-- **Zero external dependencies** beyond SkiaSharp
+- Compact, easy-to-use API (fluent configuration)
+- Built-in validation helpers (see `BarcodeValidator`)
+- Export templating: use placeholders like `{barcode}`, `{format}` in file names
+- Cross-platform rendering using SkiaSharp
 
 ---
 
@@ -169,17 +150,12 @@ else
 
 ---
 
-## 🏭 Real-World Use Cases
+## Common use cases
 
-**Trusted by developers building:**
-
-- 🛒 **E-commerce platforms** - Product catalog barcodes
-- 📦 **Inventory systems** - Asset tracking and management  
-- 🏪 **POS applications** - Retail checkout integration
-- 📚 **Library systems** - ISBN barcode generation
-- 🚚 **Logistics software** - Package tracking codes
-- 📱 **Mobile apps** - QR alternatives for simple data
-- 🖨️ **Label printing** - Batch barcode generation
+- E-commerce product barcodes (EAN/UPC)
+- Inventory and asset tracking
+- Library ISBN generation
+- Label printing and batch export
 
 ---
 
@@ -209,9 +185,8 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 |-----------|---------|-----------------|
 | **.NET Standard 2.0** | 2.0+ | Core compatibility for most scenarios |
 | **.NET Framework** | 4.6.2+ | Legacy Windows applications |
-| **.NET 6.0** | 6.0+ | Long-term support version |
-| **.NET 8.0** | 8.0+ | Latest stable version |
-| **.NET 10.0** | 10.0+ | Future-ready version |
+| **.NET 8.0** | 8.0+ | Long-term support version |
+| **.NET 10.0** | 10.0+ | Latest stable version |
 
 ---
 
@@ -250,18 +225,6 @@ BarcodeGenerator supports multiple .NET framework versions for maximum compatibi
 > **Have an idea?** [Start a discussion](https://github.com/TyKonKet/BarcodeGenerator/discussions) or [vote on features](https://github.com/TyKonKet/BarcodeGenerator/discussions/categories/ideas)!
 
 ---
-
-## 📊 Project Health
-
-![GitHub stars](https://img.shields.io/github/stars/TyKonKet/BarcodeGenerator?style=social)
-![GitHub forks](https://img.shields.io/github/forks/TyKonKet/BarcodeGenerator?style=social)
-![GitHub issues](https://img.shields.io/github/issues/TyKonKet/BarcodeGenerator)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/TyKonKet/BarcodeGenerator)
-
-- **🔄 Active development** - Regular updates and improvements
-- **🐛 Responsive support** - Issues typically resolved within 48h
-- **📈 Growing community** - Join our discussions and contribute
-- **🏆 Production ready** - Used in commercial applications worldwide
 
 ---
 

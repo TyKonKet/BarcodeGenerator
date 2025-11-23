@@ -98,7 +98,7 @@ namespace TyKonKet.BarcodeGenerator.Encoders
                 afterPrefix[..9].CopyTo(result[3..]);
             }
 
-#if NET6_0_OR_GREATER
+#if NET8_0_OR_GREATER
             return new string(result);
 #else
             return new string(result.ToArray());

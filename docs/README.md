@@ -46,7 +46,7 @@ BarcodeGenerator is a .NET library that supports multiple barcode types with a f
 📱 **Cross-Platform Compatibility**
 - Works seamlessly on Windows, macOS, Linux, and mobile platforms
 - Multiple export formats: PNG, JPEG, WEBP, and more
-- Framework support: .NET Standard 2.0, .NET Framework 4.6.2, .NET 6.0, .NET 8.0
+- Framework support: .NET Standard 2.0, .NET Framework 4.6.2, .NET 8.0, .NET 10.0
 
 ✅ **Validation & Reliability**
 - Automatic check digit calculation and validation
@@ -141,9 +141,8 @@ dotnet add package TyKonKet.BarcodeGenerator
 |-----------|---------|-----------------|
 | **.NET Standard 2.0** | 2.0+ | Core compatibility for most scenarios |
 | **.NET Framework** | 4.6.2+ | Legacy Windows applications |
-| **.NET 6.0** | 6.0+ | Long-term support version |
-| **.NET 8.0** | 8.0+ | Latest stable version |
-| **.NET 10.0** | 10.0+ | Future-ready version |
+| **.NET 8.0** | 8.0+ | Long-term support version |
+| **.NET 10.0** | 10.0+ | Latest stable version |
 
 ---
 

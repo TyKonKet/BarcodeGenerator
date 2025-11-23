@@ -10,7 +10,7 @@ BarcodeGenerator is a **.NET barcode library** using SkiaSharp. It supports:
 - CODE-39, CODE-93, CODE-128, CODABAR
 - Interleaved 2 of 5 (ITF)
 
-The library targets multiple frameworks: **.NET Standard 2.0**, **.NET Framework 4.6.2**, **.NET 6/8/10**.
+The library targets multiple frameworks: **.NET Standard 2.0**, **.NET Framework 4.6.2**, **.NET 8/10**.
 
 When in doubt, prefer modern C# features that are compatible with these targets.
 
@@ -154,3 +154,14 @@ Guidelines for LLMs:
 - Don’t change build or test commands without updating CONTRIBUTING and other docs.
 
 Following these guidelines will help LLMs generate changes that compile cleanly, satisfy analyzers, respect performance constraints, and fit naturally into the existing design.
+
+## Conditional compilation policy
+
+When adding or updating code that relies on newer framework features, prefer using `NET8_0_OR_GREATER` to gate .NET 8+ functionality. This repository targets .NET 8 and .NET 10 for modern features; use the following guidance:
+
+- Use `#if NET8_0_OR_GREATER` when the code requires APIs or behaviors introduced in .NET 8.
+- Avoid adding `NET6_0_OR_GREATER` checks now that .NET 6 support has been removed — prefer the newer symbol for clarity.
+- When dropping a target framework in the future, update `TargetFrameworks` in project files and replace conditional symbols accordingly (e.g., update `NET8_0_OR_GREATER` to `NET10_0_OR_GREATER` only when you require .NET 10-specific APIs).
+- Document any symbol changes in the repo's CONTRIBUTING or release notes so contributors and CI understand the supported TFMs.
+
+If a sub-agent or automation is used to manage these changes, ensure it updates all references across source, docs, and CI configuration.

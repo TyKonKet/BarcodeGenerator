@@ -198,7 +198,7 @@ public void Encode_ValidInput_ReturnsCorrectCheckDigit(string input, string expe
 We use **BenchmarkDotNet** to catch performance regressions:
 - **200% degradation threshold** triggers alerts
 - **Memory allocation** tracking for efficiency
-- **Cross-framework** comparison (.NET 6/8/10)
+- **Cross-framework** comparison (.NET 8/10)
 
 ### Performance Guidelines
 - **Avoid allocations** in hot paths
