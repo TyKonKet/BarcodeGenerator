@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763913499926,
+  "lastUpdate": 1763913511318,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -4222,6 +4222,54 @@ window.BENCHMARK_DATA = {
             "value": 54052.299975585935,
             "unit": "ns",
             "range": "± 270.26603661399264"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "c2dc5c01652253d3114f033d4e1016a7a0f0bf29",
+          "message": "Update framework support to .NET 8 and 10, remove .NET 6 references, and enhance documentation for API changes",
+          "timestamp": "2025-11-23T16:50:35+01:00",
+          "tree_id": "87ffd90cbe0f123d67d21c2eb5000278ec4864d7",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/c2dc5c01652253d3114f033d4e1016a7a0f0bf29"
+        },
+        "date": 1763913509589,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code93Encoder.SimpleInstance",
+            "value": 485.635737657547,
+            "unit": "ns",
+            "range": "± 3.8758546103653466"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code93Encoder.AdvancedInstance",
+            "value": 2095.423619809358,
+            "unit": "ns",
+            "range": "± 53.042166549684744"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code93Encoder.EncodingWithoutText",
+            "value": 41068.6845296224,
+            "unit": "ns",
+            "range": "± 46.804746111002565"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code93Encoder.EncodingWithText",
+            "value": 54315.18266805013,
+            "unit": "ns",
+            "range": "± 82.11387807894948"
           }
         ]
       }
