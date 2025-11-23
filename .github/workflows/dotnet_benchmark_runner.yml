@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 env:
-  DOTNET_VERSION: '8.x'
+  DOTNET_VERSION: '9.x'
   BENCH_CATEGORY: 'CI'
   ARTIFACT_RETENTION_DAYS: '1'
   TERM: xterm

@@ -10,7 +10,7 @@ namespace TyKonKet.BarcodeGenerator.Benchmarks
     {
         public BenchmarkConfig()
         {
-            AddJob(Job.Default.WithRuntime(CoreRuntime.Core80));
+            AddJob(Job.Default.WithRuntime(CoreRuntime.Core90));
             AddLogger(ConsoleLogger.Default);
             AddExporter(JsonExporter.Default);
         }
