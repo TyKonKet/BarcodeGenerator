@@ -475,7 +475,6 @@
                     <div class="chart-container">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="mb-0">${encoderName.replace('Encoder', '')} Performance ${trendBadge}</h4>
-                            <small class="text-muted">Click points to view commit details</small>
                         </div>
                         <div class="benchmark-charts" id="charts-${encoderName}">
                             <!-- Charts will be rendered here -->
@@ -544,10 +543,16 @@
                 const chartDiv = document.createElement('div');
                 chartDiv.className = 'col-12 mb-4';
 
+                // renderSeriesStats returns a ready-to-insert stats block
+
                 const canvas = document.createElement('canvas');
                 canvas.className = 'benchmark-chart';
                 canvas.id = `chart-${encoderName}-${benchmarkName.replace(/[^a-zA-Z0-9]/g, '')}`;
 
+                // compute lightweight stats for this series and render into statRow
+                const stats = this.computeSeriesStats(benchmarkGroups[benchmarkName]);
+                const statsBlock = this.renderSeriesStats(stats, benchmarkName);
+                if (statsBlock) chartDiv.appendChild(statsBlock);
                 chartDiv.appendChild(canvas);
                 chartsContainer.appendChild(chartDiv);
 
@@ -555,6 +560,82 @@
                 // encoder use the same canonical color.
                 this.createChart(canvas, encoderName, benchmarkName, benchmarkGroups[benchmarkName]);
             });
+        }
+
+        computeSeriesStats(series) {
+            // series: array of points with { value, date, commit }
+            const values = (series || []).map(s => Number(s.value)).filter(v => Number.isFinite(v));
+            if (!values.length) return null;
+
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            const sum = values.reduce((a, b) => a + b, 0);
+            const avg = sum / values.length;
+            const last = values[values.length - 1];
+
+            // change percent: compare last to previous average of up to 3 previous points
+            let prevAvg = null;
+            if (values.length >= 2) {
+                const start = Math.max(0, values.length - 4);
+                const slice = values.slice(start, values.length - 1);
+                if (slice.length) prevAvg = slice.reduce((a, b) => a + b, 0) / slice.length;
+            }
+
+            let changePercent = null;
+            if (prevAvg && prevAvg !== 0) {
+                changePercent = ((last - prevAvg) / prevAvg) * 100;
+            }
+
+            return { min, max, avg, last, changePercent, count: values.length };
+        }
+
+        renderSeriesStats(stats, title) {
+            // parent wrapper for the title row + stats row
+            const parent = document.createElement('div');
+            parent.className = 'chart-stats mb-2';
+
+            if (!stats) {
+                const span = document.createElement('div');
+                span.className = 'text-muted';
+                span.textContent = 'No data';
+                parent.appendChild(span);
+                return parent;
+            }
+
+            // Title row (centered)
+            if (title) {
+                const titleEl = document.createElement('div');
+                titleEl.className = 'chart-stats-title text-center w-100 mb-2';
+                titleEl.textContent = String(title).replace(/Encoder$/i, '');
+                parent.appendChild(titleEl);
+            }
+
+            // Stats row
+            const row = document.createElement('div');
+            row.className = 'd-flex flex-wrap gap-3 align-items-center chart-stats-row justify-content-center';
+
+            const createItem = (label, value) => {
+                const el = document.createElement('div');
+                el.className = 'chart-stat-item text-muted';
+                el.innerHTML = `<small class="stat-label">${label}</small><div class="stat-value">${value}</div>`;
+                return el;
+            };
+
+            row.appendChild(createItem('min', this.formatTime(stats.min)));
+            row.appendChild(createItem('max', this.formatTime(stats.max)));
+            row.appendChild(createItem('avg', this.formatTime(stats.avg)));
+            row.appendChild(createItem('last', this.formatTime(stats.last)));
+
+            if (typeof stats.changePercent === 'number') {
+                const change = stats.changePercent;
+                const sign = change > 0 ? '▲' : (change < 0 ? '▼' : '→');
+                const pct = `${sign} ${Math.abs(change).toFixed(1)}%`;
+                row.appendChild(createItem('change', pct));
+            }
+
+            row.appendChild(createItem('samples', stats.count));
+            parent.appendChild(row);
+            return parent;
         }
 
         groupBenchmarksByName(entries) {
@@ -635,12 +716,9 @@
                     },
                     plugins: {
                         title: {
-                            display: true,
-                            text: title,
-                            font: {
-                                size: 16,
-                                weight: 'bold'
-                            }
+                            // Title is rendered in the custom stats box above the canvas —
+                            // disable the built-in Chart.js title to avoid duplication.
+                            display: false
                         },
                         legend: {
                             display: false
