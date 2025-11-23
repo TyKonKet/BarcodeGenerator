@@ -614,19 +614,33 @@ body {
 
 .chart-stat-item {
     min-width: 6.5rem;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.125rem 0.25rem;
+    box-sizing: border-box;
 }
 
 .chart-stat-item .stat-label {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     font-size: 0.68rem;
     text-transform: uppercase;
-    opacity: 0.8;
+    opacity: 0.85;
+    margin-bottom: 0.28rem;
 }
 
 .chart-stat-item .stat-value {
-    font-weight: 700;
+    font-size: 1.05rem;
     color: var(--soft-text);
+    font-weight: 800;
+    line-height: 1;
+    min-height: 1.25rem; /* keep values aligned even if some items wrap */
+    display: flex;
+    align-items: flex-end; /* align numbers to bottom for consistent baseline */
+    justify-content: center;
 }
 
 /* Highlight box around per-chart stats */
@@ -634,9 +648,11 @@ body {
     display: block;
     background: var(--panel-bg);
     border: 1px solid var(--card-border);
-    border-radius: 10px;
-    padding: 0.45rem 0.6rem;
-    box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+    border-radius: 12px;
+    padding: 0.6rem 0.9rem;
+    box-shadow: 0 12px 40px rgba(2,6,23,0.10);
+    width: 100%;
+    overflow: visible;
 }
 
 .chart-stats-row .chart-stat-item {
@@ -651,10 +667,14 @@ body {
 
 .chart-stats-title {
     font-weight: 700;
-    font-size: 0.95rem;
-    margin-right: 0.75rem;
+    font-size: 1.05rem;
+    margin: 0;
     color: var(--soft-text);
     white-space: nowrap;
+    text-align: center;
+
+    /* make clear this title can be interacted with to collapse/expand stats */
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {
@@ -669,6 +689,100 @@ body {
 .chart-container:hover {
     transform: translateY(-2px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* emphasized stat values for better readability */
+.chart-stat-item .stat-value {
+    font-size: 1.05rem;
+    color: var(--soft-text);
+    font-weight: 800;
+}
+
+/* Collapsible stats support: hide the row and reduce visual footprint when collapsed */
+.chart-stats {
+    transition: padding 220ms ease, box-shadow 220ms ease, max-height 240ms ease;
+}
+
+.chart-stats.collapsed {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+
+.chart-stats.collapsed .chart-stats-row {
+    display: none;
+}
+
+/* Use max-height to fully collapse the stats box (only title remains) */
+.chart-stats {
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 240ms ease, padding 220ms ease, box-shadow 220ms ease;
+}
+.chart-stats.collapsed {
+    /* tightly collapse the stats box so only a compact title pill remains visible */
+    max-height: 40px;
+    padding: 0;
+    box-shadow: none;
+    border-color: transparent;
+    background: transparent;
+}
+.chart-stats.collapsed .chart-stats-title {
+    margin: 0 auto !important;
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.03);
+    color: var(--soft-text);
+}
+
+@media (prefers-color-scheme: light) {
+    .chart-stats.collapsed .chart-stats-title {
+        background: rgba(0,0,0,0.04);
+        color: rgba(33,37,41,0.9);
+    }
+}
+
+.chart-stats-title::after {
+    content: '\25BE'; /* small down-caret */
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.78rem;
+    opacity: 0.85;
+    transition: transform 200ms ease;
+}
+
+.chart-stats.collapsed .chart-stats-title::after {
+    transform: rotate(-90deg);
+}
+
+/* change percent coloring */
+.stat-change--improve .stat-value { color: var(--success-color); font-weight: 700; }
+.stat-change--regress .stat-value { color: var(--danger-color); font-weight: 700; }
+.stat-change--stable .stat-value { color: var(--secondary-color); font-weight: 700; }
+
+/* layout tweak: center the stats row inside the box and align values on a common baseline */
+.chart-stats-row { 
+    justify-content: center; 
+    align-items: flex-end; /* align stat values on a common baseline */
+}
+
+/* small inline swatches for min/max to make values scannable */
+.stat-swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: -2px; /* visually center with text */
+}
+.chart-stat-item[data-label="min"] .stat-swatch { background: var(--success-color); }
+.chart-stat-item[data-label="max"] .stat-swatch { background: var(--danger-color); }
+
+/* median and stddev smaller labels */
+.chart-stat-item[data-label="median"] .stat-label,
+.chart-stat-item[data-label="stddev"] .stat-label {
+    font-size: 0.62rem;
 }
 
 /* Enhanced overview cards styling */
@@ -921,8 +1035,8 @@ body {
 
 .benchmark-chart {
     width: 100%;
-    height: 400px;
-    max-height: 400px;
+    height: 520px; /* increased for better readability */
+    max-height: 520px;
 }
 
 .trend-indicator {
@@ -991,6 +1105,24 @@ body {
         width: 40px;
         height: 40px;
         font-size: 1rem;
+    }
+
+    /* On small screens keep charts reasonable height so they don't dominate the viewport */
+    .benchmark-chart {
+        height: 300px;
+        max-height: 300px;
+    }
+}
+
+/* Tablet-specific sizing: slightly reduced height for better vertical rhythm on tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .benchmark-chart {
+        height: 360px;
+        max-height: 360px;
+    }
+
+    .chart-container {
+        padding: 0.85rem;
     }
 }
 

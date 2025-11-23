@@ -98,6 +98,49 @@
             if (downloadBtn) {
                 downloadBtn.addEventListener('click', () => this.downloadData());
             }
+
+            // Delegated handler: allow users to collapse/expand per-chart stats by
+            // clicking the chart title. This keeps the DOM simple and avoids
+            // wiring listeners for every chart element individually.
+            // Delegated click handler: support clicks on child elements by using closest()
+            document.addEventListener('click', (ev) => {
+                const target = /** @type {HTMLElement} */ (ev.target);
+                if (!target) return;
+                const title = target.closest && target.closest('.chart-stats-title');
+                if (title) {
+                    const parent = title.closest('.chart-stats');
+                    if (parent) {
+                        parent.classList.toggle('collapsed');
+                        // accessibility: set aria-expanded to true when not collapsed
+                        const expanded = parent.classList.contains('collapsed') ? 'false' : 'true';
+                        title.setAttribute('aria-expanded', expanded);
+                    }
+                }
+            });
+
+            // Keyboard support for accessibility: Enter or Space toggles the stats
+            // Keyboard support: allow Enter/Space to toggle when focus lands on any child of the title
+            document.addEventListener('keydown', (ev) => {
+                const target = /** @type {HTMLElement} */ (ev.target);
+                if (!target) return;
+                const title = target.closest && target.closest('.chart-stats-title');
+                if (!title) return;
+                if (ev.key === 'Enter' || ev.key === ' ') {
+                    ev.preventDefault();
+                    const parent = title.closest('.chart-stats');
+                    if (parent) {
+                        parent.classList.toggle('collapsed');
+                        const expanded = parent.classList.contains('collapsed') ? 'false' : 'true';
+                        title.setAttribute('aria-expanded', expanded);
+                    }
+                }
+            });
+
+            // Global collapse/expand controls (buttons added to the toolbar)
+            const collapseBtn = getElement('collapse-stats-btn');
+            const expandBtn = getElement('expand-stats-btn');
+            if (collapseBtn) collapseBtn.addEventListener('click', () => window.collapseAllStats && window.collapseAllStats());
+            if (expandBtn) expandBtn.addEventListener('click', () => window.expandAllStats && window.expandAllStats());
         }
 
         toggleTheme() {
@@ -573,6 +616,24 @@
             const avg = sum / values.length;
             const last = values[values.length - 1];
 
+            // median
+            const sorted = values.slice().sort((a, b) => a - b);
+            let median = null;
+            if (sorted.length % 2 === 1) {
+                median = sorted[(sorted.length - 1) / 2];
+            } else {
+                const hi = sorted.length / 2;
+                median = (sorted[hi - 1] + sorted[hi]) / 2;
+            }
+
+            // standard deviation (sample)
+            let stddev = 0;
+            if (values.length > 1) {
+                const mean = avg;
+                const variance = values.reduce((acc, v) => acc + Math.pow(v - mean, 2), 0) / (values.length - 1);
+                stddev = Math.sqrt(variance);
+            }
+
             // change percent: compare last to previous average of up to 3 previous points
             let prevAvg = null;
             if (values.length >= 2) {
@@ -586,7 +647,7 @@
                 changePercent = ((last - prevAvg) / prevAvg) * 100;
             }
 
-            return { min, max, avg, last, changePercent, count: values.length };
+            return { min, max, avg, median, stddev, last, changePercent, count: values.length };
         }
 
         renderSeriesStats(stats, title) {
@@ -607,6 +668,10 @@
                 const titleEl = document.createElement('div');
                 titleEl.className = 'chart-stats-title text-center w-100 mb-2';
                 titleEl.textContent = String(title).replace(/Encoder$/i, '');
+                // Accessibility: make title act like a toggle button
+                titleEl.setAttribute('role', 'button');
+                titleEl.setAttribute('aria-expanded', 'true');
+                titleEl.setAttribute('tabindex', '0');
                 parent.appendChild(titleEl);
             }
 
@@ -617,12 +682,21 @@
             const createItem = (label, value) => {
                 const el = document.createElement('div');
                 el.className = 'chart-stat-item text-muted';
-                el.innerHTML = `<small class="stat-label">${label}</small><div class="stat-value">${value}</div>`;
+                const key = String(label).toLowerCase();
+                el.dataset.label = key;
+                // For min/max include an explicit inline swatch element so it sits beside the label text
+                const labelHtml = (key === 'min' || key === 'max')
+                    ? `<small class="stat-label"><span class="stat-swatch" aria-hidden="true"></span>${label}</small>`
+                    : `<small class="stat-label">${label}</small>`;
+                el.innerHTML = `${labelHtml}<div class="stat-value">${value}</div>`;
                 return el;
             };
 
             row.appendChild(createItem('min', this.formatTime(stats.min)));
             row.appendChild(createItem('max', this.formatTime(stats.max)));
+            // median and stddev are helpful for distribution insight
+            if (typeof stats.median === 'number') row.appendChild(createItem('median', this.formatTime(stats.median)));
+            if (typeof stats.stddev === 'number' && stats.stddev > 0) row.appendChild(createItem('stddev', this.formatTime(stats.stddev)));
             row.appendChild(createItem('avg', this.formatTime(stats.avg)));
             row.appendChild(createItem('last', this.formatTime(stats.last)));
 
@@ -630,7 +704,12 @@
                 const change = stats.changePercent;
                 const sign = change > 0 ? '▲' : (change < 0 ? '▼' : '→');
                 const pct = `${sign} ${Math.abs(change).toFixed(1)}%`;
-                row.appendChild(createItem('change', pct));
+                const changeEl = createItem('change', pct);
+                // colorize change value depending on direction
+                if (change > 0) changeEl.classList.add('stat-change--regress');
+                else if (change < 0) changeEl.classList.add('stat-change--improve');
+                else changeEl.classList.add('stat-change--stable');
+                row.appendChild(changeEl);
             }
 
             row.appendChild(createItem('samples', stats.count));
@@ -957,6 +1036,23 @@
         });
         document.querySelectorAll('[data-encoder]:not(.encoder-toggle)').forEach(section => {
             section.classList.add('hidden');
+        });
+    };
+
+    // Global helpers to collapse or expand all per-chart stats boxes
+    window.collapseAllStats = function collapseAllStats() {
+        document.querySelectorAll('.chart-stats').forEach(el => {
+            el.classList.add('collapsed');
+            const title = el.querySelector('.chart-stats-title');
+            if (title) title.setAttribute('aria-expanded', 'false');
+        });
+    };
+
+    window.expandAllStats = function expandAllStats() {
+        document.querySelectorAll('.chart-stats').forEach(el => {
+            el.classList.remove('collapsed');
+            const title = el.querySelector('.chart-stats-title');
+            if (title) title.setAttribute('aria-expanded', 'true');
         });
     };
 
