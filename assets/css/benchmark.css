@@ -469,6 +469,90 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 10000;
+}
+
+.skip-link:focus {
+    position: fixed;
+    left: 50%;
+    top: 12px;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(15, 23, 32, 0.35);
+}
+
+.site-header {
+    position: relative;
+    z-index: 10;
+    padding-top: 1rem;
+}
+
+.header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 3rem;
+}
+
+.site-main {
+    display: block;
+    padding-bottom: 3rem;
+}
+
+.section-card {
+    padding: 1.5rem 0;
+}
+
+.section-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.section-heading h2 {
+    margin-bottom: 0.25rem;
+}
+
+.summary-chip {
+    background: var(--panel-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+    text-align: center;
+    box-shadow: var(--soft-shadow);
+}
+
+.summary-chip .summary-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--text-muted, var(--overview-text));
+}
+
+.summary-chip strong {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--soft-text);
+}
+
 .hero-section {
     background: var(--gradient-primary);
     color: var(--soft-text);
@@ -520,6 +604,10 @@ body {
     transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
+.charts-section #charts-container {
+    margin-top: 1rem;
+}
+
 [data-theme="dark"] .chart-container {
     background: var(--muted-panel-bg);
     color: var(--soft-text);
@@ -531,120 +619,91 @@ body {
 }
 
 /* Enhanced overview cards styling */
-#overview-stats .card {
-    border-radius: 10px;
+#overview-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem auto 0;
+}
+
+.overview-card {
+    border-radius: 12px;
     overflow: hidden;
-    min-width: 170px;
     background: var(--panel-bg);
     box-shadow: var(--soft-shadow);
     border: 1px solid var(--card-border);
     transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-/* Layout tweaks for consistent card widths and symmetric appearance */
-#overview-stats {
-    /* ensure flex layout with consistent gaps instead of per-item margins */
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: center;
-    gap: 0.75rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+.overview-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 18px 44px rgba(2, 6, 23, 0.35);
 }
 
-/* Make each direct child share available space and have a sensible minimum */
-#overview-stats > .flex-fill {
-    flex: 1 1 220px; /* grow, shrink, base width */
-    min-width: 220px;
-    margin-right: 0 !important; /* override the per-element margins in the markup */
-}
-
-/* Ensure card bodies vertically center content so all cards appear balanced */
-#overview-stats .card-body {
+.overview-card .card-body {
+    padding: 1.5rem 1.35rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    min-height: 140px;
+    gap: 0.65rem;
 }
 
-/* Make each overview card take full width on small screens only */
-@media (max-width: 992px) {
-    #overview-stats > .flex-fill {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    /* reduce gap on small screens to save vertical space */
-    #overview-stats { gap: 0.5rem; }
-}
-
-#overview-stats .card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 18px 44px rgba(2,6,23,0.55);
-}
-
-#overview-stats .card-body {
-    padding: 1.25rem 1.35rem;
-}
-
-#overview-stats .card-title {
+.overview-card .card-title {
     font-weight: 700;
     letter-spacing: 0.2px;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.25rem;
 }
 
-/* metric rows */
-#overview-stats .card-body p {
-    margin: 0.25rem 0;
+.metric-list {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.35rem 0.75rem;
+}
+
+.metric-list dt,
+.metric-list dd {
+    margin: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
+    gap: 0.4rem;
     color: var(--overview-text);
 }
 
-/* Keep encoder + time on a single line; truncate long encoder names with ellipsis */
-#overview-stats .card-body p {
-    white-space: nowrap;      /* do not break inside the metric row */
-    flex-wrap: nowrap;        /* ensure flex children don't wrap */
-    overflow: hidden;         /* hide overflow when space is tight */
+.metric-list dt {
+    font-weight: 600;
+    justify-content: flex-start;
 }
 
-#overview-stats .card-body p > span[id$="-fastest-encoder"],
-#overview-stats .card-body p > span[id$="-slowest-encoder"] {
-    display: inline-block;
-    max-width: 9.5rem;       /* allow room for the time to remain visible */
+.metric-label {
+    white-space: nowrap;
+}
+
+.metric-entity {
+    flex: 1;
+    font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    vertical-align: middle;
+    max-width: 8.5rem;
 }
 
-#overview-stats .card-body p > span[id$="-fastest-time"],
-#overview-stats .card-body p > span[id$="-slowest-time"],
-#overview-stats .card-body span[id$="-average-time"] {
-    display: inline-block;
-    min-width: 5.5ch;        /* reserve space for the numeric time */
-    text-align: right;
+.metric-value {
+    font-weight: 600;
     white-space: nowrap;
 }
 
-/* On very small screens allow slightly smaller encoder name before truncation */
-@media (max-width: 480px) {
-    #overview-stats .card-body p > span[id$="-fastest-encoder"],
-    #overview-stats .card-body p > span[id$="-slowest-encoder"] {
-        max-width: 7.5rem;
-    }
-    #overview-stats .card-body p > span[id$="-fastest-time"],
-    #overview-stats .card-body p > span[id$="-slowest-time"],
-    #overview-stats .card-body span[id$="-average-time"] {
-        min-width: 5ch;
-    }
+.metric-list dd {
+    justify-content: flex-end;
 }
 
-#overview-stats .card-body p .metric-icon {
+.metric-list dd span + span {
+    margin-left: 0.35rem;
+}
+
+.metric-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -652,33 +711,35 @@ body {
     width: 1.5rem;
 }
 
-/* Subtle color accents for icons */
-#overview-stats .card-title.text-success ~ p .metric-icon { color: var(--success-color); }
-#overview-stats .card-title.text-warning ~ p .metric-icon { color: var(--warning-color); }
-#overview-stats .card-title.text-info ~ p .metric-icon { color: var(--bs-info); }
-#overview-stats .card-title.text-primary ~ p .metric-icon { color: var(--primary-color); }
+.overview-card .card-title.text-success + .metric-list .metric-icon { color: var(--success-color); }
+.overview-card .card-title.text-warning + .metric-list .metric-icon { color: var(--warning-color); }
+.overview-card .card-title.text-info + .metric-list .metric-icon { color: var(--bs-info); }
+.overview-card .card-title.text-primary + .metric-list .metric-icon { color: var(--primary-color); }
 
-/* Smaller muted text for encoder names */
-#overview-stats .card-body span[id$="-fastest-encoder"],
-#overview-stats .card-body span[id$="-slowest-encoder"] {
-    font-weight: 600;
-    color: var(--overview-text);
-}
+@media (max-width: 600px) {
+    .metric-list {
+        grid-template-columns: 1fr;
+    }
 
-#overview-stats .card-body span[id$="-fastest-time"],
-#overview-stats .card-body span[id$="-slowest-time"],
-#overview-stats .card-body span[id$="-average-time"] {
-    font-weight: 600;
-    color: var(--overview-text);
+    .metric-list dd {
+        justify-content: flex-start;
+    }
+
+    .metric-entity {
+        max-width: 100%;
+    }
 }
 
 @media (prefers-color-scheme: light) {
-    #overview-stats .card {
-        box-shadow: 0 5px 14px rgba(33,37,41,0.04);
+    .overview-card {
+        box-shadow: 0 5px 14px rgba(33, 37, 41, 0.04);
         background: var(--panel-bg);
         color: var(--soft-text);
     }
-    #overview-stats .card-body p { color: rgba(43,47,51,0.85); }
+    .metric-list dt,
+    .metric-list dd {
+        color: rgba(43, 47, 51, 0.85);
+    }
 }
 
 /* Additional light-theme toning: reduce contrast of theme toggle */
@@ -727,13 +788,35 @@ body {
     box-shadow: var(--soft-shadow);
 }
 
+.filter-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.filter-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.encoder-filter-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
 [data-theme="dark"] .filter-controls {
     background: #343a40;
     color: #e9ecef;
 }
 
 .encoder-toggle {
-    margin: 0.25rem;
+    margin: 0;
     transition: all 0.3s ease;
 }
 
@@ -829,6 +912,20 @@ body {
 
     .filter-controls {
         padding: 1rem;
+    }
+
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .summary-chip {
+        width: 100%;
+        align-items: center;
+    }
+
+    .filter-actions {
+        justify-content: flex-start;
     }
 
     .theme-toggle {

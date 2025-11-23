@@ -1,6 +1,23 @@
 (function () {
     'use strict';
 
+    const THEME_STORAGE_KEY = 'theme';
+    const DEFAULT_THEME = 'dark';
+    const BENCHMARK_TYPES = ['SimpleInstance', 'AdvancedInstance', 'EncodingWithoutText', 'EncodingWithText'];
+    const MAX_OVERVIEW_SERIES_POINTS = 50;
+    const OVERVIEW_CARD_CONFIG = {
+        SimpleInstance: { prefix: 'simple' },
+        AdvancedInstance: { prefix: 'advanced' },
+        EncodingWithoutText: { prefix: 'without' },
+        EncodingWithText: { prefix: 'with' }
+    };
+
+    const getElement = (id) => document.getElementById(id);
+    const setTextContent = (id, value) => {
+        const el = getElement(id);
+        if (el) el.textContent = value;
+    };
+
     // Check if Chart.js loaded from CDN, if not use embedded version
     if (typeof Chart === 'undefined') {
         console.log('Chart.js CDN failed, using embedded fallback');
@@ -13,9 +30,28 @@
             this.data = null;
             this.charts = new Map();
             this.hiddenEncoders = new Set();
+            this.colorCache = new Map();
             // Default to dark theme for first-time visitors; respect saved preference if present
-            this.theme = localStorage.getItem('theme') || 'dark';
+            this.theme = localStorage.getItem(THEME_STORAGE_KEY) || DEFAULT_THEME;
             this.init();
+        }
+
+        get encoderNames() {
+            if (!this.data || !this.data.entries) {
+                return [];
+            }
+            return Object.keys(this.data.entries);
+        }
+
+        getEntriesForEncoder(encoderName) {
+            if (!this.data || !this.data.entries) {
+                return [];
+            }
+            return this.data.entries[encoderName] || [];
+        }
+
+        extractBenchType(name = '') {
+            return name.split('.').pop();
         }
 
         formatTime(ns) {
@@ -47,22 +83,26 @@
         setupTheme() {
             document.documentElement.setAttribute('data-theme', this.theme);
             const themeIcon = document.getElementById('themeIcon');
-            themeIcon.textContent = this.theme === 'dark' ? '☀️' : '🌙';
+            if (themeIcon) {
+                themeIcon.textContent = this.theme === 'dark' ? '☀️' : '🌙';
+            }
         }
 
         setupEventListeners() {
-            document.getElementById('themeToggle').addEventListener('click', () => {
-                this.toggleTheme();
-            });
+            const themeToggle = getElement('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => this.toggleTheme());
+            }
 
-            document.getElementById('download-btn').addEventListener('click', () => {
-                this.downloadData();
-            });
+            const downloadBtn = getElement('download-btn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', () => this.downloadData());
+            }
         }
 
         toggleTheme() {
             this.theme = this.theme === 'light' ? 'dark' : 'light';
-            localStorage.setItem('theme', this.theme);
+            localStorage.setItem(THEME_STORAGE_KEY, this.theme);
             this.setupTheme();
         }
 
@@ -90,133 +130,136 @@
 
         renderHeader() {
             const lastUpdate = new Date(this.data.lastUpdate);
-            document.getElementById('last-update').textContent = lastUpdate.toLocaleString();
+            setTextContent('last-update', lastUpdate.toLocaleString());
 
             const repoLink = document.getElementById('repository-link');
-            repoLink.href = this.data.repoUrl;
-            repoLink.textContent = this.data.repoUrl;
+            if (repoLink) {
+                repoLink.href = this.data.repoUrl;
+                repoLink.textContent = this.data.repoUrl;
+            }
         }
 
         renderOverviewStats() {
-            const encoders = Object.keys(this.data.entries);
+            const encoders = this.encoderNames;
+            if (!encoders.length) return;
+
             const totalEncoders = encoders.filter(name => name.includes('Encoder')).length;
+            const totalBenchmarks = encoders.reduce((acc, encoderName) => acc + this.getEntriesForEncoder(encoderName).length, 0);
+            const stats = this.calculateOverviewStats(encoders);
 
-            // Calculate total benchmarks
-            let totalBenchmarks = 0;
-            encoders.forEach(encoderName => {
-                const entries = this.data.entries[encoderName];
-                totalBenchmarks += entries.length;
-            });
+            this.updateOverviewCards(stats, totalEncoders, totalBenchmarks);
+            this.renderOverviewSparklines();
+        }
 
-            // Benchmark types
-            const benchmarkTypes = ['SimpleInstance', 'AdvancedInstance', 'EncodingWithoutText', 'EncodingWithText'];
-
-            // Compute stats for each type
+        calculateOverviewStats(encoders) {
             const stats = {};
-            benchmarkTypes.forEach(type => {
-                let fastestEncoder = '';
-                let fastestTime = Infinity;
-                let slowestEncoder = '';
-                let slowestTime = 0;
-                let allTimes = [];
+
+            BENCHMARK_TYPES.forEach(type => {
+                const aggregate = {
+                    times: [],
+                    fastestEncoder: '',
+                    fastestTime: Infinity,
+                    slowestEncoder: '',
+                    slowestTime: 0
+                };
 
                 encoders.forEach(encoderName => {
-                    const entries = this.data.entries[encoderName];
-                    entries.forEach(entry => {
-                        entry.benches.forEach(bench => {
-                            const benchType = bench.name.split('.').pop();
-                            if (benchType === type) {
-                                allTimes.push(bench.value);
-                                if (bench.value < fastestTime) {
-                                    fastestTime = bench.value;
-                                    fastestEncoder = encoderName;
-                                }
-                                if (bench.value > slowestTime) {
-                                    slowestTime = bench.value;
-                                    slowestEncoder = encoderName;
-                                }
+                    this.getEntriesForEncoder(encoderName).forEach(entry => {
+                        (entry.benches || []).forEach(bench => {
+                            if (this.extractBenchType(bench.name) !== type) return;
+                            const value = Number(bench.value);
+                            if (Number.isNaN(value)) return;
+                            aggregate.times.push(value);
+                            if (value < aggregate.fastestTime) {
+                                aggregate.fastestTime = value;
+                                aggregate.fastestEncoder = encoderName;
+                            }
+                            if (value > aggregate.slowestTime) {
+                                aggregate.slowestTime = value;
+                                aggregate.slowestEncoder = encoderName;
                             }
                         });
                     });
                 });
 
-                const averageTime = allTimes.length > 0 ?
-                    allTimes.reduce((a, b) => a + b, 0) / allTimes.length : 0;
-
-                stats[type] = {
-                    fastestEncoder: fastestEncoder.replace('Encoder', ''),
-                    slowestEncoder: slowestEncoder.replace('Encoder', ''),
-                    fastestTime: fastestTime !== Infinity ? this.formatTime(fastestTime) : '-',
-                    slowestTime: slowestTime > 0 ? this.formatTime(slowestTime) : '-',
-                    averageTime: averageTime > 0 ? this.formatTime(averageTime) : '-'
-                };
+                stats[type] = this.buildOverviewStatSnapshot(aggregate);
             });
 
-            // Update DOM
-            document.getElementById('totalEncoders').textContent = totalEncoders;
-            document.getElementById('simple-fastest-encoder').textContent = stats.SimpleInstance.fastestEncoder;
-            document.getElementById('simple-fastest-time').textContent = stats.SimpleInstance.fastestTime;
-            document.getElementById('simple-slowest-encoder').textContent = stats.SimpleInstance.slowestEncoder;
-            document.getElementById('simple-slowest-time').textContent = stats.SimpleInstance.slowestTime;
-            // show a concise descriptor here — the chart's latest-point label shows the numeric value
-            const simpleAvgEl = document.getElementById('simple-average-time');
-            simpleAvgEl.textContent = 'Avg per run';
-            simpleAvgEl.title = stats.SimpleInstance.averageTime;
-            document.getElementById('advanced-fastest-encoder').textContent = stats.AdvancedInstance.fastestEncoder;
-            document.getElementById('advanced-fastest-time').textContent = stats.AdvancedInstance.fastestTime;
-            document.getElementById('advanced-slowest-encoder').textContent = stats.AdvancedInstance.slowestEncoder;
-            document.getElementById('advanced-slowest-time').textContent = stats.AdvancedInstance.slowestTime;
-            const advancedAvgEl = document.getElementById('advanced-average-time');
-            advancedAvgEl.textContent = 'Avg per run';
-            advancedAvgEl.title = stats.AdvancedInstance.averageTime;
-            document.getElementById('without-fastest-encoder').textContent = stats.EncodingWithoutText.fastestEncoder;
-            document.getElementById('without-fastest-time').textContent = stats.EncodingWithoutText.fastestTime;
-            document.getElementById('without-slowest-encoder').textContent = stats.EncodingWithoutText.slowestEncoder;
-            document.getElementById('without-slowest-time').textContent = stats.EncodingWithoutText.slowestTime;
-            const withoutAvgEl = document.getElementById('without-average-time');
-            withoutAvgEl.textContent = 'Avg per run';
-            withoutAvgEl.title = stats.EncodingWithoutText.averageTime;
-            document.getElementById('with-fastest-encoder').textContent = stats.EncodingWithText.fastestEncoder;
-            document.getElementById('with-fastest-time').textContent = stats.EncodingWithText.fastestTime;
-            document.getElementById('with-slowest-encoder').textContent = stats.EncodingWithText.slowestEncoder;
-            document.getElementById('with-slowest-time').textContent = stats.EncodingWithText.slowestTime;
-            const withAvgEl = document.getElementById('with-average-time');
-            withAvgEl.textContent = 'Avg per run';
-            withAvgEl.title = stats.EncodingWithText.averageTime;
-            document.getElementById('total-benchmark-runs').textContent = totalBenchmarks;
+            return stats;
+        }
 
-            // Render small sparklines showing average per-commit for each benchmark type
+        buildOverviewStatSnapshot({ times, fastestEncoder, fastestTime, slowestEncoder, slowestTime }) {
+            const average = times.length ? (times.reduce((sum, value) => sum + value, 0) / times.length) : 0;
+
+            return {
+                fastestEncoder: (fastestEncoder || '').replace('Encoder', ''),
+                slowestEncoder: (slowestEncoder || '').replace('Encoder', ''),
+                fastestTime: Number.isFinite(fastestTime) && fastestTime !== Infinity ? this.formatTime(fastestTime) : '-',
+                slowestTime: slowestTime > 0 ? this.formatTime(slowestTime) : '-',
+                averageTime: average > 0 ? this.formatTime(average) : '-'
+            };
+        }
+
+        updateOverviewCards(stats, totalEncoders, totalBenchmarks) {
+            setTextContent('totalEncoders', totalEncoders);
+            setTextContent('total-benchmark-runs', totalBenchmarks);
+
+            BENCHMARK_TYPES.forEach(type => {
+                const config = OVERVIEW_CARD_CONFIG[type];
+                const typeStats = stats[type];
+                if (!config || !typeStats) return;
+
+                setTextContent(`${config.prefix}-fastest-encoder`, typeStats.fastestEncoder);
+                setTextContent(`${config.prefix}-fastest-time`, typeStats.fastestTime);
+                setTextContent(`${config.prefix}-slowest-encoder`, typeStats.slowestEncoder);
+                setTextContent(`${config.prefix}-slowest-time`, typeStats.slowestTime);
+
+                const avgEl = getElement(`${config.prefix}-average-time`);
+                if (avgEl) {
+                    // The chart shows the numeric value; keep the label concise
+                    //avgEl.textContent = 'Avg per run';
+                    avgEl.title = typeStats.averageTime;
+                }
+            });
+        }
+
+        renderOverviewSparklines() {
             const typeToCanvas = {
-                SimpleInstance: document.getElementById('simple-average-chart'),
-                AdvancedInstance: document.getElementById('advanced-average-chart'),
-                EncodingWithoutText: document.getElementById('without-average-chart'),
-                EncodingWithText: document.getElementById('with-average-chart')
+                SimpleInstance: getElement('simple-average-chart'),
+                AdvancedInstance: getElement('advanced-average-chart'),
+                EncodingWithoutText: getElement('without-average-chart'),
+                EncodingWithText: getElement('with-average-chart')
             };
 
-            Object.keys(typeToCanvas).forEach(typeKey => {
-                const canvas = typeToCanvas[typeKey];
+            Object.entries(typeToCanvas).forEach(([typeKey, canvas]) => {
                 if (!canvas) return;
-                // limit sparklines to the most recent N runs for clarity
-                const series = this.buildTypeTimeSeries(typeKey, 50);
-                // destroy previous chart if exists
+
+                const series = this.buildTypeTimeSeries(typeKey, MAX_OVERVIEW_SERIES_POINTS);
                 const chartId = `overview-${typeKey}`;
-                if (this.charts.has(chartId)) {
-                    try { this.charts.get(chartId).destroy(); } catch (e) { /* ignore */ }
-                    this.charts.delete(chartId);
-                }
-                // create small chart (keyed by type)
-                const chartIdKey = `overview-${typeKey}`;
-                this.createOverviewSparkline(canvas, series.labels, series.values, this.getEncoderColor(typeKey), chartIdKey);
-                // store a lightweight reference (Chart instance stored by createOverviewSparkline)
+                this.destroyChart(chartId);
+                this.createOverviewSparkline(canvas, series.labels, series.values, this.getEncoderColor(typeKey), chartId);
             });
+        }
+
+        destroyChart(chartId) {
+            if (!this.charts.has(chartId)) return;
+            const chart = this.charts.get(chartId);
+            if (chart && typeof chart.destroy === 'function') {
+                try {
+                    chart.destroy();
+                } catch (error) {
+                    console.warn(`Failed to destroy chart ${chartId}`, error);
+                }
+            }
+            this.charts.delete(chartId);
         }
 
         buildTypeTimeSeries(typeKey, maxPoints) {
             // Build a time series by run index (snapshot) instead of exact timestamp.
             // Many encoders record benchmarks at slightly different timestamps per run; grouping by index
             // produces one point per run (first run, second run, ...), which matches the dataset semantics.
-            const encoders = Object.keys(this.data.entries);
-            const encoderEntries = encoders.map(name => this.data.entries[name] || []);
+            const encoders = this.encoderNames;
+            const encoderEntries = encoders.map(name => this.getEntriesForEncoder(name));
             const maxRuns = encoderEntries.reduce((m, arr) => Math.max(m, arr.length), 0);
 
             const labels = [];
@@ -231,11 +274,14 @@
                     const entry = entries[runIndex];
                     if (!entry) return;
                     // find the bench for this type
-                    const bench = (entry.benches || []).find(b => b.name.split('.').pop() === typeKey);
+                    const bench = (entry.benches || []).find(b => this.extractBenchType(b.name) === typeKey);
                     if (!bench) return;
                     bucket.push(bench.value);
                     if (!unit) unit = bench.unit || unit;
-                    if (!labelDate) labelDate = entry.date || (entry.commit && entry.commit.timestamp ? Date.parse(entry.commit.timestamp) : null);
+                    if (!labelDate) {
+                        const commitDate = entry.commit && entry.commit.timestamp ? Date.parse(entry.commit.timestamp) : null;
+                        labelDate = entry.date || commitDate;
+                    }
                 });
 
                 if (bucket.length === 0) {
@@ -377,27 +423,34 @@
         }
 
         renderFilters() {
-            const container = document.getElementById('encoder-filters');
-            container.innerHTML = ''; // Clear existing filters
-            const encoders = Object.keys(this.data.entries);
+            const container = getElement('encoder-filters');
+            if (!container) return;
+            container.innerHTML = '';
 
-            encoders.forEach(encoderName => {
-                const button = document.createElement('button');
-                // Start with all encoders shown (primary button style)
-                button.className = 'btn btn-primary btn-sm encoder-toggle me-2 mb-2';
-                button.textContent = encoderName.replace('Encoder', '');
-                button.dataset.encoder = encoderName;
-                button.onclick = () => this.toggleEncoder(encoderName);
-                container.appendChild(button);
+            const fragment = document.createDocumentFragment();
+            this.encoderNames.forEach(encoderName => {
+                fragment.appendChild(this.createEncoderToggleButton(encoderName));
             });
+
+            container.appendChild(fragment);
+        }
+
+        createEncoderToggleButton(encoderName) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            // Start with all encoders shown (primary button style)
+            button.className = 'btn btn-primary btn-sm encoder-toggle me-2 mb-2';
+            button.textContent = encoderName.replace('Encoder', '');
+            button.dataset.encoder = encoderName;
+            button.addEventListener('click', () => this.toggleEncoder(encoderName));
+            return button;
         }
 
         renderCharts() {
             const container = document.getElementById('charts-container');
+            if (!container) return;
             container.innerHTML = '';
-            const encoders = Object.keys(this.data.entries);
-
-            encoders.forEach(encoderName => {
+            this.encoderNames.forEach(encoderName => {
                 if (this.hiddenEncoders.has(encoderName)) {
                     return;
                 }
@@ -435,7 +488,7 @@
         }
 
         calculatePerformanceTrend(encoderName) {
-            const entries = this.data.entries[encoderName];
+            const entries = this.getEntriesForEncoder(encoderName);
             if (entries.length < 2) return 'stable';
 
             const recent = entries.slice(-3); // Last 3 entries
@@ -458,7 +511,7 @@
             let count = 0;
 
             entries.forEach(entry => {
-                entry.benches.forEach(bench => {
+                (entry.benches || []).forEach(bench => {
                     total += bench.value;
                     count++;
                 });
@@ -479,8 +532,10 @@
         }
 
         renderEncoderCharts(encoderName, container) {
-            const entries = this.data.entries[encoderName];
+            const entries = this.getEntriesForEncoder(encoderName);
+            if (!entries.length) return;
             const chartsContainer = container.querySelector(`#charts-${encoderName}`);
+            if (!chartsContainer) return;
 
             // Group benchmarks by name
             const benchmarkGroups = this.groupBenchmarksByName(entries);
@@ -506,11 +561,14 @@
             const groups = {};
 
             entries.forEach(entry => {
-                entry.benches.forEach(bench => {
-                    const name = bench.name.split('.').pop(); // Get the last part of the name
+                (entry.benches || []).forEach(bench => {
+                    const name = this.extractBenchType(bench.name);
+                    if (!name) return;
+
                     if (!groups[name]) {
                         groups[name] = [];
                     }
+
                     groups[name].push({
                         ...bench,
                         commit: entry.commit,
@@ -530,35 +588,38 @@
             }
 
             const ctx = canvas.getContext('2d');
-
-            // Sort data by date
-            data.sort((a, b) => a.date - b.date);
-
-            // Prepare numeric series and a smoothed series for nicer visual trends
-            const rawValues = data.map(d => d.value);
+            const sortedData = data.slice().sort((a, b) => (a.date || 0) - (b.date || 0));
+            const rawValues = sortedData.map(d => d.value);
             const smoothedValues = this.smoothArray(rawValues, 3);
+            const color = this.getEncoderColor(encoderName);
+            const chartConfig = this.buildChartConfig({
+                title,
+                color,
+                smoothedValues,
+                sortedData,
+                encoderName
+            });
 
-            // capture `this` for use in Chart callbacks
+            const chart = new Chart(ctx, chartConfig);
+            this.charts.set(canvas.id, chart);
+        }
+
+        buildChartConfig({ title, color, smoothedValues, sortedData, encoderName }) {
             const self = this;
-
-            const chart = new Chart(ctx, {
+            return {
                 type: 'line',
                 data: {
-                    labels: data.map(d => d.commit.id.slice(0, 7)),
+                    labels: sortedData.map(d => (d.commit && d.commit.id ? d.commit.id.slice(0, 7) : 'unknown')),
                     datasets: [{
                         label: title,
-                        // Use the smoothed series for the line so the chart appears less noisy.
-                        // Tooltips and click handlers still reference the original `data` array.
                         data: smoothedValues,
-                        // Use encoderName to determine color so all benchmarks for the same
-                        // encoder share the same canonical color.
-                        borderColor: this.getEncoderColor(encoderName),
-                        backgroundColor: this.getEncoderColor(encoderName) + '20',
+                        borderColor: color,
+                        backgroundColor: `${color}20`,
                         borderWidth: 2,
                         fill: true,
                         tension: 0.6,
                         cubicInterpolationMode: 'monotone',
-                        pointBackgroundColor: this.getEncoderColor(encoderName),
+                        pointBackgroundColor: color,
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2,
                         pointRadius: 4,
@@ -584,50 +645,7 @@
                         legend: {
                             display: false
                         },
-                        tooltip: {
-                            backgroundColor: this.theme === 'dark' ? 'rgba(52, 58, 64, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-                            titleColor: this.theme === 'dark' ? '#f8f9fa' : '#212529',
-                            bodyColor: this.theme === 'dark' ? '#e9ecef' : '#495057',
-                            borderColor: this.getEncoderColor(encoderName),
-                            borderWidth: 2,
-                            cornerRadius: 8,
-                            padding: 12,
-                            displayColors: false,
-                            titleFont: {
-                                size: 14,
-                                weight: 'bold'
-                            },
-                            bodyFont: {
-                                size: 13
-                            },
-                            callbacks: {
-                                title: (context) => {
-                                    const point = data[context[0].dataIndex];
-                                    return `Commit: ${point.commit.id.slice(0, 7)}`;
-                                },
-                                beforeBody: (context) => {
-                                    const point = data[context[0].dataIndex];
-                                    return [
-                                        `Date: ${new Date(point.date).toLocaleDateString()}`,
-                                        `Message: ${point.commit.message.split('\n')[0]}`
-                                    ];
-                                },
-                                label: (context) => {
-                                    const point = data[context.dataIndex];
-                                    // Use dashboard.formatTime to render the numeric value with unit
-                                    const formatted = self.formatTime(point.value);
-                                    let rangeText = '';
-                                    if (typeof point.range !== 'undefined' && point.range !== null) {
-                                        // Ensure numeric and format the ± range using the same formatTime helper
-                                        const rangeVal = Number(point.range);
-                                        if (!Number.isNaN(rangeVal)) {
-                                            rangeText = ` (±${self.formatTime(rangeVal)})`;
-                                        }
-                                    }
-                                    return `Performance: ${formatted}${rangeText}`;
-                                }
-                            }
-                        }
+                        tooltip: this.buildTooltipOptions(sortedData, color)
                     },
                     scales: {
                         x: {
@@ -640,15 +658,13 @@
                             }
                         },
                         y: {
-                            // hide the y-axis title/description (unit is shown in tooltips)
                             title: {
                                 display: false,
-                                text: data.length > 0 ? data[0].unit : 'Performance'
+                                text: sortedData.length > 0 ? sortedData[0].unit : 'Performance'
                             },
                             beginAtZero: true,
                             ticks: {
-                                // format numeric tick labels using formatTime
-                                callback: function (value, index, ticks) {
+                                callback(value) {
                                     return self.formatTime(Number(value));
                                 }
                             },
@@ -658,16 +674,61 @@
                         }
                     },
                     onClick: (event, elements) => {
-                        if (elements.length > 0) {
-                            const index = elements[0].index;
-                            const point = data[index];
+                        if (!elements.length) return;
+                        const index = elements[0].index;
+                        const point = sortedData[index];
+                        if (point && point.commit && point.commit.url) {
                             window.open(point.commit.url, '_blank');
                         }
                     }
                 }
-            });
+            };
+        }
 
-            this.charts.set(canvas.id, chart);
+        buildTooltipOptions(sortedData, color) {
+            const self = this;
+            return {
+                backgroundColor: this.theme === 'dark' ? 'rgba(52, 58, 64, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                titleColor: this.theme === 'dark' ? '#f8f9fa' : '#212529',
+                bodyColor: this.theme === 'dark' ? '#e9ecef' : '#495057',
+                borderColor: color,
+                borderWidth: 2,
+                cornerRadius: 8,
+                padding: 12,
+                displayColors: false,
+                titleFont: {
+                    size: 14,
+                    weight: 'bold'
+                },
+                bodyFont: {
+                    size: 13
+                },
+                callbacks: {
+                    title(context) {
+                        const point = sortedData[context[0].dataIndex];
+                        const commitId = point.commit && point.commit.id ? point.commit.id.slice(0, 7) : 'unknown';
+                        return `Commit: ${commitId}`;
+                    },
+                    beforeBody(context) {
+                        const point = sortedData[context[0].dataIndex];
+                        const dateValue = point.date ? new Date(point.date).toLocaleDateString() : '—';
+                        const message = point.commit && point.commit.message ? point.commit.message.split('\n')[0] : 'No message';
+                        return [`Date: ${dateValue}`, `Message: ${message}`];
+                    },
+                    label(context) {
+                        const point = sortedData[context.dataIndex];
+                        const formatted = self.formatTime(point.value);
+                        let rangeText = '';
+                        if (typeof point.range !== 'undefined' && point.range !== null) {
+                            const rangeVal = Number(point.range);
+                            if (!Number.isNaN(rangeVal)) {
+                                rangeText = ` (±${self.formatTime(rangeVal)})`;
+                            }
+                        }
+                        return `Performance: ${formatted}${rangeText}`;
+                    }
+                }
+            };
         }
 
         createFallbackChart(canvas, title, data) {
@@ -689,42 +750,42 @@
         }
 
         getEncoderColor(encoderName) {
+            const key = String(encoderName || 'default').trim();
+            if (this.colorCache.has(key)) {
+                return this.colorCache.get(key);
+            }
+
+            const color = this.computeEncoderColor(key);
+            this.colorCache.set(key, color);
+            return color;
+        }
+
+        computeEncoderColor(rawName) {
             // Compute a stable, high-variance color solely from the provided
             // encoder/benchmark name. No hardcoded class lists or special cases.
-            const name = String(encoderName || 'default').trim();
+            const tokens = rawName.split(/[^A-Za-z0-9]+/)
+                .filter(Boolean)
+                .map(t => t.replace(/Encoder$/i, ''));
+            const seed = tokens.length ? tokens[tokens.length - 1] : rawName;
 
-            // Tokenize and pick a canonical token as seed (last token is usually
-            // the most specific, e.g. 'Code128' from 'Bench.Code128' or
-            // 'Code128Encoder')
-            const tokens = name.split(/[^A-Za-z0-9]+/).filter(Boolean).map(t => t.replace(/Encoder$/i, ''));
-            const seed = tokens.length ? tokens[tokens.length - 1] : name;
-
-            // djb2 string hash (stable)
             const hashString = (str) => {
                 let h = 5381;
                 for (let i = 0; i < str.length; i++) {
                     h = ((h << 5) + h) + str.charCodeAt(i);
-                    h = h & 0xffffffff;
+                    h &= 0xffffffff;
                 }
                 return h >>> 0;
             };
 
-            // Generate several independent 32-bit hashes (different salts) so
-            // hue/sat/light are derived from distinct bits of entropy. This
-            // reduces collisions where many seeds accidentally map to similar
-            // hues (e.g., many green-ish values).
             const h1 = hashString(seed + '|h');
             const h2 = hashString(seed + '|s');
             const h3 = hashString(seed + '|l');
 
             const GOLDEN_ANGLE = 137.508; // degrees
-            // Mix fractional hashes and golden angle to spread hues.
-            const frac1 = h1 / 4294967295; // in [0,1]
+            const frac1 = h1 / 4294967295;
             const frac2 = h2 / 4294967295;
             const hue = Math.floor((frac1 * 360 + frac2 * GOLDEN_ANGLE) % 360);
 
-            // Use independent hashes for saturation and lightness with wider ranges
-            // to improve perceptual separation.
             const sat = 50 + (h2 % 45); // 50-94%
             const light = 28 + (h3 % 44); // 28-71%
 
