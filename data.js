@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763914086615,
+  "lastUpdate": 1763914098483,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -3298,6 +3298,54 @@ window.BENCHMARK_DATA = {
             "value": 94774.49520438058,
             "unit": "ns",
             "range": "± 164.44559185197716"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "committer": {
+            "email": "matteoautieri@live.it",
+            "name": "TyKonKet",
+            "username": "TyKonKet"
+          },
+          "distinct": true,
+          "id": "fe19143a8cc7cc504fad988d014ac9d110c8502c",
+          "message": "Update README to reflect recently completed features and enhancements",
+          "timestamp": "2025-11-23T17:01:00+01:00",
+          "tree_id": "9a1f083bc8d3ebc2a3a4cedeb2011ee680b0ab21",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/fe19143a8cc7cc504fad988d014ac9d110c8502c"
+        },
+        "date": 1763914096921,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.SimpleInstance",
+            "value": 652.5923896588778,
+            "unit": "ns",
+            "range": "± 13.896843573237762"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.AdvancedInstance",
+            "value": 2349.69411239624,
+            "unit": "ns",
+            "range": "± 30.50499523535111"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithoutText",
+            "value": 77633.51550292969,
+            "unit": "ns",
+            "range": "± 127.2192013998525"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithText",
+            "value": 104069.67551967075,
+            "unit": "ns",
+            "range": "± 91.1582388105983"
           }
         ]
       }
