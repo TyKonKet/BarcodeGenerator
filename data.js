@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1764463163132,
+  "lastUpdate": 1764463174573,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -7212,6 +7212,52 @@ window.BENCHMARK_DATA = {
             "value": 25961.29064687093,
             "unit": "ns",
             "range": "± 32.75050933207553"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "c65dd75df35180b81520a71e088551c3ec578385",
+          "message": "Get ready for 2.1.0 release",
+          "timestamp": "2025-11-23T16:34:30Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/c65dd75df35180b81520a71e088551c3ec578385"
+        },
+        "date": 1764463172977,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 18119.18081408049,
+            "unit": "ns",
+            "range": "± 2106.3955283907844"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 17118.618859427315,
+            "unit": "ns",
+            "range": "± 79.45204406875213"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 18677.087099347795,
+            "unit": "ns",
+            "range": "± 29.878841858036"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 26048.125643412273,
+            "unit": "ns",
+            "range": "± 34.491193403595325"
           }
         ]
       }
