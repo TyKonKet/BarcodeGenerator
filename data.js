@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1765672815370,
+  "lastUpdate": 1765672831442,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -13308,6 +13308,52 @@ window.BENCHMARK_DATA = {
             "value": 40237.480802408856,
             "unit": "ns",
             "range": "± 184.10014685100833"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "c65dd75df35180b81520a71e088551c3ec578385",
+          "message": "Get ready for 2.1.0 release",
+          "timestamp": "2025-11-23T16:34:30Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/c65dd75df35180b81520a71e088551c3ec578385"
+        },
+        "date": 1765672829053,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 16707.033887590682,
+            "unit": "ns",
+            "range": "± 77.09422296632192"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 19813.75585123698,
+            "unit": "ns",
+            "range": "± 270.6434219311601"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25304.563184465682,
+            "unit": "ns",
+            "range": "± 40.46858556043827"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40759.23775431315,
+            "unit": "ns",
+            "range": "± 141.30769794522107"
           }
         ]
       }
