@@ -127,6 +127,10 @@
     {
       "Timestamp": "2026-01-11T00:34:36Z",
       "DotNetVersion": "10.0.1"
+    },
+    {
+      "Timestamp": "2026-01-18T00:34:03Z",
+      "DotNetVersion": "10.0.2"
     }
   ]
 }
