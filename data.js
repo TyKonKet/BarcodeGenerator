@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1775350268951,
+  "lastUpdate": 1775350278589,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -6066,6 +6066,52 @@ window.BENCHMARK_DATA = {
             "value": 97930.78895670573,
             "unit": "ns",
             "range": "± 1318.5915496766484"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "c65dd75df35180b81520a71e088551c3ec578385",
+          "message": "Get ready for 2.1.0 release",
+          "timestamp": "2025-11-23T16:34:30Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/c65dd75df35180b81520a71e088551c3ec578385"
+        },
+        "date": 1775350277409,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.SimpleInstance",
+            "value": 421.2453484853109,
+            "unit": "ns",
+            "range": "± 6.23980576255104"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.AdvancedInstance",
+            "value": 1797.5607958899604,
+            "unit": "ns",
+            "range": "± 37.79872776260376"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithoutText",
+            "value": 77132.96095784505,
+            "unit": "ns",
+            "range": "± 752.0102255785158"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithText",
+            "value": 95968.71255696614,
+            "unit": "ns",
+            "range": "± 1225.4773677414955"
           }
         ]
       }
