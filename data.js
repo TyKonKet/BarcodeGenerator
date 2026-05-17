@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1778979957048,
+  "lastUpdate": 1778979966562,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -13836,6 +13836,52 @@ window.BENCHMARK_DATA = {
             "value": 25192.345794677734,
             "unit": "ns",
             "range": "± 117.55110342040311"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "c65dd75df35180b81520a71e088551c3ec578385",
+          "message": "Get ready for 2.1.0 release",
+          "timestamp": "2025-11-23T16:34:30Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/c65dd75df35180b81520a71e088551c3ec578385"
+        },
+        "date": 1778979965001,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean8Encoder.SimpleInstance",
+            "value": 15133.366258893695,
+            "unit": "ns",
+            "range": "± 112.85939914060835"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean8Encoder.AdvancedInstance",
+            "value": 17917.499481201172,
+            "unit": "ns",
+            "range": "± 186.59672122482013"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean8Encoder.EncodingWithoutText",
+            "value": 20015.91081746419,
+            "unit": "ns",
+            "range": "± 64.55551055197355"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Ean8Encoder.EncodingWithText",
+            "value": 27076.744728597005,
+            "unit": "ns",
+            "range": "± 31.404113470914684"
           }
         ]
       }
