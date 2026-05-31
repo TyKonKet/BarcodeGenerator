@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1780189945223,
+  "lastUpdate": 1780189957238,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -22230,6 +22230,52 @@ window.BENCHMARK_DATA = {
             "value": 34986.948224748885,
             "unit": "ns",
             "range": "± 95.06835551529426"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "c65dd75df35180b81520a71e088551c3ec578385",
+          "message": "Get ready for 2.1.0 release",
+          "timestamp": "2025-11-23T16:34:30Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/c65dd75df35180b81520a71e088551c3ec578385"
+        },
+        "date": 1780189955424,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Isbn13Encoder.SimpleInstance",
+            "value": 13601.73153076172,
+            "unit": "ns",
+            "range": "± 254.0975936873815"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Isbn13Encoder.AdvancedInstance",
+            "value": 13868.654305594308,
+            "unit": "ns",
+            "range": "± 81.04019703067677"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Isbn13Encoder.EncodingWithoutText",
+            "value": 22599.059143066406,
+            "unit": "ns",
+            "range": "± 42.99155689773525"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Isbn13Encoder.EncodingWithText",
+            "value": 35652.41313288762,
+            "unit": "ns",
+            "range": "± 141.044742800538"
           }
         ]
       }
