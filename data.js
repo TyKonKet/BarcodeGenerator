@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783817480872,
+  "lastUpdate": 1783817496283,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -7998,6 +7998,52 @@ window.BENCHMARK_DATA = {
             "value": 98119.43948364258,
             "unit": "ns",
             "range": "± 89.11902685432074"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "c65dd75df35180b81520a71e088551c3ec578385",
+          "message": "Get ready for 2.1.0 release",
+          "timestamp": "2025-11-23T16:34:30Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/c65dd75df35180b81520a71e088551c3ec578385"
+        },
+        "date": 1783817493831,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.SimpleInstance",
+            "value": 518.5906173706055,
+            "unit": "ns",
+            "range": "± 4.435026523048366"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.AdvancedInstance",
+            "value": 1806.04776597023,
+            "unit": "ns",
+            "range": "± 33.26558944116506"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithoutText",
+            "value": 76720.75973307292,
+            "unit": "ns",
+            "range": "± 1005.80875357666"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.Code39Encoder.EncodingWithText",
+            "value": 95756.0763811384,
+            "unit": "ns",
+            "range": "± 244.14928911973053"
           }
         ]
       }
