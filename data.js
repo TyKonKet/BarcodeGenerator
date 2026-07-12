@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783817563403,
+  "lastUpdate": 1783817575603,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -27468,6 +27468,52 @@ window.BENCHMARK_DATA = {
             "value": 40509.37997233073,
             "unit": "ns",
             "range": "± 229.61133408790863"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "c65dd75df35180b81520a71e088551c3ec578385",
+          "message": "Get ready for 2.1.0 release",
+          "timestamp": "2025-11-23T16:34:30Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/c65dd75df35180b81520a71e088551c3ec578385"
+        },
+        "date": 1783817573631,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 17440.422153727213,
+            "unit": "ns",
+            "range": "± 80.93780665949556"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 19163.881896972656,
+            "unit": "ns",
+            "range": "± 70.49333788994525"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 25251.488522338866,
+            "unit": "ns",
+            "range": "± 118.9510417887756"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40756.103567940845,
+            "unit": "ns",
+            "range": "± 102.58754873205127"
           }
         ]
       }
