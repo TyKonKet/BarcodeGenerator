@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1786235554386,
+  "lastUpdate": 1786235565279,
   "repoUrl": "https://github.com/TyKonKet/BarcodeGenerator",
   "entries": {
     "CodabarEncoder": [
@@ -29356,6 +29356,52 @@ window.BENCHMARK_DATA = {
             "value": 39535.83459472656,
             "unit": "ns",
             "range": "± 340.969246801258"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "committer": {
+            "name": "TyKonKet",
+            "username": "TyKonKet",
+            "email": "matteoautieri@live.it"
+          },
+          "id": "c65dd75df35180b81520a71e088551c3ec578385",
+          "message": "Get ready for 2.1.0 release",
+          "timestamp": "2025-11-23T16:34:30Z",
+          "url": "https://github.com/TyKonKet/BarcodeGenerator/commit/c65dd75df35180b81520a71e088551c3ec578385"
+        },
+        "date": 1786235563311,
+        "tool": "benchmarkdotnet",
+        "benches": [
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.SimpleInstance",
+            "value": 17323.798964280348,
+            "unit": "ns",
+            "range": "± 105.82177762864599"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.AdvancedInstance",
+            "value": 19449.983841959634,
+            "unit": "ns",
+            "range": "± 158.49670706474495"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.EncodingWithoutText",
+            "value": 24982.845635550362,
+            "unit": "ns",
+            "range": "± 38.612806101251806"
+          },
+          {
+            "name": "TyKonKet.BarcodeGenerator.Benchmarks.Benchmarks.UpcaEncoder.EncodingWithText",
+            "value": 40515.458044433595,
+            "unit": "ns",
+            "range": "± 125.30539280602746"
           }
         ]
       }
